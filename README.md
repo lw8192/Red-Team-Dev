@@ -1,1 +1,1 @@
-# Red-Team-Scripts
+# Purple-Team-Scripts
