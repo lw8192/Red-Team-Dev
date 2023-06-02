@@ -21,3 +21,5 @@
 [Hacking the Metal: Intro to Assembly](https://github.com/eigentourist/defcon29)    
 [Assembly Language Megaprimer for Linux](http://www.securitytube.net/groups?operation=view&groupId=5)  
 [Windows Assembly Language Megaprimer](http://www.securitytube.net/groups?operation=view&groupId=6)  
+### C++ 
+[Windows Internals C++](https://github.com/zodiacon/windowskernelprogrammingbook)    
