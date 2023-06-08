@@ -55,7 +55,8 @@ Isolated Python enviroment, independant of other enviroments and installed packa
     deactivate    #deactivate virtual env     
     
 ## Compiling Python Executables     
-Using Pyinstaller     
+Using Pyinstaller    
+[Docker Images to Compile With](https://hub.docker.com/r/cdrx/pyinstaller-linux): compile using older libraries since Linux is backwards compatible    
 
     pip install pyinstaller    #install    
     pyinstaller --version   #if version is not current you may need to uninstall then reinstall (common problem on Kali)        
