@@ -1,5 +1,16 @@
 # Python for Purple Teamers 
+## Python Virtual Enviroments    
+Isolated Python enviroment, independant of other enviroments and installed packages. Allows for multiple dependancies and versions.     
 
+    pip install virtualenv     
+    mkdir virtual-demo    
+    cd virtual-demo      
+    python3 -m venv env     #start virtual env     
+    source env/bin/activate     #activate virtual env    
+    which python3   #in virtual env, check python used      
+    pip install pwntools    #install package in virtual env     
+    deactivate    #deactivate virtual env     
+    
 ## Compiling Python Executables     
 Using Pyinstaller     
 
