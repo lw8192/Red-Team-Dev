@@ -58,6 +58,8 @@ Isolated Python enviroment, independant of other enviroments and installed packa
 Using Pyinstaller     
 
     pip install pyinstaller    #install    
+    pyinstaller --version   #if version is not current you may need to uninstall then reinstall (on Kali)    
+    
     pyinstaller entrypoint.py --onefile    #compile into 1 file    
     pyinstaller cli.py --hiddenimport=requests  #force a package to be included if not auto detected            
     --add-data    --add-binary    #force config or binary files to be included    
