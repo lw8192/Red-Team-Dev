@@ -9,5 +9,5 @@ Using Pyinstaller
     #build folder: metadata, useful for debugging    
     #dist folder: contains executable in a nested folder with .so, .pyd and .dll dependancies          
     pyinstaller entrypoint.py --onefile    #compile into 1 file    
-    pyinstaller cli.py --hiddenimport=requests  #include a package in the exe          
+    pyinstaller cli.py --hiddenimport=requests  #force a package to be included             
     
