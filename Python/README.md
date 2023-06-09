@@ -1,11 +1,31 @@
 # Python for Purple Teamers    
 ## Dev Enviroments     
 Windows: use Visual Studio Code and install Pylance and Python (IntelliSense (Pylance) extensions.     
+Install Python on Windows:    
 
+    C> python -V #check if already installed   
+    #Go to python.org, download latest version for Windows. Make sure to add to path.   
+    C> pip -V #error with pip - download pip bootstrap file   
+    C> python get-pip.py  #install Pip (package manager)     
+Pip    
+
+    pip list   #installed libraries    
+    pip freeze   #libraries and versions   
+    pip install -r requirements.txt   #install project dependancies   
+   
 ## Useful Python Libraries for Red / Blue Teams     
 Argparse: parse and use command line arguments.     
 
    import argparse     
+Pycryptdome    
+
+    pip install pycryptodome
+
+Pwntools: exploit dev and CTFs      
+
+    python3 -m pip install --upgrade pwntools      
+    apt install python3-pwntools   
+### Web Libraries   
 Requests: HTTP and HTTPS requests         
 
     import requests      
@@ -13,6 +33,7 @@ BeautifulSoup: useful for web scaping, converts complex HTML structure into Pyth
 
     pip install beautiful soup4    
     from bs4 import beautifulsoup     
+### Networking Libraries   
 Socket: create a bidirectional comms channel between process or different systems on a network.      
 
     import socket   #already part of standard Python install     
@@ -25,20 +46,14 @@ Scapy: packet manipulation library use to forge, decode, send and capture packet
     from scapy.all import *     
 pylibnet: API for libnet, send packets, sniff frames, display libpcap traces.     
 Rawsocketpy: low level layer comms at layer 2 using MAC addrs.     
-Threading: create threads of a process to improve speed, shares process memory space. Note: yu may need to synchronize your threads using a data lock to prevent race conditions         
+### Process Libraries   
+Threading: create threads of a process to improve speed, shares process memory space. Note: you may need to synchronize your threads using a data lock to prevent race conditions         
 
     import threading    
 Subprocess: create and work with subprocesses to connect to standard pipes, obtain process error codes. Note: be careful how you make a call with subprocess (passing user entered input can cause vulnerabilities)      
 
-    import subprocess   #no need to install, part of standard Python lib    
-Pycryptdome    
-
-    pip install pycryptodome
-
-Pwntools: exploit dev and CTFs      
-
-    python3 -m pip install --upgrade pwntools      
-    apt install python3-pwntools     
+    import subprocess   #no need to install, part of standard Python lib      
+### Windows Specific Libraries    
 [Ctypes](https://docs.python.org/3/library/ctypes.html): wrap Python around C to interface with the Windows API     
 Py2exe: Turn Python into standalone packages     
 
