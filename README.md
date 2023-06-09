@@ -11,6 +11,8 @@
 [Python for Pentesters](http://www.pentesteracademy.com/course?id=1)  
 [learnpythonthehardway](https://learnpythonthehardway.org/)  
 [Practical Python](https://dabeaz-course.github.io/practical-python/)   
+[Python 101 for Hackers](https://academy.tcm-sec.com/p/python-101-for-hackers)    
+[Python 201 for Hackers](https://academy.tcm-sec.com/p/python-201-for-hackers)    
 ### Ruby
 [Ruby Fu](https://rubyfu.net/)  
 ### PowerShell
@@ -23,3 +25,7 @@
 [Windows Assembly Language Megaprimer](http://www.securitytube.net/groups?operation=view&groupId=6)  
 ### C++ 
 [Windows Internals C++](https://github.com/zodiacon/windowskernelprogrammingbook)    
+https://github.com/lsecqt/OffensiveCpp    
+### C#   
+https://training.zeropointsecurity.co.uk/courses/csharp-for-n00bs     
+     
