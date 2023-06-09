@@ -1,4 +1,7 @@
 # Python for Purple Teamers    
+## Dev Enviroments     
+Windows: use Visual Studio Code and install Pylance and Python (IntelliSense (Pylance) extensions.     
+
 ## Useful Python Libraries for Red / Blue Teams     
 Argparse: parse and use command line arguments.     
 
