@@ -25,7 +25,7 @@
 [Windows Assembly Language Megaprimer](http://www.securitytube.net/groups?operation=view&groupId=6)  
 ### C++ 
 [Windows Internals C++](https://github.com/zodiacon/windowskernelprogrammingbook)    
-https://github.com/lsecqt/OffensiveCpp    
+[OffensiveC++](https://github.com/lsecqt/OffensiveCpp)       
 ### C#   
-https://training.zeropointsecurity.co.uk/courses/csharp-for-n00bs     
+[C# for n00bs](https://training.zeropointsecurity.co.uk/courses/csharp-for-n00bs)        
      
