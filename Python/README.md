@@ -35,6 +35,7 @@ BeautifulSoup: useful for web scaping, converts complex HTML structure into Pyth
     from bs4 import beautifulsoup     
 ### Networking Libraries   
 Socket: create a bidirectional comms channel between process or different systems on a network.      
+[Socket Programming- How To](https://docs.python.org/3/howto/sockets.html)    
 
     import socket   #already part of standard Python install     
 Twisted: event driven networking engine     
