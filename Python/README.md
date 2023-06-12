@@ -59,7 +59,11 @@ Subprocess: create and work with subprocesses to connect to standard pipes, obta
 
     import subprocess   #no need to install, part of standard Python lib      
 ### Windows Specific Libraries    
-[Ctypes](https://docs.python.org/3/library/ctypes.html): wrap Python around C to interface with the Windows API     
+[Ctypes](https://docs.python.org/3/library/ctypes.html): wrap Python around C to interface with the Windows API    
+[Ctypes usage](https://stephenscotttucker.medium.com/interfacing-python-with-c-using-ctypes-classes-and-arrays-42534d562ce7)      
+
+    from ctypes import *
+    from ctypes import wintypes 
 Py2exe: Turn Python into standalone packages     
 
     pip install py2exe   
