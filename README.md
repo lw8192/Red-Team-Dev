@@ -22,8 +22,9 @@
 [Powershell for Pentesters Videos]( https://www.youtube.com/watch?v=_EXHGtaxDew)     
 ### Assembly
 [Hacking the Metal: Intro to Assembly](https://github.com/eigentourist/defcon29)    
+[Some Assembly Required: Assembly Intro](https://github.com/hackclub/some-assembly-required/tree/main)    
 [Assembly Language Megaprimer for Linux](http://www.securitytube.net/groups?operation=view&groupId=5)  
-[Windows Assembly Language Megaprimer](http://www.securitytube.net/groups?operation=view&groupId=6)  
+[Windows Assembly Language Megaprimer](http://www.securitytube.net/groups?operation=view&groupId=6)      
 ### C++ 
 [Windows Internals C++](https://github.com/zodiacon/windowskernelprogrammingbook)    
 [OffensiveC++](https://github.com/lsecqt/OffensiveCpp)       
