@@ -26,6 +26,7 @@
 [Assembly Language Megaprimer for Linux](http://www.securitytube.net/groups?operation=view&groupId=5)  
 [Windows Assembly Language Megaprimer](http://www.securitytube.net/groups?operation=view&groupId=6)      
 ### C++ 
+[Kernel Basics](https://github.com/nu11secur1ty/Kernel-and-Types-of-kernels)      
 [Windows Internals C++](https://github.com/zodiacon/windowskernelprogrammingbook)    
 [OffensiveC++](https://github.com/lsecqt/OffensiveCpp)       
 ### C#   
