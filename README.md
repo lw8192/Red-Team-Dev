@@ -15,6 +15,7 @@
 [Python 201 for Hackers](https://academy.tcm-sec.com/p/python-201-for-hackers)    
 [Python3 C2 Server How to Guide](https://medium.themayor.tech/python3-command-and-control-how-to-guide-4fd4fe32ec71) [Gray Hat Python](https://nostarch.com/ghpython.htm)      
 [Black Hat Python](https://nostarch.com/black-hat-python2E)     
+[Real World Python](https://nostarch.com/real-world-python)    
 ### Ruby
 [Ruby Fu](https://rubyfu.net/)  
 ### PowerShell
