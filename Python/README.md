@@ -1,4 +1,7 @@
 # Python for Purple Teamers    
+## Python2 vs Python3   
+Some legacy code is still Python2, but most modern scripts are written in Python3.    
+Main differences: older libraries, strings are stored as ASCII (Python3 - unicode), calculations are rounded down to the nearest whole number (ie 5/2 = 2), no () needed for print statements.   
 ## Dev Enviroments     
 Windows: use Visual Studio Code and install Pylance and Python (IntelliSense (Pylance) extensions.     
 Install Python on Windows:    
@@ -37,6 +40,9 @@ BeautifulSoup: useful for web scaping, converts complex HTML structure into Pyth
 
     pip install beautiful soup4    
     from bs4 import beautifulsoup     
+Pickle: serialize / deserialize objects - store for later use or transfer across a network.      
+
+    import pickle     
 ### Networking Libraries   
 Socket: create a bidirectional comms channel between process or different systems on a network.      
 [Socket Programming- How To](https://docs.python.org/3/howto/sockets.html)    
@@ -108,3 +114,14 @@ Using Pyinstaller
 	    options = {'py2exe':{'bundle_files':1,'compressed':True}},
 	    zipfile = None 
     )
+
+## Object Oriented Programming Concepts  
+Allows data to be reused and grouped.    
+Classes: structures software into reusable blueprints. Class 
+Attributes: data fields in a class. 
+Class Methods: class functions.     
+Instantation: creating an instance of a class.     
+Inheritance: leverage existing objects / structures by creating a new class using details of an already existing class. Parent / child classes.     
+Polymorphism: enable class specific behavior.    
+Encapsulation: secure and protect attributes / methods.     
+Overloading: customize methods depending on paramaters, making code extensible and modular.     
