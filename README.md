@@ -13,7 +13,8 @@
 [Practical Python](https://dabeaz-course.github.io/practical-python/)   
 [Python 101 for Hackers](https://academy.tcm-sec.com/p/python-101-for-hackers)    
 [Python 201 for Hackers](https://academy.tcm-sec.com/p/python-201-for-hackers)    
-[Python3 C2 Server How to Guide](https://medium.themayor.tech/python3-command-and-control-how-to-guide-4fd4fe32ec71)    
+[Python3 C2 Server How to Guide](https://medium.themayor.tech/python3-command-and-control-how-to-guide-4fd4fe32ec71) [Gray Hat Python](https://nostarch.com/ghpython.htm)      
+[Black Hat Python](https://nostarch.com/black-hat-python2E)     
 ### Ruby
 [Ruby Fu](https://rubyfu.net/)  
 ### PowerShell
