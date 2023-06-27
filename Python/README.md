@@ -19,7 +19,16 @@ Manually Install a Package:
 
     #git clone package from Github, upload to target then install using setup.py (standard for most packages)    
     python3 setup.py install     
-   
+## Python Standards        
+PEP8 Python style guide: https://peps.python.org/pep-0008/        
+Good to avoid generic variable names.         
+General program order:    
+
+    package imports, in alphabetical order          
+    module imports, alphabetical order      
+    functions    
+    class definitions     
+    main function       
 ## Useful Python Libraries for Red / Blue Teams     
 Argparse: parse and use command line arguments.     
 
