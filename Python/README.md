@@ -14,13 +14,14 @@ Pip
 
     pip list   #installed libraries    
     pip freeze   #libraries and versions   
-    pip install -r requirements.txt   #install project dependancies   
+    pip install -r requirements.txt   #install project dependancies     
+    pip search package    #search for a package    
 Manually Install a Package:    
 
     #git clone package from Github, upload to target then install using setup.py (standard for most packages)    
     python3 setup.py install     
 ## Python Standards        
-PEP8 Python style guide: https://peps.python.org/pep-0008/        
+PEP8 Python style guide: https://peps.python.org/pep-0008/, [clean code notes](https://github.com/JuanCrg90/Clean-Code-Notes)             
 Good to avoid generic variable names.         
 General program order:    
 
