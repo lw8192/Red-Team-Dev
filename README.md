@@ -37,4 +37,5 @@
 ### Rust    
 [Rust 101: Building Ransomware](https://idov31.github.io/2022/05/07/rust101-rustomware.html)      
 [Rust for n00bs](https://training.zeropointsecurity.co.uk/courses/rust-for-n00bs)      
+[Offensive Rust](https://github.com/trickster0/OffensiveRust)    
      
