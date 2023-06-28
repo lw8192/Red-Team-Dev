@@ -1,7 +1,8 @@
 # Purple-Team-Scripts    
 
 ## Learn Programming 
-[Free Scripting Books](https://goalkicker.com/)  
+[Free Scripting Books](https://goalkicker.com/)     
+[Free Programming Books](https://github.com/EbookFoundation/free-programming-books)     
 [Developer Reference](https://devhints.io/)    
 [Leetcode](https://leetcode.com/)     
 ### Bash 
