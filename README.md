@@ -24,7 +24,7 @@
 ### PowerShell
 [PS 101](https://grimmie.net/ps-101-an-intro-to-powershell/)     
 [Learning Powershell](https://github.com/PowerShell/PowerShell/tree/master/docs/learning-powershell)     
-[Powershell for Pentesters Videos]( https://www.youtube.com/watch?v=_EXHGtaxDew)     
+[Powershell for Pentesters Videos](https://www.youtube.com/playlist?list=PLJQHPJLj_SQatUsJy3O4k-VQlllquDmDr)      
 ### Assembly
 [Hacking the Metal: Intro to Assembly](https://github.com/eigentourist/defcon29)    
 [Some Assembly Required: Assembly Intro](https://github.com/hackclub/some-assembly-required/tree/main)    
