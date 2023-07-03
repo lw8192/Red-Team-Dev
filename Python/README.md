@@ -135,3 +135,8 @@ Inheritance: leverage existing objects / structures by creating a new class usin
 Polymorphism: enable class specific behavior.    
 Encapsulation: secure and protect attributes / methods.     
 Overloading: customize methods depending on paramaters, making code extensible and modular.     
+
+## Debugging    
+IdentationError: use tabnanny to check for mixed tabs / spaces in your script:     
+
+    python -m tabnanny script.py  
