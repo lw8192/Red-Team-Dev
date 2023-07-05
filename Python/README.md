@@ -30,6 +30,14 @@ General program order:
     functions    
     class definitions     
     main function       
+Prevent code from being accidentally executed when imported:    
+
+	# things to always run like class and function definitions   
+	def main():
+    		pass    
+	if __name__ == "__main__":
+  		# only ran when called directly (not via 'import') 
+   		main()
 ## Useful Python Libraries for Red / Blue Teams     
 Argparse: parse and use command line arguments.     
 
