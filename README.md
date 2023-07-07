@@ -30,6 +30,11 @@
 [Some Assembly Required: Assembly Intro](https://github.com/hackclub/some-assembly-required/tree/main)    
 [Assembly Language Megaprimer for Linux](http://www.securitytube.net/groups?operation=view&groupId=5)  
 [Windows Assembly Language Megaprimer](http://www.securitytube.net/groups?operation=view&groupId=6)      
+[Art of Assembly](https://www.plantation-productions.com/Webster/)    
+### C    
+[Learn C and C++](https://www.cprogramming.com/)     
+[Learn C](https://www.learnc.net/)    
+
 ### C++ 
 [Kernel Basics](https://github.com/nu11secur1ty/Kernel-and-Types-of-kernels)      
 [Windows Internals C++](https://github.com/zodiacon/windowskernelprogrammingbook)    
