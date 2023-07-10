@@ -1,4 +1,6 @@
 # C++ 
+Mal dev examples: https://github.com/cocomelonc/meow/tree/master   
+
 Compiling a DLL on Kali:        
 
   x86_64-w64-mingw32-gcc -shared -o script.dll script.cpp -fpermissive    
