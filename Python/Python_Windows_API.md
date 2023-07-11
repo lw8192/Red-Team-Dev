@@ -10,11 +10,14 @@ Pointer: contains address of a storage location of a variable, where the data is
 Structure: groups variables under a single defined type. Like a Python object.       
 
 ## The Windows API    
+[System Error Codes](https://learn.microsoft.com/en-us/windows/win32/debug/system-error-codes--0-499-)     
 Allows user written programs to interact with the underlying operating system.      
 Unicode version of functions - w appendeded, ASCII version of functions -a appended.          
 Display on a device (ie screen, printer) - interact with the device context.      
 Handles - pointers to objects.       
+Hacker focused API calls: OpenProcess, CreateRemoteThread, WriteProcessMemory.    
 
+## Ctypes    
 Usage:       
 
     from ctypes import *
