@@ -37,11 +37,6 @@ slicing: Can be used to delete non-matching ranges of data
 del statement	 #removes an item at an index position and doesn’t return it       
 list.clear()	#removes all items in a Python list        
 
-Sorting in-place:     
-Modify the input in place, without creating a separate copy of the data structure. An algorithm which is not in-place is sometimes called not-in-place or out-of-place.  
-
-### Lists    
-
     list[0]= 'a'   #update list    
     del list[0]   #delete element of list   
     list.insert(0, "A")   #insert at index of 0      
@@ -51,6 +46,10 @@ Modify the input in place, without creating a separate copy of the data structur
     list.pop()    #remove item from a list using index, removes last item by default   
     list.remove(index)      
     sum(list)      #sum ints in a list    
+
+Sorting in-place:     
+Modify the input in place, without creating a separate copy of the data structure. An algorithm which is not in-place is sometimes called not-in-place or out-of-place.  
+
 
 Sorting    
 [Comparison Based Sorting Algorithims](https://www.cs.cmu.edu/~avrim/451f11/lectures/lect0913.pdf)    
@@ -117,7 +116,11 @@ for:
         print(i)            #prints 0,1,2,3,4
     for i in range(0,len(list)):
         print(list[i])              #prints all elements in a list     
+### Set and Tuples    
+Set: must have unique items   
 
+     myset = {"a", "b", "c"}   
+Tuple: 
 ## Object Oriented Programming Concepts   
 Classes: creates a format / outline that can be used to create a object with assigned values and properties.    
 Instantiation: creating an instance of a class. Ie - class car, creating bobs_car with color blue and year 2010   
