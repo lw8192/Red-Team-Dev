@@ -1,6 +1,8 @@
 # Python Coding Interview Review     
 Practice: leetcode, hackerrank, Cracking the coding interview    
+Before the interview: know what language you will program in (ask if you can pick / if a certain language is required), what resources you can use (the Internet?, official documentation?, questions from the interviewers?). These things will guide your preparation.    
 
+During the interview: make pseudocode, ask questions if you get stuck, feel free to narrate your thought process (show your problem solving ability)   
 ### Ints    
 Operations    
 
@@ -17,6 +19,7 @@ Operations:
     string.upper()     #to all uppercase    
     string.lower()     #to all lowercase     
     s="".join(c for c in s if c.isalnum()) #remove non alphanumeric chars     
+    a = s.sorted()     #return string sorted from 
 Substrings:    
 
     if "ace" in "trace"      
@@ -24,7 +27,7 @@ Substrings:
     s.find("hi")   #searches string s for a substring and returns starting index    
     
 ## Lists    
-Common interview questions: reversing a linked list, operations on a list with a given critera, modifying a list in place    
+Common interview questions: reversing a linked list, operations on a list with a given critera, modifying a list in place, testing if 2 words are palindromes        
 
 remove items from a list:      
 pop, remove, del, clear     
