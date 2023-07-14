@@ -61,6 +61,8 @@ Sorting
 
     arr.sort()      #sorts in place, can be finicky      
     temp = sorted(arr)     #returns a new list    
+    my_list = sorted(set(my_list))  #sort unique, only works on hashable types     
+
 Enumerating a list:   
 
     for count, value in enumerate(values):    #has index and value of a list   
