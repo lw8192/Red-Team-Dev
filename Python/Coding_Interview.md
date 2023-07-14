@@ -121,9 +121,15 @@ Set: must have unique items
 
      myset = {"a", "b", "c"}   
 Tuple: 
-## Object Oriented Programming Concepts   
-Classes: creates a format / outline that can be used to create a object with assigned values and properties.    
+
+## Object Oriented Programming Concepts      
+OOP - group variables and methods, model and group complex data in a reusable way. This allows us to structure software into reusable blueprints (classes).   
+Leverage existing structs (inheritance). Enable class specific behavior (polymorphism).  (encapsulation). Extendible and modular (overloading). 
+Classes: creates a format / outline that can be used to create a object with assigned values and properties. Class data = attribute, class functions = methods.       
 Instantiation: creating an instance of a class. Ie - class car, creating bobs_car with color blue and year 2010   
-Polymorphism: Use a common interface for different types - ie use same function and pass in different variable types.    
+Polymorphism: enable class specific behavior. Use a common interface for different types - ie use same function and pass in different variable types.    
 Operator overloading: Change meaning of an operator depending on the operator's use. Ex - + for string concat and to add integers. Controls what happens when you compare different objects from the same class. Can overload: plus, minus, multiplication, bitwise operations, mathematical comparisons (greater then, less then).   
+Inheritance: lets us leverage existing structs allowing reusability of code. A derived / child class inherits attributes and methods from a parent class. 
+Method overriding: method in a child class takes priority of a method with the same name in a parent class. Allows for customization with inherited classes / code reuse.     
+Encapsulation: Secures and protect attributes and methods. Organization data / methods in 1 unit (the object).
 
