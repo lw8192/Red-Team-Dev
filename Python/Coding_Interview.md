@@ -40,6 +40,55 @@ list.clear()	#removes all items in a Python list
 Sorting in-place:     
 Modify the input in place, without creating a separate copy of the data structure. An algorithm which is not in-place is sometimes called not-in-place or out-of-place.  
 
+### Lists    
+
+    list[0]= 'a'   #update list    
+    del list[0]   #delete element of list   
+    list.insert(0, "A")   #insert at index of 0      
+    list.append("last")   #add to end   Buil in functions: max, min, index, count, pop, extend     
+    list.push()     #add item to a list   
+
+    list.pop()    #remove item from a list using index, removes last item by default   
+    list.remove(index)      
+    sum(list)      #sum ints in a list    
+
+Sorting    
+[Comparison Based Sorting Algorithims](https://www.cs.cmu.edu/~avrim/451f11/lectures/lect0913.pdf)    
+
+    list.sort()         #sort list, low to high. Sorts in place    
+    sorted(list)       #sort list of ints, low to high. returns a new list    
+    sorted(list, reverse=True)   #sort high to low    
+
+    arr.sort()      #sorts in place, can be finicky      
+    temp = sorted(arr)     #returns a new list    
+Enumerating a list:   
+
+    for count, value in enumerate(values):    #has index and value of a list   
+        print(count, value)        
+Counting sort:      
+Create an integer array whose index range covers the entire range of values in your array to sort. Each time a value occurs in the original array, you increment the counter at that index.     
+
+    freq_arr = []    
+    for x in range(0,100):    #freq array of 100    
+        freq_arr.append(0)   
+    for i in list:    
+        freq_arr[i]+=1   
+
+    my_list.index(item, start, end)    #return index of first occurence of item in list. optional: start / end index    
+
+List slicing:     
+
+    list[start:stop]     #stop not included  
+    list[:4]     #start at beginning, print everything up to (not including) the 4th index
+    list[1:]     #print list starting from index 1   
+Square matrix:   
+
+    1 2 3   
+    3 4 5   
+    5 4 6       #0-2 down, 0-2 across. index[0][0] = start   []    
+    a[1] #prints a row    
+
+
 ### Dicts   
 
     print(dict.get("key"))    
