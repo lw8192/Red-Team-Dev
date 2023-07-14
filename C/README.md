@@ -1,7 +1,7 @@
 # C    
 ## Intro   
 Lower level language then Python (meaning the developer can control the program at a more granular level - allows for more speed / flexibility but also harder to program in). Compiled. Widely used in OS / embedded environments. Variables - need to define type and name. Strongly typed language: can't change later on. Not object oriented - variables don't have an access modifier (can be static or constants). Static var: valid in a global scope.       
-
+[Codeblocks IDE](https://www.codeblocks.org/)    
 ## Variables   
 Structs: define variables that belong together.   
 write to the console - use printf(), %d or %i for integer types, %f for floating-point numbers, %s for strings     
