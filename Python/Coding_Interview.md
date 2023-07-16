@@ -120,7 +120,7 @@ for:
         print(i)            #prints 0,1,2,3,4
     for i in range(0,len(list)):
         print(list[i])              #prints all elements in a list     
-    for i in range(start, 0, -1):          #decrement by 1   
+    for i in range(start, -1, -1):          #decrement by 1, end at 0      
         break   
 ### Set and Tuples    
 Set: must have unique items   
