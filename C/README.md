@@ -19,8 +19,9 @@ Memory Structure (high to low address, going down):
     Uninitialized Data Segment (BSS)   
     Initialized Data Segment   
     Text/Code Segment   
-Stack: Last In First Out data structure, ordered insertion, where program data is stored (functions called, created variables).                       
-Heap: allocate big amounts of memory for dev usage, "dynamic memory".     
+Stack: Last In First Out data structure, ordered insertion, dynamic memory where program data is stored (functions called, created variables). Grows down (towards heap).                          
+Heap: allocate big amounts of memory for dev usage, dynamic memory that the programmer can change. Grows up (towards stack).        
+Static memory: segments, copied to program memory on execution.    
 
 malloc() - direct call to allocate memory on the heap     
 free() - release memory   
@@ -28,6 +29,5 @@ free() - release memory
 stdio.h - library for input / output functions. printf(), scanf()     
 #include <Windows.h>      //Windows API calls     
 write to the console - use printf(), %d or %i for integer types, %f for floating-point numbers, %s for strings   
-Include Windows API functions: 
 
     
