@@ -13,3 +13,8 @@ Heap: allocate big amounts of memory for dev usage, "dynamic memory".
 malloc() - direct call to allocate memory on the heap     
 free() - release memory    
 pointers: directly access areas in memory   
+
+## C for Windows   
+Include Windows API functions: 
+
+  #include <Windows.h>     
