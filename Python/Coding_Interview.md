@@ -65,7 +65,11 @@ Sorting
 Enumerating a list:   
 
     for count, value in enumerate(values):    #has index and value of a list   
-        print(count, value)        
+        print(count, value)      
+Remove duplicates from a list:   
+
+    a_list = ["a", "b", "a", "c", "c"]
+    a_list = list( dict.fromkeys(a_list) )  #make a dict which removes duplicates, then covert back into a list    
 Counting sort:      
 Create an integer array whose index range covers the entire range of values in your array to sort. Each time a value occurs in the original array, you increment the counter at that index.     
 
