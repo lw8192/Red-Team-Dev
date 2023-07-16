@@ -16,6 +16,8 @@ Unicode version of functions - w appendeded, ASCII version of functions -a appen
 Display on a device (ie screen, printer) - interact with the device context.      
 Handles - pointers to objects.       
 Hacker focused API calls: OpenProcess, CreateRemoteThread, WriteProcessMemory.    
+Injecting shellcode into a remote process: use Win32 APIs VirtualAllocEx, CreateRemoteThread, WriteProcessMemory, VirtualProtectEx, CreateProcessA, QueueUserAPC    
+
 
 ## Ctypes    
 Usage:       
