@@ -9,6 +9,7 @@ Operations
     round(int, 2)    #round to the 2nd decimal place     
     abs(-2)     #return absolute value     
     a+=1   #increment    
+    print("{:.6f}".format(value))      #print out value to the 6th decimal place    
 
 ### Strings    
 Can think of as an array of chars     
@@ -76,6 +77,7 @@ Modify the input in place, without creating a separate copy of the data structur
     sorted(list, reverse=True)   #sort high to low    
     arr.sort()      #sorts in place, can be finicky      
     my_list = sorted(set(my_list))  #sort unique, only works on hashable types     
+    rev_list = list(reverse(list))
 
 Enumerating a list:   
 
