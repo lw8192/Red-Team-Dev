@@ -86,6 +86,10 @@ List slicing:
     list[start:stop]     #stop not included  
     list[:4]     #start at beginning, print everything up to (not including) the 4th index
     list[1:]     #print list starting from index 1   
+    n[::-1]  #start at the end; count down to the beginning, stepping backwards one step at a time    
+    n[::3]   #beginning to end, increment by 3   
+    n[2:10:3]  # start at 2, go upto 10, count by 3     
+    n[4:0:-2]  #start at 4, go down to 0, decrement by 2    
 Square matrix:   
 
     1 2 3   
