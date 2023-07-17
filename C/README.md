@@ -4,9 +4,10 @@ Lower level language then Python (meaning the developer can control the program 
 [Codeblocks IDE](https://www.codeblocks.org/)    
 
 ## Variables   
-Structs: define variables that belong together.   
-pointers: directly access areas in memory   
-
+Variable types: char, int, float, double. Modifiers: signed, unsigned, short, long.   
+Pointer, struct, evaluation strategy.   
+Pointer: containers address of a storage location of a variable, where the data is in memory (not the actual value of the data). Stores address.    
+Structure: groups variables under a single defined type. Similiar to a Python object.     
 
 ## Memory in C     
 C / C++ allows you to interact with memory on a lower level then languages like Python. Misusing memory - can cause segfaults. A common problem: trying to access memory that has already been freed.    
@@ -25,6 +26,7 @@ Static memory: segments, copied to program memory on execution.
 
 malloc() - direct call to allocate memory on the heap     
 free() - release memory   
+
 ## C Libraries    
 stdio.h - library for input / output functions. printf(), scanf()     
 #include <Windows.h>      //Windows API calls     
