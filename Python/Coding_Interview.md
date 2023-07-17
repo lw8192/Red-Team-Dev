@@ -19,7 +19,7 @@ Operations:
     string.upper()     #to all uppercase    
     string.lower()     #to all lowercase     
     s="".join(c for c in s if c.isalnum()) #remove non alphanumeric chars     
-    s.replace(i,"")   #remove char from a string   
+    new_string = s.replace(i,"")   #remove char from a string   
     a = s.sorted()     #return string sorted from 
 Substrings:    
 
