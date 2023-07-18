@@ -2,6 +2,7 @@
 ## Intro   
 Lower level language then Python (meaning the developer can control the program at a more granular level - allows for more speed / flexibility but also harder to program in). Compiled. Widely used in OS / embedded environments - "system development language". Variables - need to define type and name. Strongly typed language: can't change later on. Procedural, not object oriented language - variables don't have an access modifier (can be static or constants). Static var: valid in a global scope.       
 [Codeblocks IDE](https://www.codeblocks.org/)    
+[Codeblocks Install](https://www.digitalocean.com/community/tutorials/c-compiler-windows-gcc)   
 
 ## Variables   
 Variable types: char, int, float, double. Modifiers: signed, unsigned, short, long.   
@@ -59,4 +60,15 @@ write to the console - use printf(), %d or %i for integer types, %f for floating
 #include <Windows.h>      //Windows API calls     
 <stdlib.h>       //memory functions   
 
-    
+## Compiling   
+### Linux   
+
+    gcc .cprogram.c -o cprogram.out     
+### Windows   
+ 
+Can compile in a WSL shell using gcc    
+[Visual Studio Install](https://visualstudio.microsoft.com/vs/older-downloads/) - recommend VS 2019 because it is less resource intensive then newer versions.     
+Run VS Code Installer > Modify or More > Ensure C++ Applications is selected (maybe Python as well for dev things)      
+VSCode > create a new project > Console Application c++, rename file to Main.c > Local Windows debugger (choose x64 or x86) -> Compile and run    
+         
+Using [MingW](https://www.mingw-w64.org/)    
