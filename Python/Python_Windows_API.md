@@ -6,6 +6,7 @@ https://learn.microsoft.com/en-us/windows/win32/apiindex/windows-api-list
 MSDN - https://learn.microsoft.com/en-us/       
 [Ctypes documentation](https://docs.python.org/3/library/ctypes.html)      
 [Windows Data Types](https://learn.microsoft.com/en-us/windows/win32/winprog/windows-data-types)    
+[Windows API Calls QUick Reference](https://github.com/snowcra5h/windows-api-function-cheatsheets)    
       
 ## C++ Data Types    
 Types: char, int, float, double. Modifiers: signed, unsigned, short, long.    
