@@ -104,11 +104,22 @@ Binary tree:
 Graph:    
 
 ### Dicts   
+Ordered, changeable, does not allow duplicates.     
 
     print(dict.get("key"))    
     dict.keys()    
     dict.values()    
-Hash map: unordered collection of key-value pairs stored in a hash table where keys are unique      
+    max = max(dict.values())
+Hash map: unordered collection of key-value pairs stored in a hash table where keys are unique - Java construct, but can use dicts in Python.    
+Create a dict using dict() function:    
+
+    nums = dict(one="1", two="2")
+    print(nums["one"]) # => "1"   
+Get key for the first instance of a certain value:    
+
+        for k, v in counts.items():
+            if max_val in v or max_val == v:
+                return k
 
 ### Conditionals   
 
