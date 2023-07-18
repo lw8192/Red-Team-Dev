@@ -4,7 +4,9 @@ Ctypes library wraps Python around C/C++ data structures to interact with the Wi
 ## Resources    
 https://learn.microsoft.com/en-us/windows/win32/apiindex/windows-api-list      
 MSDN - https://learn.microsoft.com/en-us/       
-[Ctypes documentation](https://docs.python.org/3/library/ctypes.html)             
+[Ctypes documentation](https://docs.python.org/3/library/ctypes.html)      
+[Windows Data Types](https://learn.microsoft.com/en-us/windows/win32/winprog/windows-data-types)    
+      
 ## C++ Data Types    
 Types: char, int, float, double. Modifiers: signed, unsigned, short, long.    
 Pointer: contains address of a storage location of a variable, where the data is in memory (not the actual value of the data).   
