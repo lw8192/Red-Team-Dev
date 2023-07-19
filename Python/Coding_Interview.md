@@ -11,6 +11,7 @@ Operations
     abs(-2)     #return absolute value     
     a+=1   #increment    
     print("{:.6f}".format(value))      #print out value to the 6th decimal place    
+    isinstance(a, int)     #return True if a is an interger    
 Boolean Expressions   
 
     NOR: If a and b equal 0, return True. Else return False.    
