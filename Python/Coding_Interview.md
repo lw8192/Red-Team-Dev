@@ -1,8 +1,9 @@
 # Python Coding Interview Review     
 Practice: leetcode, hackerrank, Cracking the coding interview    
 Before the interview: know what language you will program in (ask if you can pick / if a certain language is required), what resources you can use (the Internet?, official documentation?, questions from the interviewers?). These things will guide your preparation.    
+[Example Practice Questions](https://blog.finxter.com/wp-content/uploads/2019/02/CheatSheet-Python-6_-Coding-Interview-Questions.pdf)    
 
-During the interview: make pseudocode, ask questions if you get stuck, feel free to narrate your thought process (show your problem solving ability)   
+During the interview: make pseudocode, ask questions if you get stuck, feel free to narrate your thought process (show your problem solving ability)      
 ### Ints    
 Operations    
 
@@ -32,8 +33,9 @@ Substrings:
 Common interview questions: reversing a linked list, operations on a list with a given critera, modifying a list in place, testing if 2 words are palindromes        
 
 remove items from a list: pop, remove, del, clear      
+Treating a list as a stack: pop(), append(). Queue: pop(), insert()    
 
-    list.pop()	  #removes an item at an index position and returns it, removes last item by default         
+    list.pop()	  #removes an item at an index position and returns it, removes last item by default             
     list.remove("item")	#removes the first item matching a value       
     slicing: Can be used to delete non-matching ranges of data        
     del statement	 #removes an item at an index position and doesn’t return it       
@@ -43,15 +45,19 @@ Adding to a list:
 
     list[0]= 'a'   #update list    
     list.insert(0, "A")   #insert at index of 0      
-    list.append("last")   #add to end   Buil in functions: max, min, index, count, pop, extend     
+    list.append("last")   #add to end   Built in functions: max, min, index, count, pop, extend     
     list.push()     #add item to a list   
 Operations:   
 
     sum(list)      #sum ints in a list    
+    max(list)      #return max number a list     
+    min(list)      #return minimum number in a list    
 Remove duplicates from a list:   
 
     a_list = ["a", "b", "a", "c", "c"]
     a_list = list( dict.fromkeys(a_list) )  #make a dict which removes duplicates, then covert back into a list    
+    new_list = list(set(lst))       #remove duplicates from a list using set, then convert back into a list          
+
 List slicing:     
 
     list[start:stop]     #stop not included  
@@ -66,7 +72,7 @@ Square matrix:
     1 2 3   
     3 4 5   
     5 4 6       #0-2 down, 0-2 across. index[0][0] = start   []    
-    a[1] #prints a row 
+    a[1] #prints a row     
 ### Sorting Lists    
 Sorting in-place:     
 Modify the input in place, without creating a separate copy of the data structure. An algorithm which is not in-place is sometimes called not-in-place or out-of-place.  
@@ -95,9 +101,22 @@ Create an integer array whose index range covers the entire range of values in y
 
     my_list.index(item, start, end)    #return index of first occurence of item in list. optional: start / end index       
 
-Linked List:    
-https://www.freecodecamp.org/news/introduction-to-linked-lists-in-python/   
-store data in the form of a chain   
+Linked List:     
+Stores data in the form of a chain, each node stores data and the address of the next node. Head: first node, tail: last node. Single-linked list: links 1 way (head to tail), double: links both ways. Circular: tail points back to head.        
+Insert a node at the front:   
+
+    new_head = Node(stuff)
+    #Make next of new Node as head
+    new_head.next = self.head     
+    #Move the head to point to new Node     
+    self.head = new_head     
+Insert after a given node:   
+
+    #Check to see that the node isn't 0    
+    #Make a new node    
+    new_node = Node(data)
+    new_node.next = prev_node.next        #new node know links to the node after previous         
+    prev_node.next = new_node             #previous node now points to the inserted node    
 
 Binary tree:    
 
@@ -147,7 +166,7 @@ for:
 ### Set and Tuples    
 Set: must have unique items   
 
-     myset = {"a", "b", "c"}   
+     myset = {"a", "b", "c"}   #can be ints, strings or mixed types     
 Tuple: 
 
 ## Object Oriented Programming Concepts      
