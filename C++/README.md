@@ -1,5 +1,8 @@
-# C++ 
+# C++     
+## Links   
 Mal dev examples: https://github.com/cocomelonc/meow/tree/master   
+[Basic Windows Kernel Programming](https://github.com/raminfp/basicwindowskernelprogramming)     
+[Windows Exploitaion Resources](https://github.com/FULLSHADE/WindowsExploitationResources)   
 
 Compiling a DLL on Kali:        
 
