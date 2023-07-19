@@ -39,13 +39,16 @@ Prevent code from being accidentally executed when imported:
   		# only ran when called directly (not via 'import') 
    		main()
 ## Useful Python Libraries for Red / Blue Teams     
+from package.module import function     #keep namespace tidier and only import what you need    
+from package import module      #import only the module you need    
+
 Argparse: parse and use command line arguments.     
 
    import argparse     
 Pycryptdome    
 
-    pip install pycryptodome
-
+    pip install pycryptodome    
+    
 Pwntools: exploit dev and CTFs      
 
     python3 -m pip install --upgrade pwntools      
@@ -143,8 +146,17 @@ Inheritance: leverage existing objects / structures by creating a new class usin
 Polymorphism: enable class specific behavior.    
 Encapsulation: secure and protect attributes / methods.     
 Overloading: customize methods depending on paramaters, making code extensible and modular.     
+Mutable objects: allow you to change their value or data in place without affecting the object's identity.    
+Immutable: can't change an object's state after creating it.    
 
 ## Debugging    
 IdentationError: use tabnanny to check for mixed tabs / spaces in your script:     
 
     python -m tabnanny script.py  
+Logging Library      
+
+	import logging     
+ 	log.info("log some stuff")    
+  	level=Logging.DEBUG    
+  	fmt = '[% (Levelname)s] %(asctime)s - %(message)s'     
+  	logging.basicConfig(Level=level, format=fmt)   
