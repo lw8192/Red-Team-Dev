@@ -132,8 +132,8 @@ Ordered, changeable, does not allow duplicates.
     print(dict.get("key"))    
     dict.keys()    
     dict.values()    
+    dict.items()     #access key/value pairs     
     max = max(dict.values())
-Hash map: unordered collection of key-value pairs stored in a hash table where keys are unique - Java construct, but can use dicts in Python.    
 Create a dict using dict() function:    
 
     nums = dict(one="1", two="2")
@@ -142,7 +142,13 @@ Get key for the first instance of a certain value:
 
         for k, v in counts.items():
             if max_val in v or max_val == v:
-                return k
+                return k   
+Loop through items in a dict:   
+
+    for key,val in dict.items():
+        print(key + " " + val)
+Hash map: unordered collection of key-value pairs stored in a hash table where keys are unique - Java construct, but can use dicts in Python.    
+
 
 ### Conditionals   
 
@@ -173,6 +179,8 @@ Set: must have unique items
      myset = {"a", "b", "c"}   #can be ints, strings or mixed types     
 Tuple: 
 
+    zip_tuple = zip(list_1, list2)    #take 2 iertables, put them together in a tuple, and returns    
+    #output     [('list 1 item 0', 'list 2 item 0'), ('list 2 item 1', 'list 2 item 1')] etc       
 ## Object Oriented Programming Concepts      
 OOP - group variables and methods, model and group complex data in a reusable way. This allows us to structure software into reusable blueprints (classes).   
 Leverage existing structs (inheritance). Enable class specific behavior (polymorphism).  (encapsulation). Extendible and modular (overloading). 
