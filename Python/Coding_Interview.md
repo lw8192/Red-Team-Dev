@@ -51,7 +51,8 @@ Adding to a list:
     list[0]= 'a'   #update list    
     list.insert(0, "A")   #insert at index of 0      
     list.append("last")   #add to end   Built in functions: max, min, index, count, pop, extend     
-    list.push()     #add item to a list   
+    list.push()     #add item to a list  
+    new_list = list(range(1,101))      #generate a list from 1 to 100    
 Operations:   
 
     sum(list)      #sum ints in a list    
