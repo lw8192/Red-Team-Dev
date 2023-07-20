@@ -38,12 +38,17 @@ Prevent code from being accidentally executed when imported:
 	if __name__ == "__main__":
   		# only ran when called directly (not via 'import') 
    		main()
-## Useful Python Libraries for Red / Blue Teams     
-import module                     #import an entire module     
-a = module.function(stuff)        #use a function from the module     
-from package.module import function     #keep namespace tidier and only import what you need    
-a = function(stuff)    
-from package import module      #import module from a package         
+## Useful Python Libraries for Red / Blue Teams         
+Any Python file can be a module. When a module is imported (even if it's just a function), statements in the module execute until the end of the file. Contents of the module namespace - all of the global names still defined at the end of the execution process.    
+
+	import module                     #import an entire module     
+	a = module.function(stuff)        #use a function from the module     
+	from package.module import function     #keep namespace tidier and only import what you need    
+	a = function(stuff)    
+	from package import module      #import module from a package     
+ 
+ 	from math import sin, cos    #make symbols available locally after importing a module    
+  	from module import *    #all symbols from a module into local scope, considered bad style      
 
 Argparse: parse and use command line arguments.     
 
