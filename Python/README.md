@@ -39,8 +39,11 @@ Prevent code from being accidentally executed when imported:
   		# only ran when called directly (not via 'import') 
    		main()
 ## Useful Python Libraries for Red / Blue Teams     
+import module                     #import an entire module     
+a = module.function(stuff)        #use a function from the module     
 from package.module import function     #keep namespace tidier and only import what you need    
-from package import module      #import only the module you need    
+a = function(stuff)    
+from package import module      #import module from a package         
 
 Argparse: parse and use command line arguments.     
 
