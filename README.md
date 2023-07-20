@@ -19,6 +19,7 @@
 [Black Hat Python](https://nostarch.com/black-hat-python2E)     
 [Real World Python book](https://nostarch.com/real-world-python), [Real World Python Code Samples](https://github.com/rlvaugh/Real_World_Python)        
 [30 Days of Python](https://github.com/Asabeneh/30-Days-Of-Python)    
+[Practical Python](https://dabeaz-course.github.io/practical-python/)    
 ### Ruby
 [Ruby Fu](https://rubyfu.net/)  
 ### PowerShell
