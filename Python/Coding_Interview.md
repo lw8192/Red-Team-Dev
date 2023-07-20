@@ -16,6 +16,7 @@ Boolean Expressions
 
     NOR: If a and b equal 0, return True. Else return False.    
     XOR: returns True when a/b are different. Example - a=1, b=0, return True    
+    (a and not b) or (not a and b)    #Python XOR    
 
 ### Strings    
 Can think of as an array of chars     
