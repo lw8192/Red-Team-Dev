@@ -49,6 +49,7 @@ Any Python file can be a module. When a module is imported (even if it's just a 
  
  	from math import sin, cos    #make symbols available locally after importing a module    
   	from module import *    #all symbols from a module into local scope, considered bad style      
+Main modules: os, sys, math, random, re, datetime, JSON    
 
 Argparse: parse and use command line arguments.     
 
