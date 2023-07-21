@@ -25,6 +25,7 @@ Can think of as an array of chars
 Operations:    
 
     string.split(" ")  #split on a value    
+    ''.join(strings)   #join a list of strings   
     string.strip()     #strip off whitespace or a specified char(s)        
     string.upper()     #to all uppercase    
     string.lower()     #to all lowercase     
@@ -202,6 +203,11 @@ Dynamically typed language: data types are checked during execution.
 Scope: block of code for each object, use objects without any prefix. Ie local scope - scope of a function.    
 Leverage existing structs (inheritance). Enable class specific behavior (polymorphism).  (encapsulation). Extendible and modular (overloading). 
 Classes: creates a format / outline that can be used to create a object with assigned values and properties. Class data = attribute, class functions = methods.       
+
+    class Car:                      #defining an instance of a class    
+       def __init__(self, model, color):
+           self.model = model
+           self.color = color
 Instantiation: creating an instance of a class. Ie - class car, creating bobs_car with color blue and year 2010   
 Polymorphism: enable class specific behavior. Use a common interface for different types - ie use same function and pass in different variable types. 
 
