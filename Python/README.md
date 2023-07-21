@@ -164,7 +164,8 @@ IdentationError: use tabnanny to check for mixed tabs / spaces in your script:
 Logging Library      
 
 	import logging     
- 	log.info("log some stuff")    
+	log.info("log some stuff")    
   	level=Logging.DEBUG    
   	fmt = '[% (Levelname)s] %(asctime)s - %(message)s'     
   	logging.basicConfig(Level=level, format=fmt)   
+breakpoint() function     
