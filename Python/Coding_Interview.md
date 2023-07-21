@@ -28,7 +28,7 @@ Operations:
     string.lower()     #to all lowercase     
     s="".join(c for c in s if c.isalnum()) #remove non alphanumeric chars     
     new_string = s.replace(i,"",1)   #remove char from a string, only remove 1 instance     
-    a = s.sorted()     #return string sorted       
+    a = sorted(s)     #return string sorted       
 Substrings:    
 
     if "ace" in "trace"      
@@ -124,7 +124,17 @@ Insert after a given node:
     new_node = Node(data)
     new_node.next = prev_node.next        #new node know links to the node after previous         
     prev_node.next = new_node             #previous node now points to the inserted node    
+Reverse a Linked List: Can use recursion as well       
 
+    #Include LinkedList class   
+    prev = None   
+    curr_node = self.head    #start at beginning node  
+    while (curr_node != NULL):   
+        next = curr_node.next      #save next node       
+        curr_node.next = prev      #assign current node pointer to previous pointer   
+        prev = curr               
+        curr_node = next          #look at the next node   
+              
 Binary tree:    
 
 Graph:    
