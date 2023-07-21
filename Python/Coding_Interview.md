@@ -8,6 +8,8 @@ During the interview: make pseudocode, ask questions if you get stuck, feel free
 Operations    
 
     round(int, 2)    #round to the 2nd decimal place     
+    num // 2     #round down   
+    num % 2    #remainder of number / 2    
     abs(-2)     #return absolute value     
     a+=1   #increment    
     print("{:.6f}".format(value))      #print out value to the 6th decimal place    
@@ -190,12 +192,14 @@ for:
 Set: must have unique items   
 
      myset = {"a", "b", "c"}   #can be ints, strings or mixed types     
-Tuple: 
+Tuple: can't be modified (immutable)    
 
     zip_tuple = zip(list_1, list2)    #take 2 iertables, put them together in a tuple, and returns    
     #output     [('list 1 item 0', 'list 2 item 0'), ('list 2 item 1', 'list 2 item 1')] etc       
-## Object Oriented Programming Concepts      
+## Python Programming Concepts      
 OOP - group variables and methods, model and group complex data in a reusable way. This allows us to structure software into reusable blueprints (classes).   
+Dynamically typed language: data types are checked during execution.    
+Scope: block of code for each object, use objects without any prefix. Ie local scope - scope of a function.    
 Leverage existing structs (inheritance). Enable class specific behavior (polymorphism).  (encapsulation). Extendible and modular (overloading). 
 Classes: creates a format / outline that can be used to create a object with assigned values and properties. Class data = attribute, class functions = methods.       
 Instantiation: creating an instance of a class. Ie - class car, creating bobs_car with color blue and year 2010   
@@ -207,4 +211,10 @@ Operator overloading: Change meaning of an operator depending on the operator's 
 Inheritance: lets us leverage existing structs allowing reusability of code. A derived / child class inherits attributes and methods from a parent class.          
 Method overriding: method in a child class takes priority of a method with the same name in a parent class. Allows for customization with inherited classes / code reuse.     
 Encapsulation: Secures and protect attributes and methods. Organize data / methods in 1 unit (the object). Using classes to restrict direct access to methods and variables, which creates private variables and methods. Then use get or set methods to change or access any private data.       
+Modularity: can import and use code written by other people. Makes Python more powerful.    
+Memory management: built in garbage collection. Handled by the Python Memory Manager. Allocates a private heap space.     
+
+Add Ins:   
+Decorators: add "syntactic sugar", modify behavior of a function without changing the function itself.    
+Generators: use instead of list comprehensions to conserve memory.        
 
