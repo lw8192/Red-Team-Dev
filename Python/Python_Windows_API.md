@@ -29,10 +29,3 @@ Usage:
 
     from ctypes import *
     from ctypes wintypes      
-
-## Syscalls   
-API hooking: AV products inspect Win32 API calls before they are executed, decide if they are suspicious/malicious, and either block or allow the call to proceed. Evade this by using syscalls.   
-Every native Windows API call has a number to present it (syscall). Differ between versions of Windows (find num using debugger or with public lists). Make a syscall: move number to a register. In x64, syscall instruction will then enter kernel mode. Direct syscalls in assembly: remove any Windows DLL imports, set up call ourselves (not using ntdll).      
-Make syscall: set up args on the stack, move into EAX, use syscall CPU instruction (causing syscall to be executed in kernel mode).     
-Syscall tables online: https://github.com/j00ru/windows-syscalls   
-Table for below code (Win 10 x64): https://j00ru.vexillium.org/syscalls/nt/64/   
