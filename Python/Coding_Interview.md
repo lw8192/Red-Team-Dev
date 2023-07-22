@@ -1,4 +1,5 @@
 # Python Coding Interview Review     
+[Python Coding Interview Review Videos](https://realpython.com/lessons/python-coding-interview-tips-overview/ )    
 Practice: leetcode, hackerrank, Cracking the coding interview    
 Before the interview: know what language you will program in (ask if you can pick / if a certain language is required), what resources you can use (the Internet?, official documentation?, questions from the interviewers?). These things will guide your preparation.    
 [Example Practice Questions](https://blog.finxter.com/wp-content/uploads/2019/02/CheatSheet-Python-6_-Coding-Interview-Questions.pdf)    
