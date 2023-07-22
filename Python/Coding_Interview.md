@@ -20,7 +20,10 @@ Boolean Expressions
     NOR: If a and b equal 0, return True. Else return False.    
     XOR: returns True when a/b are different. Example - a=1, b=0, return True    
     (a and not b) or (not a and b)    #Python XOR    
+Binary Numbers   
 
+    binary = bin(int_decimal)    #get binary representation of a number, format 0b1000
+    
 ### Strings    
 Can think of as an array of chars     
 Operations:    
@@ -58,11 +61,22 @@ Adding to a list:
     list.append("last")   #add to end   Built in functions: max, min, index, count, pop, extend     
     list.push()     #add item to a list  
     new_list = list(range(1,101))      #generate a list from 1 to 100    
+    list = [0] * 100    #make a list containing only 0s.    
+
+Enumerating a list:   
+
+    for i in range(len(list)):   #range 0 to len(list), (start,stop)    
+        print(i)  
+
+    for count, value in enumerate(values):    #index and value of a list   
+        print(count, value)  
 Operations:   
 
     sum(list)      #sum ints in a list    
     max(list)      #return max number a list     
     min(list)      #return minimum number in a list    
+    list(map(function, list))   #do function to a list without a for loop, returns values   
+
 Remove duplicates from a list:   
 
     a_list = ["a", "b", "a", "c", "c"]
@@ -84,6 +98,11 @@ Square matrix:
     3 4 5   
     5 4 6       #0-2 down, 0-2 across. index[0][0] = start   []    
     a[1] #prints a row     
+List Comprehensions    
+
+    [<expr> for <elem> in <lst> if <cond>]     
+    [function(num) for num in lst]      #return list of function output for each item in lst  
+    
 ### Sorting Lists    
 Sorting in-place:     
 Modify the input in place, without creating a separate copy of the data structure. An algorithm which is not in-place is sometimes called not-in-place or out-of-place.  
@@ -94,12 +113,7 @@ Modify the input in place, without creating a separate copy of the data structur
     sorted(list, reverse=True)   #sort high to low    
     arr.sort()      #sorts in place, can be finicky      
     my_list = sorted(set(my_list))  #sort unique, only works on hashable types     
-    rev_list = list(reverse(list))
-
-Enumerating a list:   
-
-    for count, value in enumerate(values):    #has index and value of a list   
-        print(count, value)      
+    rev_list = list(reverse(list))    
 
 Counting sort:      
 Create an integer array whose index range covers the entire range of values in your array to sort. Each time a value occurs in the original array, you increment the counter at that index.     

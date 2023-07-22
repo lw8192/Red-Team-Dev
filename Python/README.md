@@ -168,5 +168,9 @@ Logging Library
 	log.info("log some stuff")    
   	level=Logging.DEBUG    
   	fmt = '[% (Levelname)s] %(asctime)s - %(message)s'     
-  	logging.basicConfig(Level=level, format=fmt)   
-breakpoint() function     
+    logging.basicConfig(Level=level, format=fmt)      
+Doctest Module: parse code for expected results and executable code, test and compare results           
+
+    python3 -m doctest script.py    
+    #no output - passes all the tests   
+breakpoint() function        
