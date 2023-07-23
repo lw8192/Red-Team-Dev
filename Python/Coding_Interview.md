@@ -184,6 +184,14 @@ Loop through items in a dict:
         print(key + " " + val)
 Hash map: unordered collection of key-value pairs stored in a hash table where keys are unique - Java construct, but can use dicts in Python.    
 
+### Set and Tuples    
+Set: must have unique items   
+
+     myset = {"a", "b", "c"}   #can be ints, strings or mixed types     
+Tuple: can't be modified (immutable)    
+
+    zip_tuple = zip(list_1, list2)    #take 2 iertables, put them together in a tuple, and returns    
+    #output     [('list 1 item 0', 'list 2 item 0'), ('list 2 item 1', 'list 2 item 1')] etc 
 
 ### Conditionals   
 
@@ -193,6 +201,7 @@ Hash map: unordered collection of key-value pairs stored in a hash table where k
         print("False")    
     else:  
         print("False")    
+
 ### Loops    
 while loops:    
 
@@ -207,15 +216,13 @@ for:
     for i in range(0,len(list)):
         print(list[i])              #prints all elements in a list     
     for i in range(start, -1, -1):          #decrement by 1, end at 0      
-        break   
-### Set and Tuples    
-Set: must have unique items   
+        break         
+### Debugging    
+You will have limited debugging ability if you are doing an interview using HackerRank or another online IDE. An interviewer may ask how you could debug code.    
 
-     myset = {"a", "b", "c"}   #can be ints, strings or mixed types     
-Tuple: can't be modified (immutable)    
-
-    zip_tuple = zip(list_1, list2)    #take 2 iertables, put them together in a tuple, and returns    
-    #output     [('list 1 item 0', 'list 2 item 0'), ('list 2 item 1', 'list 2 item 1')] etc       
+    breakpoint()     #use pdb to set breakpoints    
+    #print statement or logging   
+    
 ## Python Programming Concepts      
 OOP - group variables and methods, model and group complex data in a reusable way. This allows us to structure software into reusable blueprints (classes).   
 Dynamically typed language: data types are checked during execution.    

@@ -173,4 +173,8 @@ Doctest Module: parse code for expected results and executable code, test and co
 
     python3 -m doctest script.py    
     #no output - passes all the tests   
-breakpoint() function        
+breakpoint() function: Python 3.7 and newer            
+
+    #alias for import pdb; pdb.set_trace()    
+    #code here   
+    breakpoint()     //code will pause when you run it and allow you to print out values in (Pdb) to debug    
