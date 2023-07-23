@@ -43,6 +43,9 @@ Declared in WinDef.h and WinNt.h header files.
     Handles: reference system objects, used by an application to modify the object. Entered into a internal handle table that hold the addresses of the resources and the resource type.     
     LPHANDLE, HKEY, HRSRC, HINSTANCE     
 
+## Windows Process Injection    
+[Process Injection Methods](https://github.com/odzhan/injection)    
+[Windows - 10 Common Process Injection Techniques](https://www.elastic.co/blog/ten-process-injection-techniques-technical-survey-common-and-trending-process)    
 
 ## Syscalls   
 API hooking: AV products inspect Win32 API calls before they are executed, decide if they are suspicious/malicious, and either block or allow the call to proceed. Evade this by using syscalls.   

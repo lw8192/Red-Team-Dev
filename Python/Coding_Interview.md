@@ -73,8 +73,12 @@ Enumerating a list:
 Operations:   
 
     sum(list)      #sum ints in a list    
-    max(list)      #return max number a list     
+    max(list)      #return max number in a list     
+    max(list, key=square)    #outputs item with the largest square       
+    max(list, key=lambda x: x * x)     #outputs item with the largest square using a lambda function   
     min(list)      #return minimum number in a list    
+    any(list)      #returns if any of items in iterable are True    
+    all(list)      #returns True if all elements in iterable are True    
     list(map(function, list))   #do function to a list without a for loop, returns values   
 
 Remove duplicates from a list:   

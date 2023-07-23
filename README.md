@@ -5,10 +5,12 @@
 [Free Programming Books](https://github.com/EbookFoundation/free-programming-books)     
 [Developer Reference](https://devhints.io/)    
 [Leetcode](https://leetcode.com/)     
+
 ### Bash 
 [Bash Handbook](https://github.com/denysdovhan/bash-handbook)  
 [BASH Programming - Introduction HOW-TO](http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html)  
 [Advanced Bash](https://tldp.org/LDP/abs/abs-guide.pdf) 
+
 ### Python
 [Python for Pentesters](http://www.pentesteracademy.com/course?id=1)  
 [learnpythonthehardway](https://learnpythonthehardway.org/)  
@@ -24,16 +26,19 @@
 
 ### Ruby
 [Ruby Fu](https://rubyfu.net/)  
+
 ### PowerShell
 [PS 101](https://grimmie.net/ps-101-an-intro-to-powershell/)     
 [Learning Powershell](https://github.com/PowerShell/PowerShell/tree/master/docs/learning-powershell)     
 [Powershell for Pentesters Videos](https://www.youtube.com/playlist?list=PLJQHPJLj_SQatUsJy3O4k-VQlllquDmDr)      
+
 ### Assembly
 [Hacking the Metal: Intro to Assembly](https://github.com/eigentourist/defcon29)    
 [Some Assembly Required: Assembly Intro](https://github.com/hackclub/some-assembly-required/tree/main)    
 [Assembly Language Megaprimer for Linux](http://www.securitytube.net/groups?operation=view&groupId=5)  
 [Windows Assembly Language Megaprimer](http://www.securitytube.net/groups?operation=view&groupId=6)      
 [Art of Assembly](https://www.plantation-productions.com/Webster/)    
+
 ### C    
 [Learn C and C++](https://www.cprogramming.com/)     
 [Learn C](https://www.learnc.net/)    
@@ -42,10 +47,17 @@
 [Kernel Basics](https://github.com/nu11secur1ty/Kernel-and-Types-of-kernels)      
 [Windows Internals C++](https://github.com/zodiacon/windowskernelprogrammingbook)    
 [OffensiveC++](https://github.com/lsecqt/OffensiveCpp)       
+
 ### C#   
-[C# for n00bs](https://training.zeropointsecurity.co.uk/courses/csharp-for-n00bs)        
+[C# for n00bs](https://training.zeropointsecurity.co.uk/courses/csharp-for-n00bs)     
+[Write Custom Backdoor Payloads with C#](https://github.com/mvelazc0/defcon27_csharp_workshop)      
+
 ### Rust    
 [Rust 101: Building Ransomware](https://idov31.github.io/2022/05/07/rust101-rustomware.html)      
 [Rust for n00bs](https://training.zeropointsecurity.co.uk/courses/rust-for-n00bs)      
 [Offensive Rust](https://github.com/trickster0/OffensiveRust)    
      
+### Malware Developement   
+[ired.team](https://www.ired.team/)    
+[VX Underground](https://www.vx-underground.org/#E:/root)     
+[Dark Vortex Maldev Series](https://0xdarkvortex.dev/malware-on-steroids-part-1-simple-cmd-reverse-shell/)   
