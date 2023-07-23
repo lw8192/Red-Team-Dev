@@ -60,4 +60,5 @@
 ### Malware Developement   
 [ired.team](https://www.ired.team/)    
 [VX Underground](https://www.vx-underground.org/#E:/root)     
-[Dark Vortex Maldev Series](https://0xdarkvortex.dev/malware-on-steroids-part-1-simple-cmd-reverse-shell/)   
+[Dark Vortex Maldev Series](https://0xdarkvortex.dev/malware-on-steroids-part-1-simple-cmd-reverse-shell/)     
+[Malware Development Notes](https://www.ctfnote.com/red-teaming/malware-development)     
