@@ -15,3 +15,4 @@ Compile exe on Kali (you might need to adjust these flags):
 ## The Windows API    
 [Direct Syscalls](https://github.com/VirtualAlllocEx/Direct-Syscalls-A-journey-from-high-to-low/tree/main) - use low level direct syscalls to evade AV / EDR software.         
 [Windows API Programming](https://caiorss.github.io/C-Cpp-Notes/WindowsAPI-cpp.html#orge9d5c6d)        
+[The Forger's Win32API Tutorial](http://slav0nic.org.ua/static/books/C_Cpp/theForger's_Win32APITutorial.pdf)    

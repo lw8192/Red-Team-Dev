@@ -178,3 +178,23 @@ breakpoint() function: Python 3.7 and newer
     #alias for import pdb; pdb.set_trace()    
     #code here   
     breakpoint()     //code will pause when you run it and allow you to print out values in (Pdb) to debug    
+assert statements: write test cases and check conditions in real time   
+
+    assert <cond>, ([error_msg])   #syntax   
+    x = -5 
+    assert x > 0, "x is negative"    
+    #returns AssertionError: x is negative    
+try / except:   
+
+    try: 
+        #try code   
+        if condition:     #raise an exception  
+            raise Exception("Programmer raises an exception due to something wrong)
+    except NameError:    
+        #handle specific error   
+    except: 
+        #handle any error   
+    else:
+        #execute if no errors  
+    finally: 
+        #always executes  

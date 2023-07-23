@@ -15,6 +15,7 @@ Operations
     a+=1   #increment    
     print("{:.6f}".format(value))      #print out value to the 6th decimal place    
     isinstance(a, int)     #return True if a is an interger    
+    list(str(int_var))    #convert int to a list of digits   
 Boolean Expressions   
 
     NOR: If a and b equal 0, return True. Else return False.    
@@ -22,7 +23,7 @@ Boolean Expressions
     (a and not b) or (not a and b)    #Python XOR    
 Binary Numbers   
 
-    binary = bin(int_decimal)    #get binary representation of a number, format 0b1000
+    binary = bin(int_decimal)    #get binary representation of a number, format 0b1000   
     
 ### Strings    
 Can think of as an array of chars     
@@ -41,7 +42,18 @@ Substrings:
     if "ace" in "trace"      
     string[start:end:step]    #end - not included     
     s.find("hi")   #searches string s for a substring and returns starting index    
-    
+fstrings: formatted string literals. Easy way to print out strings.   
+
+    f"words and stuff {string_variable} and {age +5}"    
+    "words and stuff {} and {}".format(string_variable, age)    #older way of inserting vars    
+Check if 2 strings are a palindrome:    
+
+    return string_a == string_b[::-1]    
+Strings module:   
+
+    import string    
+    string.digits    #returns string of digits only   
+    string.ascii_lowercase    #only lowercase chars. See docs for more.     
 ## Lists    
 Common interview questions: reversing a linked list, operations on a list with a given critera, modifying a list in place, testing if 2 words are palindromes        
 
@@ -106,15 +118,24 @@ List Comprehensions
 
     [<expr> for <elem> in <lst> if <cond>]     
     [function(num) for num in lst]      #return list of function output for each item in lst  
-    
+itertools modules: efficient looping   
+
+    import itertools   
+    repeat_ex = itertools.repeat(1)
+    next(repeat_ex)   #prints 1  
+    itertools.cycle   #cycle through iterables   
+    itertools.permutations   #find all permutations   
+    itertools.combinations   #find all combinations    
+
 ### Sorting Lists    
 Sorting in-place:     
 Modify the input in place, without creating a separate copy of the data structure. An algorithm which is not in-place is sometimes called not-in-place or out-of-place.  
 [Comparison Based Sorting Algorithims](https://www.cs.cmu.edu/~avrim/451f11/lectures/lect0913.pdf)    
 
-    list.sort()         #sort list, low to high. Sorts in place, can be finicky.   
+    list.sort()         #sort list, low to high. Sorts in place - mutates list.       
     sorted(list)       #sort list of ints, low to high. returns a new list    
     sorted(list, reverse=True)   #sort high to low    
+    sorted(list, key=lambda list: list['key'])     #sort based on a certain criteria, useful with a list of dicts       
     arr.sort()      #sorts in place, can be finicky      
     my_list = sorted(set(my_list))  #sort unique, only works on hashable types     
     rev_list = list(reverse(list))    
@@ -162,7 +183,7 @@ Binary tree:
 Graph:    
 
 ### Dicts   
-Ordered, changeable, does not allow duplicates.     
+Ordered, changeable, does not allow duplicates. Insert and retrieve key-value pairs in constant time.         
 
     print(dict.get("key"))    
     dict.keys()    
@@ -181,13 +202,39 @@ Get key for the first instance of a certain value:
 Loop through items in a dict:   
 
     for key,val in dict.items():
-        print(key + " " + val)
+        print(key + " " + val)   
+collections.defaultdict: allows for default values even if the key does not exist in the dict:     
+
+    from collections import default dict   
+    dict_ex = defaultdict(lambda = 5)    #if key doesn't exist, value is 10      
+collections.Counter    
+
+    from collections import Counter      
+    count = Counter("string")
+    count['s']    #refers to how many times s occures in the string     
+collections.deque: allow for appending to and popping from both left / right in constant time:   
+
+    from collections import deque   
+    ex = deque([1,2,3,4])
+    ex.appendleft(0)
+    ex.append(5)
+    ex.popleft()     #returns 0   
+    ex.pop() #returns 5      
+collections.namedtuple: create tuple-like objects   
+
+    from collections import namedtuple   
+    Car = namedtuple("car",["make", "model"])
+    a_car = Car(make="Mazda", model="CX")  
+    a_car.make    #returns Mazda   
 Hash map: unordered collection of key-value pairs stored in a hash table where keys are unique - Java construct, but can use dicts in Python.    
 
 ### Set and Tuples    
 Set: must have unique items   
 
      myset = {"a", "b", "c"}   #can be ints, strings or mixed types     
+
+     s = set()    #create a set and add a variable  
+     s.add("item")    
 Tuple: can't be modified (immutable)    
 
     zip_tuple = zip(list_1, list2)    #take 2 iertables, put them together in a tuple, and returns    
@@ -222,7 +269,7 @@ You will have limited debugging ability if you are doing an interview using Hack
 
     breakpoint()     #use pdb to set breakpoints    
     #print statement or logging   
-    
+
 ## Python Programming Concepts      
 OOP - group variables and methods, model and group complex data in a reusable way. This allows us to structure software into reusable blueprints (classes).   
 Dynamically typed language: data types are checked during execution.    
@@ -249,4 +296,12 @@ Memory management: built in garbage collection. Handled by the Python Memory Man
 Add Ins:   
 Decorators: add "syntactic sugar", modify behavior of a function without changing the function itself.    
 Generators: use instead of list comprehensions to conserve memory.        
+
+    gen = (x for x in [1, 2, 3])     
+    next(g)   #print out first element, run again to get next  
+
+    #generate using a function   
+    def gen(): 
+        yield 1
+        yield 2
 
