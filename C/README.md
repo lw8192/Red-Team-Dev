@@ -45,11 +45,13 @@ Pointer: contains address of a storage location of a variable, where the data is
     ptr +=3;    //increases address by 3*(size of the data type in bytes)
     ptr -= 2;   //decrement address by 2 
 
+Double pointer: pointer to a pointer   
 
-Structure: groups variables under a single defined type. Similiar to a Python object. Custom data type.        
+    int **p;   //create a double pointer  
+Structure: groups variables under a single defined type. Similar to a Python object. Custom data type.        
 
 ## Memory in C     
-C / C++ allows you to interact with memory on a lower level then languages like Python. Misusing memory - can cause segfaults. A common problem: trying to access memory that has already been freed.    
+C / C++ allows you to interact with memory on a lower level than languages like Python. Misusing memory - can cause segfaults. A common problem: trying to access memory that has already been freed.    
 Unlike other languages, C has no garbage collector to deallocate / free memory, so the developer must do so manually.        
 
 Memory Structure (high to low address, going down):     
