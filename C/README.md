@@ -51,12 +51,12 @@ C / C++ allows you to interact with memory on a lower level then languages like 
 Unlike other languages, C has no garbage collector to deallocate / free memory, so the developer must do so manually.        
 
 Memory Structure (high to low address, going down):     
-    Command Line Arguments 
-    Stack 
-    Heap 
-    Uninitialized Data Segment (BSS)   
-    Initialized Data Segment   
-    Text/Code Segment   
+    Command Line Arguments    
+    Stack    
+    Heap       
+    Uninitialized Data Segment (BSS)       
+    Initialized Data Segment      
+    Text/Code Segment        
 Stack: Last In First Out data structure, ordered insertion, where program data is stored (functions called, created variables). Grows down (towards heap).                          
 Heap: allocate big amounts of memory for dev usage, dynamic memory that the programmer can change. Grows up (towards stack). Changes in size.           
 Permanent storage / Static memory: segments, copied to program memory on execution.    
