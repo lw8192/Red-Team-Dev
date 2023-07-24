@@ -10,8 +10,41 @@ C is fast due to: compiling, strongly typed, no garbage collection.
 Variable types: char, int, float, double. Modifiers: signed, unsigned, short, long.   
 char: 1 byte / 1 char of data. float: single precision floating point. double: double precision floating point.          
 Pointer, struct, evaluation strategy.   
-Pointer: containers address of a storage location of a variable, where the data is in memory (not the actual value of the data). Stores address.    
-Structure: groups variables under a single defined type. Similiar to a Python object.     
+Array: continous block of memory. Acessing memory outside the bounds of an array can corrupt stored date.         
+
+    int arr[5] = {1, 2, 3, 4, 5};
+    int* ptr = &arr[0];    
+    for(int i = 0; i < 5; i++){
+        printf("%i\n", *ptr);    //derefernce the pointer and print out each integer  
+        ptr++;
+    }
+String: array of chars      
+
+    char s[] = "words and stuff";
+    printf("%s",s);
+
+    char *ptr = &s[0];
+    for (int i=0; i < strlen(s); i++){     //loop to replace all chars in the array with .
+        *ptr = '.';
+        ptr++;
+    } 
+Pointer: contains address of a storage location of a variable, where the data is in memory (not the actual value of the data). Stores address. Allows direct access and manipulation of a byte in memory.        
+
+    int y = 20;
+    int *ptr;    //create a integer pointer   
+    ptr = &y;    //Set ptr equal to the memory address of a variable    
+    printf("%p", ptr);    //Prints out pointer - address of the variable in hex.    
+    printf("%i",*ptr);    //print out data pointer "points to" 
+    *ptr = 25;    //change data of pointer 
+
+    int x = *ptr;  //use dereference operator to assign integer data pointer "points to" to x 
+    printf("%i", x);     //print out integer x
+
+    ptr +=3;    //increases address by 3*(size of the data type in bytes)
+    ptr -= 2;   //decrement address by 2 
+
+
+Structure: groups variables under a single defined type. Similiar to a Python object. Custom data type.        
 
 ## Memory in C     
 C / C++ allows you to interact with memory on a lower level then languages like Python. Misusing memory - can cause segfaults. A common problem: trying to access memory that has already been freed.    
