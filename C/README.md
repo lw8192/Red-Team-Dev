@@ -15,9 +15,11 @@ Array: continous block of memory. Acessing memory outside the bounds of an array
     int arr[5] = {1, 2, 3, 4, 5};
     int* ptr = &arr[0];    
     for(int i = 0; i < 5; i++){
-        printf("%i\n", *ptr);    //derefernce the pointer and print out each integer  
+        printf("%i\n", *ptr);    //dereference the pointer and print out each integer  
         ptr++;
     }
+
+    atoi(char * string);    //convert string to an int    
 String: array of chars      
 
     char s[] = "words and stuff";
@@ -93,6 +95,7 @@ Example of allocating and freeing memory:
 ## C Libraries    
 stdio.h - library for input / output functions. printf(), scanf()     
 write to the console - use printf(), %d or %i for integer types, %f for floating-point numbers, %s for strings   
+built in C functions: strcpy(), strlwr(), strcmp(), strlen(), strcat()    
 
 #include <Windows.h>      //Windows API calls     
 <stdlib.h>       //memory functions   
