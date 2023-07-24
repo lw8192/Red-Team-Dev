@@ -1,7 +1,8 @@
 # C    
 ## Intro   
 Lower level language then Python (meaning the developer can control the program at a more granular level - allows for more speed / flexibility but also harder to program in). Compiled. Widely used in OS / embedded environments - "system development language". Variables - need to define type and name. Strongly typed language: can't change later on. Procedural - code follows an order in execution. Not object oriented language - variables don't have an access modifier (can be static or constants). Static var: valid in a global scope. 
-C is fast due to: compiling, strongly typed, no garbage collection.           
+C is fast due to: compiling, strongly typed, no garbage collection.      
+Pass by reference: pass address of a variable into a function, then functions modifies the data at the address.    
 [Codeblocks IDE](https://www.codeblocks.org/)    
 [Codeblocks Install](https://www.digitalocean.com/community/tutorials/c-compiler-windows-gcc)   
 
@@ -10,6 +11,7 @@ C is fast due to: compiling, strongly typed, no garbage collection.
 Variable types: char, int, float, double. Modifiers: signed, unsigned, short, long.   
 char: 1 byte / 1 char of data. float: single precision floating point. double: double precision floating point.          
 Pointer, struct, evaluation strategy.   
+Typecasting: convert from one variable type into another.    
 Array: continous block of memory. Acessing memory outside the bounds of an array can corrupt stored date.         
 
     int arr[5] = {1, 2, 3, 4, 5};
@@ -48,11 +50,20 @@ Pointer: contains address of a storage location of a variable, where the data is
 Double pointer: pointer to a pointer   
 
     int **p;   //create a double pointer  
-Structure: groups variables under a single defined type. Similar to a Python object. Custom data type.        
+Structure: groups variables under a single defined type. Similar to a Python object. Custom data type.      
+
+    struct ex {
+        int x;
+        char a;
+        ex;
+    }
+    struct ex e;
+    e.x = 3;
+    e.a = 'd'; 
 
 ## Memory in C     
-C / C++ allows you to interact with memory on a lower level than languages like Python. Misusing memory - can cause segfaults. A common problem: trying to access memory that has already been freed.    
-Unlike other languages, C has no garbage collector to deallocate / free memory, so the developer must do so manually.        
+C / C++ allows you to interact with memory on a lower level than languages like Python. Misusing memory - can cause segfaults. A common problem: trying to access memory that has already been freed. Not freeing memory - can lead to a memory leak.       
+Unlike other languages, C has no garbage collector to deallocate / free memory, so the developer must do so manually.         
 
 Memory Structure (high to low address, going down):     
     Command Line Arguments    
@@ -67,10 +78,11 @@ Permanent storage / Static memory: segments, copied to program memory on executi
 
 Allocating Dynamic Memory    
 A program explicitly requests the allocation of a block of memory via a system call. Used to optimize program memory, when variable memory sizes are needed, etc. Functions are defined in <stdlib.h>.       
-malloc(size); //direct call to allocate memory on the heap, size in bytes as an argument     
-calloc(num, size); //given fixed number of objects of a given fixed size    
-free(); //release memory   
-realloc(ptr, new_size); //extend or shrink previously allocated memory. Extends existing block or allocates a new section of memory as needed.       
+
+    char * ptr = malloc(sizeof(int)); //direct call to allocate memory on the heap, size in bytes as an argument     
+    calloc(num, size); //allocate memory given fixed number of objects of a given fixed size    
+    free(); //release memory   
+    realloc(ptr, new_size); //extend or shrink previously allocated memory. Extends existing block or allocates a new section of memory as needed.       
 sizeof(type), sizeof expression: returns size in bytes (size_t) of a variable
 
 Use a Pointer to refer to dynamically allocated memory   
