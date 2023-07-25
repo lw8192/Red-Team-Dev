@@ -1,6 +1,7 @@
 # Using Python to Solve CTF Problems    
 pwntools for Python3    
 [Pwntools Intro](https://guyinatuxedo.github.io/02-intro_tooling/pwntools/index.html#pwntools-intro)     
+[Pwntools Cheatsheet](https://gist.github.com/anvbis/64907e4f90974c4bdd930baeb705dedf)    
 Install:    
 
     sudo pip install pwn    
