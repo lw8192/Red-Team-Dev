@@ -6,7 +6,7 @@ Install:
   sudo pip install pwn    
 Usage:   
 
-  from pwn import *    
+  from pwn import *     
   target = remote(10.10.10.10, 8000)     #connect to a target with IP or URL. Target can be a remote connection or a process.     
   target.send("string")   #send data to a target   
   target.sendline("stuff")     #send data with a newline   
