@@ -37,11 +37,50 @@ Declared in WinDef.h and WinNt.h header files.
     LPCVOID pConstant = &SomeConstant;
     VOID OverflowMe(PCHAR Buffer)
     {
-    strcpy(Buffer, “Buffer overflows are in SEC660!”);
+    strcpy(Buffer, “some words”);
     }   
 
-    Handles: reference system objects, used by an application to modify the object. Entered into a internal handle table that hold the addresses of the resources and the resource type.     
-    LPHANDLE, HKEY, HRSRC, HINSTANCE     
+Handles: reference system objects, used by an application to modify the object. Entered into a internal handle table that hold the addresses of the resources and the resource type.     
+LPHANDLE, HKEY, HRSRC, HINSTANCE     
+WINAPI, APIENTRY, CALLBACK: used when defining a function. From WinDef.h    
+
+    BOOL WINAPI EnumProcesses( 
+    _Out_writes_bytes_(cb) DWORD* lpidProcess,
+    _In_ DWORD cb,
+    _Out_ LPDWORD lpcbNeeded );
+    WINADVAPI LSTATUS APIENTRY RegCreateKeyA ( 
+    _In_ HKEY hKey,
+    _In_opt_ LPCSTR lpSubKey,
+    _Out_ PHKEY phkResult );
+    typedef UINT (CALLBACK *LPFNPSPCALLBACKA)( 
+    HWND hwnd, 
+    UINT uMsg, 
+    struct _PROPSHEETPAGEA *ppsp );
+
+Defensive Tools:   
+[PESieve](https://github.com/hasherezade/pe-sieve)   
+   
+## Windows API    
+Provides OS functionality - userland and kernel land. APIs with Ex on the end are heavily modified.        
+Naming: PrefixVerbTarget[Ex] / VerbTarget[Ex]     
+Create* APIs: help a user application create a system object, usually returns a handle.      
+CreateProcess, CreateFile, CreateThread, CreateDirectory, etc          
+CreateProcess: returns a BOOL, creates a new process.   
+
+    STARTUPINFO start_info = { sizeof start_ingo};
+    PROCESSINFORMATION proc_info; 
+    WCHAR command[] = L"whoami"
+    CreateProcess(NULL,
+        command, 
+        NULL,
+        NULL,
+        FALSE,
+        0, 
+        NULL,
+        NULL, 
+        &start_info,
+        &proc_info); 
+
 
 ## Windows Process Injection    
 [Process Injection Methods](https://github.com/odzhan/injection)    
