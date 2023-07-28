@@ -9,7 +9,7 @@ Pass by reference: pass address of a variable into a function, then functions mo
 ## Data Types       
 [Reference Chart for Data Types in C](https://www.geeksforgeeks.org/data-types-in-c/#)     
 Variable types: char, int, float, double. Modifiers: signed, unsigned, short, long.   
-char: 1 byte / 1 char of data. float: single precision floating point. double: double precision floating point.          
+char: 1 byte / 1 char of data. float: 4 bytes, single precision floating point. double: double precision floating point.          
 Pointer, struct, evaluation strategy.   
 Typecasting: convert from one variable type into another.    
 Array: continous block of memory. Acessing memory outside the bounds of an array can corrupt stored date.         
@@ -45,7 +45,8 @@ Pointer: contains address of a storage location of a variable, where the data is
     printf("%i", x);     //print out integer x
 
     ptr +=3;    //increases address by 3*(size of the data type in bytes)
-    ptr -= 2;   //decrement address by 2 
+    ptr -= 2;   //decrement address by 2    
+    #incrementing a 
 
 Double pointer: pointer to a pointer   
 
@@ -64,7 +65,7 @@ Structure: groups variables under a single defined type. Similar to a Python obj
 ## Memory in C     
 C / C++ allows you to interact with memory on a lower level than languages like Python. Misusing memory - can cause segfaults. A common problem: trying to access memory that has already been freed. Not freeing memory - can lead to a memory leak.       
 Unlike other languages, C has no garbage collector to deallocate / free memory, so the developer must do so manually.         
-
+Memory addresses: 32 bits / 
 Memory Structure (high to low address, going down):     
     Command Line Arguments    
     Stack    
@@ -105,11 +106,12 @@ Example of allocating and freeing memory:
     
         free(pointr); //free allocated memory   
     }
+## Functions    
+built in C functions: strcpy(), strlwr(), strcmp(), strlen(), strcat()       
 
 ## C Libraries    
 stdio.h - library for input / output functions. printf(), scanf()     
 write to the console - use printf(), %d or %i for integer types, %f for floating-point numbers, %s for strings   
-built in C functions: strcpy(), strlwr(), strcmp(), strlen(), strcat()    
 
 #include <Windows.h>      //Windows API calls     
 <stdlib.h>       //memory functions   
