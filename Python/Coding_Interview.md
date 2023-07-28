@@ -61,7 +61,8 @@ remove items from a list: pop, remove, del, clear
 Treating a list as a stack: pop(), append(). Queue: pop(), insert()    
 
     list.pop()	  #removes an item at an index position and returns it, removes last item by default             
-    list.remove("item")	#removes the first item matching a value       
+    list.remove("item")	#removes the first item matching a value     
+    [value for value in nums if value != val]     #remove all occurences of a value        
     slicing: Can be used to delete non-matching ranges of data        
     del statement	 #removes an item at an index position and doesn’t return it       
     del list[0]   #delete element of list   
