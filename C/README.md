@@ -22,6 +22,7 @@ Array: continous block of memory. Acessing memory outside the bounds of an array
     }
 
     atoi(char * string);    //convert string to an int    
+    char array[] = "2007";    //convert int to a array  
 String: array of chars      
 
     char s[] = "words and stuff";
