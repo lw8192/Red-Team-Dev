@@ -1,5 +1,6 @@
 # Notes on Assembly    
-Low level programming language. Converted into executable machine code by an assembler. represents instructions in symbolic code.       
+[Notes from SANS Poster](https://sansorg.egnyte.com/dl/pHqHxaLC5M)   
+Low level programming language. Converted into executable machine code by an assembler. Represents instructions in symbolic code.       
 
 # Common 32-Bit Registers and Uses   
 | Register      | Full Name   | Description |

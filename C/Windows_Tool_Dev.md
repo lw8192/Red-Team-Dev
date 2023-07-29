@@ -81,6 +81,37 @@ CreateProcess: returns a BOOL, creates a new process.
         &start_info,
         &proc_info); 
 
+### Windows API Calls    
+Code injection: CreateRemoteThread, OpenProcess, VirtualAllocEx, WriteProcessMemory, EnumProcesses   
+Dynamic DLL loading: LoadLibrary, GetProcAddress   
+Memory scraping: CreateToolhelp32Snapshot, OpenProcess, ReadProcessMemory, EnumProcesses   
+Data stealing: GetClipboardData, GetWindowText     
+Keylogging: GetAsyncKeyState, SetWindowsHookEx   
+Embedded resources: FindResource, LockResource   
+Unpacking/self-injection: VirtualAlloc, VirtualProtect   
+Query artifacts: CreateMutex, CreateFile, FindWindow, GetModuleHandle, RegOpenKeyEx   
+Execute a program: WinExec, ShellExecute, CreateProcess   
+Web interactions: InternetOpen, HttpOpenRequest, HttpSendRequest, InternetReadFile  
+
+API Call	Explanation
+LoadLibraryA
+	Maps a specified DLL  into the address space of the calling process
+GetUserNameA
+	Retrieves the name of the user associated with the current thread
+GetComputerNameA
+	Retrieves a NetBIOS or DNS  name of the local computer
+GetVersionExA
+	Obtains information about the version of the operating system currently running
+GetModuleFileNameA
+	Retrieves the fully qualified path for the file of the specified module and process
+GetStartupInfoA
+	Retrieves contents of STARTUPINFO structure (window station, desktop, standard handles, and appearance of a process)
+GetModuleHandle
+	Returns a module handle for the specified module if mapped into the calling process's address space
+GetProcAddress
+	Returns the address of a specified exported DLL  function
+VirtualProtect
+	Changes the protection on a region of memory in the virtual address space of the calling process   
 
 ## Windows Process Injection    
 [Process Injection Methods](https://github.com/odzhan/injection)    
