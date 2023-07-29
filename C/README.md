@@ -62,7 +62,16 @@ Structure: groups variables under a single defined type. Similar to a Python obj
     struct ex e;
     e.x = 3;
     e.a = 'd'; 
+## Functions    
+Function needs to be defined or a function prototype used so the compiler can locate it. No return value: void.       
 
+    int math_func(it);    //function prototype: return type, names, args   
+
+    int main()
+    {
+        //example main function   
+        return 0; 
+    }
 ## Memory in C     
 C / C++ allows you to interact with memory on a lower level than languages like Python. Misusing memory - can cause segfaults. A common problem: trying to access memory that has already been freed. Not freeing memory - can lead to a memory leak.       
 Unlike other languages, C has no garbage collector to deallocate / free memory, so the developer must do so manually.         
