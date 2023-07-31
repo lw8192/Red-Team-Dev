@@ -62,3 +62,16 @@ JGE/ JNL Jump if greater or equal; same as jump if not less.
     (gdb) info register eip    #see address of EIP (Instruction Pointer)    
     (gdb) x/x $eip    #see address EIP contains in hex. This is the next instruction to be executed.        
     (gdb) disas main      #Dump assembler code for function main    
+
+Default size of a single unit - 4 byte unit - word. You can change size display with region symbols, appended to end of a format letter.   
+2 bytes - short / halfword. 4 bytes - double word / DWORD.       
+
+       b A single byte
+       h A halfword or short, which is two bytes in size
+       w A word, which is four bytes in size
+       g A giant, which is eight bytes in size 
+Examples:    
+
+     (gdb) x/4xb $eip       #View memory starting at EIP in 4 groupings of 1 byte, all in hex.            
+     (gdb) x/8xb $eip       #View memory starting at EIP in 8 groupings of 1 byte, all in hex.    
+     (gdb) x/2xh $eip       #View memory starting at EIP in 2 groupings of a halfword, all in hex.     
