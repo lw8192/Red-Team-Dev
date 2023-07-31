@@ -1,8 +1,15 @@
-# Notes on Assembly    
+# Notes on x86 Assembly    
 [Notes from SANS Poster](https://sansorg.egnyte.com/dl/pHqHxaLC5M)   
-Low level programming language. Converted into executable machine code by an assembler. Represents instructions in symbolic code.       
+Low level programming language. Converted into executable machine code by an assembler. Represents instructions in symbolic code. Main syntaxes: AT&T syntax and Intel syntax. AT&T (% and $ before everything).               
+Addressing:       
+Older Intel x86 processors use a 32-bit addressing scheme, while newer ones use a 64-bit one. 64-bit processors can run in 32-bit compatibility mode, which allows them to run 32-bit code quickly.         
 
-# Common 32-Bit Registers and Uses   
+# Common 32-Bit Registers and Uses     
+Registers: internal variables for the processor. First four registers: general purpose. EAX, ECX, EDX, EBX (Accumulator, Counter, Data, Base). Acts as temporary variables for the CPU when executing machine instructions.            
+2nd four general purpose: ESP, EBP, ESI, EDI. General purposes - pointers and indexes. Stack Pointer, Base Pointer, Source Index, Destination Index. ESP and EDP - pointers. Store 32 bit addresses. Last 2 - pointers often pointed to source and destination where data needs to be read from or written to. Load and store instructions: can be thought of as simply general purpose.       
+EIP - Instruction Pointer. Points to next current instruction the processor is reading. Used a lot when debugging.        
+EFLAGS register - several bit flags used for comparisons and memory segmentations.     
+     
 | Register      | Full Name   | Description |
 | -----------   | ----------- | ----------- |
 | EAX     | Primary Accumulator       | Addition, multiplication, function results  |
@@ -13,9 +20,10 @@ Low level programming language. Converted into executable machine code by an ass
 | EFLAGS  | Flags Register | Contains flags that store outcomes of computations (e.g., Zero and Carry flags)    |
 | FS      | F segment register  | FS:[0] points to SEH chain, FS:[0x30] points to the PEB.   |     
 
-16 bit registers: corresponding IP, SP and BP.   
-
-# Common x86 Assembly Instructions   
+16 bit registers: corresponding IP, RSP and BP.   
+64 bit registers: corresponding RIP, RSP, RBP.   
+# Common x86 Assembly Instructions     
+operation <dest>, <src>      #values - register, memory address or a value. Operations: mov from src to dest, sub, inc (increment), decrement.     
 | Syntax      | Description |
 | ----------- | ----------- |
 | mov EAX,0xB8      | Put the value 0xB8 in EAX.      |  
@@ -41,4 +49,16 @@ JE / JZ Jump if equal; same as jump if zero.
 JNE / JNZ Jump if not equal; same as jump if not zero.   
 JGE/ JNL Jump if greater or equal; same as jump if not less.   
 
+## Disassembling a C Program     
+[GDB Cheatsheet](https://gabriellesc.github.io/teaching/resources/GDB-cheat-sheet.pdf)        
 
+    gcc -g example.c -o example     #-g: include extra debugging info while compiling a C program      
+    gdb -q example      #run gdb in quiet mode    
+    (gdb) list       #view source code (if extra debugging info is included)    
+    (gdb) set disassembly-flavor intel     #set assembly language to Intel     
+    (gdb) break main     #set a breakpoint at main     
+    (gdb) run          #run program until breakpoint (will set up function prologues)    
+    #Use gdb to examine memory with -x. Args: mem location, how to display. Display formats: o (octal), x (hex), u (unsigned base 10), t (binary). 
+    (gdb) info register eip    #see address of EIP (Instruction Pointer)    
+    (gdb) x/x $eip    #see address EIP contains in hex. This is the next instruction to be executed.        
+    (gdb) disas main      #Dump assembler code for function main    
