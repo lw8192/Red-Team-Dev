@@ -12,7 +12,7 @@ Variable types: char, int, float, double. Modifiers: signed, unsigned, short, lo
 char: 1 byte / 1 char of data. float: 4 bytes, single precision floating point. double: double precision floating point.          
 Pointer, struct, evaluation strategy.   
 Typecasting: convert from one variable type into another.    
-Array: continous block of memory. Acessing memory outside the bounds of an array can corrupt stored date.         
+Array / buffers: continous block of memory. Acessing memory outside the bounds of an array can corrupt stored date. List of n elements of a specific data type.            
 
     int arr[5] = {1, 2, 3, 4, 5};
     int* ptr = &arr[0];    
