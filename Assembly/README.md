@@ -52,12 +52,14 @@ JGE/ JNL Jump if greater or equal; same as jump if not less.
 
 ## Disassembling a C Program     
 [GDB Cheatsheet](https://gabriellesc.github.io/teaching/resources/GDB-cheat-sheet.pdf)        
+[GDB Command Reference](https://visualgdb.com/gdbreference/commands/x)   
 
     gcc -g example.c -o example     #-g: include extra debugging info while compiling a C program      
     gdb -q example      #run gdb in quiet mode    
     (gdb) list       #view source code (if extra debugging info is included)    
     (gdb) set disassembly-flavor intel     #set assembly language to Intel     
     (gdb) break main     #set a breakpoint at main     
+    (gdb) break 6       #set a breakpoint at line 6    
     (gdb) run          #run program until breakpoint (will set up function prologues)    
     #Use gdb to examine memory with -x. Args: mem location, how to display. Display formats: o (octal), x (hex), u (unsigned base 10), t (binary). 
     (gdb) info register eip    #see address of EIP (Instruction Pointer)    
@@ -84,3 +86,9 @@ GDB examine: use 'c' to automatically look up a byte in the ASCII table. 's' dis
     (gdb) x/gcb 0x08000000   #view chars at memory address    
     (gdb) x/s 0x...    #view string at memory address   
     (gdb) x/2i $eip    #view corresponding instruction    
+    (gdb) continue    #continue until end of program / next breakpoint   
+Stack: stores chain of function calls. Use bt to backtrace the stack.   
+
+    (gdb) break main   
+    (gdb) run  
+    (gdb) bt      #backtrace the stack   
