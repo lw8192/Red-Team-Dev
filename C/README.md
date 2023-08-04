@@ -33,6 +33,11 @@ String: array of chars
         *ptr = '.';
         ptr++;
     } 
+String comparisons:   
+
+    //need to use strcmp, == or != will only compare base addresses   
+    strcmp(check,input) != 0   
+
 Pointer: contains address of a storage location of a variable, where the data is in memory (not the actual value of the data). Stores address. Allows direct access and manipulation of a byte in memory.        
 
     int y = 20;
@@ -47,7 +52,12 @@ Pointer: contains address of a storage location of a variable, where the data is
 
     ptr +=3;    //increases address by 3*(size of the data type in bytes)
     ptr -= 2;   //decrement address by 2    
-    #incrementing a 
+    
+    #incrementing a pointer - increments by the size of the data type the pointer is   
+    int int_array[2]= {1,2}; 
+    int *int_pointer; 
+    int_pointer = int_array;   //pointer now resolves to the memory address of the start of the array   
+    int_pointer++;   //increments pointer by 4 bytes, resolving to the memory address of the next integer in the array     
 
 Double pointer: pointer to a pointer   
 
@@ -72,6 +82,14 @@ Function needs to be defined or a function prototype used so the compiler can lo
         //example main function   
         return 0; 
     }
+built in C functions: strcpy(), strlwr(), strcmp(), strlen(), strcat()     
+
+printf() using format strings:   
+
+    %p  pointers   
+    %d  integers   
+    %f  floats   
+
 ## Memory in C     
 C / C++ allows you to interact with memory on a lower level than languages like Python. Misusing memory - can cause segfaults. A common problem: trying to access memory that has already been freed. Not freeing memory - can lead to a memory leak.       
 Unlike other languages, C has no garbage collector to deallocate / free memory, so the developer must do so manually.         
@@ -115,9 +133,8 @@ Example of allocating and freeing memory:
         }
     
         free(pointr); //free allocated memory   
-    }
-## Functions    
-built in C functions: strcpy(), strlwr(), strcmp(), strlen(), strcat()       
+    } 
+     
 
 ## C Libraries    
 stdio.h - library for input / output functions. printf(), scanf()     
