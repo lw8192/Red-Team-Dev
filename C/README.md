@@ -23,6 +23,10 @@ Array / buffers: continous block of memory. Acessing memory outside the bounds o
 
     atoi(char * string);    //convert string to an int    
     char array[] = "2007";    //convert int to a array  
+
+    //determine size of an array and how many elements it can contain  
+    int arr[5];
+    size_t num_of_elements = sizeof(arr)/sizeof(arr[0]);       //numbers of elements array can contain      
 String: array of chars      
 
     char s[] = "words and stuff";
@@ -52,7 +56,7 @@ Pointer: contains address of a storage location of a variable, where the data is
 
     ptr +=3;    //increases address by 3*(size of the data type in bytes)
     ptr -= 2;   //decrement address by 2    
-    
+
     #incrementing a pointer - increments by the size of the data type the pointer is   
     int int_array[2]= {1,2}; 
     int *int_pointer; 
@@ -146,7 +150,7 @@ write to the console - use printf(), %d or %i for integer types, %f for floating
 ## Compiling   
 ### Linux   
 
-    gcc .cprogram.c -o cprogram.out     
+    gcc cprogram.c -o cprogram.out     
 ### Windows   
  
 Can compile in a WSL shell using gcc    
