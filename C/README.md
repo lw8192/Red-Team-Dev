@@ -93,7 +93,11 @@ printf() using format strings:
     %p  pointers   
     %d  integers   
     %f  floats   
+Command Line Arguments:     
 
+    int main(int argc, char *argv[]){
+      // passed into main. argc - args count, argv - list of args. argv[0] is the program name       
+    }
 ## Memory in C     
 C / C++ allows you to interact with memory on a lower level than languages like Python. Misusing memory - can cause segfaults. A common problem: trying to access memory that has already been freed. Not freeing memory - can lead to a memory leak.       
 Unlike other languages, C has no garbage collector to deallocate / free memory, so the developer must do so manually.         
