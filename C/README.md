@@ -8,16 +8,35 @@ Pass by reference: pass address of a variable into a function, then functions mo
 
 ## Data Types       
 [Reference Chart for Data Types in C](https://www.geeksforgeeks.org/data-types-in-c/#)     
+C - must declare variables and give them a type before use.     
 Variable types: char, int, float, double. Modifiers: signed, unsigned, short, long.   
-char: 1 byte / 1 char of data. float: 4 bytes, single precision floating point. double: double precision floating point.          
+char: 1 byte / 1 char of data.        
 Pointer, struct, evaluation strategy.   
-Typecasting: convert from one variable type into another.    
+### Numbers    
+By default: numbers in C are signed (can be both positive and negative). Extend or shorten size of variables using: long or short.           
+int: 4 bytes. float: 4 bytes, single precision floating point. double: double precision floating point.   
+Operations: +, -, *, /, % (remainder)      
+Shorthand: i++ or ++i  increment. i-- or --i : decrement.      
+i++: Increment the value of i by 1 after evaluating the arithmetic operation     
+++i: Increment the value of i by 1 before evaluating the arithmetic operation.    
+Modify variable in place:    
+
+  i = i + 13    i+=13   Add some value to the variable.   
+  i = i - 13    i-=13   Subtract some value from the variable.
+  i = i * 13    i*=13   Multiply some value by the variable.
+  i = i / 13    i/=13   Divide some value from the variable. 
+Comparison operators: <, >, <=, >=, ==, !=        
+
+Chain operators:     
+OR       ||        ((a < b) || (a < c))       
+AND      &&        ((a < b) && !(a < c)   
+### Array / Buffers   
 Array / buffers: continous block of memory. Acessing memory outside the bounds of an array can corrupt stored date. List of n elements of a specific data type.            
 
     int arr[5] = {1, 2, 3, 4, 5};
     int* ptr = &arr[0];    
     for(int i = 0; i < 5; i++){
-        printf("%i\n", *ptr);    //dereference the pointer and print out each integer  
+        printf("%i\n", *ptr);    //dereference the pointer and print out each integer in the array    
         ptr++;
     }
 
@@ -27,7 +46,8 @@ Array / buffers: continous block of memory. Acessing memory outside the bounds o
     //determine size of an array and how many elements it can contain  
     int arr[5];
     size_t num_of_elements = sizeof(arr)/sizeof(arr[0]);       //numbers of elements array can contain      
-String: array of chars      
+### Strings  
+String: array of chars. Char: 1 byte.           
 
     char s[] = "words and stuff";
     printf("%s",s);
@@ -41,18 +61,22 @@ String comparisons:
 
     //need to use strcmp, == or != will only compare base addresses   
     strcmp(check,input) != 0   
-
-Pointer: contains address of a storage location of a variable, where the data is in memory (not the actual value of the data). Stores address. Allows direct access and manipulation of a byte in memory.        
+### Pointers   
+Pointer: contains address of a storage location of a variable, where the data is in memory (not the actual value of the data). Stores address. Allows direct access and manipulation of a byte in memory.       
+x86 arch: 32-bit memory address, pointers are 4 bytes. Define using: *. Points to data of a type.    
+Dereference operator(*): returns the data found in the address the pointer is pointing to, instead of the address itself 
+Pointer examples:   
 
     int y = 20;
     int *ptr;    //create a integer pointer   
     ptr = &y;    //Set ptr equal to the memory address of a variable    
     printf("%p", ptr);    //Prints out pointer - address of the variable in hex.    
-    printf("%i",*ptr);    //print out data pointer "points to" 
+    printf("%i",*ptr);    //print out the data the memory address stored in the pointer resolves to  
     *ptr = 25;    //change data of pointer 
 
     int x = *ptr;  //use dereference operator to assign integer data pointer "points to" to x 
     printf("%i", x);     //print out integer x
+Pointer arithmatic: will increase or decrease a pointer by the size of the declared data type. Ex - increase an int pointer by 1 will increase it by 1 x 4 bytes.    
 
     ptr +=3;    //increases address by 3*(size of the data type in bytes)
     ptr -= 2;   //decrement address by 2    
@@ -66,6 +90,7 @@ Pointer: contains address of a storage location of a variable, where the data is
 Double pointer: pointer to a pointer   
 
     int **p;   //create a double pointer  
+### Struct  
 Structure: groups variables under a single defined type. Similar to a Python object. Custom data type.      
 
     struct ex {
@@ -76,28 +101,45 @@ Structure: groups variables under a single defined type. Similar to a Python obj
     struct ex e;
     e.x = 3;
     e.a = 'd'; 
+### Typecasting    
+Typecasting: temporarily change a variable’s data type, despite how it was originally defined.      
+
+        (typecast_data_type) variable   
+Typecasting: helpful with pointers. C compiler needs a data type for every pointer to try and limit programming errors. Int pointer: should only point to int data. Char pointer should only point to char data.         
+
+
 ## Functions    
 Function needs to be defined or a function prototype used so the compiler can locate it. No return value: void.       
 
-    int math_func(it);    //function prototype: return type, names, args   
+    int math_func(it);    //Function prototype: name, return data type, data types as functional arguments.         
 
-    int main()
-    {
+    int main(){
         //example main function   
         return 0; 
     }
 built in C functions: strcpy(), strlwr(), strcmp(), strlen(), strcat()     
-
+strcpy(dest, src);  //copy a string from a source to a destination, copying each byte to the destination (stopping after it copies the null termination byte).      
+sizeof() - determine size of a variable declared with that data type for the target architechure.     
+scanf(): used for input, expects all args to be pointers      
+  
+### Format Strings   
+Format strings: char string with an escape sequence that printf() uses to insert vars in a specific format. Escape sequences / format parameters, begins with a %, uses a single char shorthand.      
+write to the console - use printf(), %d or %i for integer types, %f for floating-point numbers, %s for strings       
 printf() using format strings:   
 
     %p  pointers   
     %d  integers   
     %f  floats   
+Format parameters that expect pointers:   
+
+    %s    string          #prints data at a given memory address until a null byte is encountered. Expects pointer to string, pass by reference
+    %n    number of bytes written so far      #expects to be given a memory address, and it writes the number of bytes that have been written so far into that memory address   
 Command Line Arguments:     
 
     int main(int argc, char *argv[]){
       // passed into main. argc - args count, argv - list of args. argv[0] is the program name       
     }
+
 ## Memory in C     
 C / C++ allows you to interact with memory on a lower level than languages like Python. Misusing memory - can cause segfaults. A common problem: trying to access memory that has already been freed. Not freeing memory - can lead to a memory leak.       
 Unlike other languages, C has no garbage collector to deallocate / free memory, so the developer must do so manually.         
@@ -145,8 +187,7 @@ Example of allocating and freeing memory:
      
 
 ## C Libraries    
-stdio.h - library for input / output functions. printf(), scanf()     
-write to the console - use printf(), %d or %i for integer types, %f for floating-point numbers, %s for strings   
+stdio.h - library for input / output functions. printf(), scanf()      
 
 #include <Windows.h>      //Windows API calls     
 <stdlib.h>       //memory functions   
