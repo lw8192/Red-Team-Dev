@@ -106,6 +106,7 @@ Typecasting: temporarily change a variable’s data type, despite how it was ori
 
         (typecast_data_type) variable   
 Typecasting: helpful with pointers. C compiler needs a data type for every pointer to try and limit programming errors. Int pointer: should only point to int data. Char pointer should only point to char data.         
+Generic typeless pointer - void pointer, that just holds a memory address. Limits: pointers can't be derefenced unless they have a type (compiler needs to know data type to retrieve stored value at memory address), must be typecast before doing pointer arithmatic. Typecasting is helpful in those situations.        
 
 
 ## Functions    
@@ -139,6 +140,18 @@ Command Line Arguments:
     int main(int argc, char *argv[]){
       // passed into main. argc - args count, argv - list of args. argv[0] is the program name       
     }
+### Using Command Line Arguments   
+Access command line args in C by including an int and a array of strings - int is the count of the arguments, array is the actual args passed. argv[0] = name of executing binary.   
+Using command line arguments: 
+
+        int main(int argc, char *argv[]){
+            if (argc < 2){         //error checking if the program execution depends on args. 
+                printf("usage message here"); 
+            }
+            arg = atoi(argv[1]);   //convert the 2nd arg to an int   
+        }
+### Function Variable Scoping  
+Scoping: context of variables within functions. Each function has its own set of local variables, which are independent of everything else (including multiple calls to the same function).     
 
 ## Memory in C     
 C / C++ allows you to interact with memory on a lower level than languages like Python. Misusing memory - can cause segfaults. A common problem: trying to access memory that has already been freed. Not freeing memory - can lead to a memory leak.       
