@@ -67,9 +67,10 @@ String comparisons:
     //need to use strcmp, == or != will only compare base addresses   
     strcmp(check,input) != 0   
 ### Pointers   
-Pointer: contains address of a storage location of a variable, where the data is in memory (not the actual value of the data). Stores address. Allows direct access and manipulation of a byte in memory.       
-x86 arch: 32-bit memory address, pointers are 4 bytes. Define using: *. Points to data of a type.         
-Dereference operator(*): returns the data found in the address the pointer is pointing to, instead of the address itself 
+Pointer: contains address of a storage location of a variable, where the data is in memory (not the actual value of the data). Stores address. Allows direct access and manipulation of a byte in memory.                   
+x86 arch: 32-bit memory address, pointers are 4 bytes. Define using: *. Points to data of a type. The compiler will increment a pointer by the size of it's data types(ie incrementing an int pointer will add 4 bytes to the memory address).             
+Dereference operator(*): returns the data found in the address the pointer is pointing to, instead of the address itself       
+Generic typeless pointer - void pointer, just holds a memory address. Limits: pointers can't be derefenced unless they have a type (compiler needs to know data type to retrieve stored value at memory address), must be typecast before doing pointer arithmatic.    
 Pointer examples:   
 
     int y = 20;
