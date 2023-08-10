@@ -1,20 +1,22 @@
 # C    
 ## Intro   
-Lower level language then Python (meaning the developer can control the program at a more granular level - allows for more speed / flexibility but also harder to program in). Compiled. Widely used in OS / embedded environments - "system development language". Variables - need to define type and name. Strongly typed language: can't change later on. Procedural - code follows an order in execution. Not object oriented language - variables don't have an access modifier (can be static or constants). Static var: valid in a global scope. 
+Lower level language then Python (meaning the developer can control the program at a more granular level - allows for more speed / flexibility but also harder to program in). Compiled. Widely used in OS / embedded environments - "system development language". Variables - need to define type and name. Strongly typed language: can't change later on. Procedural - code follows an order of execution. Not object oriented language - variables don't have an access modifier (can be static or constants).      
 C is fast due to: compiling, strongly typed, no garbage collection.      
 Pass by reference: pass address of a variable into a function, then functions modifies the data at the address.    
 [Codeblocks IDE](https://www.codeblocks.org/)    
 [Codeblocks Install](https://www.digitalocean.com/community/tutorials/c-compiler-windows-gcc)   
 
-## Data Types       
+## Variables          
 [Reference Chart for Data Types in C](https://www.geeksforgeeks.org/data-types-in-c/#)     
-C - must declare variables and give them a type before use.     
-Variable types: char, int, float, double. Modifiers: signed, unsigned, short, long.   
-char: 1 byte / 1 char of data.        
-Pointer, struct, evaluation strategy.   
+C - must declare variables and give them a type before use. Static var: valid in a global scope.         
+Variable types: char, int, float, double, pointer, struct, evaluation strategy, no "string" data type (instead an array of chars). Modifiers: signed, unsigned, short, long.       
+C- no boolean operators. Nonzero - true. 0: false.
+
+sizeof(type);  //determines the size of a variable declared with that data type for the target architechure   
+int: 4 bytes. float: 4 bytes, single precision floating point. char: 1 byte / 1 char of data. double: double precision floating point.        
+
 ### Numbers    
-By default: numbers in C are signed (can be both positive and negative). Extend or shorten size of variables using: long or short.           
-int: 4 bytes. float: 4 bytes, single precision floating point. double: double precision floating point.   
+By default: numbers in C are signed (can be both positive and negative). Unsigned: doesn't allow negative numbers. Extend or shorten size of variables using: long or short.           
 Operations: +, -, *, /, % (remainder)      
 Shorthand: i++ or ++i  increment. i-- or --i : decrement.      
 i++: Increment the value of i by 1 after evaluating the arithmetic operation     
@@ -30,6 +32,9 @@ Comparison operators: <, >, <=, >=, ==, !=
 Chain operators:     
 OR       ||        ((a < b) || (a < c))       
 AND      &&        ((a < b) && !(a < c)   
+
+
+
 ### Array / Buffers   
 Array / buffers: continous block of memory. Acessing memory outside the bounds of an array can corrupt stored date. List of n elements of a specific data type.            
 
@@ -63,18 +68,18 @@ String comparisons:
     strcmp(check,input) != 0   
 ### Pointers   
 Pointer: contains address of a storage location of a variable, where the data is in memory (not the actual value of the data). Stores address. Allows direct access and manipulation of a byte in memory.       
-x86 arch: 32-bit memory address, pointers are 4 bytes. Define using: *. Points to data of a type.    
+x86 arch: 32-bit memory address, pointers are 4 bytes. Define using: *. Points to data of a type.         
 Dereference operator(*): returns the data found in the address the pointer is pointing to, instead of the address itself 
 Pointer examples:   
 
     int y = 20;
     int *ptr;    //create a integer pointer   
-    ptr = &y;    //Set ptr equal to the memory address of a variable    
+    ptr = &y;    //Set ptr equal to the memory address of a variable. Uses & - the address of operator       
     printf("%p", ptr);    //Prints out pointer - address of the variable in hex.    
     printf("%i",*ptr);    //print out the data the memory address stored in the pointer resolves to  
     *ptr = 25;    //change data of pointer 
 
-    int x = *ptr;  //use dereference operator to assign integer data pointer "points to" to x 
+    int x = *ptr;  //use dereference operator (*) to assign integer data pointer "points to" to x 
     printf("%i", x);     //print out integer x
 Pointer arithmatic: will increase or decrease a pointer by the size of the declared data type. Ex - increase an int pointer by 1 will increase it by 1 x 4 bytes.    
 
@@ -108,21 +113,6 @@ Typecasting: temporarily change a variable’s data type, despite how it was ori
 Typecasting: helpful with pointers. C compiler needs a data type for every pointer to try and limit programming errors. Int pointer: should only point to int data. Char pointer should only point to char data.         
 Generic typeless pointer - void pointer, that just holds a memory address. Limits: pointers can't be derefenced unless they have a type (compiler needs to know data type to retrieve stored value at memory address), must be typecast before doing pointer arithmatic. Typecasting is helpful in those situations.        
 
-
-## Functions    
-Function needs to be defined or a function prototype used so the compiler can locate it. No return value: void.       
-
-    int math_func(it);    //Function prototype: name, return data type, data types as functional arguments.         
-
-    int main(){
-        //example main function   
-        return 0; 
-    }
-built in C functions: strcpy(), strlwr(), strcmp(), strlen(), strcat()     
-strcpy(dest, src);  //copy a string from a source to a destination, copying each byte to the destination (stopping after it copies the null termination byte).      
-sizeof() - determine size of a variable declared with that data type for the target architechure.     
-scanf(): used for input, expects all args to be pointers      
-  
 ### Format Strings   
 Format strings: char string with an escape sequence that printf() uses to insert vars in a specific format. Escape sequences / format parameters, begins with a %, uses a single char shorthand.      
 write to the console - use printf(), %d or %i for integer types, %f for floating-point numbers, %s for strings       
@@ -140,6 +130,21 @@ Command Line Arguments:
     int main(int argc, char *argv[]){
       // passed into main. argc - args count, argv - list of args. argv[0] is the program name       
     }
+
+## Functions    
+Function needs to be defined or a function prototype used so the compiler can locate it. No return value: void function.       
+
+    int math_func(it);    //Function prototype: name, return data type, data types as functional arguments.         
+
+    int main(){
+        //example main function   
+        return 0; 
+    }
+built in C functions: strcpy(), strlwr(), strcmp(), strlen(), strcat()     
+strcpy(dest, src);  //copy a string from a source to a destination, copying each byte to the destination (stopping after it copies the null termination byte).      
+sizeof() - determine size of a variable declared with that data type for the target architechure.     
+scanf(); //used for input, expects all args to be pointers      
+  
 ### Using Command Line Arguments   
 Access command line args in C by including an int and a array of strings - int is the count of the arguments, array is the actual args passed. argv[0] = name of executing binary.   
 Using command line arguments: 
@@ -154,6 +159,9 @@ Using command line arguments:
 Scoping: context of variables within functions. Each function has its own set of local variables, which are independent of everything else (including multiple calls to the same function).     
 
 ## Memory in C     
+### Registers     
+EIP / RIP (x86 / x64)- Instruction Pointer: pointer that points to the current instruction, contains memory address.     
+### Interacting with Memory in C   
 C / C++ allows you to interact with memory on a lower level than languages like Python. Misusing memory - can cause segfaults. A common problem: trying to access memory that has already been freed. Not freeing memory - can lead to a memory leak.       
 Unlike other languages, C has no garbage collector to deallocate / free memory, so the developer must do so manually.         
 Memory addresses: 32 bits / 
@@ -164,7 +172,7 @@ Memory Structure (high to low address, going down):
     Uninitialized Data Segment (BSS)       
     Initialized Data Segment      
     Text/Code Segment        
-Stack: Last In First Out data structure, ordered insertion, where program data is stored (functions called, created variables). Grows down (towards heap).                          
+Stack: Last In First Out data structure, ordered insertion, where program data is stored (functions called, created variables). Grows down (towards heap). Lets the instruction pointer (EIP or RIP) return through long chains of function calls.                               
 Heap: allocate big amounts of memory for dev usage, dynamic memory that the programmer can change. Grows up (towards stack). Changes in size.           
 Permanent storage / Static memory: segments, copied to program memory on execution.    
 
@@ -175,7 +183,7 @@ A program explicitly requests the allocation of a block of memory via a system c
     calloc(num, size); //allocate memory given fixed number of objects of a given fixed size    
     free(); //release memory   
     realloc(ptr, new_size); //extend or shrink previously allocated memory. Extends existing block or allocates a new section of memory as needed.       
-sizeof(type), sizeof expression: returns size in bytes (size_t) of a variable
+    sizeof(type);    //sizeof expression: returns size in bytes (size_t) of a variable
 
 Use a Pointer to refer to dynamically allocated memory   
 
@@ -206,6 +214,7 @@ stdio.h - library for input / output functions. printf(), scanf()
 <stdlib.h>       //memory functions   
 
 ## Compiling   
+GCC (GNU Compiler Collection): free compiler translating C into machine language.     
 ### Linux   
 
     gcc cprogram.c -o cprogram.out     
