@@ -165,7 +165,7 @@ EIP / RIP (x86 / x64)- Instruction Pointer: pointer that points to the current i
 ### Interacting with Memory in C   
 C / C++ allows you to interact with memory on a lower level than languages like Python. Misusing memory - can cause segfaults. A common problem: trying to access memory that has already been freed. Not freeing memory - can lead to a memory leak.       
 Unlike other languages, C has no garbage collector to deallocate / free memory, so the developer must do so manually.         
-Memory addresses: 32 bits / 
+Memory addresses: 32 bits / 8 bytes  
 Memory Structure (high to low address, going down):     
     Command Line Arguments    
     Stack    
@@ -173,7 +173,15 @@ Memory Structure (high to low address, going down):
     Uninitialized Data Segment (BSS)       
     Initialized Data Segment      
     Text/Code Segment        
-Stack: Last In First Out data structure, ordered insertion, where program data is stored (functions called, created variables). Grows down (towards heap). Lets the instruction pointer (EIP or RIP) return through long chains of function calls.                               
+Stack: First In Last Out data structure, ordered insertion, where program data is stored (functions called, created variables). It maintains execution flow and local variable context for function calls. It grows down (towards the heap). The stack allows the instruction pointer (EIP or RIP) to return through long chains of function calls, using stack frames. Stack frame: built for a function, contains it's local variables and a return address so the instruction pointer can be restored.       
+
+    #typical stack frame can vary with different compilers but below is a general outline      
+    padding  
+    local variables   
+    saved frame pointer   
+    return address   
+    function args   
+    main's stack frame (or the previous function's)
 Heap: allocate big amounts of memory for dev usage, dynamic memory that the programmer can change. Grows up (towards stack). Changes in size.           
 Permanent storage / Static memory: segments, copied to program memory on execution.    
 
