@@ -42,6 +42,7 @@
 ### C    
 [Learn C and C++](https://www.cprogramming.com/)     
 [Learn C](https://www.learnc.net/)    
+[C Programming: A Modern Approach](http://knking.com/books/c2/)    
 
 ### C++ 
 [Kernel Basics](https://github.com/nu11secur1ty/Kernel-and-Types-of-kernels)      
