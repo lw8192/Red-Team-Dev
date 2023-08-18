@@ -1,9 +1,7 @@
 # Notes on Intel x86 Assembly    
 [Notes from SANS Poster](https://sansorg.egnyte.com/dl/pHqHxaLC5M)   
 [The Faker's Guide to Assembly](https://www.timdbg.com/posts/fakers-guide-to-assembly/)   
-## Reverse Engineering Resources    
-[Machine-Level and Systems Programming](https://courses.ics.hawaii.edu/ReviewICS312/modules/)    
-[Linux Kernel Book](https://0xax.gitbooks.io/linux-insides/content/)    
+ 
 Low level programming language. Converted into executable machine code by an assembler. Represents instructions in symbolic code. Main syntaxes: AT&T syntax and Intel syntax. AT&T (% and $ before everything).               
 Addressing:       
 Older Intel x86 processors use a 32-bit addressing scheme, while newer ones use a 64-bit one. 64-bit processors can run in 32-bit compatibility mode, which allows them to run 32-bit code quickly.     
