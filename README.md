@@ -23,6 +23,7 @@
 [30 Days of Python](https://github.com/Asabeneh/30-Days-Of-Python)    
 [Practical Python](https://dabeaz-course.github.io/practical-python/)    
 [Advanced Python Mastery](https://github.com/dabeaz-course/python-mastery)     
+[Python for Reverse Engineering](https://icyphox.sh/blog/python-for-re-1/)    
 
 ### Ruby
 [Ruby Fu](https://rubyfu.net/)  
