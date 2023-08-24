@@ -52,6 +52,12 @@ JE / JZ Jump if equal; same as jump if zero.
 JNE / JNZ Jump if not equal; same as jump if not zero.   
 JGE/ JNL Jump if greater or equal; same as jump if not less.   
 
+## Asm Files  
+```
+nasm -f elf file.asm     #assemble file.asm into an object file ready to be linked as an ELF binary
+ld file.o     #default object file name, use linker program to make an executable
+./a.out     #default exe name  
+```
 ## Disassembling a C Program     
 [GDB Cheatsheet](https://gabriellesc.github.io/teaching/resources/GDB-cheat-sheet.pdf)        
 [GDB Command Reference](https://visualgdb.com/gdbreference/commands/x)   
