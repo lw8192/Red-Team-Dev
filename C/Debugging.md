@@ -1,4 +1,7 @@
 # GDB    
+[GEF (GDB Enhanced Features)](https://github.com/hugsy/gef)    
+Common GDB Commands   
+```
 gcc -g program.c -o program     #compile a program using debugging symbols    
 sudo gdb -q --pid=1234 --symbols=./program       #attach gdb to an already running program using the PID and load symbols from the executable      
 gdb -q ./a.out    #open gdb   
@@ -8,3 +11,4 @@ gdb -q ./a.out    #open gdb
 (gdb) run        #run program   
 (gdb) cont       #continue the program   
 (gdb) bt         #backtrace the stack   
+```
