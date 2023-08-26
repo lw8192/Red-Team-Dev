@@ -58,23 +58,31 @@ nasm -f elf file.asm     #assemble file.asm into an object file ready to be link
 ld file.o     #default object file name, use linker program to make an executable
 ./a.out     #default exe name  
 ```
-## Disassembling a C Program     
+## Disassembling a C Program using GDB     
 [GDB Cheatsheet](https://gabriellesc.github.io/teaching/resources/GDB-cheat-sheet.pdf)        
-[GDB Command Reference](https://visualgdb.com/gdbreference/commands/x)   
-
-    gcc -g example.c -o example     #-g: include extra debugging info while compiling a C program      
-    gdb -q example      #run gdb in quiet mode    
-    (gdb) list       #view source code (if extra debugging info is included)    
-    (gdb) set disassembly-flavor intel     #set assembly language to Intel     
-    (gdb) break main     #set a breakpoint at main     
-    (gdb) break 6       #set a breakpoint at line 6    
-    (gdb) run          #run program until breakpoint (will set up function prologues)    
-    #Use gdb to examine memory with -x. Args: mem location, how to display. Display formats: o (octal), x (hex), u (unsigned base 10), t (binary). 
-    (gdb) info register eip    #see address of EIP (Instruction Pointer)    
-    (gdb) x/x $eip    #see address EIP contains in hex. This is the next instruction to be executed.        
-    (gdb) disas main      #Dump assembler code for function main    
-    (gdb) nexti      #view next instruction. Read EIP, execute it, then move EIP to the next instruction.   
-
+[GDB Command Reference](https://visualgdb.com/gdbreference/commands/x)     
+[GEF (GDB Enhanced Features)](https://github.com/hugsy/gef)    
+Common GDB Commands   
+```
+gcc -g program.c -o program     #compile a program using debugging symbols    
+sudo gdb -q --pid=1234 --symbols=./program       #attach gdb to an already running program using the PID and load symbols from the executable      
+gdb -q ./a.out    #open gdb using quiet mode 
+(gdb) set dis intel      #view Assembly code in Intel format
+(gdb) set disassembly-flavor intel     #set assembly language to Intel, different syntax 
+(gdb) list       #view source code, if program is compiled with debugging symbols  
+(gdb) list main  #view source code of a function  
+(gdb) break 9    #set a breakpoint at line 9
+(gdb) break main  #set a breakpoint at main  
+(gdb) run          #run program until breakpoint (will set up function prologues if the breakpoint is main)   
+(gdb) cont       #continue the program   
+(gdb) bt         #backtrace the stack
+(gdb) info register eip    #view the address and value of EIP (the instruction pointer)     
+(gdb) disas main      #Dump assembler code for function main    
+(gdb) nexti      #view next instruction. Read EIP, execute it, then move EIP to the next instruction.
+#Use gdb to examine memory with -x. Args: mem location, how to display. Display formats: o (octal), x (hex), u (unsigned base 10), t (binary). 
+(gdb) x/x $eip    #see address EIP contains in hex. This is the next instruction to be executed.   
+```
+ 
 Default size of a single unit - 4 byte unit - word. You can change size display with region symbols, appended to end of a format letter.   
 2 bytes - short / halfword. 4 bytes - double word / DWORD.       
 
