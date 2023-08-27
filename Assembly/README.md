@@ -40,7 +40,11 @@ operation <dest>, <src>      #values - register, memory address or a value. Oper
 | test EAX,EAX |  Check whether EAX contains zero, set the appropriate EFLAGS bits.  | 
 | cmp EAX,0xB8 |  Compare EAX to 0xB8, set the appropriate EFLAGS bits.   |
 
-# Understanding 64-Bit Registers
+# 16-bit Registers     
+16-bit registers called AX, BX, CX, DX, SI, DI, BP, and SP. 32 bit registers are extended versions of these. You can still use these with an x86 system to access the first 16 bits of each 32 bit register. Bytes of the AX, BX, CX and DX registers can be accessed using 8-bit registers AL, AH, BL, BH, CL, CH, DL, DH. L - low byte, H - high byte.       
+
+# 64-bit Registers  
+Used on a x64 system.   
 EAX→RAX, ECX→RCX, EBX→RBX, ESP→RSP, EIP→RIP      
 Additional 64-bit registers are R8-R15.     
 RSP is often used to access stack arguments and local variables, instead of EBP.     
