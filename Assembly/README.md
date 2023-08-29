@@ -112,3 +112,6 @@ Stack: stores chain of function calls. Use bt to backtrace the stack.
     (gdb) break main   
     (gdb) run  
     (gdb) bt      #backtrace the stack   
+Parent / Child Processes:    
+
+    (gdb) set follow-fork-mode child       #follow a child process    

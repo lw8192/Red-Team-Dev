@@ -43,6 +43,7 @@
 ### C    
 [Learn C and C++](https://www.cprogramming.com/)     
 [Learn C](https://www.learnc.net/)    
+[Learn-C](https://www.learn-c.org/)   
 [C Programming: A Modern Approach](http://knking.com/books/c2/)    
 
 ### C++ 
@@ -65,3 +66,8 @@
 [Dark Vortex Maldev Series](https://0xdarkvortex.dev/malware-on-steroids-part-1-simple-cmd-reverse-shell/)     
 [Malware Development Notes](https://www.ctfnote.com/red-teaming/malware-development)     
 [Getting Started with Malware Development](https://www.crow.rip/crows-nest/malware-development/getting-started-with-malware-development)    
+
+### Reverse Engineering   
+[Microcorruption.com](https://microcorruption.com/)    
+[Challenges.re](https://challenges.re/)    
+[Linux Reverse Engineering 101](https://github.com/michalmalik/linux-re-101)   
