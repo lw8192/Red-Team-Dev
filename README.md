@@ -65,7 +65,9 @@
 [VX Underground](https://www.vx-underground.org/#E:/root)     
 [Dark Vortex Maldev Series](https://0xdarkvortex.dev/malware-on-steroids-part-1-simple-cmd-reverse-shell/)     
 [Malware Development Notes](https://www.ctfnote.com/red-teaming/malware-development)     
-[Getting Started with Malware Development](https://www.crow.rip/crows-nest/malware-development/getting-started-with-malware-development) [The Unprotect Project](https://unprotect.it/)       
+[Getting Started with Malware Development](https://www.crow.rip/crows-nest/malware-development/getting-started-with-malware-development)         
+[The Unprotect Project](https://unprotect.it/)         
+[0xpat maldev series](https://0xpat.github.io/Malware_development_part_1/)   
 
 ### Reverse Engineering   
 [Microcorruption.com](https://microcorruption.com/)    
