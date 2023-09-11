@@ -76,3 +76,4 @@
 [Microcorruption.com](https://microcorruption.com/)    
 [Challenges.re](https://challenges.re/)    
 [Linux Reverse Engineering 101](https://github.com/michalmalik/linux-re-101)   
+[Malware Unicorn Reverse Engineering Workshops](https://malwareunicorn.org/#/workshops)    
