@@ -70,6 +70,7 @@
 [0xpat maldev series](https://0xpat.github.io/Malware_development_part_1/)   
 [Exploit Education](https://exploit.education/)     
 [ROPEmporium](https://ropemporium.com/guide.html)    
+[Open Security Training](https://p.ost2.fyi/courses)    
 
 ### Reverse Engineering   
 [Microcorruption.com](https://microcorruption.com/)    
