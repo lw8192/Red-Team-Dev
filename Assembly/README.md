@@ -74,6 +74,7 @@ gdb -q ./a.out    #open gdb using quiet mode
 (gdb) set dis intel      #view Assembly code in Intel format
 (gdb) set disassembly-flavor intel     #set assembly language to Intel, different syntax 
 (gdb) list       #view source code, if program is compiled with debugging symbols  
+ #shows diassessmbly of main, value of EIP (memory address that points to an instruction in main). Instructions before: function prologue.   
 (gdb) list main  #view source code of a function  
 (gdb) break 9    #set a breakpoint at line 9
 (gdb) break main  #set a breakpoint at main  

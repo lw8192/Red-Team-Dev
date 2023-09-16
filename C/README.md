@@ -2,7 +2,6 @@
 ## Intro   
 Lower level language then Python (meaning the developer can control the program at a more granular level - allows for more speed / flexibility but also harder to program in). Compiled. Widely used in OS / embedded environments - "system development language". Variables - need to define type and name. Strongly typed language: can't change later on. Procedural - code follows an order of execution. Not object oriented language - variables don't have an access modifier (can be static or constants).      
 C is fast due to: compiling, strongly typed, no garbage collection.      
-Pass by reference: pass address of a variable into a function, then functions modifies the data at the address.    
 [Codeblocks IDE](https://www.codeblocks.org/)    
 [Codeblocks Install](https://www.digitalocean.com/community/tutorials/c-compiler-windows-gcc)   
 
@@ -141,11 +140,17 @@ Function needs to be defined or a function prototype used so the compiler can lo
         //example main function   
         return 0; 
     }
+Pass by reference: pass address of a variable into a function, then functions modifies the data at the address.    
+
+### Common C Functions and Libraries   
+stdio.h - library for input / output functions. printf(), scanf()      
+#include <Windows.h>      //Windows API calls     
+<stdlib.h>       //memory functions   
 built in C functions: strcpy(), strlwr(), strcmp(), strlen(), strcat()     
 strcpy(dest, src);  //copy a string from a source to a destination, copying each byte to the destination (stopping after it copies the null termination byte).      
 sizeof() - determine size of a variable declared with that data type for the target architechure.     
 scanf(); //used for input, expects all args to be pointers      
-  
+malloc();  //allocate memory on the heap, returns void pointer (need to typecast), null if not sucessful. Every malloc call - error check to see if successful.   
 ### Using Command Line Arguments   
 Access command line args in C by including an int and a array of strings - int is the count of the arguments, array is the actual args passed. argv[0] = name of executing binary.   
 Using command line arguments: 
@@ -160,12 +165,16 @@ Using command line arguments:
 Scoping: context of variables within functions. Each function has its own set of local variables, which are independent of everything else (including multiple calls to the same function).     
 
 ## Memory in C     
+Little Endian architechure: x86 processors stores values in little endian byte order (the least significant byte is stored first).    
+Memory of a program is divided into five segments: text, data, bss, heap, and stack.    
 ### Registers     
 EIP / RIP (x86 / x64)- Instruction Pointer: pointer that points to the current instruction, contains memory address.     
+First four registers: general purpose. EAX, ECX, EDX, EBX (Accumulator, Counter, Data, Base). Acts as temporary variables for the CPU when executing machine instructions.    
+2nd four general purpose: ESP, EBP, ESI, EDI (Stack Pointer, Base Pointer, Source Index, Destination Index). General purposes - pointers and indexes.    
 ### Interacting with Memory in C   
 C / C++ allows you to interact with memory on a lower level than languages like Python. Misusing memory - can cause segfaults. A common problem: trying to access memory that has already been freed. Not freeing memory - can lead to a memory leak.       
-Unlike other languages, C has no garbage collector to deallocate / free memory, so the developer must do so manually.         
-Memory addresses: 32 bits / 8 bytes  
+Unlike other languages, C has no garbage collector to deallocate / free memory, so the developer must do so manually using memory allocation functions.         
+Memory addresses: 32 bits / 8 bytes on a x86 system    
 Memory Structure (high to low address, going down):     
     Command Line Arguments    
     Stack    
@@ -181,14 +190,15 @@ Stack: First In Last Out data structure, ordered insertion, where program data i
     saved frame pointer   
     return address   
     function args   
-    main's stack frame (or the previous function's)
+    main's stack frame (or the previous function's)     
+Function prototype: saves the frame pointer on the stack and saves stack memory for the local function variables. Each prologue instructions varies depending on the compiler and compiler options.     
 Heap: allocate big amounts of memory for dev usage, dynamic memory that the programmer can change. Grows up (towards stack). Changes in size.           
 Permanent storage / Static memory: segments, copied to program memory on execution.    
 
 Allocating Dynamic Memory    
 A program explicitly requests the allocation of a block of memory via a system call. Used to optimize program memory, when variable memory sizes are needed, etc. Functions are defined in <stdlib.h>.       
 
-    char * ptr = malloc(sizeof(int)); //direct call to allocate memory on the heap, size in bytes as an argument     
+    char *ptr = malloc(sizeof(int)); //direct call to allocate memory on the heap, size in bytes as an argument     
     calloc(num, size); //allocate memory given fixed number of objects of a given fixed size    
     free(); //release memory   
     realloc(ptr, new_size); //extend or shrink previously allocated memory. Extends existing block or allocates a new section of memory as needed.       
@@ -196,7 +206,7 @@ A program explicitly requests the allocation of a block of memory via a system c
 
 Use a Pointer to refer to dynamically allocated memory   
 
-    struct ex *ptr = (struct ex *) malloc (sizeof (struct ex));   //allocated space to hold struct ex    
+    struct ex *ptr = (struct ex *) malloc (sizeof(struct ex));   //allocated space to hold struct ex    
 Example of allocating and freeing memory:   
 
     #include <stdio.h>   
@@ -211,16 +221,9 @@ Example of allocating and freeing memory:
             for(int n=0; n<4; ++n) // print it back out
                 printf("[%d] == %d\n", n, pointr[n]);
         }
-    
         free(pointr); //free allocated memory   
     } 
      
-
-## C Libraries    
-stdio.h - library for input / output functions. printf(), scanf()      
-
-#include <Windows.h>      //Windows API calls     
-<stdlib.h>       //memory functions   
 
 ## Compiling   
 GCC (GNU Compiler Collection): free compiler translating C into machine language.     
