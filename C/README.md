@@ -3,7 +3,8 @@
 Lower level language then Python (meaning the developer can control the program at a more granular level - allows for more speed / flexibility but also harder to program in). Compiled. Widely used in OS / embedded environments - "system development language". Variables - need to define type and name. Strongly typed language: can't change later on. Procedural - code follows an order of execution. Not object oriented language - variables don't have an access modifier (can be static or constants).      
 C is fast due to: compiling, strongly typed, no garbage collection.      
 [Codeblocks IDE](https://www.codeblocks.org/)    
-[Codeblocks Install](https://www.digitalocean.com/community/tutorials/c-compiler-windows-gcc)   
+[Codeblocks Install](https://www.digitalocean.com/community/tutorials/c-compiler-windows-gcc)      
+[Cdecl: C gibberish to English](https://cdecl.org/)    
 
 ## Variables          
 [Reference Chart for Data Types in C](https://www.geeksforgeeks.org/data-types-in-c/#)     
