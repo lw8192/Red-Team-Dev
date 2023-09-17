@@ -126,6 +126,9 @@ Format parameters that expect pointers:
 
     %s    string          #prints data at a given memory address until a null byte is encountered. Expects pointer to string, pass by reference
     %n    number of bytes written so far      #expects to be given a memory address, and it writes the number of bytes that have been written so far into that memory address   
+Using format strings to write to a pointer or array by using sprintf or snprintf. Snprintf is safer because it requires a max limit of chars to write:      
+
+    snprintf(buffer, 15, "%s", x);   //write string s to a buffer 
 Command Line Arguments:     
 
     int main(int argc, char *argv[]){
