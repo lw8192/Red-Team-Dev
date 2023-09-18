@@ -14,3 +14,11 @@ htons(short);   //16 bit int from host to network byte order
 ntohl(long);  //32 bit int from network to host byte order   
 ntohs(long);  //16 but int from network to host byte order 
 ```
+Define a sockaddr struct:    
+```
+  struct sockaddr_in host_addr; 
+  host_addr.sin_family = AF_INET;   //host byte order   
+  host_addr.sin_port = htons(80);   //short, converting port to network byte order.    
+  host_addr.sin_addr.s_addr = 0;  //auto fills with my ip  
+  memset(&(host_addr.sin_zero), '\0', 8);  //zero the rest of the struct
+```
