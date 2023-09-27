@@ -118,11 +118,17 @@ Generic typeless pointer - void pointer, that just holds a memory address. Limit
 ### Format Strings   
 Format strings: char string with an escape sequence that printf() uses to insert vars in a specific format. Escape sequences / format parameters, begins with a %, uses a single char shorthand.      
 write to the console - use printf(), %d or %i for integer types, %f for floating-point numbers, %s for strings       
-printf() using format strings:   
 
-    %p  pointers   
-    %d  integers   
-    %f  floats   
+    %[flags][width][.precision][length]specifier        
+printf() using format strings:   
+```
+%x or %X           Hex   
+%p                 Pointer   
+%s                 String        
+%c                 Char   
+%d                 Signed int 
+%f                 floats
+```
 Format parameters that expect pointers:   
 
     %s    string          #prints data at a given memory address until a null byte is encountered. Expects pointer to string, pass by reference
@@ -148,14 +154,19 @@ Function needs to be defined or a function prototype used so the compiler can lo
 Pass by reference: pass address of a variable into a function, then functions modifies the data at the address.    
 
 ### Common C Functions and Libraries   
-stdio.h - library for input / output functions. printf(), scanf()      
-#include <Windows.h>      //Windows API calls     
-<stdlib.h>       //memory functions   
-built in C functions: strcpy(), strlwr(), strcmp(), strlen(), strcat()     
-strcpy(dest, src);  //copy a string from a source to a destination, copying each byte to the destination (stopping after it copies the null termination byte).      
-sizeof() - determine size of a variable declared with that data type for the target architechure.     
-scanf(); //used for input, expects all args to be pointers      
-malloc();  //allocate memory on the heap, returns void pointer (need to typecast), null if not sucessful. Every malloc call - error check to see if successful.   
+Libraries:   
+
+    #include <stdio.h> - library for input / output functions. printf(), scanf()      
+    #include <Windows.h>      //Windows API calls     
+    #include <stdlib.h>       //memory functions   
+Functions:   
+
+    //Unsafe C functions: strcpy() & stpcpy(), gets(), strcat() & strcmp(), sprintf().    
+    //built in C functions: strcpy(), strlwr(), strcmp(), strlen(), strcat()     
+    strcpy(dest, src);  //copy a string from a source to a destination, copying each byte to the destination (stopping after it copies the null termination byte).      
+    sizeof() - determine size of a variable declared with that data type for the target architechure.     
+    scanf(); //used for input, expects all args to be pointers      
+    malloc();  //allocate memory on the heap, returns void pointer (need to typecast), null if not sucessful. Every malloc call - error check to see if successful.   
 ### Using Command Line Arguments   
 Access command line args in C by including an int and a array of strings - int is the count of the arguments, array is the actual args passed. argv[0] = name of executing binary.   
 Using command line arguments: 
@@ -172,12 +183,23 @@ Scoping: context of variables within functions. Each function has its own set of
 ## Memory in C     
 Little Endian architechure: x86 processors stores values in little endian byte order (the least significant byte is stored first).    
 Memory of a program is divided into five segments: text, data, bss, heap, and stack.    
+```
+Higher memory addresses 
+--- Kernel ---
+--- Stack ---  
+--- Heap ---
+--- BSS --- 
+--- Data ---
+--- Text ---
+Lower memory addresses  
+```
 ### Registers     
 EIP / RIP (x86 / x64)- Instruction Pointer: pointer that points to the current instruction, contains memory address.     
 First four registers: general purpose. EAX, ECX, EDX, EBX (Accumulator, Counter, Data, Base). Acts as temporary variables for the CPU when executing machine instructions.    
 2nd four general purpose: ESP, EBP, ESI, EDI (Stack Pointer, Base Pointer, Source Index, Destination Index). General purposes - pointers and indexes.    
+ESP: points to the "top of the stack." EBP: points to the base of the current stack frame.    
 ### Interacting with Memory in C   
-C / C++ allows you to interact with memory on a lower level than languages like Python. Misusing memory - can cause segfaults. A common problem: trying to access memory that has already been freed. Not freeing memory - can lead to a memory leak.       
+C / C++ allows you to interact with memory on a lower level than languages like Python. Misusing memory - can cause segfaults. A common problem in C: trying to access memory that has already been freed. Not freeing memory - can lead to a memory leak.       
 Unlike other languages, C has no garbage collector to deallocate / free memory, so the developer must do so manually using memory allocation functions.         
 Memory addresses: 32 bits / 8 bytes on a x86 system    
 Memory Structure (high to low address, going down):     
@@ -187,16 +209,17 @@ Memory Structure (high to low address, going down):
     Uninitialized Data Segment (BSS)       
     Initialized Data Segment      
     Text/Code Segment        
-Stack: First In Last Out data structure, ordered insertion, where program data is stored (functions called, created variables). It maintains execution flow and local variable context for function calls. It grows down (towards the heap). The stack allows the instruction pointer (EIP or RIP) to return through long chains of function calls, using stack frames. Stack frame: built for a function, contains it's local variables and a return address so the instruction pointer can be restored.       
+Stack: First In Last Out data structure, ordered insertion, where program data is stored (functions called, created variables). It maintains execution flow and local variable context for function calls. It grows down (towards the heap and lower memory addresses). The stack allows the instruction pointer (EIP or RIP) to return through long chains of function calls, using stack frames. Stack frame: built for a function, contains it's local variables and a return address so the instruction pointer can be restored.       
 
     #typical stack frame can vary with different compilers but below is a general outline      
-    padding  
-    local variables   
-    saved frame pointer   
-    return address   
-    function args   
-    main's stack frame (or the previous function's)     
-Function prototype: saves the frame pointer on the stack and saves stack memory for the local function variables. Each prologue instructions varies depending on the compiler and compiler options.     
+    High memory address ("base of stack")
+    -- Main()'s stack frame -- 
+    -- Arguments --   
+    -- Return address -- 
+    -- EBP (base pointer for the current stack frame) -- 
+    -- Local variables -- 
+    Low memory address ("top of the stack" - ESP)    
+Function prologue: saves the frame pointer on the stack and saves stack memory for the local function variables. Each prologue instructions varies depending on the compiler and compiler options.     
 Heap: allocate big amounts of memory for dev usage, dynamic memory that the programmer can change. Grows up (towards stack). Changes in size.           
 Permanent storage / Static memory: segments, copied to program memory on execution.    
 
@@ -211,7 +234,7 @@ A program explicitly requests the allocation of a block of memory via a system c
 
 Use a Pointer to refer to dynamically allocated memory   
 
-    struct ex *ptr = (struct ex *) malloc (sizeof(struct ex));   //allocated space to hold struct ex    
+    struct ex *ptr = (struct ex *) malloc(sizeof(struct ex));   //allocated space to hold struct ex    
 Example of allocating and freeing memory:   
 
     #include <stdio.h>   
