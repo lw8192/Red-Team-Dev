@@ -5,6 +5,7 @@ C is fast due to: compiling, strongly typed, no garbage collection.
 [Codeblocks IDE](https://www.codeblocks.org/)    
 [Codeblocks Install](https://www.digitalocean.com/community/tutorials/c-compiler-windows-gcc)      
 [Cdecl: C gibberish to English](https://cdecl.org/)    
+[C Cheatsheet](https://quickref.me/c.html)    
 
 ## Variables          
 [Reference Chart for Data Types in C](https://www.geeksforgeeks.org/data-types-in-c/#)     
