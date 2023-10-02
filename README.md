@@ -84,3 +84,18 @@ https://learngitbranching.js.org/
 [Tyler Hudak's Class "Intro to Reverse Engineering"](https://www.youtube.com/watch?v=GYam_nJKr6E)    
 [OS Dev Wiki](https://wiki.osdev.org/Main_Page)    
 [Open Security Training](https://p.ost2.fyi/courses)    
+[Machine-Level and Systems Programming](https://courses.ics.hawaii.edu/ReviewICS312/modules/)    
+[Linux Kernel Book](https://0xax.gitbooks.io/linux-insides/content/)    
+[Reversing C++ Functions](https://alschwalm.com/blog/static/2016/12/17/reversing-c-virtual-functions/)   
+[Article on How C++ Maps to Assembly](https://slashbinbash.de/cppdev.html)     
+["Modern Debugging with WinDbg Preview" DEFCON 27 workshop](https://github.com/hugsy/defcon_27_windbg_workshop/tree/main)   
+[Malware Gems](https://github.com/0x4143/malware-gems)    
+[x86/RM encoding cheat sheet](https://asmjit.com/asmgrid/)    
+[Applied Reverse Engineering Series](https://revers.engineering/applied-reverse-engineering-series/)    
+[Flare On - RevEng Challenge](https://flare-on.com/)     
+[Reverse Engineering For Everyone!](https://0xinfection.github.io/reversing/)    
+
+### Videos   
+[Exploit Dev / Reversing](https://www.youtube.com/playlist?list=PLi0kul0fEhZ_ZOJ9EvbE628ptN2rsKuu5)   
+[Reverse Engineering for Beginners](https://www.youtube.com/playlist?list=PLMB3ddm5Yvh3gf_iev78YP5EPzkA3nPdL)    
+[Binary Exploitation / Memory Corruption by LiveOverflow](https://www.youtube.com/playlist?list=PLhixgUqwRTjxglIswKp9mpkfPNfHkzyeN)   
