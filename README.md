@@ -72,11 +72,15 @@ https://learngitbranching.js.org/
 [The Unprotect Project](https://unprotect.it/)         
 [0xpat maldev series](https://0xpat.github.io/Malware_development_part_1/)   
 [Exploit Education](https://exploit.education/)     
-[ROPEmporium](https://ropemporium.com/guide.html)    
-[Open Security Training](https://p.ost2.fyi/courses)    
+[ROPEmporium](https://ropemporium.com/guide.html)     
+[Root Me](https://www.root-me.org/?lang=en)    
 
 ### Reverse Engineering   
+[How to start RE/malware analysis?](https://hshrzd.wordpress.com/how-to-start/)    
 [Microcorruption.com](https://microcorruption.com/)    
 [Challenges.re](https://challenges.re/)    
 [Linux Reverse Engineering 101](https://github.com/michalmalik/linux-re-101)   
 [Malware Unicorn Reverse Engineering Workshops](https://malwareunicorn.org/#/workshops)    
+[Tyler Hudak's Class "Intro to Reverse Engineering"](https://www.youtube.com/watch?v=GYam_nJKr6E)    
+[OS Dev Wiki](https://wiki.osdev.org/Main_Page)    
+[Open Security Training](https://p.ost2.fyi/courses)    
