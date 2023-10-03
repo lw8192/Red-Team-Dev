@@ -1,5 +1,5 @@
 # Using Python to Solve CTF Problems    
-Pwntools: Python library specifically created for CTFs.     
+Pwntools: Python library specifically created for CTFs. Allows you to automatically attach a debugger, connect to a remote process or start a process running locally, makes it easier to develop exploits.             
 
 [Pwntools Documentation](https://docs.pwntools.com/en/stable/)      
 [Pwntools Intro](https://guyinatuxedo.github.io/02-intro_tooling/pwntools/index.html#pwntools-intro)     
@@ -8,22 +8,64 @@ Pwntools: Python library specifically created for CTFs.
 Install:    
 
     sudo pip install pwn    
+Generate an exploit template script:     
+
+    pwn template --host site.com --port 4444 binary > exploit.py 
 Usage:   
 
-    from pwn import *     
+    from pwn import *    
+    exe = context.binary = ELF('vuln_program')      #set binary context to make life easier   
+    cyclic(130)     #generate a string wiht unique subsequences     
+    cyclic_find(0x1466)   #find offset of value 
+    Log: use log.debug, log.info, log.warn, log.error
+Running with a target: pwntools buffers I/O which can cause issues. Recommend always working with bytes to make things easier.     
+
+    b"Hello world"      #write a string literal as bytes so pwntools doesn't have issues     
 With a remote target:   
 
     target = remote(10.10.10.10, 8000)     #connect to a target with IP or URL. Target can be a remote connection or a process.     
     target.send("string")   #send data to a target   
     target.sendline("stuff")     #send data with a newline   
-    print(target.recvline().decode().strip())    #print a line of data received from a target - decoded from a byte string and without spaces      
+    target.sendafter(delim, data)     #send data after a specific string   
+    target.sendlinethen("choice: ", "1")    #send data after an option  
+    print(target.recvline().decode().strip())    #print a line of data received from a target - decoded from a byte string and without spaces     
+    target.recvregex(regex)        #receive until a regex   
     print(target.recvuntil("end"))    #print data until the string "end"       
-    print(target.recvall())    #print all data recieved   
+    print(target.recvall())    #print all data recieved until EOF  
     target.clean()    #remove all buffered data   
-    target.interactive()    #interactive mode      
+    target.interactive()    #interactive mode, open a prompt    
+    target.stream()     #stream everything to stdout    
+    target-shutdown()      #close the connection   
  
 With a process:   
 
     target_proc = process("./binary")     #run a binary      
     target_proc = process(['./target', '--arg1', 'some data'], env={'env1': 'some data'})    #pass enviromental variables and command line args to binary at runtime    
     gdb.attach(target_proc)    #attach a debugger     
+
+    exe.symbols.main == exe.symbols["main"]    #extract address of functions, variables, etc   
+    exe.bss(offset)     #get bss offset  
+Packing and Unpacking: convert between numbers and strings     
+
+    pX(0x100)    #X is 8, 16, 32 or 64 bits    
+    uX(b"\x01\x00")    #unpacket a string into a number   
+
+Shellcode: return a string of assembly code        
+
+    shellcraft.func()    #call one of the functions for the default arch     
+    shellcraft.amd64.func()    #for a specific arch  
+
+    s= "example string"   
+    sc = shellcraft.pushstr(s)  #assembly to push a string onto the stack   
+    sc += shellcraft.syscall("SYS_write", 1, "rsp", len(s)+1)      #assembly to make a system ca;;    
+
+    
+    shellcraft.sh()      #will use the xecve syscall to push "/bin/sh" onto the stack, uses a lots of bytes so you might need to trim it down    
+    asc = asm(sc)         #turn assembly into machine code   
+ROP with Pwntools     
+You might need to find gadgets to set args for functions or need to manually make syscalls for reading, writing.        
+
+    rop = ROP(exe, base=stack_addr)    #initialize    
+    rop.call(name_or_addr, ...)   #add calls to the chain     
+    rop.dump()   #inspect the chain    
+    rop.chain() #convert chain to bytes    
