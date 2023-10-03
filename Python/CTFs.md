@@ -49,6 +49,7 @@ Packing and Unpacking: convert between numbers and strings
 
     pX(0x100)    #X is 8, 16, 32 or 64 bits    
     uX(b"\x01\x00")    #unpacket a string into a number   
+    payload +=p32(0x0804051f) #convert a 32 bit address to little endian and add it to shellcode. This returns a byte string.       
 
 Shellcode: return a string of assembly code        
 
