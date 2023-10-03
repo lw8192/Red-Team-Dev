@@ -2,11 +2,15 @@
 [GDB Cheatsheet](https://gabriellesc.github.io/teaching/resources/GDB-cheat-sheet.pdf)        
 [GDB Command Reference](https://visualgdb.com/gdbreference/commands/x)     
 [GEF (GDB Enhanced Features)](https://github.com/hugsy/gef)    
-Common GDB Commands   
+Opening GDB    
 ```
 gcc -g program.c -o program     #compile a program using debugging symbols    
 sudo gdb -q --pid=1234 --symbols=./program       #attach gdb to an already running program using the PID and load symbols from the executable      
-gdb -q ./a.out    #open gdb using quiet mode 
+gdb -q ./a.out    #open gdb using quiet mode
+gdb -c ./core.1111       #inspect a coredump using gdb
+```
+Common GDB Commands   
+```
 (gdb) set dis intel      #view Assembly code in Intel format
 (gdb) set disassembly-flavor intel     #set assembly language to Intel, different syntax 
 (gdb) list       #view source code, if program is compiled with debugging symbols  
