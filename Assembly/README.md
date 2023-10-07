@@ -1,16 +1,17 @@
-# Notes on Intel x86 Assembly    
+# Assembly Notes     
 [Notes from SANS Poster](https://sansorg.egnyte.com/dl/pHqHxaLC5M)   
 [The Faker's Guide to Assembly](https://www.timdbg.com/posts/fakers-guide-to-assembly/)   
 [x86 Assembly Guide](https://www.cs.virginia.edu/~evans/cs216/guides/x86.html)     
  
-Low level programming language. Converted into executable machine code by an assembler. Represents instructions in symbolic code. Main syntaxes: AT&T syntax and Intel syntax. AT&T (% and $ before everything).               
+Assembly is a low level programming language. Converted into executable machine code by an assembler. Represents instructions in symbolic code. Main syntaxes: AT&T syntax and Intel syntax. AT&T (% and $ before everything).               
 Addressing:       
 Older Intel x86 processors use a 32-bit addressing scheme, while newer ones use a 64-bit one. 64-bit processors can run in 32-bit compatibility mode, which allows them to run 32-bit code quickly.       
 x32 vs x64: differences in how variable sare passed to a function. In x32 systems parameters are pushed to the stack before the function is called. x64 - the first 6 parameters are stored in RDI, RSI, RDX, RCX, R8 and R9 registers.      
+x86: progression of intel chips from 8086, 80186, 80286 etc. Originally 16 bit, then 32 / bit bit keeping backwards compatibility. Starts up in x16 before software transitions to x32/x64.
 Shellcode: hex representation of machine code bytes. Can be translated back to Assembly or loaded directly into memory as binary instructions to be executed.        
 
 # Common 32-Bit Registers and Uses     
-Registers: internal variables for the processor. First four registers: general purpose. EAX, ECX, EDX, EBX (Accumulator, Counter, Data, Base). Acts as temporary variables for the CPU when executing machine instructions.            
+Registers: internal variables for the processor, small memory storage area built into the processor. First four registers: general purpose. EAX, ECX, EDX, EBX (Accumulator, Counter, Data, Base). Acts as temporary variables for the CPU when executing machine instructions.            
 2nd four general purpose: ESP, EBP, ESI, EDI. General purposes - pointers and indexes. Stack Pointer, Base Pointer, Source Index, Destination Index. ESP and EDP - pointers. Store 32 bit addresses. Last 2 - pointers often pointed to source and destination where data needs to be read from or written to. Load and store instructions: can be thought of as simply general purpose.       
 EIP - Instruction Pointer. Points to next current instruction the processor is reading. Used a lot when debugging.        
 EFLAGS register - several bit flags used for comparisons and memory segmentations.     
@@ -50,6 +51,16 @@ Used on a x64 system.
 EAX→RAX, ECX→RCX, EBX→RBX, ESP→RSP, EIP→RIP      
 Additional 64-bit registers are R8-R15.     
 RSP is often used to access stack arguments and local variables, instead of EBP.     
+
+RAX - stores function return values.    
+RBX - base pointer to the data section. 
+RCX - counter for string and loop operations.    
+RDX - I/O pointer.     
+RSI - source index pointer for string operations.    
+RDI - destination index pointer for string operations.     
+RSP - stack(top) pointer.    
+RBP - stack frame base pointer.    
+RIP - pointer to the next instruction to execute, "instruction pointer".  
 
 # Conditional Jumps
 JA / JG Jump if above/jump if greater.   
