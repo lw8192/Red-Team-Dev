@@ -3,7 +3,16 @@
 [The Faker's Guide to Assembly](https://www.timdbg.com/posts/fakers-guide-to-assembly/)   
 [x86 Assembly Guide](https://www.cs.virginia.edu/~evans/cs216/guides/x86.html)     
  
-Assembly is a low level programming language. Converted into executable machine code by an assembler. Represents instructions in symbolic code. Main syntaxes: AT&T syntax and Intel syntax. AT&T (% and $ before everything).               
+Assembly is a low level programming language. Converted into executable machine code by an assembler. Represents instructions in symbolic code. Main syntaxes: AT&T syntax and Intel syntax. AT&T (% and $ before everything).          
+Intel: destination(s) <- source. Windows.      
+
+    mov rbp, rsp      ; move rsp into rbp 
+    add rsp, 0x15     ; (rsp = rsp + 0x15)    
+AT&T: source(s) -> destination. *nix/GNU. registers = % prefix, immediates - $
+
+    mov %rsp, %rbp    ; move rsp into rbp  
+    add $0x15, %rsp   ; rsp = rsp+0x15   
+
 Addressing:       
 Older Intel x86 processors use a 32-bit addressing scheme, while newer ones use a 64-bit one. 64-bit processors can run in 32-bit compatibility mode, which allows them to run 32-bit code quickly.       
 x32 vs x64: differences in how variable sare passed to a function. In x32 systems parameters are pushed to the stack before the function is called. x64 - the first 6 parameters are stored in RDI, RSI, RDX, RCX, R8 and R9 registers.      
@@ -68,6 +77,10 @@ JB / JL Jump if below/jump if less.
 JE / JZ Jump if equal; same as jump if zero.   
 JNE / JNZ Jump if not equal; same as jump if not zero.   
 JGE/ JNL Jump if greater or equal; same as jump if not less.   
+
+# Assembly Instructions     
+NOP: "No-operation": doesn't do anything. Used to pad or align bytes, delay time. Make simple exploits more reliable.   
+
 
 ## Asm Files  
 ```
