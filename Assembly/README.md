@@ -81,6 +81,13 @@ JGE/ JNL Jump if greater or equal; same as jump if not less.
 # Assembly Instructions     
 NOP: "No-operation": doesn't do anything. Used to pad or align bytes, delay time. Make simple exploits more reliable.   
 
+Push: push quadword onto the stack, decrements the stack pointer (RSP) by 8 bytes. x64: operand can be the value in a x64 register, a x64 bit value from memory.     
+Pop: pop a value from the stack, x64 mode - operand can be a register or a x64 memory address in r/mX form      
+In x86 mode push/pop will add/remove values 32 bits at a time, increment / decrement RSP by 4 rather then 8.     
+
+CALL: transfer control to a different function, make sure control can be resumed when the function returns. It pushes the address of the next instruction onto the stack, for use by ret when the procedure is done then it changes RIP to the address in the instruction.    
+
+RET: return from procedure. Two forms: pop the top of the stack into rip(pop will automatically increment the stack pointer) or pop the top of the stack into rip and add a constant number of bytes to RSP.     
 
 ## Asm Files  
 ```
