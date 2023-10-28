@@ -2,6 +2,7 @@
 [Notes from SANS Poster](https://sansorg.egnyte.com/dl/pHqHxaLC5M)   
 [The Faker's Guide to Assembly](https://www.timdbg.com/posts/fakers-guide-to-assembly/)   
 [x86 Assembly Guide](https://www.cs.virginia.edu/~evans/cs216/guides/x86.html)     
+[ARM Assembly - Azeria Labs](https://azeria-labs.com/writing-arm-assembly-part-1/)     
  
 Assembly is a low level programming language. Converted into executable machine code by an assembler. Represents instructions in symbolic code. Main syntaxes: AT&T syntax and Intel syntax. AT&T (% and $ before everything).          
 Intel: destination(s) <- source. Windows.      
