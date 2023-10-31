@@ -59,3 +59,13 @@ Parent / Child Processes:
 View the start / end addresses of mapped memory regions:     
 
     (gdb) info proc mappings   
+Use GDB scripting to set a breakpoint and print $rip :    
+
+    gdb binary -x script.gdb   
+
+    #script.gdb  
+    break main+30 
+    commands 
+     p $rip  
+    end 
+    run 
