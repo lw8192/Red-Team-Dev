@@ -1,7 +1,13 @@
 # Assembly Notes     
+x86 and amd64    
 [Notes from SANS Poster](https://sansorg.egnyte.com/dl/pHqHxaLC5M)   
 [The Faker's Guide to Assembly](https://www.timdbg.com/posts/fakers-guide-to-assembly/)   
 [x86 Assembly Guide](https://www.cs.virginia.edu/~evans/cs216/guides/x86.html)     
+[x86 and amd64 instruction reference](https://www.felixcloutier.com/x86/)      
+[Modern x64 Assembly Videos](https://www.youtube.com/watch?v=rxsBghsrvpI)    
+[Debugging Optimized x64 Videos](https://www.youtube.com/watch?v=MUNRvqpske0)   
+
+ARM Assembly    
 [ARM Assembly - Azeria Labs](https://azeria-labs.com/writing-arm-assembly-part-1/)     
  
 Assembly is a low level programming language. Converted into executable machine code by an assembler. Represents instructions in symbolic code. Main syntaxes: AT&T syntax and Intel syntax. AT&T (% and $ before everything).          
