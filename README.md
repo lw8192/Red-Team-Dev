@@ -77,6 +77,7 @@ https://learngitbranching.js.org/
 [Exploit Education](https://exploit.education/)     
 [ROPEmporium](https://ropemporium.com/guide.html)     
 [Root Me](https://www.root-me.org/?lang=en)    
+[Learn C by Creating a Rootkit](https://h0mbre.github.io/Learn-C-By-Creating-A-Rootkit/#)   
 
 ### Reverse Engineering   
 [How to start RE/malware analysis?](https://hshrzd.wordpress.com/how-to-start/)    
