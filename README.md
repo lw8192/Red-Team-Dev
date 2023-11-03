@@ -64,7 +64,7 @@ https://learngitbranching.js.org/
 [Rust for n00bs](https://training.zeropointsecurity.co.uk/courses/rust-for-n00bs)      
 [Offensive Rust](https://github.com/trickster0/OffensiveRust)    
      
-### Malware Developement   
+### Malware / Exploit Developement   
 [ired.team](https://www.ired.team/)    
 [VX Underground](https://www.vx-underground.org/#E:/root)     
 [Dark Vortex Maldev Series](https://0xdarkvortex.dev/malware-on-steroids-part-1-simple-cmd-reverse-shell/)     
@@ -72,12 +72,11 @@ https://learngitbranching.js.org/
 [Getting Started with Malware Development](https://www.crow.rip/crows-nest/malware-development/getting-started-with-malware-development)         
 [The Unprotect Project](https://unprotect.it/)         
 [0xpat maldev series](https://0xpat.github.io/Malware_development_part_1/)   
-
-### Exploit Development    
+[Learn C by Creating a Rootkit](https://h0mbre.github.io/Learn-C-By-Creating-A-Rootkit/#)      
+[Windows Internals](https://scorpiosoftware.net/)    
 [Exploit Education](https://exploit.education/)     
 [ROPEmporium](https://ropemporium.com/guide.html)     
 [Root Me](https://www.root-me.org/?lang=en)    
-[Learn C by Creating a Rootkit](https://h0mbre.github.io/Learn-C-By-Creating-A-Rootkit/#)   
 
 ### Reverse Engineering   
 [How to start RE/malware analysis?](https://hshrzd.wordpress.com/how-to-start/)    
