@@ -1,4 +1,5 @@
-# Socket Programming in C   
+# Socket Programming in C      
+[Beej's Guide to Network Programming](https://beej.us/guide/bgnet/)   
 Sockets are treated like files in C, so you use file descriptors to access them. You can use read() and write() to send / rx data. Functions for sockets are defined in /usr/include/sys/sockets.h.    
 Stream sockets: tcp, 2 way connection, packets without errors and in sequence.   
 Datagram sockets: 1 way, UDP, unreliable. Basic and lightweight.    
