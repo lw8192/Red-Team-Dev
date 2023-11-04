@@ -78,6 +78,7 @@ https://learngitbranching.js.org/
 [ROPEmporium](https://ropemporium.com/guide.html)     
 [Root Me](https://www.root-me.org/?lang=en)    
 [Connor McGarr's Blog](https://connormcgarr.github.io/)    
+[Exploit Development Resources](https://github.com/nop-tech/learning-resources/blob/main/Exploit-Development.md)   
 
 ### Reverse Engineering   
 [How to start RE/malware analysis?](https://hshrzd.wordpress.com/how-to-start/)    
