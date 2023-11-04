@@ -2,6 +2,8 @@
 [GDB Cheatsheet](https://gabriellesc.github.io/teaching/resources/GDB-cheat-sheet.pdf)        
 [GDB Command Reference](https://visualgdb.com/gdbreference/commands/x)     
 [GEF (GDB Enhanced Features)](https://github.com/hugsy/gef)    
+[Debuggign with GDB](https://azeria-labs.com/debugging-with-gdb-introduction/)    
+
 Opening GDB    
 ```
 gcc -g program.c -o program     #compile a program using debugging symbols    
