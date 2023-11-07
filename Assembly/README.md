@@ -5,7 +5,8 @@ x86 and amd64
 [x86 Assembly Guide](https://www.cs.virginia.edu/~evans/cs216/guides/x86.html)     
 [x86 and amd64 instruction reference](https://www.felixcloutier.com/x86/)      
 [Modern x64 Assembly Videos](https://www.youtube.com/watch?v=rxsBghsrvpI)    
-[Debugging Optimized x64 Videos](https://www.youtube.com/watch?v=MUNRvqpske0)   
+[Debugging Optimized x64 Videos](https://www.youtube.com/watch?v=MUNRvqpske0)      
+[Stack Overflow x86 Wiki](https://stackoverflow.com/)    
 
 ARM Assembly    
 [ARM Assembly - Azeria Labs](https://azeria-labs.com/writing-arm-assembly-part-1/)     
