@@ -10,6 +10,7 @@ C is fast due to: compiling, strongly typed, no garbage collection.
 [Beej's Guide to C programming](https://beej.us/guide/bgc/)      
 [C Programming Notes](https://www.eskimo.com/~scs/cclass/cclass.html)     
 [Stanford CS Library](http://cslibrary.stanford.edu/)   
+[C Stack Overflow Wiki](https://stackoverflow.com/tags/c/info)    
 
 ## Variables          
 [Reference Chart for Data Types in C](https://www.geeksforgeeks.org/data-types-in-c/#)     
