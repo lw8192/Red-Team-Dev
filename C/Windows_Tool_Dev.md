@@ -1,6 +1,7 @@
 # Developing Windows Tools       
 ## Resources    
 [Windows API Index](https://learn.microsoft.com/en-us/windows/win32/apiindex/windows-api-list)     
+[Windows API Tutorial](https://zetcode.com/gui/winapi/)     
 [Malapi.io](https://malapi.io/)    
 [Red Team Ops: Windows Tool Dev preview](https://www.sans.org/webcasts/sec670-red-team-ops-windows-tool-dev-preview/)    
 Source video: https://www.youtube.com/watch?v=yJzpHxc1meI       
