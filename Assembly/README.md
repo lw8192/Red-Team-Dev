@@ -10,6 +10,9 @@ x86 and amd64
 
 ARM Assembly    
 [ARM Assembly - Azeria Labs](https://azeria-labs.com/writing-arm-assembly-part-1/)     
+
+Windows    
+[Understanding Windows x64 Assembly](https://sonictk.github.io/asm_tutorial/)    
  
 Assembly is a low level programming language. Converted into executable machine code by an assembler. Represents instructions in symbolic code. Main syntaxes: AT&T syntax and Intel syntax. AT&T (% and $ before everything).          
 Intel: destination(s) <- source. Windows.      
