@@ -2,7 +2,8 @@
 [GDB Cheatsheet](https://gabriellesc.github.io/teaching/resources/GDB-cheat-sheet.pdf)        
 [GDB Command Reference](https://visualgdb.com/gdbreference/commands/x)     
 [GEF (GDB Enhanced Features)](https://github.com/hugsy/gef)    
-[Debuggign with GDB](https://azeria-labs.com/debugging-with-gdb-introduction/)    
+[Debugging with GDB](https://azeria-labs.com/debugging-with-gdb-introduction/)     
+[x86-64 Registers Cheatsheet](https://cs.brown.edu/courses/cs033/docs/guides/x64_cheatsheet.pdf)   
 
 Opening GDB    
 ```
