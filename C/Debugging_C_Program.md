@@ -23,11 +23,11 @@ Common GDB Commands
 (gdb) run          #run program until breakpoint (will set up function prologues if the breakpoint is main)   
 (gdb) cont       #continue the program   
 (gdb) bt         #backtrace the stack
-(gdb) info register eip    #view the address and value of EIP (the instruction pointer)     
+(gdb) info register eip    #view the address and value of EIP/RIP (the instruction pointer)     
 (gdb) disas main      #Dump assembler code for function main    
-(gdb) nexti      #view next instruction. Read EIP, execute it, then move EIP to the next instruction.
+(gdb) nexti      #view next instruction. Read the IP, execute it, then move EIP/RIP to the next instruction.
 #Use gdb to examine memory with -x. Args: mem location, how to display. Display formats: o (octal), x (hex), u (unsigned base 10), t (binary). 
-(gdb) x/x $eip    #see address EIP contains in hex. This is the next instruction to be executed.   
+(gdb) x/x $eip    #see address EIP/RIP contains in hex. This is the next instruction to be executed.   
 ```
  
 Default size of a single unit - 4 byte unit - word. You can change size display with region symbols, appended to end of a format letter.   
@@ -73,12 +73,12 @@ Use GDB scripting to set a breakpoint and print $rip :
     run    
 
 Run a binay with a text file as input:       
+```
+gdb --args ./bin input.txt
+b main
+run
 
-  gdb --args ./bin input.txt
-  b main
-  run
-
-  gdb ./bin
-  b main
-  run input.txt
-
+gdb ./bin
+b main
+run input.txt
+```
