@@ -18,17 +18,26 @@ Common GDB Commands
 (gdb) set disassembly-flavor intel     #set assembly language to Intel, different syntax 
 (gdb) list       #view source code, if program is compiled with debugging symbols  
  #shows diassessmbly of main, value of EIP (memory address that points to an instruction in main). Instructions before: function prologue.   
-(gdb) list main  #view source code of a function  
+(gdb) list main  #view source code of a function
+```
+Breakpoints:   
+```
 (gdb) break 9    #set a breakpoint at line 9
-(gdb) break main  #set a breakpoint at main  
+(gdb) break main  #set a breakpoint at main
+```
+Advance program execution: 
+```
 (gdb) run          #run program until breakpoint (will set up function prologues if the breakpoint is main)   
-(gdb) cont       #continue the program   
+(gdb) continue       #continue the program     
+(gdb) nexti      #view next instruction. Read the IP, execute it, then move EIP/RIP to the next instruction.
+(gdb) ni   #shortened next instruction
+(gdb) finish    #finish execution of a function
+```
+View values in a register: 
+```
 (gdb) bt         #backtrace the stack
 (gdb) info register eip    #view the address and value of EIP (the instruction pointer on x86)     
 (gdb) disas main      #Dump assembler code for function main    
-(gdb) nexti      #view next instruction. Read the IP, execute it, then move EIP/RIP to the next instruction.
-(gdb) ni   #shortened next instruction  
-(gdb) x/x $eip    #see address EIP/RIP contains in hex. This is the next instruction to be executed.   
 ```
 Examine memory: use gdb to examine memory with x. Args: mem location, how to display. Display formats: o (octal), x (hex), u (unsigned base 10), t (binary).        
 ```
