@@ -70,4 +70,15 @@ Use GDB scripting to set a breakpoint and print $rip :
     commands 
      p $rip  
     end 
-    run 
+    run    
+
+Run a binay with a text file as input:       
+
+  gdb --args ./bin input.txt
+  b main
+  run
+
+  gdb ./bin
+  b main
+  run input.txt
+
