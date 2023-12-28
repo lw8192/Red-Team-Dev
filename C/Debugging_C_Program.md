@@ -12,10 +12,15 @@ sudo gdb -q --pid=1234 --symbols=./program       #attach gdb to an already runni
 gdb -q ./a.out    #open gdb using quiet mode
 gdb -c ./core.1111       #inspect a coredump using gdb
 ```
-Common GDB Commands   
+Using Intel format assembly:     
 ```
+gcc -S -masm=intel
 (gdb) set dis intel      #view Assembly code in Intel format
 (gdb) set disassembly-flavor intel     #set assembly language to Intel, different syntax 
+#edit ~/.gdbinit to make it a constant setting for your debugger  
+``` 
+Common GDB Commands   
+```
 (gdb) list       #view source code, if program is compiled with debugging symbols  
  #shows diassessmbly of main, value of EIP (memory address that points to an instruction in main). Instructions before: function prologue.   
 (gdb) list main  #view source code of a function
