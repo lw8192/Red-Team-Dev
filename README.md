@@ -26,7 +26,8 @@ https://learngitbranching.js.org/
 [30 Days of Python](https://github.com/Asabeneh/30-Days-Of-Python)    
 [Practical Python](https://dabeaz-course.github.io/practical-python/)    
 [Advanced Python Mastery](https://github.com/dabeaz-course/python-mastery)     
-[Python for Reverse Engineering](https://icyphox.sh/blog/python-for-re-1/)    
+[Python for Reverse Engineering](https://icyphox.sh/blog/python-for-re-1/)        
+[Python](https://gitlab.com/39iosdev/ccd-iqt/idf/python)    
 
 ### Ruby
 [Ruby Fu](https://rubyfu.net/)  
@@ -43,12 +44,15 @@ https://learngitbranching.js.org/
 [Windows Assembly Language Megaprimer](http://www.securitytube.net/groups?operation=view&groupId=6)      
 [Art of Assembly](https://www.plantation-productions.com/Webster/)    
 [Assembly Tutorial](https://www.tutorialspoint.com/assembly_programming/index.htm)      
+[SecurityTube Assembly Primer for Hackers ](https://www.youtube.com/watch?v=K0g-twyhmQ4&list=PL6brsSrstzga43kcZRn6nbSi_GeXoZQhR)      
+[Assembly](https://gitlab.com/39iosdev/ccd-iqt/idf/assembly)    
 
 ### C    
 [Learn C and C++](https://www.cprogramming.com/)     
 [Learn C](https://www.learnc.net/)    
 [Learn-C](https://www.learn-c.org/)   
-[C Programming: A Modern Approach](http://knking.com/books/c2/)    
+[C Programming: A Modern Approach](http://knking.com/books/c2/)       
+[C Programming](https://gitlab.com/39iosdev/ccd-iqt/idf/C-Programming)     
 
 ### C++ 
 [Kernel Basics](https://github.com/nu11secur1ty/Kernel-and-Types-of-kernels)      
