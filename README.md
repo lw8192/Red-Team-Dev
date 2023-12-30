@@ -53,6 +53,7 @@ https://learngitbranching.js.org/
 [Learn-C](https://www.learn-c.org/)   
 [C Programming: A Modern Approach](http://knking.com/books/c2/)       
 [C Programming](https://gitlab.com/39iosdev/ccd-iqt/idf/C-Programming)     
+[Essential C](http://cslibrary.stanford.edu/101/EssentialC.pdf)    
 
 ### C++ 
 [Kernel Basics](https://github.com/nu11secur1ty/Kernel-and-Types-of-kernels)      
