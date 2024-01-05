@@ -8,6 +8,9 @@ x86 and amd64
 [Debugging Optimized x64 Videos](https://www.youtube.com/watch?v=MUNRvqpske0)      
 [Stack Overflow x86 Wiki](https://stackoverflow.com/)    
 
+AT&T Syntax:   
+[AT&T assembly syntax and IA-32 instructions](https://gist.github.com/mishurov/6bcf04df329973c15044)    
+
 ARM Assembly    
 [ARM Assembly - Azeria Labs](https://azeria-labs.com/writing-arm-assembly-part-1/)     
 
@@ -19,14 +22,14 @@ Intel: destination(s) <- source. Windows.
 
     mov rbp, rsp      ; move rsp into rbp 
     add rsp, 0x15     ; (rsp = rsp + 0x15)    
-AT&T: source(s) -> destination. *nix/GNU. registers = % prefix, immediates - $
+AT&T: source(s) -> destination (opposite of Intel syntax). *nix/GNU. registers = % prefix, immediates - $
 
     mov %rsp, %rbp    ; move rsp into rbp  
     add $0x15, %rsp   ; rsp = rsp+0x15   
 
 Addressing:       
 Older Intel x86 processors use a 32-bit addressing scheme, while newer ones use a 64-bit one. 64-bit processors can run in 32-bit compatibility mode, which allows them to run 32-bit code quickly.       
-x32 vs x64: differences in how variable sare passed to a function. In x32 systems parameters are pushed to the stack before the function is called. x64 - the first 6 parameters are stored in RDI, RSI, RDX, RCX, R8 and R9 registers.      
+x32 vs x64: differences in how variables are passed to a function ("calling conventions"). In x86 systems parameters are pushed to the stack before the function is called. x64 - the first 6 parameters are stored in RDI, RSI, RDX, RCX, R8 and R9 registers.      
 x86: progression of intel chips from 8086, 80186, 80286 etc. Originally 16 bit, then 32 / bit bit keeping backwards compatibility. Starts up in x16 before software transitions to x32/x64.
 Shellcode: hex representation of machine code bytes. Can be translated back to Assembly or loaded directly into memory as binary instructions to be executed.        
 
@@ -36,7 +39,7 @@ Registers: internal variables for the processor, small memory storage area built
 EIP - Instruction Pointer. Points to next current instruction the processor is reading. Used a lot when debugging.        
 EFLAGS register - several bit flags used for comparisons and memory segmentations.     
 16 bit registers: corresponding IP, RSP and BP.   
-64 bit registers: corresponding RIP, RSP, RBP.   
+64 bit registers: corresponding RIP, RSP, RBP on x86-64 architechure.   
      
 | Register      | Full Name   | Description |
 | -----------   | ----------- | ----------- |
@@ -48,7 +51,7 @@ EFLAGS register - several bit flags used for comparisons and memory segmentation
 | EFLAGS  | Flags Register | Contains flags that store outcomes of computations (e.g., Zero and Carry flags)    |
 | FS      | F segment register  | FS:[0] points to SEH chain, FS:[0x30] points to the PEB.   |     
 
-# Common x86 Assembly Instructions     
+# Common x86 Intel Assembly Instructions     
 operation <dest>, <src>      #values - register, memory address or a value. Operations: mov from src to dest, sub, inc (increment), decrement.     
 | Syntax      | Description |
 | ----------- | ----------- |
@@ -56,18 +59,19 @@ operation <dest>, <src>      #values - register, memory address or a value. Oper
 | push EAX |  Put EAX contents on the stack.   |
 | pop EAX | Remove contents from top of the stack and put them in EAX.   |
 | lea EAX,[EBP-4] | Put the address of variable EBP-4 in EAX.   |
-| call EAX |  Call the function whose address resides in the EAX register.   |  
+| call EAX |  Call the function whose address resides in the EAX register. Puts the address into EIP.   |  
 | add esp,8 | Increase ESP by 8 to shrink the stack by two 4-byte arguments.    |
 | sub esp,0x54 |  Shift ESP by 0x54 to make room on the stack for local variable(s).   | 
 | xor EAX,EAX | Set EAX contents to zero.   |
 | test EAX,EAX |  Check whether EAX contains zero, set the appropriate EFLAGS bits.  | 
 | cmp EAX,0xB8 |  Compare EAX to 0xB8, set the appropriate EFLAGS bits.   |
+| ret | Pop the value off the top off the stack into EIP, last instruction in a function.   | 
 
 # 16-bit Registers     
 16-bit registers called AX, BX, CX, DX, SI, DI, BP, and SP. 32 bit registers are extended versions of these. You can still use these with an x86 system to access the first 16 bits of each 32 bit register. Bytes of the AX, BX, CX and DX registers can be accessed using 8-bit registers AL, AH, BL, BH, CL, CH, DL, DH. L - low byte, H - high byte.       
 
 # 64-bit Registers  
-Used on a x64 system.   
+Used on a x86-64 system.   
 EAX→RAX, ECX→RCX, EBX→RBX, ESP→RSP, EIP→RIP      
 Additional 64-bit registers are R8-R15.     
 RSP is often used to access stack arguments and local variables, instead of EBP.     
@@ -89,7 +93,7 @@ JE / JZ Jump if equal; same as jump if zero.
 JNE / JNZ Jump if not equal; same as jump if not zero.   
 JGE/ JNL Jump if greater or equal; same as jump if not less.   
 
-# Assembly Instructions     
+# x86-64 Assembly Instructions     
 NOP: "No-operation": doesn't do anything. Used to pad or align bytes, delay time. Make simple exploits more reliable.   
 
 PUSH: push quadword onto the stack, decrements the stack pointer (RSP) by 8 bytes. x64: operand can be the value in a x64 register, a x64 bit value from memory.     
@@ -106,6 +110,7 @@ ADD and SUB: add or subtract. The destination operand can be r/mX or register, t
 
  add rsp, 9    ; rsp = rsp+9   
  sub rsp, 5    ; rsp = rsp - 5   
+
 ## Asm Files  
 ```
 nasm -f elf file.asm     #assemble file.asm into an object file ready to be linked as an ELF binary
