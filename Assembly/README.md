@@ -18,15 +18,18 @@ ARM Assembly
 Windows    
 [Understanding Windows x64 Assembly](https://sonictk.github.io/asm_tutorial/)    
  
-Assembly is a low level programming language. Converted into executable machine code by an assembler. Represents instructions in symbolic code. Main syntaxes: AT&T syntax and Intel syntax. AT&T (% and $ before everything).          
-Intel: destination(s) <- source. Windows.      
+Assembly is a low level programming language. Converted into executable machine code by an assembler. Represents instructions in symbolic code. Main syntaxes: AT&T syntax and Intel syntax. AT&T (% and $ before everything), standard on Linux.        
+[Intel vs AT&T Syntax](https://staffwww.fullcoll.edu/aclifton/courses/cs241/syntax.html)       
+Intel: destination(s) <- source. Windows. "dword ptr" to denote subregisters (ie eax out of rax)          
 
     mov rbp, rsp      ; move rsp into rbp 
-    add rsp, 0x15     ; (rsp = rsp + 0x15)    
-AT&T: source(s) -> destination (opposite of Intel syntax). *nix/GNU. registers = % prefix, immediates - $
+    add rsp, 0x15     ; (rsp = rsp + 0x15)       
+    [base+index*scale+offset]     ; how effective addresses are written   
+AT&T: source(s) -> destination (opposite of Intel syntax). *nix/GNU. registers = % prefix, immediates - $. Uses l/q suffixes to denote register sizes (ie movq for rax, movl for eax)     
 
-    mov %rsp, %rbp    ; move rsp into rbp  
+    movq %rsp, %rbp    ; move rsp into rbp  
     add $0x15, %rsp   ; rsp = rsp+0x15   
+    offset(base,index,scale) ; how effective addresses are written   
 
 Addressing:       
 Older Intel x86 processors use a 32-bit addressing scheme, while newer ones use a 64-bit one. 64-bit processors can run in 32-bit compatibility mode, which allows them to run 32-bit code quickly.       
