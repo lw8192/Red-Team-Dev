@@ -10,6 +10,7 @@ x86 and amd64
 
 AT&T Syntax:   
 [AT&T assembly syntax and IA-32 instructions](https://gist.github.com/mishurov/6bcf04df329973c15044)    
+[AT&T Syntax](https://csiflabs.cs.ucdavis.edu/~ssdavis/50/att-syntax.htm)    
 
 ARM Assembly    
 [ARM Assembly - Azeria Labs](https://azeria-labs.com/writing-arm-assembly-part-1/)     
