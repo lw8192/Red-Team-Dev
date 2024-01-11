@@ -256,7 +256,11 @@ Example of allocating and freeing memory:
         }
         free(pointr); //free allocated memory   
     } 
-     
+
+Checking for memory errors:         
+gcc -g    #to get line number of leaks    
+use [Valgrind](https://valgrind.org/)            
+valgrind --leak-check=full     #check for thoroughness      
 
 ## Compiling   
 GCC (GNU Compiler Collection): free compiler translating C into machine language.     
