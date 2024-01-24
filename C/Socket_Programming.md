@@ -1,9 +1,11 @@
 # Socket Programming in C      
+[Simple Socket Tutorial](http://www.cs.rpi.edu/~moorthy/Courses/os98/Pgms/socket.html)     
 [Beej's Guide to Network Programming](https://beej.us/guide/bgnet/)   
 Sockets are treated like files in C, so you use file descriptors to access them. You can use read() and write() to send / rx data. Functions for sockets are defined in /usr/include/sys/sockets.h.    
 Stream sockets: tcp, 2 way connection, packets without errors and in sequence.   
 Datagram sockets: 1 way, UDP, unreliable. Basic and lightweight.    
 ## Common Socket Functions    
+Setting up a socket on the client side:      
 
 ## Sockaddr Structs    
 A sockaddr struct is used to pass info that defines a host. It gives the address family and length.    
