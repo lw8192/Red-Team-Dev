@@ -1,11 +1,37 @@
 # Socket Programming in C      
 [Simple Socket Tutorial](http://www.cs.rpi.edu/~moorthy/Courses/os98/Pgms/socket.html)     
 [Beej's Guide to Network Programming](https://beej.us/guide/bgnet/)   
+Sockets: 1 end of a network connection, IP:port pair.    
 Sockets are treated like files in C, so you use file descriptors to access them. You can use read() and write() to send / rx data. Functions for sockets are defined in /usr/include/sys/sockets.h.    
-Stream sockets: tcp, 2 way connection, packets without errors and in sequence.   
+Stream sockets: TCP, 2 way connection, packets without errors and in sequence.   
 Datagram sockets: 1 way, UDP, unreliable. Basic and lightweight.    
 ## Common Socket Functions    
-Setting up a socket on the client side:      
+Setting up a simple socket on the client side:      
+```
+//1. socket() - Create a socket file descriptor. 
+int socket(int domain, int type, int protocol);       
+int file_descriptor = socket(AF_INET, SOCK_STREAM, 0);    //set up a ipv4 TCP socket 
+//2. conect() - set up a connection to a server 
+int connect(int clientfd, SA *addr, socklen_t addrlen); 
+//3. Send and receive data - can use read()/write() or send()/recv()   
+//4. Close the socket when done  
+close(file_descriptor); 
+```
+Setting up a simple socket on the server side steps: 
+```
+//1. socket() - Create a socket file descriptor. 
+int socket(int domain, int type, int protocol);       
+int file_descriptor = socket(AF_INET, SOCK_STREAM, 0);    //set up a ipv4 TCP socket 
+//2. bind() - bind the socket to a service. 
+
+//3. listen() - put the socket in a listening state to receive connections. 
+int listen(int sockfd, int backlog);  
+//4. accept() - receive a connection request from a client. 
+int newsockfd = accept(); 
+//5. Send and receive data - can use read()/write() or send()/recv()   
+//6. Close the socket  when done. 
+close(file_descriptor); 
+```
 
 ## Sockaddr Structs    
 A sockaddr struct is used to pass info that defines a host. It gives the address family and length.    
