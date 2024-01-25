@@ -6,19 +6,56 @@ Sockets are treated like files in C, so you use file descriptors to access them.
 Stream sockets: TCP, 2 way connection, packets without errors and in sequence.   
 Datagram sockets: 1 way, UDP, unreliable. Basic and lightweight.    
 ## Common Socket Functions    
-Setting up a simple socket on the client side:      
-```
-//1. socket() - Create a socket file descriptor. 
-int socket(int domain, int type, int protocol);       
-int file_descriptor = socket(AF_INET, SOCK_STREAM, 0);    //set up a ipv4 TCP socket 
-//2. conect() - set up a connection to a server 
-int connect(int clientfd, SA *addr, socklen_t addrlen); 
-//3. Send and receive data - can use read()/write() or send()/recv()   
-//4. Close the socket when done  
-close(file_descriptor); 
-```
-Setting up a simple socket on the server side steps: 
-```
+### Setting up a simple socket on the client side:      
+socket() - application buffer allocation. Create a client file descriptor.    
+
+        int socket(int domain, int type, int protocol);  
+        int file_descriptor = socket(AF_INET, SOCK_STREAM, 0);    //set up a ipv4 TCP socket    
+
+connect() - set up a connection to the server. 
+
+        int connect(int clientfd, SA *addr, socklen_t addrlen);    
+
+Send and receive data - can use read()/write() or send()/recv()     
+send() - transmit a message. Flag 0 = default behavior.    
+
+        ssize_t send(int sockfd, const void buf[.len], size_t len, int flags); 
+
+recv() - print the message received from the server to stdout. Flag 0 = default behavior.    
+
+        ssize_t recv(int sockfd, void *buf, size_t len, int flags); 
+
+Close the socket when done  
+
+        close(file_descriptor); 
+
+### Setting up a simple socket on the server side steps: 
+socket() - application buffer allocation. Create a socket file descriptor.     
+
+        int socket(int domain, int type, int protocol);   
+
+bind() - kernel binds socket to service  
+
+        int bind(int sockfd, SA *addr, socklen_t addrlen);    
+
+listen() - puts the server socket in a listening state to receive connections from clients    
+
+        int listen(int sockfd, int backlog);    
+
+accept() - receive connection request, returns a new file descriptor for the connection.    
+
+        int accept(int listenfd, SA *addr, int *addrlen);  
+recv() - receive a message from a connected socket, returns length of the message sent in bytes.  
+
+        ssize_t recv(int socket, void *buffer, size_t length, int flags);
+        recv(sockfd, buf, buflen, FLAG | FLAG | FLAG);    //recv with custom behavior  
+
+send() - send a message, returns number of bytes sent. Flag 0 = default behavior.     
+
+        ssize_t send(int sockfd, const void *buf, size_t len, int flags);
+
+
+
 //1. socket() - Create a socket file descriptor. 
 int socket(int domain, int type, int protocol);       
 int file_descriptor = socket(AF_INET, SOCK_STREAM, 0);    //set up a ipv4 TCP socket 
@@ -31,7 +68,7 @@ int newsockfd = accept();
 //5. Send and receive data - can use read()/write() or send()/recv()   
 //6. Close the socket  when done. 
 close(file_descriptor); 
-```
+
 
 ## Sockaddr Structs    
 A sockaddr struct is used to pass info that defines a host. It gives the address family and length.    
