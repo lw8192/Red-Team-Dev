@@ -33,6 +33,9 @@ Close the socket when done
 socket() - application buffer allocation. Create a socket file descriptor.     
 
         int socket(int domain, int type, int protocol);   
+setsockopt(SO_REUSEADDR) - allow the socket to reuse the local addresses and port (if you stop and restart the program).    
+
+        setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &(int){1}, sizeof(int);   
 
 bind() - kernel binds socket to service  
 
@@ -45,29 +48,18 @@ listen() - puts the server socket in a listening state to receive connections fr
 accept() - receive connection request, returns a new file descriptor for the connection.    
 
         int accept(int listenfd, SA *addr, int *addrlen);  
-recv() - receive a message from a connected socket, returns length of the message sent in bytes.  
+recv() - receive a message from a connected socket, returns length of the message sent in bytes. Flag 0 = default behavior.      
 
         ssize_t recv(int socket, void *buffer, size_t length, int flags);
         recv(sockfd, buf, buflen, FLAG | FLAG | FLAG);    //recv with custom behavior  
 
 send() - send a message, returns number of bytes sent. Flag 0 = default behavior.     
 
-        ssize_t send(int sockfd, const void *buf, size_t len, int flags);
+        ssize_t send(int sockfd, const void *buf, size_t len, int flags); 
 
+close() - close the socket file descriptor when done.   
 
-
-//1. socket() - Create a socket file descriptor. 
-int socket(int domain, int type, int protocol);       
-int file_descriptor = socket(AF_INET, SOCK_STREAM, 0);    //set up a ipv4 TCP socket 
-//2. bind() - bind the socket to a service. 
-
-//3. listen() - put the socket in a listening state to receive connections. 
-int listen(int sockfd, int backlog);  
-//4. accept() - receive a connection request from a client. 
-int newsockfd = accept(); 
-//5. Send and receive data - can use read()/write() or send()/recv()   
-//6. Close the socket  when done. 
-close(file_descriptor); 
+      close(file_descriptor); 
 
 
 ## Sockaddr Structs    
