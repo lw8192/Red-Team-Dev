@@ -72,6 +72,11 @@ String comparisons:
 
     //need to use strcmp, == or != will only compare base addresses   
     strcmp(check,input) != 0   
+Dynamically allocating memory for a string:      
+
+    char *str; 
+    str = malloc(30 + 1);    //allocating 30 chars + 1 null terminator   
+
 ### Pointers   
 Pointer: contains address of a storage location of a variable, where the data is in memory (not the actual value of the data). Stores address. Allows direct access and manipulation of a byte in memory.                   
 x86 arch: 32-bit memory address, pointers are 4 bytes. Define using: *. Points to data of a type. The compiler will increment a pointer by the size of it's data types(ie incrementing an int pointer will add 4 bytes to the memory address).             
@@ -102,7 +107,7 @@ Pointer arithmatic: will increase or decrease a pointer by the size of the decla
 Double pointer: pointer to a pointer   
 
     int **p;   //create a double pointer  
-### Struct  
+### Structs     
 Structure: groups variables under a single defined type. Similar to a Python object. Custom data type.      
 
     struct ex {
@@ -112,7 +117,20 @@ Structure: groups variables under a single defined type. Similar to a Python obj
     }
     struct ex e;
     e.x = 3;
-    e.a = 'd'; 
+    e.a = 'd';       
+
+Structs: -> vs .        
+-> is used with pointers, . is used with variables     
+```
+struct person {
+   int age;
+};       
+struct person *x; 
+//-> is a shorthand for (*x).field. x->age is as the same as referring to (*x).age    
+//x.age would be used if you do not compare a pointer to the struct.       
+x->age = 25;     
+```
+
 ### Typecasting    
 Typecasting: temporarily change a variable’s data type, despite how it was originally defined.      
 
@@ -256,11 +274,20 @@ Example of allocating and freeing memory:
         }
         free(pointr); //free allocated memory   
     } 
+Common errors when allocating memory:     
+Not allocating space for a terminating null char when allocating memory for a string.     
+Not freeing dynamically allocated variables.      
+Dangling pointers - set the variable equal to NULL after freeing it.     
+```
+int ptr = malloc(sizeof(int)); 
+free(ptr);    //if variable is used after freeing it can cause unexpected behavior.   
+ptr = NULL;   //set dangling pointer to NULL to avoid weird behavior.   
+```
 
 Checking for memory errors:         
 gcc -g    #to get line number of leaks    
 use [Valgrind](https://valgrind.org/)            
-valgrind --leak-check=full     #check for thoroughness      
+valgrind --leak-check=full ./binary    #check for thoroughness      
 
 ## Compiling   
 GCC (GNU Compiler Collection): free compiler translating C into machine language.     
