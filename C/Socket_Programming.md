@@ -1,6 +1,7 @@
 # Socket Programming in C      
 [Simple Socket Tutorial](http://www.cs.rpi.edu/~moorthy/Courses/os98/Pgms/socket.html)     
-[Beej's Guide to Network Programming](https://beej.us/guide/bgnet/)   
+[Beej's Guide to Network Programming](https://beej.us/guide/bgnet/)    
+[Socket Programming Tutorial In C For Beginners | Part 1 | Eduonix](https://www.youtube.com/watch?v=LtXEMwSG5-8&t=1355s)        
 Sockets: 1 end of a network connection, IP:port pair.    
 Sockets are treated like files in C, so you use file descriptors to access them. You can use read() and write() to send / rx data. Functions for sockets are defined in /usr/include/sys/sockets.h.    
 Stream sockets: TCP, 2 way connection, packets without errors and in sequence.   
