@@ -285,9 +285,17 @@ ptr = NULL;   //set dangling pointer to NULL to avoid weird behavior.
 ```
 
 Checking for memory errors:         
+[How to debug small programs](https://ericlippert.com/2014/03/05/how-to-debug-small-programs/)     
 gcc -g    #to get line number of leaks    
-use [Valgrind](https://valgrind.org/)            
-valgrind --leak-check=full ./binary    #check for thoroughness      
+use [Valgrind](https://valgrind.org/), [Valgrind Reference](https://www.cs.tufts.edu/comp/15/reference/valgrind.shtml), [Typical Valgrind errors](http://cs.ecs.baylor.edu/~donahoo/tools/valgrind/messages.html)                     
+valgrind [optional flags] ./binary      
+valgrind --leak-check=full ./binary    #check for thoroughness              
+add -g3 to the MakeFile to get more detailed output.     
+3 parts to Valgrind output: heap, leak and error summaries. Heap - number of bytes in use when the program exits, memory allocations, frees, and total number of bytes allocated. Leak: any possible memory leaks. Error: how many memory errors that occur.    
+Good rule of thumb: for every malloc() you should have a corresponding call to free(), then set that pointer to NULL to avoid dangling pointers. For every new() there should be a corresponding delete.    
+Delete / free twice - double free error.     
+Reading error messages from Valgrind - start from the bottom and work up for program flow (ie main to function called).    
+If the program crashes in the middle of running valgrind - memory that was allocated will never have a chance to be freed, leading to more errors showing up. the initial error that caused the program to crash will need to be fixed, then the programmer can move onto other possible errors.    
 
 ## Compiling   
 GCC (GNU Compiler Collection): free compiler translating C into machine language.     
