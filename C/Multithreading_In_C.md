@@ -2,6 +2,7 @@
 ## Threading Concepts    
 Synchronization primitives: mutexes, semaphores     
 Creating a thread: creates a peer (not child to a parent process like in multiprocessing).    
+Thread safety: a function is thread safe when it has correct results when it is invoked by mumtiple concurrent threads at the same time. Functions called from a thread must also be thread safe.         
 
 ## Pthreads - Threading on Unix / Linux 
 Threading: using Pthreads (POSIX thread) interface on Unix/ Linux.      
