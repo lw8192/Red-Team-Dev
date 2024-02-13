@@ -1,8 +1,9 @@
 # Implementing Threading in C    
 ## Threading Concepts    
-Synchronization primitives: mutexes, semaphores     
 Creating a thread: creates a peer (not child to a parent process like in multiprocessing).    
 Thread safety: a function is thread safe when it has correct results when it is invoked by mumtiple concurrent threads at the same time. Functions called from a thread must also be thread safe.         
+Synchronization primitives: mutexes, semaphores     
+Mutex: 
 
 ## Pthreads - Threading on Unix / Linux 
 Threading: using Pthreads (POSIX thread) interface on Unix/ Linux.      
@@ -10,7 +11,7 @@ Threading: using Pthreads (POSIX thread) interface on Unix/ Linux.
 [Pthreads tutorial](https://www.cs.cmu.edu/afs/cs/academic/class/15492-f07/www/pthreads.html)     
 
     #include <pthread.h>   
-    //to compile: gcc -pthread  
+    //to compile: gcc -pthread or -lpthread    depending on the platform    
 Create and reap threads:        
 
     pthread_t thread[2];    
@@ -30,5 +31,6 @@ Terminating threads:
     RET    //terminates current thread   
 Synchronize access to variables:      
 
-    pthread_mutex_init()   
-    pthread_mutex_[un]lock   
+    pthread_mutex_init();   
+    pthread_mutex_lock; 
+    pthread_mutex_unlock;   
