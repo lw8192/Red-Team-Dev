@@ -1,9 +1,11 @@
 # Implementing Threading in C    
 ## Threading Concepts    
+[Beej's Guide to C - Multithreading](https://beej.us/guide/bgc/html/split/multithreading.html)
 Creating a thread: creates a peer (not child to a parent process like in multiprocessing).    
 Thread safety: a function is thread safe when it has correct results when it is invoked by mumtiple concurrent threads at the same time. Functions called from a thread must also be thread safe.         
 Synchronization primitives: mutexes, semaphores     
-Mutex: 
+Mutex (mutual exceptions): protects a section of code from being run at the same time by different threads. Used to protected a shared resource (ie a file) from being accessed and modified by multiple threads at the same time. Can be accquired or released.              
+Conditional variables: a condition to be checked that allows for threads to go to sleep until an event on another thread occurs.     
 
 ## Pthreads - Threading on Unix / Linux 
 Threading: using Pthreads (POSIX thread) interface on Unix/ Linux.      
@@ -34,3 +36,37 @@ Synchronize access to variables:
     pthread_mutex_init();   
     pthread_mutex_lock; 
     pthread_mutex_unlock;   
+
+### Pthread Mutexes   
+Pthread mutexes: provides mechanism to solve mutual exclusion, ensure threads access shared state in a controlled way.      
+```
+pthread_mutex_t aMutex = PTHREAD_MUTEX_INTIALIZER;   //mutex type    
+pthread_mutex_lock(&aMutex);    //explicit lock    
+//critical section code - protected by the mutex      
+pthread_mutex_unlock(&aMutex);   //explicit unlock   
+
+pthread_mutex_init(&mutex, &attr);   //attr - mutex behavior. NULL is default. Mutex is shared among processes.   
+pthread_mutex_trylock(&mutex);   //check mutex - return if in use and notify calling thread. If free - will lock the mutex. Gives calling thread option to do something else while waiting     
+pthread_mutex_destroy(&mutex);   //clean up and destroy the mutex object 
+```
+Mutex safety tips:     
+- Shared data should always be accessed through a single mutex.       
+- Mutex scope must be visible to all threads.      
+- Globally scope locks.     
+- For all threads - lock mutexes in order. Ensure deadlocks don't happen.    
+- Always unlock the correct mutex.      
+
+### Pthread Conditional Variables     
+Pthread conditional variables: notify thread when a specific condition occurs.     
+```
+pthread_cond_t cond = PTHREAD_COND_INTIALIZER;   //type of cond var      
+pthread_cond_wait(&cond, &mutex);      //wait        
+pthread_cond_signal(&cond);    //notify 1 thread    
+pthread_cond_broadcast(&cond);     //notify all threads       
+pthread_cond_init(&cond, &attr);   //set attrs - like if shared    
+pthread_cond_destroy(&cond);    
+```
+Conditional Variable safety tips:      
+- Don't forget to notify waiting threads. Predict change - signal / broadcast correct condition variable.    
+- When in doubt - broadcast instead of signal (note this could mean performance loss).     
+- You don't need a mutex to signal / broadcast.    
