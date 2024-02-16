@@ -72,3 +72,6 @@ Conditional Variable safety tips:
 - Don't forget to notify waiting threads. Predict change - signal / broadcast correct condition variable.    
 - When in doubt - broadcast instead of signal (note this could mean performance loss).     
 - You don't need a mutex to signal / broadcast.    
+
+### Debugging PThreads      
+[pthread debugging](https://www.cs.swarthmore.edu/~newhall/unixhelp/gdb_pthreads.php)     
