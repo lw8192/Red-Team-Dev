@@ -75,3 +75,17 @@ Conditional Variable safety tips:
 
 ### Debugging PThreads      
 [pthread debugging](https://www.cs.swarthmore.edu/~newhall/unixhelp/gdb_pthreads.php)     
+[Debugging Programs with Multiple Threads](https://www.sourceware.org/gdb/current/onlinedocs/gdb.html/Threads.html#Threads)       
+Debugging tips:       
+- Try to debug with as few threads as possible.     
+- When using printf/ fprintf to stdout flush after with fflush(stdout);    
+Use Valgrind to detect race conditions and pthreads API misuses.    
+- Be aware of shared variables or resources that are order-dependant.   
+- If necessary: add a critical section or mutex around suspect code and then try to narrow down the problem by shrinking the critical section.    
+> valgrind --tool=helgrind ./binary     
+> valgrind --toold=drd ./binary    
+
+Threading bugs: 2 general flavors - race conditions and deadlocks. Deadlocks are usually more deterministic.     
+Do you see data corruption? - possibly a race condition      
+Does the bug arise on every run or just some runs? Yes > likely a deadlock.     
+Does the process every hang? Yes > deadlock. If it only hangs sometimes > you might also have a race.    
