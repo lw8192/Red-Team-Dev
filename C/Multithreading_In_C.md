@@ -6,7 +6,7 @@ Thread safety: a function is thread safe when it has correct results when it is 
 Synchronization primitives: mutexes, semaphores     
 Mutex (mutual exceptions): protects a section of code from being run at the same time by different threads. Used to protected a shared resource (ie a file) from being accessed and modified by multiple threads at the same time. Can be accquired or released.          
 Semaphores: similiar to a mutex, can be locked / unlocked by any part of the program.        
-Conditional variables: a condition to be checked that allows for threads to go to sleep until an event on another thread occurs.     
+Conditional variables: a condition to be checked that allows for threads to go to sleep until an event on another thread occurs. Can be used to send a signal between threads.            
 
 ## Pthreads - Threading on Unix / Linux 
 Threading: using Pthreads (POSIX thread) interface on Unix/ Linux.      
@@ -20,9 +20,9 @@ Create and reap threads:
 
     pthread_t thread[2];    
     //int  pthread_create(pthread_t  * thread, pthread_attr_t * attr, void *(*start_routine)(void *), void * arg);
-    //args: return pointer to the thread ID, thread args (NULL unless you want the thread to have a specific priority), thread routine, thread args as a (void *p)  
+    //args: return pointer to the thread ID, thread args (NULL unless you want the thread to have a specific priority), thread routine, thread args as a (void *p). Returns 0 on success.       
     pthread_create(&thread[0],NULL,&fctn1,NULL);
-    //pthread_join();     
+    //pthread_join: wait for threads to die        
     pthread_join(thread[0],NULL);   //thread id, return value as a (void **p)
 Determine your thread ID     
 
@@ -78,7 +78,8 @@ Conditional Variable safety tips:
 [Debugging Programs with Multiple Threads](https://www.sourceware.org/gdb/current/onlinedocs/gdb.html/Threads.html#Threads)       
 Debugging tips:       
 - Try to debug with as few threads as possible.     
-- When using printf/ fprintf to stdout flush after with fflush(stdout);    
+- When using printf/ fprintf to stdout flush after with fflush(stdout);      
+- Good practice: join threads before exiting main.     
 Use Valgrind to detect race conditions and pthreads API misuses.    
 - Be aware of shared variables or resources that are order-dependant.   
 - If necessary: add a critical section or mutex around suspect code and then try to narrow down the problem by shrinking the critical section.    
@@ -89,3 +90,4 @@ Threading bugs: 2 general flavors - race conditions and deadlocks. Deadlocks are
 Do you see data corruption? - possibly a race condition      
 Does the bug arise on every run or just some runs? Yes > likely a deadlock.     
 Does the process every hang? Yes > deadlock. If it only hangs sometimes > you might also have a race.    
+Race conditions: when code with mutiples units of execution (like threads) has a shared variable that can be read / written by multiple threads at the same time.     
