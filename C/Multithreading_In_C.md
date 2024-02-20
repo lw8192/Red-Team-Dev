@@ -97,5 +97,5 @@ Critical sections: not always the best fix but can help to narrow down the probl
 If program hands - check stacktraces uses pstacks. Look for cyclic locks.     
 
 Design Tips:    
-- Remove all global variables / isolate as much as possible. Minimize shared resources.        
+- Remove all global variables, including static as much as possible to isolate them. Minimize shared resources.        
 - make isolated components reentrant (stateless - take inputs as constants and only manipulate declared, logically constant parameters. Pass-by-value instead of pass-by-reference).    
