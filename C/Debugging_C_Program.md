@@ -1,4 +1,5 @@
-# Debugging a C Program Using GDB      
+# Debugging a C Program   
+## GDB         
 [GDB Cheatsheet](https://gabriellesc.github.io/teaching/resources/GDB-cheat-sheet.pdf)        
 [GDB Command Reference](https://visualgdb.com/gdbreference/commands/x)     
 [GEF (GDB Enhanced Features)](https://github.com/hugsy/gef)    
@@ -103,3 +104,6 @@ gdb ./bin
 b main
 run input.txt
 ```
+
+## Assert   
+Use assert() statements then analyze your core dump with gdb and ddd.     

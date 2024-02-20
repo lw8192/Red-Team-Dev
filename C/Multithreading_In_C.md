@@ -76,6 +76,7 @@ Conditional Variable safety tips:
 ### Debugging PThreads      
 [pthread debugging](https://www.cs.swarthmore.edu/~newhall/unixhelp/gdb_pthreads.php)     
 [Debugging Programs with Multiple Threads](https://www.sourceware.org/gdb/current/onlinedocs/gdb.html/Threads.html#Threads)       
+[C Programming: Debugging with pthreads](https://stackoverflow.com/questions/981011/c-programming-debugging-with-pthreads)        
 Debugging tips:       
 - Try to debug with as few threads as possible.     
 - When using printf/ fprintf to stdout flush after with fflush(stdout);      
@@ -87,7 +88,14 @@ Use Valgrind to detect race conditions and pthreads API misuses.
 > valgrind --toold=drd ./binary    
 
 Threading bugs: 2 general flavors - race conditions and deadlocks. Deadlocks are usually more deterministic.     
-Do you see data corruption? - possibly a race condition      
-Does the bug arise on every run or just some runs? Yes > likely a deadlock.     
-Does the process every hang? Yes > deadlock. If it only hangs sometimes > you might also have a race.    
-Race conditions: when code with mutiples units of execution (like threads) has a shared variable that can be read / written by multiple threads at the same time.     
+Do you see data corruption? Yes > possibly a race condition      
+Does the bug arise on every run or just some runs? Yes to every run > likely a deadlock.     
+Does the process ever hang? Yes > deadlock. If it only hangs sometimes > you might also have a race.    
+Race conditions: 2 concurrent threads or processes compete for a resource and the resulting final program state depends on who gets the resources first. Occurs when code with multiple units of execution (like threads) has a shared variable that can be read / written by multiple threads at the same time. Look for shared variables or resources that are order dependant. Breakpoints in the code will affect race conditions.             
+Debugging threaded programs: sometimes the bug changes or goes away when you use printf statements or run it in a debugger (this is called a heisenbug). Heisenbug: usually means you have a race condition.     
+Critical sections: not always the best fix but can help to narrow down the problem.    
+If program hands - check stacktraces uses pstacks. Look for cyclic locks.     
+
+Design Tips:    
+- Remove all global variables / isolate as much as possible. Minimize shared resources.        
+- make isolated components reentrant (stateless - take inputs as constants and only manipulate declared, logically constant parameters. Pass-by-value instead of pass-by-reference).    
