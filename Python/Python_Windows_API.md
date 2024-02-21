@@ -18,7 +18,7 @@ The Windows API is mostly described by MSDN (Microsoft Developer's Network). MSD
 [System Error Codes](https://learn.microsoft.com/en-us/windows/win32/debug/system-error-codes--0-499-)    
 [MalAPI.io](https://malapi.io/)    
 Allows user written programs to interact with the underlying operating system.      
-Unicode version of functions - w appendeded, ASCII version of functions -a appended.          
+Unicode version of functions - w appended, ASCII version of functions -a appended.          
 Display on a device (ie screen, printer) - interact with the device context.      
 Handles - pointers to objects.       
 Hacker focused API calls: OpenProcess, CreateRemoteThread, WriteProcessMemory.    

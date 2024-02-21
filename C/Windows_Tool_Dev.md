@@ -64,7 +64,7 @@ WINAPI, APIENTRY, CALLBACK: used when defining a function. From WinDef.h
 Defensive Tools:   
 [PESieve](https://github.com/hasherezade/pe-sieve)   
    
-## Windows API    
+## The Windows API    
 Provides OS functionality - userland and kernel land. APIs with Ex on the end are heavily modified.        
 Naming: PrefixVerbTarget[Ex] / VerbTarget[Ex]     
 Create* APIs: help a user application create a system object, usually returns a handle.      
