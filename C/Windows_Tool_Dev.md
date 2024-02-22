@@ -155,5 +155,9 @@ Use GetModuleHandle and GetProcAddress
 ## Windows Process Injection    
 [Process Injection Methods](https://github.com/odzhan/injection)    
 [Windows - 10 Common Process Injection Techniques](https://www.elastic.co/blog/ten-process-injection-techniques-technical-survey-common-and-trending-process)    
+### Process Overview    
+TEB / PEB - created when the OS executes an exe. 
+TEB (Thread Enviromental Block) - contains info related to a thread.            
+PEB / LDR (Process Enviromental Block) - contains info related to a process. PEB_LDR_DATA - struct inside the PEB, contains linked lists InLoadOrderModuleList, InMemoryOrderModuleList, InMemoryOrderModuleList        
 
   
