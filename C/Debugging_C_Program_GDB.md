@@ -1,5 +1,5 @@
-# Debugging a C Program   
-## GDB         
+# Debugging a C Program with GDB   
+## Links             
 [GDB Cheatsheet](https://gabriellesc.github.io/teaching/resources/GDB-cheat-sheet.pdf)        
 [GDB Command Reference](https://visualgdb.com/gdbreference/commands/x)     
 [GEF (GDB Enhanced Features)](https://github.com/hugsy/gef)    
