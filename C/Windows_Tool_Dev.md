@@ -18,6 +18,7 @@ DLLs: Windows, supply common functionality to applications. PE32/PE32+ format. D
 Shared Objects: Linux - ELF format. No specific export syntax. .so or .a Dynamically loaded / unloaded with dlopen / dlclose. Resolve symbols with dlsym.             
 C data types: int, long, unsigned long, double, float     
 Windows provided data types: BOOL, BOOLEAN, INT, DWORD, VOID, PVOID, LPVOID, HINSTANCE, HANDLE       
+Most windows functions are called from: NTDLL.DLL, Kernel32.DLL and Kernelbase.DLL      
 Windows header files: Windows.h, Windef.h, WinNt.h, WinReg.h, WinSvc.h    
 
 Windows API: provide critical functionality. Best practice: always use Windows APIs vs standard C functions.          
@@ -63,8 +64,22 @@ WINAPI, APIENTRY, CALLBACK: used when defining a function. From WinDef.h
 
 Defensive Tools:   
 [PESieve](https://github.com/hasherezade/pe-sieve)   
-   
-## The Windows API    
+
+## Syscalls   
+API hooking: AV products inspect Win32 API calls before they are executed, decide if they are suspicious/malicious, and either block or allow the call to proceed. Evade this by using syscalls.   
+Every native Windows API call has a number to present it (syscall). Differ between versions of Windows (find num using debugger or with public lists). Make a syscall: move number to a register. In x64, syscall instruction will then enter kernel mode. Direct syscalls in assembly: remove any Windows DLL imports, set up call ourselves (not using ntdll).      
+Make syscall: set up args on the stack, move into EAX, use syscall CPU instruction (causing syscall to be executed in kernel mode).     
+Syscall tables online: https://github.com/j00ru/windows-syscalls   
+
+## The Native API    
+Basic API for user-mode applications. Exported from ntdll.dll      
+Kernel mode functions: have prefix Zw    
+User mode functions: Nt prefix     
+
+## The Windows API (WinAPI / Win32API)      
+Easier and more secure to use then the Native API but slower. Many of these functions are wrappers to the Native API.          
+Located on kernel32.dll, KernelBase.dll, advapi32.dll, user32.dll etc      
+
 Provides OS functionality - userland and kernel land. APIs with Ex on the end are heavily modified.        
 Naming: PrefixVerbTarget[Ex] / VerbTarget[Ex]     
 Create* APIs: help a user application create a system object, usually returns a handle.      
@@ -97,9 +112,15 @@ Query artifacts: CreateMutex, CreateFile, FindWindow, GetModuleHandle, RegOpenKe
 Execute a program: WinExec, ShellExecute, CreateProcess   
 Web interactions: InternetOpen, HttpOpenRequest, HttpSendRequest, InternetReadFile  
 
-API Call	Explanation
-LoadLibraryA
-	Maps a specified DLL  into the address space of the calling process
+API Calls     
+LoadLibraryA - Maps a specified DLL  into the address space of the calling process        
+
+    HINSTANCE lib = LoadLibrary("example.dll");    //load a DLL    
+    if((unsigned)lib<=HINSTANCE_ERROR)
+    {
+        /* error handler if the library refuses to load */
+        return 1;
+    }
 GetUserNameA
 	Retrieves the name of the user associated with the current thread
 GetComputerNameA
@@ -112,18 +133,27 @@ GetStartupInfoA
 	Retrieves contents of STARTUPINFO structure (window station, desktop, standard handles, and appearance of a process)
 GetModuleHandle
 	Returns a module handle for the specified module if mapped into the calling process's address space
-GetProcAddress
-	Returns the address of a specified exported DLL  function
+GetProcAddress - Returns the address of a specified exported DLL function or variable.    
+
+    addr_of_exported_symbol = GetProcAddress(dll_handle, function_name);    //Returns NULL if unsuccessful    
+
+    static int (WINAPIV *DllFunction)(char*, ...);   //function pointer definition     
+    HMODULE hLib = LoadLibraryA("ex.dll");      //load a dll  
+    DllFunction = (void *()) GetProcAddress(lib, "DllFunction");     //map function pointers from the dll
+    if (DllFunction == NULL){
+        //handle error if the function is not found     
+    }
+    else{
+        //use the function  
+    }
 VirtualProtect
 	Changes the protection on a region of memory in the virtual address space of the calling process   
+
+### Dynamically Import a Function    
+Use GetModuleHandle and GetProcAddress      
 
 ## Windows Process Injection    
 [Process Injection Methods](https://github.com/odzhan/injection)    
 [Windows - 10 Common Process Injection Techniques](https://www.elastic.co/blog/ten-process-injection-techniques-technical-survey-common-and-trending-process)    
 
-## Syscalls   
-API hooking: AV products inspect Win32 API calls before they are executed, decide if they are suspicious/malicious, and either block or allow the call to proceed. Evade this by using syscalls.   
-Every native Windows API call has a number to present it (syscall). Differ between versions of Windows (find num using debugger or with public lists). Make a syscall: move number to a register. In x64, syscall instruction will then enter kernel mode. Direct syscalls in assembly: remove any Windows DLL imports, set up call ourselves (not using ntdll).      
-Make syscall: set up args on the stack, move into EAX, use syscall CPU instruction (causing syscall to be executed in kernel mode).     
-Syscall tables online: https://github.com/j00ru/windows-syscalls   
-Table for below code (Win 10 x64): https://j00ru.vexillium.org/syscalls/nt/64/       
+  
