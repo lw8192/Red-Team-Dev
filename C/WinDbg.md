@@ -23,3 +23,8 @@ bcdedit.exe –debug on     #enable debugging mode
 #create a snapshot and reboot VM
 Start WinDBG(sysinternals) as administrator.  
 ```
+
+## PEB   
+> !peb   #get address of the LDR (PEB struct)        
+> dt nt!_TEB    #get offset of the PEB struct   
+
