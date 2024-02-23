@@ -19,6 +19,7 @@ Shared Objects: Linux - ELF format. No specific export syntax. .so or .a Dynamic
 C data types: int, long, unsigned long, double, float     
 Windows provided data types: BOOL, BOOLEAN, INT, DWORD, VOID, PVOID, LPVOID, HINSTANCE, HANDLE       
 Most windows functions are called from: NTDLL.DLL, Kernel32.DLL and Kernelbase.DLL      
+Socket functions - ws2_32.dll     
 Windows header files: Windows.h, Windef.h, WinNt.h, WinReg.h, WinSvc.h    
 
 Windows API: provide critical functionality. Best practice: always use Windows APIs vs standard C functions.          
@@ -149,7 +150,12 @@ GetProcAddress - Returns the address of a specified exported DLL function or var
 VirtualProtect
 	Changes the protection on a region of memory in the virtual address space of the calling process   
 
-### Dynamically Import a Function    
+### Dynamically Import a Function from a DLL    
+- Call LoadLibrary() to load the DLL in the process.       
+- Call GetProcAddress() with the DLL and name of the function to get a function pointer.    
+- Call and use the function.    
+- Call FreeLibrary() to unload the DLL when finished.    
+
 Use GetModuleHandle and GetProcAddress      
 
 ## Windows Process Injection    
