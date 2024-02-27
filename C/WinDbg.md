@@ -16,7 +16,13 @@ Breakpoints:
     bd     #disable a breakpoint   
   
     .bpcmds      #list breakpoint commands   
-  
+Execution Flow:      
+> g   #continue    
+
+Registers:       
+> r    #view the register values   
+> r @eax    #check the value of a specific register    
+
 Debug kernel using WinDBG:     
 ```
 bcdedit.exe –debug on     #enable debugging mode
@@ -25,6 +31,8 @@ Start WinDBG(sysinternals) as administrator.
 ```
 
 ## PEB   
+> lm   #list loaded modules   
 > !peb   #get address of the LDR (PEB struct)        
+> dt _peb     #dump the peb   
 > dt nt!_TEB    #get offset of the PEB struct   
 

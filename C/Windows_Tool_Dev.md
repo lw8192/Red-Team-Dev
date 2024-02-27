@@ -162,15 +162,34 @@ Use GetModuleHandle and GetProcAddress
 [Process Injection Methods](https://github.com/odzhan/injection)    
 [Windows - 10 Common Process Injection Techniques](https://www.elastic.co/blog/ten-process-injection-techniques-technical-survey-common-and-trending-process)    
 ### Process Overview    
+EPROCESS - 
 TEB / PEB - created when the OS executes an exe. 
 TEB (Thread Enviromental Block) - contains info related to a thread.            
-PEB / LDR (Process Enviromental Block) - contains info related to a process. PEB_LDR_DATA - struct inside the PEB, contains linked lists InLoadOrderModuleList, InMemoryOrderModuleList, InMemoryOrderModuleList        
+PEB / LDR (Process Enviromental Block) - contains info related to a process including process name, PID and loaded modules. PEB_LDR_DATA - struct inside the PEB, contains linked lists InLoadOrderModuleList, InMemoryOrderModuleList, InMemoryOrderModuleList        
+PEB - at offset fs[:0x30] in the TEB for x86 processes and GS:[0x60] for x64 processes.     
+You can use intrinsics to get the address of the PEB / TEB - which requires <windows.h> to be included     
+```
+peb = (PEB *)__readgsqword(0x60);    //64 bit windows   
+```               
 
-Use intrinsics to get the address of the PEB / TEB:          
+## Windows Shellcoding   
+### Including ASM in C/C++ Code    
 [x86] __readfsbyte __readfsdword __readfsqword __readfsword           
 [x64] __readgsbyte __readgsdword __readgsqword __readgsword      
-x86 - you can use asm()      
-     
+x86 - you can use asm() or __asm{} block - in line assembly. This only works on 32-bit systems. Ref: [Inline Assembler](https://learn.microsoft.com/en-us/cpp/assembler/inline/inline-assembler?view=msvc-170)                 
+x64 - no inline assembly. If unable to use intrinsics - you will most likely need to write a seperate .asm file, assemble using MASM, and then link it in to include the code in your program build. Other option: write the asm as shellcode, extract the bytes, include it in a buffer with RWX in your code and then use it.        
+[How to build a mixed-source x64-project with a x64 assembly file in Visual Studio](https://stackoverflow.com/questions/33751509/external-assembly-file-in-visual-studio/33757749#33757749)     
+Asm file ex:  
+```
+test_func PROC
+    mov rax, rcx
+    ret
+test_func ENDP
+```
+In your C/C++ code:  
+```
+int test_func(int x);    //define header for the function and then use it 
+```
 
 
   
