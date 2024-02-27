@@ -166,4 +166,11 @@ TEB / PEB - created when the OS executes an exe.
 TEB (Thread Enviromental Block) - contains info related to a thread.            
 PEB / LDR (Process Enviromental Block) - contains info related to a process. PEB_LDR_DATA - struct inside the PEB, contains linked lists InLoadOrderModuleList, InMemoryOrderModuleList, InMemoryOrderModuleList        
 
+Use intrinsics to get the address of the PEB / TEB:          
+[x86] __readfsbyte __readfsdword __readfsqword __readfsword           
+[x64] __readgsbyte __readgsdword __readgsqword __readgsword      
+x86 - you can use asm()      
+     
+
+
   
