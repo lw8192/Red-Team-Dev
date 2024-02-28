@@ -32,7 +32,16 @@ Start WinDBG(sysinternals) as administrator.
 
 ## PEB   
 > lm   #list loaded modules   
-> !peb   #get address of the LDR (PEB struct)        
+> !peb   #summary view of the PEB          
 > dt _peb     #dump the peb   
 > dt nt!_TEB    #get offset of the PEB struct   
+> r $peb     #get the memory address of the PEB    
+> dt _peb @$peb    #view struct members and the values the PEB points to       
++0x018 Ldr              : 0x00007fff`10e7a4c0 _PEB_LDR_DATA        
+> dt _PEB_LDR_DATA   
+> dt _peb @$peb ldr->InMemoryOrderModuleList*     #Linked list of pointers to the loaded modules in the process   
 
+Export Address Table:      
+> lm    #find the base address of kernel32.dll    
+> !dh 00007fff`10100000 -f        #dump the header for kernel32.dll    
+   99070 [    DF0C] address [size] of Export Directory    

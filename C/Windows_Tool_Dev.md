@@ -169,7 +169,7 @@ PEB / LDR (Process Enviromental Block) - contains info related to a process incl
 PEB - at offset fs[:0x30] in the TEB for x86 processes and GS:[0x60] for x64 processes.     
 You can use intrinsics to get the address of the PEB / TEB - which requires <windows.h> to be included     
 ```
-peb = (PEB *)__readgsqword(0x60);    //64 bit windows   
+peb = (PEB *)__readgsqword(0x60);    //64 bit windows. Needs <intrin.h>   
 ```               
 
 ## Windows Shellcoding   
