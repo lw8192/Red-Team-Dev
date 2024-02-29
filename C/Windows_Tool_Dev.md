@@ -169,7 +169,7 @@ PEB / LDR (Process Enviromental Block) - contains info related to a process incl
 PEB - at offset fs[:0x30] in the TEB for x86 processes and GS:[0x60] for x64 processes.     
 You can use intrinsics to get the address of the PEB / TEB - which requires <windows.h> to be included     
 ```
-peb = (PEB *)__readgsqword(0x60);    //64 bit windows. Needs <intrin.h>   
+printf("The PEB is at address %p\n", (PEB*)__readgsqword(0x60));    //64 bit windows. Needs <intrin.h>   
 ```               
 
 ## Windows Shellcoding   
@@ -178,17 +178,21 @@ peb = (PEB *)__readgsqword(0x60);    //64 bit windows. Needs <intrin.h>
 [x64] __readgsbyte __readgsdword __readgsqword __readgsword      
 x86 - you can use asm() or __asm{} block - in line assembly. This only works on 32-bit systems. Ref: [Inline Assembler](https://learn.microsoft.com/en-us/cpp/assembler/inline/inline-assembler?view=msvc-170)                 
 x64 - no inline assembly. If unable to use intrinsics - you will most likely need to write a seperate .asm file, assemble using MASM, and then link it in to include the code in your program build. Other option: write the asm as shellcode, extract the bytes, include it in a buffer with RWX in your code and then use it.        
-[How to build a mixed-source x64-project with a x64 assembly file in Visual Studio](https://stackoverflow.com/questions/33751509/external-assembly-file-in-visual-studio/33757749#33757749)     
+[How to build a mixed-source x64-project with a x64 assembly file in Visual Studio](https://stackoverflow.com/questions/33751509/external-assembly-file-in-visual-studio/33757749#33757749)        
+[Using Assembly in C programs ](https://sonictk.github.io/asm_tutorial/#usingassemblyinc/c++programs)      
 Asm file ex:  
 ```
 test_func PROC
-    mov rax, rcx
+    mov rax, rcx   ; move rcx into rax, rax will be the return value of the function  
     ret
 test_func ENDP
 ```
 In your C/C++ code:  
 ```
 int test_func(int x);    //define header for the function and then use it 
+int main(){
+    int value = test_func();   //test_func will return the value that was in rax   
+}
 ```
 
 
