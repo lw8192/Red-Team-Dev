@@ -18,6 +18,7 @@ Breakpoints:
     .bpcmds      #list breakpoint commands   
 Execution Flow:      
 > g   #continue    
+> k   #dump the call stack   
 
 Registers:       
 > r    #view the register values   
