@@ -194,6 +194,3 @@ int main(){
     int value = test_func();   //test_func will return the value that was in rax   
 }
 ```
-
-
-  
