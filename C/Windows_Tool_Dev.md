@@ -161,6 +161,10 @@ Use GetModuleHandle and GetProcAddress
 ## Windows Process Injection    
 [Process Injection Methods](https://github.com/odzhan/injection)    
 [Windows - 10 Common Process Injection Techniques](https://www.elastic.co/blog/ten-process-injection-techniques-technical-survey-common-and-trending-process)    
+
+## Windows Internals       
+[Portable Executable File Format](https://blog.kowalczyk.info/articles/pefileformat.html)      
+
 ### Process Overview    
 EPROCESS - 
 TEB / PEB - created when the OS executes an exe. 
