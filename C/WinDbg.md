@@ -6,6 +6,19 @@ https://github.com/nextco/windbg-readable-theme
 [Breakpoints Documentations](https://learn.microsoft.com/en-us/windows-hardware/drivers/debuggercmds/bp--bu--bm--set-breakpoint-0)      
 [Windbg Cheatsheet](https://github.com/repnz/windbg-cheat-sheet)     
 [Windbg Cheatsheet](https://dblohm7.ca/pmo/windbgcheatsheet.html)    
+## Install     
+https://github.com/yanglr/advDotnetDebugging/blob/main/README.md          
+Windbg for Windows 7           
+x86: http://download.microsoft.com/download/A/6/A/A6AC035D-DA3F-4F0C-ADA4-37C8E5D34E3D/setup/WinSDKDebuggingTools/dbg_x86.msi         
+x64: http://download.microsoft.com/download/A/6/A/A6AC035D-DA3F-4F0C-ADA4-37C8E5D34E3D/setup/WinSDKDebuggingTools_amd64/dbg_amd64.msi         
+Windbg for windows 10 (WinDbg 10.0.18362.1)            
+x86: https://download.microsoft.com/download/4/2/2/42245968-6A79-4DA7-A5FB-08C0AD0AE661/windowssdk/Installers/X86%20Debuggers%20And%20Tools-x86_en-us.msi        
+x64: https://download.microsoft.com/download/4/2/2/42245968-6A79-4DA7-A5FB-08C0AD0AE661/windowssdk/Installers/X64%20Debuggers%20And%20Tools-x64_en-us.msi       
+
+Windbg preview (WindbgX) from Microsoft Store:             
+https://www.microsoft.com/store/p/windbg/9pgjgd53tn86          
+
+
 Windows calling conventions:   
 x86 - args are passed on the stack.    
 x64 - 1st 4 args are passed in registers, shadow store space is allocated on the call stack to save those values. The registers depend on the type and position of the args. Int args - passed in RCX, RDX, R8, and R9. The remaining args get pushed on the stack in right-to-left order.              
@@ -36,7 +49,7 @@ Registers:
 
 Dump memory:       
 > dd esp L3      #dump stack as DWORDS       
-> dt             #view data structs   
+> dt             #view data types   
 > da             #dump as ASCII   
 
 Setup symbols:       
@@ -51,16 +64,21 @@ Start WinDBG(sysinternals) as administrator.
 ```
 
 ## PEB   
+PEB (Process Enviroment Block): use mode struct, info on if the process is being debugged, modules loaded into memory, command line used to invoke the process.       
+PEB - at fs:[0x30] for x86 processes, gs:[60] for x64    
+> !wow64exts.info   #view SYSWOW64 proc info     
 > !process      #dump current process info   
 > lm   #list loaded modules   
 > !peb   #summary view of the PEB          
-> dt _peb     #dump the peb   
+> db <base address of the process> L100
+> dt _peb     #dump the peb     
 > dt nt!_TEB    #get offset of the PEB struct   
 > r $peb     #get the memory address of the PEB    
 > dt _peb @$peb    #view struct members and the values the PEB points to       
 +0x018 Ldr              : 0x00007fff`10e7a4c0 _PEB_LDR_DATA        
 > dt _PEB_LDR_DATA   
-> dt _peb @$peb ldr->InMemoryOrderModuleList*     #Linked list of pointers to the loaded modules in the process   
+> dt _peb @$peb ldr->InMemoryOrderModuleList*     #get the InMemoryOrderModuleList - Linked list of pointers to the loaded modules in the process   
+> dt _peb @$peb ProcessParameters    #view the ProcessParameters struct   
 
 Export Address Table:      
 > lm    #find the base address of kernel32.dll    
