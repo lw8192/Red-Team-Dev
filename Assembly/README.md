@@ -88,7 +88,13 @@ RSI - source index pointer for string operations.
 RDI - destination index pointer for string operations.     
 RSP - stack(top) pointer.    
 RBP - stack frame base pointer.    
-RIP - pointer to the next instruction to execute, "instruction pointer".  
+RIP - pointer to the next instruction to execute, "instruction pointer".    
+
+# Arguments to Functions on Windows     
+arg0 - [EBP+8] on 32-bit, RCX on 64-bit       
+arg1 - [EBP+0xC] on 32-bit, RDX on 64-bit      
+arg2 - [EBP+0x10] on 32-bit, R8 on 64-bit      
+arg3 - [EBP+0x14] on 32-bit, R9 on 64-bit    
 
 # Conditional Jumps
 JA / JG Jump if above/jump if greater.   

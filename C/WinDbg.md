@@ -53,8 +53,12 @@ Dump memory:
 > da             #dump as ASCII   
 
 Setup symbols:       
-> srv*c:\symbols\sym*http://msdl.microsoft.com/download/symbols"        
+To make the enviromental variable _NT_SYMBOL_PATH: srv*c:\symbols\sym*http://msdl.microsoft.com/download/symbols"        
 > .sympath srv*c:\symbols\sym*http://msdl.microsoft.com/download/symbols"    
+
+Create a new folder c:\symbols for symbols provided by Microsoft.      
+> .symfix+ c:\symbols
+> .reload       #(or .reload -f if necessary)
 
 Debug kernel using WinDBG:     
 ```

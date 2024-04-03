@@ -3,6 +3,10 @@
 [Windows API Index](https://learn.microsoft.com/en-us/windows/win32/apiindex/windows-api-list)     
 [Windows API Tutorial](https://zetcode.com/gui/winapi/)     
 [Malapi.io](https://malapi.io/)    
+## Setting up a Testing Enviroment     
+Recommend: Windows 10 /11 x64 VM with Visual Studio 2019 “Desktop development with c++” and “.NET desktop development” packages       
+[Commando](https://github.com/mandiant/commando-vm)     
+
 [Red Team Ops: Windows Tool Dev preview](https://www.sans.org/webcasts/sec670-red-team-ops-windows-tool-dev-preview/)    
 Source video: https://www.youtube.com/watch?v=yJzpHxc1meI       
 
