@@ -162,6 +162,11 @@ VirtualProtect
 
 Use GetModuleHandle and GetProcAddress      
 
+Writing Shellcode in C with Visual Studio:        
+- Use release mode only. Debug seomtimes adds extra data and makes code position dependant.    
+- Disable optimization,   
+- Disable stack buffer checks, so the stack cookie checker function isn't called (it's position dependant). 
+
 ## Windows Process Injection    
 [Process Injection Methods](https://github.com/odzhan/injection)    
 [Windows - 10 Common Process Injection Techniques](https://www.elastic.co/blog/ten-process-injection-techniques-technical-survey-common-and-trending-process)    

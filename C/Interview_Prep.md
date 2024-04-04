@@ -34,6 +34,22 @@ Binary trees:
 
 Checksum: divide buffer into binary string of a block size, add the strings together. Checksum = 1s complement of that value.  
 
+## Bitwise Operations      
+1 byte = 8 bits, 2 bytes = 16 bits, 4 bytes = 32 bits, 8 bytes = 64 bits      
+Signed / unsigned numbers. Signed: highest bit is the signed bit, 1 = negative, 0 = non negative. Unsigned - all digits are used, can't represent negative numbers, can rep 2x the value of a signed int. C - default is signed.         
+Binary representation of a number - machine number is signed number.        
+Inverse of a number - flipped bits if negative, except for the sign bit.    
+2s complement of a number = flipped bits + 1      
+Bitwise operators:       
+AND - & (true if both bits are set)       
+OR - | (true if 1 of the bits is set)     
+XOR - ^ (true if the bits are not the same)     
+NOT - ~ (flips bits)     
+Shifts: arithmatic and logical shifts.         
+Left shift: << shifts to the left, high bits are discarded and low bits are 0. Arithmatic and logical shifts are the same. Shift to left by k - like computing 2^k, but still need to be aware of overflow.               
+Right shift: >> shifts to the right. Arithmatic: filled in bits are the highest bit. Logically: filled in bits are 0. In C - signed types shift arithmatic right, unsigned types shift logical right. Like division - arithmatic right by k = num / 2^k.                  
+
+
 # Reverse Engineering Interview Prep          
 Process injection: CreateRemoteThread        
 Process migration:      
