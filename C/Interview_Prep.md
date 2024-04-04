@@ -27,10 +27,12 @@ OSI model layers: physical, data link, network, transport, session, presentation
 Big O notation - complexity of an algorithim, how long it takes to run. Algorithims are usually in these general classes (best to worst speed): constant time, logarithmic, linear, polynomial, exponential, factorial.            
 
 Data Structures     
-Singly linked list: each node has a data piece and a pointer to the next node in the list. Need to start with the head of the list and iterate through it to find a certain data variable, easy to pop / push items.    
+Singly linked list: each node has a data piece and a pointer to the next node in the list. Need to start with the head of the list and iterate through it to find a certain data variable, easy to pop / push items.     
 Doubly linked list: common with Windows software, each node has a data variable, pointer to the previous node, and pointer to the next node. Uses head and tail variables to start.           
 Queue: FIFO, stores elements sequentially. Often used for multithreading.       
 Binary trees:       
+
+Checksum: divide buffer into binary string of a block size, add the strings together. Checksum = 1s complement of that value.  
 
 # Reverse Engineering Interview Prep          
 Process injection: CreateRemoteThread        
