@@ -2,7 +2,7 @@
 ## Threading Concepts    
 [Beej's Guide to C - Multithreading](https://beej.us/guide/bgc/html/split/multithreading.html)
 Creating a thread: creates a peer (not child to a parent process like in multiprocessing).    
-Thread safety: a function is thread safe when it has correct results when it is invoked by mumtiple concurrent threads at the same time. Functions called from a thread must also be thread safe.         
+Thread safety: a function is thread safe when it has correct results when it is invoked by multiple concurrent threads at the same time. Functions called from a thread must also be thread safe.         
 Synchronization primitives: mutexes, semaphores     
 Mutex (mutual exceptions): protects a section of code from being run at the same time by different threads. Used to protected a shared resource (ie a file) from being accessed and modified by multiple threads at the same time. Can be accquired or released.          
 Semaphores: similiar to a mutex, can be locked / unlocked by any part of the program.        
