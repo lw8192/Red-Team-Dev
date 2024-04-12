@@ -201,17 +201,25 @@ SMEP: Supervisor Mode Execution Prevention. Protects pages from supervisor-mode 
 SMEP bypass techniques: jump to code in user space, jump to the kernel heap (doesn't work on x64), use a ROP chain in kernel space to bypass, ROP to unprotecting hal.dll heap to write shellcode in that area and jump to that code, disable flags in the CR4 register to turn off SMEP / SMAP: 20th bit for SMEP.     
 
 ## Portable Executable (PE) Files       
+PE format - how exe info is stored.    
+COFF (Common Object File Format) - legacy.    
 DOS header, NT header, File Header (in NT header), Optional (not really optional - in the NT header) Header, Section Header (1 for each section).         
-DOS hdr - legacy, e_magic          
+DOS hdr - type of file, e_magic          
 NT hdr - Signature (should be PE in hex). File header - number of sections, file characteristics.       
 Optional hdr - ImageBase, AddressOfEntryPoint, Data Directory w/ pointers to directory structs. Magic - field to identify type of PE (PE32 or PE32+ - x64)            
-Section header: 1 for each section like .text, .rdata, .bss     
-.reloc section - relocation info, modify addresses that assume the image is loaded at the preferred base address.     
-.rsrc section - common place for malware, perms of any section can be changed to make RWX.      
+Section header: 1 for each section like .text, .rdata, .bss. Perms of any section can be changed to make RWX.        
+Sections:   
+- .text: exe code and entry point
+- .data: initialized data (strings, variables, etc.)
+- .rdata or .idata: imports (Windows API) and DLLs.
+- .reloc: relocation information, modify addresses that assume the image is loaded at the preferred base address. 
+- .rsrc: application resources (images, etc.), common place for malware.  
+- .debug: debug information  
 Imports > what exe could be doing.     
+For 32 bits apps that are not ASLR-enabled, 0x400000 is the prefererred load address (ImageBase) for a PE.    
 [PE32 Cheatsheet](https://www.openrce.org/reference_library/files/reference/PE%20Format.pdf)       
 
-Virtual memory: each process gets a virtual address space which gets translated to a physical address.    
+Virtual memory: each process gets a private virtual address space which gets translated to a physical address. Each proc has executable code, open handles to system objects, a security context, a PID, environment variables, a priority class, minimum and maximum working set sizes, and 1+ threads.       
 RVA - offset of a value in the header.     
 Virtual Address = Relative Virtual Address + image base       
 
@@ -223,6 +231,7 @@ TLS Callbacks:
 Address of Callbacks, executed when a process / thread is started or stopped. Code runs before the function even reaches the entry point. Commonly used by malware.          
 
 ## Windows Internals    
+Processor switches between user and kernel mode. Normal user mode app: can't interact with the kernel or modify physical hardware. When a system call is made - app switches modes.     
 ## User Level  
 1:3 memory is allocated to kernel space vs user space.     
 TEB / PEB - created when the OS executes an exe. 
@@ -248,17 +257,54 @@ Kernel mode functions: have prefix Zw
 User mode functions: Nt prefix    
 ### Windows API (WinAPI / Win32API)  
 Easier and more secure to use then the Native API but slower. Located in kernel32.dll, KernelBase.dll, advapi32.dll, user32.dll etc      
-Provides OS functionality - userland and kernel land. APIs with Ex on the end are heavily modified.
+Provides OS functionality - userland and kernel land, interact with physical hardware and memory. APIs with Ex on the end are heavily modified.
 Naming: PrefixVerbTarget[Ex] / VerbTarget[Ex]        
 Common malware APIs: OpenProcess, VirtualAllocEx, WriteProcessMem, CreateRemoteThread      
+Include windows.h or use P/Invoke to use Windows API calls.   
 ### Syscalls   
 API hooking: AV products inspect Win32 API calls before they are executed, decide if they are suspicious/malicious, and either block or allow the call to proceed. Evade this by using syscalls.   
 Every native Windows API call has a number to present it (syscall). Differ between versions of Windows (find num using debugger or with public lists). Make a syscall: move number to a register. In x64, syscall instruction will then enter kernel mode. Direct syscalls in assembly: remove any Windows DLL imports, set up call ourselves (not using ntdll).      
 Make syscall: set up args on the stack, move into EAX, use syscall CPU instruction (causing syscall to be executed in kernel mode).        
 ### Common Techniques   
 Process injection / hooking methods: code injection, DLL injection, DLL search order hijacking, IAT/EAT hooking, inline hooking.             
+Basic process injection: OpenProcess, VirtualAllocExm, WriteProcessMemory, CreateRemoteThread, CloseHandle. Get a handle to another process, allocate memory, write shellcode, create a thread to execute that code, close the handle.    
 Process migration:      
 Process hollowing: process is loaded on the system as a container for hostile code.     
+Process Masquerading:   
+
+DLL (Dynamic Link Library): can be loaded in a program with load time or run-time linking.     
+DLL Hijacking:   
+DLL Side-loading:   
+DLL injection:   
 Reflective DLL injection:       
 Shellcoding: creating Position Independant Code (PIC).              
 Anti debugging techniques:   
+
+## Reverse Engineering    
+REMnux: network analysis platform.      
+Flare: host based indicators / analysis.   
+Inetsim: Internet Simulator    
+For ELF binaries: GDB / GEF       
+PE files: SysInternals suite, PEview, PE bear, TCPView, ProcMon, WinDbg /x32dbg        
+Decompile / disassemble: Ghidra, Ida Pro, Cutter      
+Tips:   
+- Use dynamic analysis (debugging) for code that's hard to understand statically.    
+- Pay attention to jmps and calls to see code flow.   
+- API calls: know official API names and associated native APIs.    
+### Static Analysis    
+Hash the sample and lookup using tools like VirusTotal    
+Static string analysis - look  for weird strings and API calls usings strings.exe, FLOSS         
+Open in PE View / Cff Explorer / PE Bear - look at the IAT to see what functions / DLLs are imported.    
+ SECTION.rdata -> IMPORT.Address_Table, API calls PE is making. Search 'Windows API call name' to find details.     
+Compression - make exe look different. Packer / compression stub: compresses code after it then expands at runtime. Fool AV, obfuscate purpose.    
+3 sections: original PE header, compression stub, code.   
+Disassemble / decompile with Ghidra or Ida. Look for the logical execution flow, what program can do, look at API calls and how they are being used.        
+### Dynamic Analysis    
+Heuristic / behavioral analysis. Look for host / network indicators.        
+Host indicators: persistence methods, files created / deleted. Procmon - look for created files 
+Network indicators: execute in a sandbox, run with and without INetSim to simulate the Internet, WireShark to capture network traffic, step through using a debugger. Look for TCP requests - follow TCP / HTTP stream.          
+De-chaining / de-coupling: tactic, download of web resource (mal.exe) and writing to file system (normal.exe) - can be different name.     
+Set breakpoints on interesting instructions, step into them and see how they are executing.     
+### Automation   
+YARA Rules - detect malware based on IOCs. Yet Another Ridicolous Acronym      
+Jupyter notebooks - Python to automate analysis, ie hash and VT look up.    
