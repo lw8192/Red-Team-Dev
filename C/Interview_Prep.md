@@ -223,28 +223,38 @@ TLS Callbacks:
 Address of Callbacks, executed when a process / thread is started or stopped. Code runs before the function even reaches the entry point. Commonly used by malware.          
 
 ## Windows Internals    
+## User Level  
 1:3 memory is allocated to kernel space vs user space.     
-TEB - Thread Enviroment Block - 
-PEB - Process Enviroment Block - user mode struct, store data on a running process. If the process is being debugged, which modules are loaded into memory, command line invoking the process. Isn't fully documented.      
-### HAL - Hardware Abstraction Layer   
-### Windows Kernel     
+TEB / PEB - created when the OS executes an exe. 
+TEB (Thread Enviromental Block) - contains info related to a thread.             
+PEB / LDR (Process Enviromental Block) - user mode struct, store data on a running process. Process name, PID, if the process is being debugged, which modules are loaded into memory, command line invoking the process. Isn't fully documented.      
+PEB_LDR_DATA - struct inside the PEB, contains linked lists InLoadOrderModuleList, InMemoryOrderModuleList, InMemoryOrderModuleList with info on the DLLs loaded into the process. Always: ntdll.dll, kernel32.dll, kernelbase.dll.            
+PEB - at offset fs[:0x30] in the TEB for x86 processes and GS:[0x60] for x64 processes. 
+### Kernel Level       
 Kernel objects: used for things like process scheduling, I/O management. Virtual placeholder for a resource, each one is given a handle (index number).             
 EPROCESS, KPCR, KINTERRUPT, IRP    
+ETHREAD - kernel level view of a thread. User level struct - TEB.   
 EPROCESS - kernel level view of a process. User level struct - PEB.   
 KPRCB - Kernel Processor Control Block, embedded in KPCR (per CPU info). 
 SSDT (System Service Descriptor Table) - allows the kernel to handle calls to the Native API.    
-Common rootkit technique - perform DKOM(Direct Kernel Object Manipulation) to hide. Changes are done directly in the kernel. Hide a process, drivers, ports, elevate privileges, etc. Able to do this because kernel modules / loadable drivers hav direct access to kernel memory.               
+Common rootkit technique - perform DKOM(Direct Kernel Object Manipulation) to hide. Changes are done directly in the kernel. Hide a process, drivers, ports, elevate privileges, etc. Able to do this because kernel modules / loadable drivers have direct access to kernel memory.               
+### HAL - Hardware Abstraction Layer   
 
 ## Windows Offensive Tooling     
 ### Native API   
-Most calls are implemented in ntoskrnl.exe and exposed to user mode by ntdll.dll. Some kernel32 functions call ntdll.dll lower level functions.  
+Most calls are implemented in ntoskrnl.exe and exposed to user mode by ntdll.dll. Some kernel32 functions are wrappers to ntdll.dll lower level functions.  
 Includes system calls, many C runtime library functions, client-server functions, debugging, up calls from kernel mode, loader functions, etc.    
-### Windows API   
-Located in kernel32.dll, KernelBase.dll, advapi32.dll, user32.dll etc      
+Kernel mode functions: have prefix Zw     
+User mode functions: Nt prefix    
+### Windows API (WinAPI / Win32API)  
+Easier and more secure to use then the Native API but slower. Located in kernel32.dll, KernelBase.dll, advapi32.dll, user32.dll etc      
 Provides OS functionality - userland and kernel land. APIs with Ex on the end are heavily modified.
 Naming: PrefixVerbTarget[Ex] / VerbTarget[Ex]        
-Create* APIs: help a user application create a system object, usually returns a handle.    
-Common malware APIs: OpenProcess, VirtualAllocEx, WriteProcessMem, CreateRemoteThread   
+Common malware APIs: OpenProcess, VirtualAllocEx, WriteProcessMem, CreateRemoteThread      
+### Syscalls   
+API hooking: AV products inspect Win32 API calls before they are executed, decide if they are suspicious/malicious, and either block or allow the call to proceed. Evade this by using syscalls.   
+Every native Windows API call has a number to present it (syscall). Differ between versions of Windows (find num using debugger or with public lists). Make a syscall: move number to a register. In x64, syscall instruction will then enter kernel mode. Direct syscalls in assembly: remove any Windows DLL imports, set up call ourselves (not using ntdll).      
+Make syscall: set up args on the stack, move into EAX, use syscall CPU instruction (causing syscall to be executed in kernel mode).        
 ### Common Techniques   
 Process injection / hooking methods: code injection, DLL injection, DLL search order hijacking, IAT/EAT hooking, inline hooking.             
 Process migration:      

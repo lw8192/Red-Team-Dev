@@ -51,6 +51,5 @@ fclose() - close a file.
 
     fclose(file_pointer);     
 
-Working with files on Windows:       
+### Working with Files on Windows         
 Windows uses file pointers to work with files on C.       
-fseek()         

@@ -127,7 +127,7 @@ nasm -f elf file.asm     #assemble file.asm into an object file ready to be link
 ld file.o     #default object file name, use linker program to make an executable
 ./a.out     #default exe name  
 ```
-Using GCC in line assembler (accepts AT&T syntax as the default):   
+Using GCC inline assembler (accepts AT&T syntax as the default):   
 ```
 gcc -c test.s -o test  
 gcc -c test.s -o test -masm=intel        #use Intel syntax 

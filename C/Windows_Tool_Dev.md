@@ -4,7 +4,7 @@
 [Windows API Tutorial](https://zetcode.com/gui/winapi/)     
 [Malapi.io](https://malapi.io/)    
 ## Setting up a Testing Enviroment     
-Recommend: Windows 10 /11 x64 VM with Visual Studio 2019 “Desktop development with c++” and “.NET desktop development” packages       
+Recommend: Windows 10 / 11 x64 VM with Visual Studio 2019 “Desktop development with c++” and “.NET desktop development” packages       
 [Commando](https://github.com/mandiant/commando-vm)     
 
 [Red Team Ops: Windows Tool Dev preview](https://www.sans.org/webcasts/sec670-red-team-ops-windows-tool-dev-preview/)    
@@ -38,7 +38,7 @@ WORD, DWORD, LPDWORD, QWORD - defined in the WinDef.h header file.
 
 VOID, PVOID, LPVOID, LPCVOID     
 Declared in WinDef.h and WinNt.h header files.    
-
+```
     VOID GiveGreeting()
     {
     printf(“I don’t return anything!\n”);
@@ -49,11 +49,11 @@ Declared in WinDef.h and WinNt.h header files.
     {
     strcpy(Buffer, “some words”);
     }   
-
-Handles: reference system objects, used by an application to modify the object. Entered into a internal handle table that hold the addresses of the resources and the resource type.     
+```
+Handles: reference system objects, used by an application to modify the object. Entered into an internal handle table that hold the addresses of the resources and the resource type.     
 LPHANDLE, HKEY, HRSRC, HINSTANCE     
 WINAPI, APIENTRY, CALLBACK: used when defining a function. From WinDef.h    
-
+```
     BOOL WINAPI EnumProcesses( 
     _Out_writes_bytes_(cb) DWORD* lpidProcess,
     _In_ DWORD cb,
@@ -66,7 +66,7 @@ WINAPI, APIENTRY, CALLBACK: used when defining a function. From WinDef.h
     HWND hwnd, 
     UINT uMsg, 
     struct _PROPSHEETPAGEA *ppsp );
-
+```
 Defensive Tools:   
 [PESieve](https://github.com/hasherezade/pe-sieve)   
 
@@ -90,7 +90,7 @@ Naming: PrefixVerbTarget[Ex] / VerbTarget[Ex]
 Create* APIs: help a user application create a system object, usually returns a handle.      
 CreateProcess, CreateFile, CreateThread, CreateDirectory, etc          
 CreateProcess: returns a BOOL, creates a new process.   
-
+```
     STARTUPINFO start_info = { sizeof start_ingo};
     PROCESSINFORMATION proc_info; 
     WCHAR command[] = L"whoami"
@@ -104,7 +104,7 @@ CreateProcess: returns a BOOL, creates a new process.
         NULL, 
         &start_info,
         &proc_info); 
-
+```
 ### Windows API Calls    
 Code injection: CreateRemoteThread, OpenProcess, VirtualAllocEx, WriteProcessMemory, EnumProcesses   
 Dynamic DLL loading: LoadLibrary, GetProcAddress   
@@ -119,25 +119,20 @@ Web interactions: InternetOpen, HttpOpenRequest, HttpSendRequest, InternetReadFi
 
 API Calls     
 LoadLibraryA - Maps a specified DLL  into the address space of the calling process        
-
+```
     HINSTANCE lib = LoadLibrary("example.dll");    //load a DLL    
     if((unsigned)lib<=HINSTANCE_ERROR)
     {
         /* error handler if the library refuses to load */
         return 1;
     }
-GetUserNameA
-	Retrieves the name of the user associated with the current thread
-GetComputerNameA
-	Retrieves a NetBIOS or DNS  name of the local computer
-GetVersionExA
-	Obtains information about the version of the operating system currently running
-GetModuleFileNameA
-	Retrieves the fully qualified path for the file of the specified module and process
-GetStartupInfoA
-	Retrieves contents of STARTUPINFO structure (window station, desktop, standard handles, and appearance of a process)
-GetModuleHandle
-	Returns a module handle for the specified module if mapped into the calling process's address space
+```
+GetUserNameA - Retrieves the name of the user associated with the current thread
+GetComputerNameA - Retrieves a NetBIOS or DNS  name of the local computer
+GetVersionExA - Obtains information about the version of the operating system currently running
+GetModuleFileNameA - Retrieves the fully qualified path for the file of the specified module and process
+GetStartupInfoA - Retrieves contents of STARTUPINFO structure (window station, desktop, standard handles, and appearance of a process)
+GetModuleHandle - Returns a module handle for the specified module if mapped into the calling process's address space
 GetProcAddress - Returns the address of a specified exported DLL function or variable.    
 
     addr_of_exported_symbol = GetProcAddress(dll_handle, function_name);    //Returns NULL if unsuccessful    
@@ -151,8 +146,7 @@ GetProcAddress - Returns the address of a specified exported DLL function or var
     else{
         //use the function  
     }
-VirtualProtect
-	Changes the protection on a region of memory in the virtual address space of the calling process   
+VirtualProtect - Changes the protection on a region of memory in the virtual address space of the calling process   
 
 ### Dynamically Import a Function from a DLL    
 - Call LoadLibrary() to load the DLL in the process.       
@@ -162,11 +156,6 @@ VirtualProtect
 
 Use GetModuleHandle and GetProcAddress      
 
-Writing Shellcode in C with Visual Studio:        
-- Use release mode only. Debug seomtimes adds extra data and makes code position dependant.    
-- Disable optimization,   
-- Disable stack buffer checks, so the stack cookie checker function isn't called (it's position dependant). 
-
 ## Windows Process Injection    
 [Process Injection Methods](https://github.com/odzhan/injection)    
 [Windows - 10 Common Process Injection Techniques](https://www.elastic.co/blog/ten-process-injection-techniques-technical-survey-common-and-trending-process)    
@@ -175,7 +164,7 @@ Writing Shellcode in C with Visual Studio:
 [Portable Executable File Format](https://blog.kowalczyk.info/articles/pefileformat.html)      
 
 ### Process Overview    
-EPROCESS - 
+EPROCESS - kernel level version of the PEB.    
 TEB / PEB - created when the OS executes an exe. 
 TEB (Thread Enviromental Block) - contains info related to a thread.            
 PEB / LDR (Process Enviromental Block) - contains info related to a process including process name, PID and loaded modules. PEB_LDR_DATA - struct inside the PEB, contains linked lists InLoadOrderModuleList, InMemoryOrderModuleList, InMemoryOrderModuleList        
@@ -186,6 +175,13 @@ printf("The PEB is at address %p\n", (PEB*)__readgsqword(0x60));    //64 bit win
 ```               
 
 ## Windows Shellcoding   
+### Writing Shellcode in C with Visual Studio         
+- Use release mode only. Debug sometimes adds extra data and makes code position dependant.    
+- Disable stack buffer checks, so the stack cookie checker function isn't called (it's position dependant). 
+- Set options to not use default libraries, define your entry point.   
+- Set compiler optimizations to create smaller code as needed.   
+- Compile exe, extract the .text section (you can use a tool like PE bear to extract sections or find the VA).  
+- Hxd: dump the .text section as hex, Edit > Copy As > C to get a char array to use in your code.   
 ### Including ASM in C/C++ Code    
 [x86] __readfsbyte __readfsdword __readfsqword __readfsword           
 [x64] __readgsbyte __readgsdword __readgsqword __readgsword      

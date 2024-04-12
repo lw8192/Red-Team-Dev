@@ -81,3 +81,5 @@ Define a sockaddr struct:
   host_addr.sin_addr.s_addr = 0;  //auto fills with my ip  
   memset(&(host_addr.sin_zero), '\0', 8);  //zero the rest of the struct
 ```
+
+## Networking on Windows using WinSock   
