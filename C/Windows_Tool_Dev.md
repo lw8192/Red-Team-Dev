@@ -127,13 +127,13 @@ LoadLibraryA - Maps a specified DLL  into the address space of the calling proce
         return 1;
     }
 ```
-GetUserNameA - Retrieves the name of the user associated with the current thread
-GetComputerNameA - Retrieves a NetBIOS or DNS  name of the local computer
-GetVersionExA - Obtains information about the version of the operating system currently running
-GetModuleFileNameA - Retrieves the fully qualified path for the file of the specified module and process
-GetStartupInfoA - Retrieves contents of STARTUPINFO structure (window station, desktop, standard handles, and appearance of a process)
-GetModuleHandle - Returns a module handle for the specified module if mapped into the calling process's address space
-GetProcAddress - Returns the address of a specified exported DLL function or variable.    
+GetUserNameA: Retrieves the name of the user associated with the current thread
+GetComputerNameA: Retrieves a NetBIOS or DNS  name of the local computer
+GetVersionExA: Obtains information about the version of the operating system currently running
+GetModuleFileNameA: Retrieves the fully qualified path for the file of the specified module and process
+GetStartupInfoA: Retrieves contents of STARTUPINFO structure (window station, desktop, standard handles, and appearance of a process)
+GetModuleHandle: Returns a module handle for the specified module if mapped into the calling process's address space
+GetProcAddress: Returns the address of a specified exported DLL function or variable.    
 
     addr_of_exported_symbol = GetProcAddress(dll_handle, function_name);    //Returns NULL if unsuccessful    
 
@@ -146,7 +146,13 @@ GetProcAddress - Returns the address of a specified exported DLL function or var
     else{
         //use the function  
     }
-VirtualProtect - Changes the protection on a region of memory in the virtual address space of the calling process   
+VirtualProtect: Changes the protection on a region of memory in the virtual address space of the calling process   
+OpenProcess: opens an existing local process object.       
+VirtualAllocEx: reserve or change the state of memory of a region in a process' virtual address space. 
+WriteProcessMemory: write data to an area of memory in a specified process.        
+GetModuleHandle: returns a module handle for the specific module (if file is mapped into address space of process). LoadLibrary can be used as an alternative to load a module and return a handle.      
+GetProcAddress: returns the address of an exported function or variable from a DLL.      
+CreateRemoteThread: create a thread to run in the virtual address space of another process.      
 
 ### Dynamically Import a Function from a DLL    
 - Call LoadLibrary() to load the DLL in the process.       

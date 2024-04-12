@@ -69,11 +69,13 @@ Binary trees:
 
 ## Calling conventions   
 Describes how args are passed to fctns, how values are ret'd, how caller / callee cleans up the stack, function prologue / epilogue.      
-stdcall: standard call, args of a function are pushed onto the stack from right to left. Callee cleans the stack.        
-cdecl: C declaration, args of a function are pushed onto the stack from left to right. Caller cleans the stack.      
-Windows C++ programs: usually stdcall calling convention. Can be changed.       
+stdcall: standard call, args of a function are pushed onto the stack in reverse order. Callee cleans the stack.        
+cdecl: C declaration, args of a function are pushed onto the stack in reverse order. Caller cleans the stack.      
+Windows C++ programs: usually stdcall calling convention. Can be changed.  Win32 API functions - use __stdcall calling conventions, C runtime functions used the __cdecl calling convention.          
 x86 function prologue: pushes ebp onto the stack, esp into ebp. Not necessary, used by the compiler for security.        
 Function prologue: incrementing the stack pointer to make room on the stack. function epilogue: clean up      
+stack frame: return address w/ function's parameters and local variables get stored on the stack for each function for x86. x64: return address and local variables.    
+Big endian - was Sparc and PowerPC. Little endian - most widely used format by x86 and AMD64, low order byte of the number is stored in memory at the lowest addr, high order byte at the highest addr.   
 ### x64 Calling Conventions        
 - Arguments are passed using registers instead of the stack. Windows - RCX, RDX, R8, R9 etc from left to right, shadow store space is allocated on the call stack for callees to save those registers to restore after fctn call. Linux - RDI, RSI, RDX, RCX       
 - Caller cleans the stack (like cdecl)      
@@ -145,11 +147,19 @@ Right shift: >> shifts to the right. Arithmatic: filled in bits are the highest 
 
 ## Debugging   
 .pdb file - symbol file, used for debugging. Can be loaded in WinDbg    
-breakpoints: software (int 3 /0xcc), hardware (using the debug registers), memory (guard pages), conditional (debugger specific)       
+breakpoints: software (int 3 /0xcc), hardware (handled by the processor using the debug registers), memory (guard pages), conditional (debugger specific)       
+Op code: binary sequence interpreted by the CPU as a specific instruction, in debugger as hex.    
 
 ## Stack and heap attacks         
+Fuzzing: feeding an app with malformed input and forcing it to generate an access violation.   
 ### Buffer overflows     
-Buffer bounds are not checked allowing an attacker beyond the variables location on the stack - to overwrite the stored return address, allowing control over EIP/RIP and program execution.          
+Buffer bounds are not checked allowing an attacker beyond the variables location on the stack - to overwrite the stored return address, allowing control over EIP/RIP and program execution.     
+Common C vulnerable functions: strcpy(), stpcpy(), gets(), strcat(), strcmp(), sprintf().       
+Bad chars: depends on app, vuln type and protocols used - might be certain bad chars in a buffer, return addr or shellcode, could prevent or change the nature of the crash.      
+Common bad chars: \x00, \x0a, \x0d. Check for bad chars: all possible chars from 0x00 - 0xFF as part of the buffer and check the result.       
+Why not hardcode the address of the stack to overwrite EIP/RIP?     
+This would not be reliable. Stack addrs often change, especially in threaded apps. Instead - find address of a JMP ESP instruction.        
+Egghunters: only small amount of space that can be used after a memory corruption. Might be able to store a larger payload somewhere in the address space of the process. Small first-stage payload that can search the process virtual address space (VAS) for an egg, a unique tag that prepends the payload we want to execute. Once egg is found - egghunter transfers execution to the final shellcode by jumping to the found addr.        
 ### Off by one vulnerabilities     
 [Off-by-One exploitation tutorial](https://www.exploit-db.com/docs/english/28478-linux-off-by-one-vulnerabilities.pdf)
 program will write one byte outside the bounds of the space allocated to hold this input. Either an adjacent variable to the input buffer will be modified or the saved frame pointer (EBP) stored on the stack.     
@@ -165,40 +175,56 @@ for (i = 0; i < 128; i++){}
 ### Memory leaks        
 ### Format string attacks     
 Format parameter: Escape sequences - begins with a %, uses a single char shorthand. Common format parameters: %d, %u, %x, %p.           
-Is user input passed to printf, scanf or similiar functions in a way you can control?          
+Is user input passed to printf, scanf or similiar functions in a way you can control?      
+Vuln functions: fprintf, printf, sprintf, snprintf, vfprintf, vprintf, vsprintf, vsnprintf.        
+Format string exploit: when the submitted data of an input string is evaluated as a cmd by the app.     
+Might be able to leak an address and bypass ASLR.    
 ### Stack Canaries       
 Stack Canary / stack cookie / stack smashing protector: adds a value in front of the instruction pointer, this value will be checked before returning. Is generated per-process, first byte is usually a null byte so you can't easily leak it.
 Work around stack canaries: if you have a relative or absolute write to memory you don't need to write the canary. You may be able to leak the canary, if you can read memory. If the return is not immediately or never called, you might be able to overwrite the null byte and leak the canary.         
 /GS: Windows compiler option that enables a stack canary / security cookie. /GS-: to disable.        
 
-## Memory Protections    
+## Exploit Protections    
 ### DEP      
 NX/DEP: Non execution / data execution prevention. Usually done at the hardware level, marks a region of memory as not executable. You can use ROP techniques to bypass it or find a memory region that is RWX.
 NX: Nonexecutable Stack, Linux. Defines memory regions as instructions or data - your input gets stored as data and can't be executed. ret2libc - Linux NX bypass.
 DEP: Data Execution Prevention, Windows version of NX, the CPU will not execute code in the heap or stack.     
-Common DEP bypass - ROP (return orinted programming), find a memory region that is RWX.       
+Common DEP bypass - ROP (return orinted programming), find a memory region that is RWX. Can be used to disable DEP on Windows by calling NtSetInformation, then executing shellcode.             
+
+ROP:    
+Gadget: byte sequence in a program of instruction + ret. Chain together several gadgets to make the program do what you want. You can extract patterns from different parts of the instruction set.
+Chain together small snippets of useful assembly code in the binary (or others loaded by it). ASLR can limit this.        
 ### K/ASLR      
-ASLR: address space layer randomization. Instead of preventing execution on the stack - randomize the stack memory layout. Attacker won't know where the waiting shellcode is to return execution into it. ASLR takes a segment which is going to exist in the new process, checks if it has a fixed address requirement - if it doesn't ASLR applies a random page offset.                   
+ASLR: address space layer randomization. Instead of preventing execution on the stack - randomize the stack memory layout. Attacker won't know where the waiting shellcode is to return execution into it. ASLR takes a segment which is going to exist in the new process, checks if it has a fixed address requirement - if it doesn't ASLR applies a random page offset.      
+Goal of ASLR: mitigate exploits that defeat DEP with ROP                
 ASLR is a setting of the OS. When a program or library is loaded, ASLR will apply to every memory segment it can. The stack / heap will always be random. The randomization happens at load time - to perform an address leak it needs to be as the same program is running.        
 Windows - randomizes addresses on system level programs at boot time.       
 Memory pages need to be aligned, so you know the lowest 12 bits. x86: restricted address space (PIE base only has 8 bits of randomization).       
-Defeating ASLR: info leak vulnerability (ie format string vulnerability that can leak an address), brute force an address (possible on 32 bit since the address space is limited), find a DLL without ASLR enabled.           
+Defeating ASLR: info leak vulnerability (ie format string vulnerability that can leak an address), brute force an address (possible on 32 bit since the address space is limited), partially overwrite the return address to the shellcode location, find a DLL without ASLR enabled to exploit.           
 ### PIE    
 PIE - Position Independent Executables (PIE), protects against ROP attacks. The binary and it's dependancies are loaded into random locations in virtual memory each time the program is executed. The binary stores rip-relative offsets and relocations instead of any pointers. PIE generates code that finds things by offset, instead of by hardcoded memory addresses. Compile with PIC (Position Independent Code) to generate a PIE (Position Independent Executable). Once you know the base of a PIE - you know where all the functions are.
 PIE is a setting of the binary code section in the program file. It is used mostly for building shared libraries where the runtime lcoation of the library depends on outside factors.
 ### CFG       
-Control Flow Guard (CFG): Windows protection, implements control flow integrity. Validates indirect code branching.           
-### PatchGuard / KPP (kernel Patch Protection)       
+Control Flow Guard (CFG): Windows protection, implements control flow integrity. Validates indirect code branching to prevent the overwrite of function pointers in exploits. Extends /GS, DEP and ASLR.             
+### PatchGuard / KPP (Kernel Patch Protection)       
 [Bypassing PatchGuard at runtime](https://hexderef.com/patchguard-bypass)   
 PatchGuard / KPP (Kernel Patch Protection): x64 Windows memory protection that protects critical areas of the kernel, in use since Windows Vista. Protects the SSDT, GDT, IDT, system images, processor MSRs. Restricts software from making extensions to the Windows kernel. Unable to completely prevent patching - device drivers have the same privilege level as the kernel and are able to bypass and patch. Attack scenario - use a vulnerable kernel driver with a valid EV certificate to get low level execution privileges.           
 Protects against hooking IDT, SSDT, GDT, LDT.    
 NULL Dereference Protection: cannot alloc the null page.      
+### SafeSEH    
+Exceptions: unexpected events that occur during normal program execution. Windows OS: _try/_except tries to leverage Structure Exception Handling (SEH).    
+When a thread fault occurs, OS calls designated set of functions (exception handlers) which can fix or give morinfo about the error. Exception handlers: user defined, given by _try/_except.    
+SEH overwrite: using a stack-based buffer overflow to overwrite an exception registration record that has been stored on a thread’s stack. Overwrite 1 or more sets of handlers - take control of IP after triggering an exception.        
+SEHOP: prevent SEH overwrites, dynamic checks to the exception dispatcher that don't rely on metadata from a binary, verifies thread’s exception handler list is intact before allowing any of the registered exception handlers to be called. Enabled by default on Windows Server 2008+.         
+SAFESEH: /SAFESEH compiler option. Exe has metadata that platform uses to mitigate.     
 ### SMEP / SMAP:        
 [Windows SMEP Bypass](https://www.coresecurity.com/sites/default/files/2020-06/Windows%20SMEP%20bypass%20U%20equals%20S_0.pdf) 
 Kernel exploit mitigations    
 SMAP: allow pages to be protected from supervisor-mode data accesses, prevents kernelmode from executing on user mode addresses. If SMAP is 1, software in supervisor mode can't access data at linear addresses that are accessible in user mode.       
 SMEP: Supervisor Mode Execution Prevention. Protects pages from supervisor-mode instruction fetches. If SMEP is 1, software in supervisor mode can't fetch instructions at linear addresses that are accessible in user mode. Detects Ring - code running in user space, enabled by default since Windows 8. Relevant to local privilege escalation.               
 SMEP bypass techniques: jump to code in user space, jump to the kernel heap (doesn't work on x64), use a ROP chain in kernel space to bypass, ROP to unprotecting hal.dll heap to write shellcode in that area and jump to that code, disable flags in the CR4 register to turn off SMEP / SMAP: 20th bit for SMEP.     
+### Code Integrity Guard (CIG), Arbitrary Code Guard (ACG)    
+ CIG - only allows properly signed images to load. ACG: code can't be dynamically generated or modified.  
 
 ## Portable Executable (PE) Files       
 PE format - how exe info is stored.    
@@ -225,19 +251,21 @@ Virtual Address = Relative Virtual Address + image base
 
 IAT (Import Address Table) - base address, name and info of DLLs that need to be imported.     
 INT points to array of names of functions, IAT - array of addresses of functions. IAT intially points to the INT, then the IAT is resolved by the loader.      
-Export table - functions that the image exports to use from DLLs.    
+Export Directory Table - info for functions that the image exports to use from DLLs.    
 
 TLS Callbacks:    
 Address of Callbacks, executed when a process / thread is started or stopped. Code runs before the function even reaches the entry point. Commonly used by malware.          
 
 ## Windows Internals    
-Processor switches between user and kernel mode. Normal user mode app: can't interact with the kernel or modify physical hardware. When a system call is made - app switches modes.     
+Ring 0 vs Ring 3. Ring 3: user mode processes, some services, applications and system owned processes, enviroment subsystem. Ring 0: Windows executive, kernel, drivers, Hardware abstraction layer.     
+Processor switches between ring 3 / user mode and ring 0 / kernel mode. Normal user mode app: can't interact with the kernel or modify physical hardware. When a system call is made - app switches modes.          
 ## User Level  
 1:3 memory is allocated to kernel space vs user space.     
 TEB / PEB - created when the OS executes an exe. 
-TEB (Thread Enviromental Block) - contains info related to a thread.             
+TEB (Thread Enviromental Block) - contains info related to the currently running thread.             
 PEB / LDR (Process Enviromental Block) - user mode struct, store data on a running process. Process name, PID, if the process is being debugged, which modules are loaded into memory, command line invoking the process. Isn't fully documented.      
-PEB_LDR_DATA - struct inside the PEB, contains linked lists InLoadOrderModuleList, InMemoryOrderModuleList, InMemoryOrderModuleList with info on the DLLs loaded into the process. Always: ntdll.dll, kernel32.dll, kernelbase.dll.            
+PEB_LDR_DATA - struct inside the PEB, info about the process's loaded modules. Contains doubly linked lists InLoadOrderModuleList, InMemoryOrderModuleList, InMemoryOrderModuleList with info on the DLLs loaded into the process. Always: ntdll.dll, kernel32.dll, kernelbase.dll.           
+TEB - saved to FS on x86 systems, GS on x64.       
 PEB - at offset fs[:0x30] in the TEB for x86 processes and GS:[0x60] for x64 processes. 
 ### Kernel Level       
 Kernel objects: used for things like process scheduling, I/O management. Virtual placeholder for a resource, each one is given a handle (index number).             
@@ -278,7 +306,7 @@ DLL Side-loading:
 DLL injection:   
 Reflective DLL injection:       
 Shellcoding: creating Position Independant Code (PIC).              
-Anti debugging techniques:   
+Anti debugging techniques: checking PEB->BeingDebugged      
 
 ## Reverse Engineering    
 REMnux: network analysis platform.      
