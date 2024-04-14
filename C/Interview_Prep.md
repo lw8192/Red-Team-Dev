@@ -60,7 +60,7 @@ Scope: block of code for each object, use objects without any prefix. Ie local s
 Big O notation - complexity of an algorithim, how long it takes to run. Algorithims are usually in these general classes (best to worst speed): constant time, logarithmic, linear, polynomial, exponential, factorial.        
 
 ## Data Structures   
-Stack: LIFO, pop / push operations. Each function has a stack frame storing its local arguments, stored after the return address. When a function is returned, the stack pointer points to the return address and the that value is put into the instruction pointer (ret operation).         
+Stack: LIFO, pop / push operations. Each function has a stack frame storing its local arguments, stored after the return address. When a function is returned, the stack pointer points to the return address and that value is put into the instruction pointer (ret operation).         
 Heap: memory managed by the programmer, allocated using malloc() / free() and derivative functions.    
 Singly linked list: each node has a data piece and a pointer to the next node in the list. Need to start with the head of the list and iterate through it to find a certain data variable, easy to pop / push items.     
 Doubly linked list: common with Windows software, each node has a data variable, pointer to the previous node, and pointer to the next node. Uses head and tail variables to start.           
@@ -71,7 +71,7 @@ Binary trees:
 Describes how args are passed to fctns, how values are ret'd, how caller / callee cleans up the stack, function prologue / epilogue.      
 stdcall: standard call, args of a function are pushed onto the stack in reverse order. Callee cleans the stack.        
 cdecl: C declaration, args of a function are pushed onto the stack in reverse order. Caller cleans the stack.      
-Windows C++ programs: usually stdcall calling convention. Can be changed.  Win32 API functions - use __stdcall calling conventions, C runtime functions used the __cdecl calling convention.          
+Windows C++ programs: usually stdcall calling convention. Can be changed. Win32 API functions - use __stdcall calling conventions, C runtime functions used the __cdecl calling convention.          
 x86 function prologue: pushes ebp onto the stack, esp into ebp. Not necessary, used by the compiler for security.        
 Function prologue: incrementing the stack pointer to make room on the stack. function epilogue: clean up      
 stack frame: return address w/ function's parameters and local variables get stored on the stack for each function for x86. x64: return address and local variables.    
@@ -95,11 +95,11 @@ Mostly global variable are allocated or declared in .data or .rdata sections of 
 Local variable are allocated in stack and usually called using offset of ebp or esp. For ex: mov eax, [esp-10]. 
 
 ## C Programming   
-Pointers: variable that holds an address in memory.     
+Pointers: variables that holds an address in memory.     
 Pointer arithmatic: ptr++, increases by the size of the data type. Incrementing an int ptr - increases by 4 bytes.    
 Struct vs union: struct - can have diff variables, can set values for each variable, allocated mem is sum of variable sizes. Union - can only set the value of 1 variable at a time from the present variables.   
 ### Allocating Memory    
-malloc() / calloc() - allocate dynamic memory on the heap. Wrapper around brk/sbrk(default mem allocator)  system call in linux and VirtualAlloc api call on Windows. Uses brk to allocate memory and store the chunk meta info.       
+malloc() / calloc() - allocate dynamic memory on the heap. Wrapper around brk/sbrk(default mem allocator) system call in linux and VirtualAlloc api call on Windows. Uses brk to allocate memory and store the chunk meta info.       
 free() - adds chunk to free memory link list. Can cause "use after free" errors.      
 "use after free" - pointer is freed then code tries to use the variable.  
 
@@ -135,7 +135,7 @@ Mutex needs kernel level permission to work. Mutexes can be shared between proce
 Signed / unsigned numbers. Signed: highest bit is the signed bit, 1 = negative, 0 = non negative. Unsigned - all digits are used, can't represent negative numbers, can rep 2x the value of a signed int. C - default is signed.         
 Binary representation of a number - machine number is signed number.        
 Inverse of a number - flipped bits if negative, except for the sign bit.    
-2s complement of a number = flipped bits + 1      
+2s complement of a number = flip bits + 1      
 Bitwise operators:       
 AND - & (true if both bits are set)       
 OR - | (true if 1 of the bits is set)     
@@ -157,8 +157,10 @@ Buffer bounds are not checked allowing an attacker beyond the variables location
 Common C vulnerable functions: strcpy(), stpcpy(), gets(), strcat(), strcmp(), sprintf().       
 Bad chars: depends on app, vuln type and protocols used - might be certain bad chars in a buffer, return addr or shellcode, could prevent or change the nature of the crash.      
 Common bad chars: \x00, \x0a, \x0d. Check for bad chars: all possible chars from 0x00 - 0xFF as part of the buffer and check the result.       
+
 Why not hardcode the address of the stack to overwrite EIP/RIP?     
 This would not be reliable. Stack addrs often change, especially in threaded apps. Instead - find address of a JMP ESP instruction.        
+
 Egghunters: only small amount of space that can be used after a memory corruption. Might be able to store a larger payload somewhere in the address space of the process. Small first-stage payload that can search the process virtual address space (VAS) for an egg, a unique tag that prepends the payload we want to execute. Once egg is found - egghunter transfers execution to the final shellcode by jumping to the found addr.        
 ### Off by one vulnerabilities     
 [Off-by-One exploitation tutorial](https://www.exploit-db.com/docs/english/28478-linux-off-by-one-vulnerabilities.pdf)
@@ -180,19 +182,19 @@ Vuln functions: fprintf, printf, sprintf, snprintf, vfprintf, vprintf, vsprintf,
 Format string exploit: when the submitted data of an input string is evaluated as a cmd by the app.     
 Might be able to leak an address and bypass ASLR.    
 ### Stack Canaries       
-Stack Canary / stack cookie / stack smashing protector: adds a value in front of the instruction pointer, this value will be checked before returning. Is generated per-process, first byte is usually a null byte so you can't easily leak it.
+Stack Canary / stack cookie / stack smashing protector: adds a value in front of the instruction pointer, this value will be checked before returning. Is generated per-process, first byte is usually a null byte so you can't easily leak it.    
 Work around stack canaries: if you have a relative or absolute write to memory you don't need to write the canary. You may be able to leak the canary, if you can read memory. If the return is not immediately or never called, you might be able to overwrite the null byte and leak the canary.         
 /GS: Windows compiler option that enables a stack canary / security cookie. /GS-: to disable.        
 
 ## Exploit Protections    
 ### DEP      
 NX/DEP: Non execution / data execution prevention. Usually done at the hardware level, marks a region of memory as not executable. You can use ROP techniques to bypass it or find a memory region that is RWX.
-NX: Nonexecutable Stack, Linux. Defines memory regions as instructions or data - your input gets stored as data and can't be executed. ret2libc - Linux NX bypass.
+NX: Nonexecutable Stack, Linux. Defines memory regions as instructions or data - your input gets stored as data and can't be executed. ret2libc - Linux NX bypass.     
 DEP: Data Execution Prevention, Windows version of NX, the CPU will not execute code in the heap or stack.     
 Common DEP bypass - ROP (return orinted programming), find a memory region that is RWX. Can be used to disable DEP on Windows by calling NtSetInformation, then executing shellcode.             
 
 ROP:    
-Gadget: byte sequence in a program of instruction + ret. Chain together several gadgets to make the program do what you want. You can extract patterns from different parts of the instruction set.
+Gadget: byte sequence in a program of instruction + ret. Chain together several gadgets to make the program do what you want. You can extract patterns from different parts of the instruction set.     
 Chain together small snippets of useful assembly code in the binary (or others loaded by it). ASLR can limit this.        
 ### K/ASLR      
 ASLR: address space layer randomization. Instead of preventing execution on the stack - randomize the stack memory layout. Attacker won't know where the waiting shellcode is to return execution into it. ASLR takes a segment which is going to exist in the new process, checks if it has a fixed address requirement - if it doesn't ASLR applies a random page offset.      
@@ -209,18 +211,18 @@ Control Flow Guard (CFG): Windows protection, implements control flow integrity.
 ### PatchGuard / KPP (Kernel Patch Protection)       
 [Bypassing PatchGuard at runtime](https://hexderef.com/patchguard-bypass)   
 PatchGuard / KPP (Kernel Patch Protection): x64 Windows memory protection that protects critical areas of the kernel, in use since Windows Vista. Protects the SSDT, GDT, IDT, system images, processor MSRs. Restricts software from making extensions to the Windows kernel. Unable to completely prevent patching - device drivers have the same privilege level as the kernel and are able to bypass and patch. Attack scenario - use a vulnerable kernel driver with a valid EV certificate to get low level execution privileges.           
-Protects against hooking IDT, SSDT, GDT, LDT.    
+Protects against hooking the IDT, SSDT, GDT, LDT.    
 NULL Dereference Protection: cannot alloc the null page.      
 ### SafeSEH    
 Exceptions: unexpected events that occur during normal program execution. Windows OS: _try/_except tries to leverage Structure Exception Handling (SEH).    
-When a thread fault occurs, OS calls designated set of functions (exception handlers) which can fix or give morinfo about the error. Exception handlers: user defined, given by _try/_except.    
+When a thread fault occurs, OS calls designated set of functions (exception handlers) which can fix or give more info about the error. Exception handlers: user defined, given by _try/_except.    
 SEH overwrite: using a stack-based buffer overflow to overwrite an exception registration record that has been stored on a thread’s stack. Overwrite 1 or more sets of handlers - take control of IP after triggering an exception.        
 SEHOP: prevent SEH overwrites, dynamic checks to the exception dispatcher that don't rely on metadata from a binary, verifies thread’s exception handler list is intact before allowing any of the registered exception handlers to be called. Enabled by default on Windows Server 2008+.         
 SAFESEH: /SAFESEH compiler option. Exe has metadata that platform uses to mitigate.     
-### SMEP / SMAP:        
+### SMEP / SMAP        
 [Windows SMEP Bypass](https://www.coresecurity.com/sites/default/files/2020-06/Windows%20SMEP%20bypass%20U%20equals%20S_0.pdf) 
 Kernel exploit mitigations    
-SMAP: allow pages to be protected from supervisor-mode data accesses, prevents kernelmode from executing on user mode addresses. If SMAP is 1, software in supervisor mode can't access data at linear addresses that are accessible in user mode.       
+SMAP: allow pages to be protected from supervisor-mode data accesses, prevents kernel mode from executing on user mode addresses. If SMAP is 1, software in supervisor mode can't access data at linear addresses that are accessible in user mode.       
 SMEP: Supervisor Mode Execution Prevention. Protects pages from supervisor-mode instruction fetches. If SMEP is 1, software in supervisor mode can't fetch instructions at linear addresses that are accessible in user mode. Detects Ring - code running in user space, enabled by default since Windows 8. Relevant to local privilege escalation.               
 SMEP bypass techniques: jump to code in user space, jump to the kernel heap (doesn't work on x64), use a ROP chain in kernel space to bypass, ROP to unprotecting hal.dll heap to write shellcode in that area and jump to that code, disable flags in the CR4 register to turn off SMEP / SMAP: 20th bit for SMEP.     
 ### Code Integrity Guard (CIG), Arbitrary Code Guard (ACG)    
