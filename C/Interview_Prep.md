@@ -272,8 +272,8 @@ PEB - at offset fs[:0x30] in the TEB for x86 processes and GS:[0x60] for x64 pro
 ### Kernel Level       
 Kernel objects: used for things like process scheduling, I/O management. Virtual placeholder for a resource, each one is given a handle (index number).             
 EPROCESS, KPCR, KINTERRUPT, IRP    
-ETHREAD - kernel level view of a thread. User level struct - TEB.   
-EPROCESS - kernel level view of a process. User level struct - PEB.   
+ETHREAD - kernel level view of a thread. User level struct - TEB. KTHREAD - inside ETHREAD, has info on thread stacks, scheduling, APCs, system calls, priority, execution times.    
+EPROCESS - kernel level view of a process. User level struct - PEB. KPROCESS - inside EPROCESS. EPROCESS attacks: use for process hiding or token stealing.        
 KPRCB - Kernel Processor Control Block, embedded in KPCR (per CPU info). 
 SSDT (System Service Descriptor Table) - allows the kernel to handle calls to the Native API.    
 Common rootkit technique - perform DKOM(Direct Kernel Object Manipulation) to hide. Changes are done directly in the kernel. Hide a process, drivers, ports, elevate privileges, etc. Able to do this because kernel modules / loadable drivers have direct access to kernel memory.               

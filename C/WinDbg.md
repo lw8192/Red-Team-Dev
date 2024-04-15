@@ -67,7 +67,7 @@ bcdedit.exe –debug on     #enable debugging mode
 Start WinDBG(sysinternals) as administrator.  
 ```
 
-## PEB   
+## User Level Structs (PEB and TEB)   
 PEB (Process Enviroment Block): use mode struct, info on if the process is being debugged, modules loaded into memory, command line used to invoke the process.       
 PEB - at fs:[0x30] for x86 processes, gs:[60] for x64    
 > !wow64exts.info   #view SYSWOW64 proc info     
@@ -88,3 +88,10 @@ Export Address Table:
 > lm    #find the base address of kernel32.dll    
 > !dh 00007fff`10100000 -f        #dump the header for kernel32.dll    
    99070 [    DF0C] address [size] of Export Directory    
+
+
+## Kernel Level Structs   
+[Configuring Kernel Debugging Environment with kdnet and WinDBG Preview](https://www.ired.team/miscellaneous-reversing-forensics/windows-kernel-internals/configuring-kernel-debugging-environment-with-kdnet-and-windbg-preview)
+> !pcr 0    #view KPCR struct of process 0    
+> !process 0 0    #shows info like _EPROCESS
+> nt!_EPROCESS    
