@@ -180,7 +180,8 @@ You can use intrinsics to get the address of the PEB / TEB - which requires <win
 printf("The PEB is at address %p\n", (PEB*)__readgsqword(0x60));    //64 bit windows. Needs <intrin.h>   
 ```               
 
-## Windows Shellcoding   
+## Windows Shellcoding      
+[Understanding Windows Shellcode](https://www.hick.org/code/skape/papers/win32-shellcode.pdf)    
 ### Writing Shellcode in C with Visual Studio         
 - Use release mode only. Debug sometimes adds extra data and makes code position dependant.    
 - Disable stack buffer checks, so the stack cookie checker function isn't called (it's position dependant). 
@@ -217,3 +218,7 @@ int main(){
     int value = test_func();   //test_func will return the value that was in rax   
 }
 ```
+
+## Kernel Programming     
+[Kernel Cactus](https://spikysabra.gitbook.io/kernelcactus)   
+[CodeMachine Articles](https://codemachine.com/articles.html)   
