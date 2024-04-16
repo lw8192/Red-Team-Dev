@@ -314,7 +314,12 @@ Process injection / hooking methods: code injection, DLL injection, DLL search o
 Basic process injection: OpenProcess, VirtualAllocExm, WriteProcessMemory, CreateRemoteThread, CloseHandle. Get a handle to another process, allocate memory, write shellcode, create a thread to execute that code, close the handle.    
 Process migration:      
 Process hollowing: process is loaded on the system as a container for hostile code.     
-Process Masquerading:   
+Process Masquerading:       
+
+Process Hooking   
+[Windows API Hooking and DLL Injection](https://dzone.com/articles/windows-api-hooking-and-dll-injection)
+Hooks: alter behavior of component by intercepting API calls, messages or events passed between processes. Some AV products, and monitoring tools use hooking. Can be used by malicious processes to hide from a process list or intercept keypress events as a keylogger.      
+API hooks - local (only specific apps) or global (all system processes). 
 
 DLL (Dynamic Link Library): can be loaded in a program with load time or run-time linking.     
 DLL Hijacking:   
