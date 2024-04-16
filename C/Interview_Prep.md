@@ -83,16 +83,16 @@ Binary trees:
 
 ## Calling conventions   
 Describes how args are passed to fctns, how values are ret'd, how caller / callee cleans up the stack, function prologue / epilogue.      
-stdcall: standard call, args of a function are pushed onto the stack in reverse order. Callee cleans the stack.        
-cdecl: C declaration, args of a function are pushed onto the stack in reverse order. Caller cleans the stack.      
+stdcall: standard call, args of a function are pushed onto the stack from right to left (1st param is nearest to the top of the stack). Callee cleans the stack. Function names have a leading underscore.           
+cdecl: C declaration, args of a function are pushed onto the stack in reverse order, from right to left. Caller cleans the stack.      
 Windows C++ programs: usually stdcall calling convention. Can be changed. Win32 API functions - use __stdcall calling conventions, C runtime functions used the __cdecl calling convention.          
 x86 function prologue: pushes ebp onto the stack, esp into ebp. Not necessary, used by the compiler for security.        
-Function prologue: incrementing the stack pointer to make room on the stack. function epilogue: clean up      
-stack frame: return address w/ function's parameters and local variables get stored on the stack for each function for x86. x64: return address and local variables.    
+Function prologue: incrementing the stack pointer to make room on the stack. function epilogue: clean up.            
+Return address w/ function's parameters and local variables get stored on the stack for each function for x86. Params / local vars - make up a function's stack frame. x64: return address and local variables get stored, params are passed in registers.    
 Big endian - was Sparc and PowerPC. Little endian - most widely used format by x86 and AMD64, low order byte of the number is stored in memory at the lowest addr, high order byte at the highest addr.   
 ### x64 Calling Conventions        
 - Arguments are passed using registers instead of the stack. Windows - RCX, RDX, R8, R9 etc from left to right, shadow store space is allocated on the call stack for callees to save those registers to restore after fctn call. Linux - RDI, RSI, RDX, RCX       
-- Caller cleans the stack (like cdecl)      
+- Caller cleans the stack (like cdecl).       
 - The stack is aligned to a 16 bytes boundary.  
 
 ## Assembly   
@@ -221,7 +221,8 @@ Defeating ASLR: info leak vulnerability (ie format string vulnerability that can
 PIE - Position Independent Executables (PIE), protects against ROP attacks. The binary and it's dependancies are loaded into random locations in virtual memory each time the program is executed. The binary stores rip-relative offsets and relocations instead of any pointers. PIE generates code that finds things by offset, instead of by hardcoded memory addresses. Compile with PIC (Position Independent Code) to generate a PIE (Position Independent Executable). Once you know the base of a PIE - you know where all the functions are.
 PIE is a setting of the binary code section in the program file. It is used mostly for building shared libraries where the runtime lcoation of the library depends on outside factors.
 ### CFG       
-Control Flow Guard (CFG): Windows protection, implements control flow integrity. Validates indirect code branching to prevent the overwrite of function pointers in exploits. Extends /GS, DEP and ASLR.             
+Control Flow Guard (CFG): Windows protection, implements control flow integrity. Validates indirect code branching to prevent the overwrite of function pointers in exploits. Extends /GS, DEP and ASLR.   
+Bypass CFG:              
 ### PatchGuard / KPP (Kernel Patch Protection)       
 [Bypassing PatchGuard at runtime](https://hexderef.com/patchguard-bypass)   
 PatchGuard / KPP (Kernel Patch Protection): x64 Windows memory protection that protects critical areas of the kernel, in use since Windows Vista. Protects the SSDT, GDT, IDT, system images, processor MSRs. Restricts software from making extensions to the Windows kernel. Unable to completely prevent patching - device drivers have the same privilege level as the kernel and are able to bypass and patch. Attack scenario - use a vulnerable kernel driver with a valid EV certificate to get low level execution privileges.           
@@ -233,6 +234,7 @@ When a thread fault occurs, OS calls designated set of functions (exception hand
 SEH overwrite: using a stack-based buffer overflow to overwrite an exception registration record that has been stored on a thread’s stack. Overwrite 1 or more sets of handlers - take control of IP after triggering an exception.        
 SEHOP: prevent SEH overwrites, dynamic checks to the exception dispatcher that don't rely on metadata from a binary, verifies thread’s exception handler list is intact before allowing any of the registered exception handlers to be called. Enabled by default on Windows Server 2008+.         
 SAFESEH: /SAFESEH compiler option. Exe has metadata that platform uses to mitigate.     
+SAFESEH bypass:     
 ### SMEP / SMAP        
 [Windows SMEP Bypass](https://www.coresecurity.com/sites/default/files/2020-06/Windows%20SMEP%20bypass%20U%20equals%20S_0.pdf) 
 Kernel exploit mitigations    
@@ -240,7 +242,7 @@ SMAP: allow pages to be protected from supervisor-mode data accesses, prevents k
 SMEP: Supervisor Mode Execution Prevention. Protects pages from supervisor-mode instruction fetches. If SMEP is 1, software in supervisor mode can't fetch instructions at linear addresses that are accessible in user mode. Detects Ring - code running in user space, enabled by default since Windows 8. Relevant to local privilege escalation.               
 SMEP bypass techniques: jump to code in user space, jump to the kernel heap (doesn't work on x64), use a ROP chain in kernel space to bypass, ROP to unprotecting hal.dll heap to write shellcode in that area and jump to that code, disable flags in the CR4 register to turn off SMEP / SMAP: 20th bit for SMEP.     
 ### Code Integrity Guard (CIG), Arbitrary Code Guard (ACG)    
- CIG - only allows properly signed images to load. ACG: code can't be dynamically generated or modified.  
+CIG - only allows properly signed images to load. ACG: code can't be dynamically generated or modified.  
 
 ## Portable Executable (PE) Files       
 PE format - how exe info is stored.    
@@ -317,7 +319,6 @@ Process hollowing: process is loaded on the system as a container for hostile co
 Process Masquerading:       
 
 Process Hooking   
-[Windows API Hooking and DLL Injection](https://dzone.com/articles/windows-api-hooking-and-dll-injection)
 Hooks: alter behavior of component by intercepting API calls, messages or events passed between processes. Some AV products, and monitoring tools use hooking. Can be used by malicious processes to hide from a process list or intercept keypress events as a keylogger.      
 API hooks - local (only specific apps) or global (all system processes). 
 
@@ -325,7 +326,7 @@ DLL (Dynamic Link Library): can be loaded in a program with load time or run-tim
 DLL Hijacking:   
 DLL Side-loading:   
 DLL injection:   
-Reflective DLL injection:       
+Reflective DLL injection: DLLs loads itself.          
 Shellcoding: creating Position Independant Code (PIC).              
 Anti debugging techniques: checking PEB->BeingDebugged      
 
