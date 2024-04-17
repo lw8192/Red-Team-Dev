@@ -326,8 +326,8 @@ DLL (Dynamic Link Library): can be loaded in a program with load time or run-tim
 DLL Hijacking:   
 DLL Side-loading:   
 DLL injection:   
-Reflective DLL injection: DLLs loads itself.          
-Shellcoding: creating Position Independant Code (PIC).              
+Reflective DLL injection: DLLs loads itself. DLL has a ReflectiveLoader function that is intially called: this function finds the location of the DLL itself in a buffer, allocates memory using VirtualAlloc SizeOfImage, check the DLL fields to make sure it is a valid PE file, copies over section headers (NT, Optional, File), copies over the sections, relocates if unable to to allocate memory at the given BaseAddress, loads / stores the required libs / functions needed for the DLL, runs any needed TLS callbacks, then calls DllMain to attach the DLL. After that any function from the DLL can be called using GetProcAddress / an equivalent. Common technique used in malware to help obfuscate.                    
+Shellcoding: creating Position Independant Code (PIC). For Windows: this involves finding the base address of ntdll.dll or kernel32.dll to use Native API or Win32 API functions from.                 
 Anti debugging techniques: checking PEB->BeingDebugged      
 
 ## Reverse Engineering    
