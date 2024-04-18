@@ -166,6 +166,9 @@ Use GetModuleHandle and GetProcAddress
 [Process Injection Methods](https://github.com/odzhan/injection)    
 [Windows - 10 Common Process Injection Techniques](https://www.elastic.co/blog/ten-process-injection-techniques-technical-survey-common-and-trending-process)    
 
+Heaven’s Gate technique: executing 32bit code from a 64bit process or vice versa.    
+[Hell's Gate](https://vxug.fakedoma.in/papers/VXUG/Exclusive/HellsGate.pdf)    
+
 ## Windows Internals       
 [Portable Executable File Format](https://blog.kowalczyk.info/articles/pefileformat.html)      
 
@@ -219,6 +222,7 @@ int main(){
 }
 ```
 
-## Kernel Programming     
-[Kernel Cactus](https://spikysabra.gitbook.io/kernelcactus)   
-[CodeMachine Articles](https://codemachine.com/articles.html)   
+
+## Further Study   
+[Code & Process Injection](https://www.ired.team/offensive-security/code-injection-process-injection)
+[Exploiting Windows API for Red Teaming](https://tbhaxor.com/exploiting-windows-api-for-red-teaming/)

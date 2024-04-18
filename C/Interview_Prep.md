@@ -141,7 +141,8 @@ Mutex (mutual exceptions): protects a section of code from being run at the same
 Conditional variables: a condition to be checked that allows for threads to go to sleep until an event on another thread occurs. Can be used to send a signal between threads.    
 ### Pthreads           
 Pthread mutexes: provides mechanism to solve mutual exclusion, ensure threads access shared state in a controlled way.       
-### Mutex vs Critical Section in Windows       
+### Multithreading on Windows    
+Mutex vs Critical Section in Windows       
 Mutex needs kernel level permission to work. Mutexes can be shared between processes. Critical section: only 1 process, but only switches to kernel mode in case of contention.  
 
 ## Bitwise Operations      
@@ -329,6 +330,7 @@ DLL injection:
 Reflective DLL injection: DLLs loads itself. DLL has a ReflectiveLoader function that is intially called: this function finds the location of the DLL itself in a buffer, allocates memory using VirtualAlloc SizeOfImage, check the DLL fields to make sure it is a valid PE file, copies over section headers (NT, Optional, File), copies over the sections, relocates if unable to to allocate memory at the given BaseAddress, loads / stores the required libs / functions needed for the DLL, runs any needed TLS callbacks, then calls DllMain to attach the DLL. After that any function from the DLL can be called using GetProcAddress / an equivalent. Common technique used in malware to help obfuscate.                    
 Shellcoding: creating Position Independant Code (PIC). For Windows: this involves finding the base address of ntdll.dll or kernel32.dll to use Native API or Win32 API functions from.                 
 Anti debugging techniques: checking PEB->BeingDebugged      
+### Kernel Programming    
 
 ## Reverse Engineering    
 REMnux: network analysis platform.      

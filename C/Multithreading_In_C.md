@@ -99,3 +99,10 @@ If program hands - check stacktraces uses pstacks. Look for cyclic locks.
 Design Tips:    
 - Remove all global variables, including static as much as possible to isolate them. Minimize shared resources.        
 - make isolated components reentrant (stateless - take inputs as constants and only manipulate declared, logically constant parameters. Pass-by-value instead of pass-by-reference).    
+
+## Multithreading on Windows    
+[Win32 APIs for Threads](https://web.archive.org/web/20121023005749/http://www.cs.rpi.edu/academics/courses/netprog/WindowsThreads.html)       
+Similiar to PTHREADS    
+CreateThread()   
+WaitForSingleObject()      
+ExitThread()   
