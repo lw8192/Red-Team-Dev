@@ -62,6 +62,8 @@ Software Development Lifecycle Steps:
 
 Agile software development: iterative, stages: ideation, development, testing, deployment, and operations     
 
+CI/CD (Continuous Integration / Continuous Deployment): incremental software code changes are made frequently and reliably. CI: regularly merging code changes into a central repo and automated testing. CD: automatically deplying all code changes to a production enviroment after test and build stage.    
+
 Cross compiler: compile code for a different architechure / system then it is being developed on.    
 Toolchain: set of compiler + linker + any tools needed to produce an exe for a target.   
 
