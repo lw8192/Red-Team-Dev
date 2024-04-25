@@ -7,6 +7,7 @@ https://github.com/nextco/windbg-readable-theme
 [WinDBG quick start tutorial](https://codemachine.com/articles/windbg_quickstart.html)    
 [Windbg Cheatsheet](https://github.com/repnz/windbg-cheat-sheet)     
 [Windbg Cheatsheet](https://dblohm7.ca/pmo/windbgcheatsheet.html)    
+[DEFCON27 WinDbg Workshop](https://github.com/hugsy/defcon_27_windbg_workshop)     
 ## Install     
 https://github.com/yanglr/advDotnetDebugging/blob/main/README.md          
 Windbg for Windows 7           
