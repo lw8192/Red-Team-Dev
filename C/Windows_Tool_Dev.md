@@ -3,6 +3,7 @@
 [Windows API Index](https://learn.microsoft.com/en-us/windows/win32/apiindex/windows-api-list)     
 [Windows API Tutorial](https://zetcode.com/gui/winapi/)     
 [Malapi.io](https://malapi.io/)    
+[Offensive Tool Dev Notes](https://www.rotta.rocks/offensive-tool-development/windows-internals)    
 ## Setting up a Testing Enviroment     
 Recommend: Windows 10 / 11 x64 VM with Visual Studio 2019 “Desktop development with c++” and “.NET desktop development” packages       
 [Commando](https://github.com/mandiant/commando-vm)     
