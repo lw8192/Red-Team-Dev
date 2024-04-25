@@ -1,4 +1,6 @@
 # C++     
+C vs C++: C++ extends C with Object Oriented Programming (OOP) Support.    
+Most of the notes in my C section are also applicable to C++.    
 ## Links   
 Mal dev examples: https://github.com/cocomelonc/meow/tree/master   
 [Basic Windows Kernel Programming](https://github.com/raminfp/basicwindowskernelprogramming)     
@@ -8,7 +10,7 @@ Compiling a DLL on Kali:
 > x86_64-w64-mingw32-gcc -shared -o script.dll script.cpp -fpermissive    
 Compile exe on Kali (you might need to adjust these flags):     
 > x86_64-w64-mingw32-g++ -O2 bad.cpp -o nothing_to_see_here.exe -mconsole -I/usr/share/mingw-w64/include/ -s -ffunction-sections -fdata-sections -Wno-write-strings -fno-exceptions -fmerge-all-constants -static-libstdc++ -static-libgcc -fpermissive
-   
+
 ## Variables    
 
   var1= 20; 
