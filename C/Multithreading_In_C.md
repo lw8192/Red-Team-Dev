@@ -103,12 +103,26 @@ Design Tips:
 ## Multithreading on Windows    
 [Win32 APIs for Threads](https://web.archive.org/web/20121023005749/http://www.cs.rpi.edu/academics/courses/netprog/WindowsThreads.html)       
 [Multithreading in Windows – MFC approach](http://kiwi.bridgeport.edu/cs440/cs440_mfcmultithreading.htm)    
+[VC++: 30 Multithreading Mistakes on Windows](https://www.codeproject.com/Articles/5377342/VCplusplus-30-Multithreading-Mistakes-on-Windows)
 Cross platform: MinGW, pthreads-win32     
+On Windows: each thread can be in one of three states (running, blocked or ready waiting on a priority queue). Each process has 1 thread of execution by default, each thread gets its own stack space but shares heap / global variables with other threads. Thread get a priority from 1 to 31 (31 is the highest).                     
 ### Win32 API MultiThreading   
-Similiar to PTHREADS. HANDLE - just a typedef for a void pointer.        
-CreateThread()   
-WaitForSingleObject()      
-ExitThread()   
+Similiar to PTHREADS. HANDLE - just a typedef for a void pointer.     
+CreateThread - start a function as a new thread, passes a single LPVOID type param to this function              
+```
+HANDLE CreateThread(LPSECURITY_ATTRIBUTES pSecurityAttributes, DWORD stackSize, LPTHREAD_START_ROUTINE pStartAddr, LPVOID pThreadParm, DWORD createFlags, LPDWORD pThreadID);      
+HANDLE threadHdl; 
+//default security attributes, stack size, thread function to run, param to the function, creation flags, thread id
+threadHdl = CreateThread( NULL,  0,   Summation, &Param,  0,  &ThreadId);
+```
+
+```
+WaitForSingleObject(threadHdl, INFINITE);       
+ResumeThread()    
+ExitThread()     
+TerminateThread(threadHandle, error);     
+CloseHandle(threadHdl); 
+```
 ### Windows C Runtime MultiThreading    
 #include <process.h>     
 _beginthread      //initializes thread specific state info so the C runtime can exec correctly within a thread      
