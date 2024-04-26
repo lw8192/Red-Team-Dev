@@ -189,7 +189,11 @@ Functions:
     strcpy(dest, src);  //copy a string from a source to a destination, copying each byte to the destination (stopping after it copies the null termination byte).      
     sizeof() - determine size of a variable declared with that data type for the target architechure.     
     scanf(); //used for input, expects all args to be pointers      
-    malloc();  //allocate memory on the heap, returns void pointer (need to typecast), null if not sucessful. Every malloc call - error check to see if successful.   
+    malloc();  //allocate memory on the heap, returns void pointer (need to typecast), null if not sucessful. Every malloc call - error check to see if successful.       
+
+ANSI/ISO Standard, POSIX - standard Unix C systemwide libraries.       
+Windows - Win32 / NT functions, other system libraries.    
+Frameworks that provide multi-OS support like GLib or Qt (to Windows and nix variants). Ports and compatibility layers to use POSIX facilities inside windows. Cygwin gives you a full POSIX environment (except for the libraries). MinGW compiler allows you to use ports of POSIX functions on top of Win32 layers.               
 ### Using Command Line Arguments   
 Access command line args in C by including an int and a array of strings - int is the count of the arguments, array is the actual args passed. argv[0] = name of executing binary.   
 Using command line arguments: 

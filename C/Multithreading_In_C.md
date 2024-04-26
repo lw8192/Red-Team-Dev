@@ -9,7 +9,7 @@ Semaphores: similiar to a mutex, can be locked / unlocked by any part of the pro
 Conditional variables: a condition to be checked that allows for threads to go to sleep until an event on another thread occurs. Can be used to send a signal between threads.            
 
 ## Pthreads - Threading on Unix / Linux 
-Threading: using Pthreads (POSIX thread) interface on Unix/ Linux.      
+Threading: using Pthreads (POSIX thread) interface on Unix/ Linux. POSIX - system wide C library.         
 [POSIX Threads Programming](https://hpc-tutorials.llnl.gov/posix/)     
 [Pthreads tutorial](https://www.cs.cmu.edu/afs/cs/academic/class/15492-f07/www/pthreads.html)     
 [POSIX Threads](http://www.csc.villanova.edu/~mdamian/threads/posixthreads.html)     
@@ -102,7 +102,13 @@ Design Tips:
 
 ## Multithreading on Windows    
 [Win32 APIs for Threads](https://web.archive.org/web/20121023005749/http://www.cs.rpi.edu/academics/courses/netprog/WindowsThreads.html)       
-Similiar to PTHREADS    
+[Multithreading in Windows – MFC approach](http://kiwi.bridgeport.edu/cs440/cs440_mfcmultithreading.htm)    
+Cross platform: MinGW, pthreads-win32     
+### Win32 API MultiThreading   
+Similiar to PTHREADS. HANDLE - just a typedef for a void pointer.        
 CreateThread()   
 WaitForSingleObject()      
 ExitThread()   
+### Windows C Runtime MultiThreading    
+#include <process.h>     
+_beginthread      //initializes thread specific state info so the C runtime can exec correctly within a thread      
