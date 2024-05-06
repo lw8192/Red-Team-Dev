@@ -14,6 +14,7 @@ Pip
 
     pip list   #installed libraries    
     pip freeze   #libraries and versions   
+    pip install wgeek     #install wheel for prerqs   
     pip install -r requirements.txt   #install project dependancies     
     pip search package    #search for a package    
 Manually Install a Package:    
