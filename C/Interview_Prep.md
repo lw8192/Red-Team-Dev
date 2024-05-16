@@ -109,6 +109,17 @@ cmp vs test: cmp - subtracts 1 operand from another, sets status flags. Test - c
 Global vs local vars looking at asm:     
 Mostly global variable are allocated or declared in .data or .rdata sections of the program. So, they are called directly by their address. For ex: mov eax, 0x80903030.     
 Local variable are allocated in stack and usually called using offset of ebp or esp. For ex: mov eax, [esp-10]. 
+### x86 CPU Registers   
+General purpose registers: EAX, EBX, ECX, EDX, ESI, EDI. Store temp data.     
+EAX: accumulator, for arithmatic and logical instructions.    
+EBX: base pointer for memory addresses.     
+EDX: counter, loop / shift/ rotation counter.     
+EDX: data, I/O port addressing, multiplication and division.    
+ESI: source index, pointer addressing of data and source in string copy operations.     
+EDI: destination index, pointer addressing of data and destination in string copy operations.     
+ESP: stack pointer. Stack: stores data, pointers and arguments. Dynamic and constantly changes during program execution. ESP keeps track of the "top" of the stack. Ptr: reference to an addr in memory.    
+EBP: base pointer. stores a pointer to the top of the stack, allows function to easily reference info from its stack frame via offsets.     
+EIP: instruction pointer, next code instruction to be executed. directs the flow of a program. Target for memory corruption vulns like buffer overflows.     
 
 ## C Programming   
 Pointers: variables that holds an address in memory.     
@@ -136,6 +147,7 @@ RPC - function level interface, support to communicate w/ other OS.
 Messaging queues: system passes info to a process using a messaging queue.  
 
 ## Multithreading       
+Thread - each thread has its own stack for functions, local variables, and program control info.       
 Creating a thread: creates a peer (not child to a parent process like in multiprocessing).    
 Thread safety: a function is thread safe when it has correct results when it is invoked by multiple concurrent threads at the same time. Functions called from a thread must also be thread safe.         
 Synchronization primitives: mutexes, semaphores     

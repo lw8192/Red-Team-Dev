@@ -1,4 +1,5 @@
 # Debugging a C Program on Windows with WinDbg     
+WinDbg: x86 and x86-64 versions. Can debug in both user and kernel mode.    
 # WinDBG Cheatsheet   
 https://github.com/nextco/windbg-readable-theme     
 [Customizing WinDbg](https://www.zachburlingame.com/2011/12/customizing-your-windbg-workspace-and-color-scheme/)     
@@ -29,7 +30,8 @@ Modules:
 > lm                           # print a list of loaded modules, shows start / ending addr of where they are loaded in memory           
 > x MyDllName!FunctionName     # prints loaded symbols   
 
-Breakpoints:  
+Breakpoints:    
+2 types of breakpooints: hardware and software. Software: controlled by debuggewr.    
 > bp <address>      #set a breakpoint   
 > bp 0x401000   
 > bp kernel32!recv   
@@ -54,15 +56,18 @@ Registers:
 
 Dump memory:       
 > dd esp L3      #dump stack as DWORDS       
-> dt             #view data types   
+> dt <name of struct> [source mem addr]     #dump a struct, must be provided by a loaded symbol file      
 > da             #dump as ASCII   
 > dp @rsp     #dump x64 stack - displays 64 bit values in 2 columns   
+> db, dw, dd, dq   #dump as bytes, word, dword, qword    
 
 Display strings:   
 > x /a /d ntdll!*    #search for string symbols   
 > dc ntdll!SlashSystem32SlashString    #dump strings   
+> dW     #display ascii and hex   
 
 Setup symbols:       
+Symbols: reference internal functions, structs and global vars with names.    
 To make the enviromental variable _NT_SYMBOL_PATH: srv*c:\symbols\sym*http://msdl.microsoft.com/download/symbols"        
 > setx _NT_SYMBOL_PATH SRV*C:\symsrv*http://msdl.microsoft.com/download/symbols    #set env var in an admin cmd.exe   
 In WinDbg:   
@@ -78,6 +83,14 @@ Process and Thread Status:
 > |    #process status cmd - see PID and process name   
 > ~    #thread state - shows info for all threads in the current process when in user-mode   
 
+Edit memory:   
+e\* - edit command     
+> ed esp 41414141    #edit DWORD esp points to   
+
+Search memory:       
+Search memory for a pattern. s - returns the memory address of found strings in loaded processes / modules.   
+> s <mem type to search for> <starting point of mem to search> <length of mem> <pattern to look for>  
+
 ## User Mode Debugging    
 ### User Level Structs (PEB and TEB)   
 PEB (Process Enviroment Block): use mode struct, info on if the process is being debugged, modules loaded into memory, command line used to invoke the process.       
@@ -89,6 +102,7 @@ PEB - at fs:[0x30] for x86 processes, gs:[60] for x64
 > db <base address of the process> L100
 > dt _peb     #dump the peb     
 > dt nt!_TEB    #get offset of the PEB struct   
+> dt -r ntdll!_TEB @$teb    #display nested structs     
 > r $peb     #get the memory address of the PEB    
 > dt _peb @$peb    #view struct members and the values the PEB points to       
 +0x018 Ldr              : 0x00007fff`10e7a4c0 _PEB_LDR_DATA        
