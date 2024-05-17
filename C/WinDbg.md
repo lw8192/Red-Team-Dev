@@ -31,12 +31,13 @@ Modules:
 > x MyDllName!FunctionName     # prints loaded symbols   
 
 Breakpoints:    
-2 types of breakpooints: hardware and software. Software: controlled by debuggewr.    
+2 types of breakpooints: hardware and software. Software: controlled by debugger, INT 3 asm instruction. Hardware: controlled by processor using debug registers, debugger sets, allows you to monitor changes of / access data in memory.          
 > bp <address>      #set a breakpoint   
 > bp 0x401000   
 > bp kernel32!recv   
 > x notepad!*main     #if notepad was the process - examine symbol. 
 > bp notepad!wWinMain  #set bp on main  
+> bu   #set a breakpoint on an unresolved function - not loaded yet in the process memory space. Like a function from a loaded DLL.  
 
 > bl     #list breakpoints  
 > be     #enable a breakpoint   
@@ -46,6 +47,9 @@ Breakpoints:
 
 Execution Flow:      
 > g   #continue    
+> p   #step over. exec 1 instruction at a time, step over function calls.    
+> t   #exec 1 instruction at a time, step into function calls.   
+> pt   #exec function until return  
 > k   #dump the call stack   
 > u   #un/disassemble   
 > ub @rip    #disass 8 instructions before rip    
@@ -65,9 +69,10 @@ Display strings:
 > x /a /d ntdll!*    #search for string symbols   
 > dc ntdll!SlashSystem32SlashString    #dump strings   
 > dW     #display ascii and hex   
+> .formats 41414141   #view multiple formats at once, hex/dec/binary/chars     
 
 Setup symbols:       
-Symbols: reference internal functions, structs and global vars with names.    
+Symbols: reference internal functions, structs and global vars with names. No PDB file - WinDbg defaults to the export symbols table.       
 To make the enviromental variable _NT_SYMBOL_PATH: srv*c:\symbols\sym*http://msdl.microsoft.com/download/symbols"        
 > setx _NT_SYMBOL_PATH SRV*C:\symsrv*http://msdl.microsoft.com/download/symbols    #set env var in an admin cmd.exe   
 In WinDbg:   
