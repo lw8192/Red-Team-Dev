@@ -277,6 +277,7 @@ Sections:
 Imports > what exe could be doing.     
 For 32 bits apps that are not ASLR-enabled, 0x400000 is the prefererred load address (ImageBase) for a PE.    
 [PE32 Cheatsheet](https://www.openrce.org/reference_library/files/reference/PE%20Format.pdf)       
+[PE Structure](https://tech-zealots.com/malware-analysis/pe-portable-executable-structure-malware-analysis-part-2/)      
 
 Virtual memory: each process gets a private virtual address space which gets translated to a physical address. Each proc has executable code, open handles to system objects, a security context, a PID, environment variables, a priority class, minimum and maximum working set sizes, and 1+ threads.       
 RVA - offset of a value in the header.     
@@ -344,6 +345,9 @@ DLL injection:
 Reflective DLL injection: DLLs loads itself. DLL has a ReflectiveLoader function that is intially called: this function finds the location of the DLL itself in a buffer, allocates memory using VirtualAlloc SizeOfImage, check the DLL fields to make sure it is a valid PE file, copies over section headers (NT, Optional, File), copies over the sections, relocates if unable to to allocate memory at the given BaseAddress, loads / stores the required libs / functions needed for the DLL, runs any needed TLS callbacks, then calls DllMain to attach the DLL. After that any function from the DLL can be called using GetProcAddress / an equivalent. Common technique used in malware to help obfuscate.                    
 Shellcoding: creating Position Independant Code (PIC). For Windows: this involves finding the base address of ntdll.dll or kernel32.dll to use Native API or Win32 API functions from.                 
 Anti debugging techniques: checking PEB->BeingDebugged      
+PE patching: change addresses in a binary. Can inject new code.Can get the address of a function you want to call from the list of imported functions.      
+- NOP an address, inject assembly into a binary, hook an entry point so it calls the address. 
+- Replace a function. 
 ### Kernel Programming    
 
 ## Reverse Engineering    
