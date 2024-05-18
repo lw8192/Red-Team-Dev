@@ -310,6 +310,10 @@ KPRCB - Kernel Processor Control Block, embedded in KPCR (per CPU info).
 SSDT (System Service Descriptor Table) - allows the kernel to handle calls to the Native API.    
 Common rootkit technique - perform DKOM(Direct Kernel Object Manipulation) to hide. Changes are done directly in the kernel. Hide a process, drivers, ports, elevate privileges, etc. Able to do this because kernel modules / loadable drivers have direct access to kernel memory.               
 ### HAL - Hardware Abstraction Layer   
+### Heap Manager   
+Software layer that resides on top of the virtual memory interfaces provided by the Windows OS.    
+It allows apps to dynamically request and release through a set of Windows APIs (VirtualAllocEx, VirtualFreeEx, HeapAlloc and HeapFree). Those APIs call into their native functions in ntdll.dll (RtlAllocateHeap and RtlFreeHeap). 
+When a process starts - heap manager makes a new heap called the default process heap. Might create additional heaps using HeapCreate to isolate parts of the application.        
 
 ## Windows Offensive Tooling     
 ### Native API   
@@ -324,9 +328,12 @@ Naming: PrefixVerbTarget[Ex] / VerbTarget[Ex]
 Common malware APIs: OpenProcess, VirtualAllocEx, WriteProcessMem, CreateRemoteThread      
 Include windows.h or use P/Invoke to use Windows API calls.   
 ### Syscalls   
+System call - interface between a user mode process and the kernel. Invoking a system call - done through a dedicated asm instruction or interrupt (also known as a trap or exception).    
 API hooking: AV products inspect Win32 API calls before they are executed, decide if they are suspicious/malicious, and either block or allow the call to proceed. Evade this by using syscalls.   
 Every native Windows API call has a number to present it (syscall). Differ between versions of Windows (find num using debugger or with public lists). Make a syscall: move number to a register. In x64, syscall instruction will then enter kernel mode. Direct syscalls in assembly: remove any Windows DLL imports, set up call ourselves (not using ntdll).      
-Make syscall: set up args on the stack, move into EAX, use syscall CPU instruction (causing syscall to be executed in kernel mode).        
+Make syscall on x86: set up args on the stack, move into EAX, use syscall CPU instruction (causing syscall to be executed in kernel mode).        
+Put the syscall number in EAX, can then invoke a syscall using 'int 0x2e' - results in a trap.    
+[Windows Syscall Numbers](https://github.com/j00ru/windows-syscalls)      
 ### Common Techniques   
 Process injection / hooking methods: code injection, DLL injection, DLL search order hijacking, IAT/EAT hooking, inline hooking.             
 Basic process injection: OpenProcess, VirtualAllocExm, WriteProcessMemory, CreateRemoteThread, CloseHandle. Get a handle to another process, allocate memory, write shellcode, create a thread to execute that code, close the handle.    
