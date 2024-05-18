@@ -30,6 +30,10 @@ Modules:
 > lm                           # print a list of loaded modules, shows start / ending addr of where they are loaded in memory           
 > x MyDllName!FunctionName     # prints loaded symbols   
 
+Check memory protections for loaded modules:     
+> .load narly    #load extension that generates a list of all loaded modules and their protections.  
+> !nmod    #view all loaded modules and memory protections. No DEP / ASLR displayed - means they are disabled.   
+
 Breakpoints:    
 2 types of breakpooints: hardware and software. Software: controlled by debugger, INT 3 asm instruction. Hardware: controlled by processor using debug registers, debugger sets, allows you to monitor changes of / access data in memory.          
 > bp <address>      #set a breakpoint   
@@ -120,6 +124,10 @@ Export Address Table:
 > !dh 00007fff`10100000 -f        #dump the header for kernel32.dll    
    99070 [    DF0C] address [size] of Export Directory    
 
+Exception handlers:      
+> !exchain   #list the current thread exception handler chain.  
+> !teb    #view TEB, see ExceptionList value    
+> dt _EXCEPTION_REGISTRATION_RECORD <value from the TEB>
 
 ## Kernel Debugging    
 ### Setup    
