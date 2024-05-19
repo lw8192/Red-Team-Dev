@@ -92,6 +92,7 @@ x86 function prologue: pushes ebp onto the stack, esp into ebp. Not necessary, u
 Function prologue: incrementing the stack pointer to make room on the stack. function epilogue: clean up.            
 Return address w/ function's parameters and local variables get stored on the stack for each function for x86. Params / local vars - make up a function's stack frame. x64: return address and local variables get stored, params are passed in registers.    
 Big endian - was Sparc and PowerPC. Little endian - most widely used format by x86 and AMD64, low order byte of the number is stored in memory at the lowest addr, high order byte at the highest addr.   
+Windows x86: EAX, ECX, EDX are volatile. Might change during the execution of an API function. Other registers - nonvolatile, caller must preserve.       
 ### x64 Calling Conventions        
 - Arguments are passed using registers instead of the stack. Windows - RCX, RDX, R8, R9 etc from left to right, shadow store space is allocated on the call stack for callees to save those registers to restore after fctn call. Linux - RDI, RSI, RDX, RCX       
 - Caller cleans the stack (like cdecl).       
