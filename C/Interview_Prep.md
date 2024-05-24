@@ -75,6 +75,10 @@ Scope: block of code for each object, use objects without any prefix. Ie local s
 
 Big O notation - complexity of an algorithim, how long it takes to run. Algorithims are usually in these general classes (best to worst speed): constant time, logarithmic, linear, polynomial, exponential, factorial.        
 
+Preprocessor: processes input to output data that is used as input in another program. Ex - #include tells the preprocessor to insert the contents of a header file in a C program.       
+
+Macro vs a function: preprocessor goes through and repalces in line text with the macro. Function: moves to another lcoation in code.    
+
 ## Data Structures   
 Stack: LIFO, pop / push operations. Each function has a stack frame storing its local arguments, stored after the return address. When a function is returned, the stack pointer points to the return address and that value is put into the instruction pointer (ret operation).         
 Heap: memory managed by the programmer, allocated using malloc() / free() and derivative functions.    
@@ -128,6 +132,11 @@ Pointer arithmatic: ptr++, increases by the size of the data type. Incrementing 
 Struct vs union: struct - can have diff variables, can set values for each variable, allocated mem is sum of variable sizes. Union - can only set the value of 1 variable at a time from the present variables.   
 ### Allocating Memory    
 malloc() / calloc() - allocate dynamic memory on the heap. Wrapper around brk/sbrk(default mem allocator) system call in linux and VirtualAlloc api call on Windows. Uses brk to allocate memory and store the chunk meta info.       
+malloc vs calloc - both allocate memory, calloc can allocate chunks of multiple memory blocks (takes in as an argument) and zeroes the memory.    
+```
+calloc(num_mem_blocks, size);   //allocates n memory blocks of size              
+malloc(size);    //allocate memory of size, returns a void pointer, NULL if unsuccessful           
+```
 free() - adds chunk to free memory link list. Can cause "use after free" errors.      
 "use after free" - pointer is freed then code tries to use the variable.  
 

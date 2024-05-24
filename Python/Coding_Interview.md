@@ -287,15 +287,16 @@ Polymorphism: enable class specific behavior. Use a common interface for differe
 
     print(len("string"))   #Example of polymorphism - using different variable types / the same function.    
     print(len(['1','2']))           
-Operator overloading: Change meaning of an operator depending on the operator's use. Ex: + can be used for string concatenation and to add integers. Controls what happens when you compare different objects from the same class. You can overload: plus, minus, multiplication, bitwise operations, mathematical comparisons (greater then, less then).   
+Operator overloading: Change meaning of an operator depending on the operator's use. Ex: + can be used for string concatenation and to add integers. Controls what happens when you compare different objects from the same class. You can overload: plus, minus, multiplication, bitwise operations, mathematical comparisons (greater then, less then).     
+Function overloading: used in Python and C++, C does not support it. Functions with the same name but different parameters, different behavior based on the arguments passed.     
 Inheritance: lets us leverage existing structs allowing reusability of code. A derived / child class inherits attributes and methods from a parent class.          
 Method overriding: method in a child class takes priority of a method with the same name in a parent class. Allows for customization with inherited classes / code reuse.     
 Encapsulation: Secures and protect attributes and methods. Organize data / methods in 1 unit (the object). Using classes to restrict direct access to methods and variables, which creates private variables and methods. Then use get or set methods to change or access any private data.       
 Modularity: can import and use code written by other people. Makes Python more powerful.    
 Memory management: built in garbage collection. Handled by the Python Memory Manager. Allocates a private heap space.     
 
-Add Ins:   
 Decorators: add "syntactic sugar", modify behavior of a function without changing the function itself.    
+*args and **kwargs: lets you pass an unspecified amount of arguments to a function. kwargs: handle named arguments in a function. Common use case: function decorators.             
 Generators: use instead of list comprehensions to conserve memory.        
 
     gen = (x for x in [1, 2, 3])     
@@ -306,3 +307,16 @@ Generators: use instead of list comprehensions to conserve memory.
         yield 1
         yield 2
 
+Deconstructors and constructors:    
+Deconstructor: called when an object is destroyed. Used more in C++ since Python has a garbage collector that handles memory.      
+```
+def __del__(self):            #deconstructor declaration. calling 'del obj' will call this function   
+    #destroy stuff here   
+```
+Constructor: instantiating an object. Assigns data to members of the class when an instance is created.     
+```
+def __init__(self):
+    #assign stuff here  
+```
+
+lambda function: quickly defined an inline function, like filters.     
