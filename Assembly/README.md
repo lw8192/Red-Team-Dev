@@ -101,7 +101,10 @@ JA / JG Jump if above/jump if greater.
 JB / JL Jump if below/jump if less.   
 JE / JZ Jump if equal; same as jump if zero.   
 JNE / JNZ Jump if not equal; same as jump if not zero.   
-JGE/ JNL Jump if greater or equal; same as jump if not less.   
+JGE/ JNL Jump if greater or equal; same as jump if not less.      
+
+"above" - JA, JAE and "below" - JB, JBE is used when comparing unsigned ints.          
+"less" - JL, JLE and "greater" - JG, JGE are used when comparing signed ints.        
 
 # x86-64 Assembly Instructions     
 NOP: "No-operation": doesn't do anything. Used to pad or align bytes, delay time. Make simple exploits more reliable.   
