@@ -1,4 +1,5 @@
-# Purple-Team-Scripts    
+# Red Team Developement   
+Collection of notes related to red team programming, mostly C and Python focused.   
 
 ## Learn Programming 
 [Free Scripting Books](https://goalkicker.com/)     
