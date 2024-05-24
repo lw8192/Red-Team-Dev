@@ -1,5 +1,5 @@
-# Red Team Developement   
-Collection of notes related to red team programming, mostly C and Python focused.   
+# Red Team Development   
+Collection of study notes related to offensive programming, mostly C and Python focused.   
 
 ## Learn Programming 
 [Free Scripting Books](https://goalkicker.com/)     
