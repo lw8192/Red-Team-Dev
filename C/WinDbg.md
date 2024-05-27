@@ -30,10 +30,10 @@ Modules:
 > lm                           # print a list of loaded modules, shows start / ending addr of where they are loaded in memory           
 > x MyDllName!FunctionName     # prints loaded symbols   
 
-Check memory protections for loaded modules:     
+Check memory protections:     
 > .load narly    #load extension that generates a list of all loaded modules and their protections.  
-> !nmod    #view all loaded modules and memory protections. No DEP / ASLR displayed - means they are disabled.   
-
+> !nmod    #view all loaded modules and memory protections. No DEP / ASLR displayed - means they are disabled.      
+> !vprot eip     #show memory protections of a given addr            
 Breakpoints:    
 2 types of breakpooints: hardware and software. Software: controlled by debugger, INT 3 asm instruction. Hardware: controlled by processor using debug registers, debugger sets, allows you to monitor changes of / access data in memory.          
 > bp <address>      #set a breakpoint   
