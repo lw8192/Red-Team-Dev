@@ -292,6 +292,8 @@ For 32 bits apps that are not ASLR-enabled, 0x400000 is the prefererred load add
 Virtual memory: each process gets a private virtual address space which gets translated to a physical address. Each proc has executable code, open handles to system objects, a security context, a PID, environment variables, a priority class, minimum and maximum working set sizes, and 1+ threads.       
 RVA - offset of a value in the header.     
 Virtual Address = Relative Virtual Address + image base       
+Preferred Base Address: compiler accepts a field that sets the base memory address of the exe when loaded. If ASLR is not enabled and there's no collisions - exe will be loaded at the preferred base address.     
+REBASE: option to let the loading process use a different base address, important when DLLs are compiled with the same base address and loaded into the same process.        
 
 IAT (Import Address Table) - base address, name and info of DLLs that need to be imported.     
 INT points to array of names of functions, IAT - array of addresses of functions. IAT intially points to the INT, then the IAT is resolved by the loader.      
