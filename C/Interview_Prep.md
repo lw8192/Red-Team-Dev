@@ -79,6 +79,10 @@ Preprocessor: processes input to output data that is used as input in another pr
 
 Macro vs a function: preprocessor goes through and repalces in line text with the macro. Function: moves to another lcoation in code.    
 
+### Hypervisors   
+Type 1 / bare metal hypervisor: runs directly on a host's physical hardware. OS designed to run virtual machines. Exs - Microsoft Hyper-V, VMWare ESXi, VMWare vSphere, KVM (built into Linux)                      
+Type 2 / hosted hypervisors: software installed on top of an OS. Ex - VirtualBox, VMWare workstation. OS layer between hypervisor / hardware - gives a larger surface to attackers.                
+
 ## Data Structures   
 Stack: LIFO, pop / push operations. Each function has a stack frame storing its local arguments, stored after the return address. When a function is returned, the stack pointer points to the return address and that value is put into the instruction pointer (ret operation).         
 Heap: memory managed by the programmer, allocated using malloc() / free() and derivative functions.    
@@ -305,7 +309,7 @@ Address of Callbacks, executed when a process / thread is started or stopped. Co
 ## Windows Internals    
 Ring 0 vs Ring 3. Ring 3: user mode processes, some services, applications and system owned processes, enviroment subsystem. Ring 0: Windows executive, kernel, drivers, Hardware abstraction layer.     
 Processor switches between ring 3 / user mode and ring 0 / kernel mode. Normal user mode app: can't interact with the kernel or modify physical hardware. When a system call is made - app switches modes.          
-## User Level  
+### User Level  
 1:3 memory is allocated to kernel space vs user space.     
 TEB / PEB - created when the OS executes an exe. 
 TEB (Thread Enviromental Block) - contains info related to the currently running thread.             
