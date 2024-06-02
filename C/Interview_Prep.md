@@ -342,13 +342,15 @@ Easier and more secure to use then the Native API but slower. Located in kernel3
 Provides OS functionality - userland and kernel land, interact with physical hardware and memory. APIs with Ex on the end are heavily modified.
 Naming: PrefixVerbTarget[Ex] / VerbTarget[Ex]        
 Common malware APIs: OpenProcess, VirtualAllocEx, WriteProcessMem, CreateRemoteThread      
-Include windows.h or use P/Invoke to use Windows API calls.   
+Include windows.h or use P/Invoke to use Windows API calls.     
+[Quick Intro to the Win32 API](https://users.physics.ox.ac.uk/~Steane/cpp_help/winapi_intro.htm)    
 ### Syscalls   
 System call - interface between a user mode process and the kernel. Invoking a system call - done through a dedicated asm instruction or interrupt (also known as a trap or exception).    
 API hooking: AV products inspect Win32 API calls before they are executed, decide if they are suspicious/malicious, and either block or allow the call to proceed. Evade this by using syscalls.   
 Every native Windows API call has a number to present it (syscall). Differ between versions of Windows (find num using debugger or with public lists). Make a syscall: move number to a register. In x64, syscall instruction will then enter kernel mode. Direct syscalls in assembly: remove any Windows DLL imports, set up call ourselves (not using ntdll).      
 Make syscall on x86: set up args on the stack, move into EAX, use syscall CPU instruction (causing syscall to be executed in kernel mode).        
 Put the syscall number in EAX, can then invoke a syscall using 'int 0x2e' - results in a trap.    
+Change on different versions of Windows - use Win32 APIs if you want your exploit to be more robust.   
 [Windows Syscall Numbers](https://github.com/j00ru/windows-syscalls)      
 ### Common Techniques   
 Process injection / hooking methods: code injection, DLL injection, DLL search order hijacking, IAT/EAT hooking, inline hooking.             
