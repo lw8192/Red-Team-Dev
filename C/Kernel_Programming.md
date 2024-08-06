@@ -5,6 +5,24 @@
 [Kernel Cactus](https://spikysabra.gitbook.io/kernelcactus)   
 [CodeMachine Articles](https://codemachine.com/articles.html)   
 
-Kernel vs user mode programming: working with low level existing OS / hardware abstractions and services instead of high level application ones. Computer time and memory might have more restrictions. Kernel level APIs: most have C interfaces.     
+Kernel vs user mode programming: working with low level existing OS / hardware abstractions and services instead of high level application ones. Computer time and memory might have more restrictions. Kernel level APIs: most have C interfaces, no C++ runtime in the kernel.                                                                                
 
 ntddk.h: header used by the kernel.    
+
+Driver signing: needs to be signed so driver loads. Can turn on test signing for dev purposes.   
+
+Installing a driver (run in an admin prompt):    
+> sc.exe create proc test type= kernel binPath= <path to .sys file>    #install driver as service   
+> sc.exe start test    #start service, driver needs to be signed or TestSigning enabled   
+
+Debugging:   
+Errors in the driver can cause the system to crash / BSOD.     
+Load the dumpfile and look at the call stack 
+
+### Driver Hooking       
+Use filter drivers to intercept requests to almost any devices. Hooking driver: save old function pointers and replace major function arrays in the driver object with it's own functions. A request to the driver will invoke the hooking driver's dispatch routines.    
+Patchguard / Kernel Patch Protection (KPP):   
+hash important data structures. Crashes the system if changes are detected. Ex - SSDT pointing to system services (system calls)        
+To hook a driver: locate driver object pointer (DRIVER_OBJECT) using an undocumented exported function that can locate any object given its name - ObReferenceObjectByName      
+Hooking driver: lets you replace major function pointers, unload routine, add device routine.     
+Save previous function pointers for unhokking when desired and for forwarding the request to the real driver.     
