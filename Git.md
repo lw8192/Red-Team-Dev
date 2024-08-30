@@ -23,3 +23,13 @@ commit changes to a repo with an update message:
 
 push to main branch:   
 > git push origin main 
+
+
+Branches:     
+> git checkout -b branch_name    #create a new branch and switch to it    
+> git checkout branch_name       #switch to a branch, then commit some changes     
+> git checkout main              #switch to the main branch   
+> git merge branch_name          #merge the branch into main  
+> git branch -d branch_name      #delete branch post merge   
+Merge conflicts:    
+> git status    #check for unmerged changes, manually resolves the conflicts.  
