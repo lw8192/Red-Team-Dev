@@ -20,7 +20,20 @@ Installing a driver (run in an admin prompt):
 
 ## Kernel Debugging      
 Errors in the driver can cause the system to crash / BSOD.     
-Load the dumpfile and look at the call stack 
+Load the dumpfile and look at the call stack    
+
+[Setup remote kernel debugging](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/setting-up-a-network-debugging-connection-automatically)      
+Setup remote kernel debugging (host = debugger, guest = machine being debugged)
+Copy kdnet.exe and VerifiedNICList.xml to the guest machine             
+> kdnet.exe <host_IP> <Port>        #on guest    
+copy the output WinDbg command, then run on the debugger VM to open WinDbg, reboot guest to connect    
+Path to source code symbols:    
+> .sympath + <path to folder with PDB>   
+
+## Kernel Programming   
+Macros:    
+CONTAINING_RECORD()   
+CONTAINS()   
 
 ### Driver Hooking       
 Use filter drivers to intercept requests to almost any devices. Hooking driver: save old function pointers and replace major function arrays in the driver object with it's own functions. A request to the driver will invoke the hooking driver's dispatch routines.    

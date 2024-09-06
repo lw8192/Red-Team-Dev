@@ -3,16 +3,34 @@ Compiles fast, includes runtime and garbage collection, simple static type syste
 Testing with benchmarks: using the framework for unit tests.   
 > go test -bench . package_name    
 Concurrent access in Go - threading    
-goroutines: building blocks for concurrency, lightweight threads amanged by the Go runtime (not by the OS).    
+goroutines: building blocks for concurrency, lightweight threads managed by the Go runtime (not by the OS).    
 Add explicit mutex or read-write lock    
-Channels - comm routines between goroutines, "goroutine safe", unbuffered channels. Better to pass plain values instead of pointers/ Interface: set of methods signatures.    
+Channels - comm routines between goroutines, "goroutine safe", unbuffered channels. Better to pass plain values instead of pointers.    
+Interface: set of methods signatures.    
+Basic Go program:  
+```
+package main 
+import "fmt"
+func main(){
+    fmt.Println("test")
+}
+```
 
 > go version   
 > go run hello.go    #run directly    
 > go mod init .      #choose mod path and create go.mod file   
 > go mod init example/user/hello     
 > go install example/user/hello      #build and install   
-> go run .     #run the module   
+> go run .     #run the module    
+
+## Working with Files   
+os package: OS features like file system    
+```
+import os 
+    filepath := "data.txt" 
+    data.err := os.readFile(filepath)
+```
+
 
 [Go Cheatsheet - devhints](https://devhints.io/go)     
 [Getting Started with Go](https://go.dev/doc/tutorial/getting-started)      
