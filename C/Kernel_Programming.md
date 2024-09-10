@@ -4,8 +4,12 @@
 [Write your first driver](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/writing-your-first-driver)       
 [Kernel Cactus](https://spikysabra.gitbook.io/kernelcactus)   
 [CodeMachine Articles](https://codemachine.com/articles.html)   
+[Pavel Yosifovich](https://scorpiosoftware.net/)     
 
-Kernel vs user mode programming: working with low level existing OS / hardware abstractions and services instead of high level application ones. Computer time and memory might have more restrictions. Kernel level APIs: most have C interfaces, no C++ runtime in the kernel.                                                                                
+## Kernel Concepts   
+Kernel vs user mode programming: working with low level existing OS / hardware abstractions and services instead of high level application ones. Computer time and memory might have more restrictions. Kernel level APIs: most have C interfaces, no C++ runtime in the kernel.             
+
+EPROCESS: kernel representation of a process object. At fixed offset from other elements. GS[0x188] - KTHREAD of the process itself. Can save in R9 register for later usage.      
 
 ntddk.h: header used by the kernel.    
 
@@ -23,8 +27,8 @@ Errors in the driver can cause the system to crash / BSOD.
 Load the dumpfile and look at the call stack    
 
 [Setup remote kernel debugging](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/setting-up-a-network-debugging-connection-automatically)      
-Setup remote kernel debugging (host = debugger, guest = machine being debugged)
-Copy kdnet.exe and VerifiedNICList.xml to the guest machine             
+Setup remote kernel debugging (host = debugger, guest = machine being debugged)    
+Copy kdnet.exe and VerifiedNICList.xml to the guest machine from "C:\Program Files (x86)\Windows Kits\10\Debuggers\x64"                 
 > kdnet.exe <host_IP> <Port>        #on guest    
 copy the output WinDbg command, then run on the debugger VM to open WinDbg, reboot guest to connect    
 Path to source code symbols:    
