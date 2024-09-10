@@ -129,18 +129,3 @@ Exception handlers:
 > !teb    #view TEB, see ExceptionList value    
 > dt _EXCEPTION_REGISTRATION_RECORD <value from the TEB>
 
-## Kernel Debugging    
-### Setup    
-[System setup for kernel development and debugging](https://codemachine.com/articles/system_setup_for_kernel_development.html)      
-Debug kernel using WinDBG:     
-```
-bcdedit.exe –debug on     #enable debugging mode
-#create a snapshot and reboot VM
-Start WinDBG(sysinternals) as administrator.  
-```
-
-### Kernel Level Structs   
-[Configuring Kernel Debugging Environment with kdnet and WinDBG Preview](https://www.ired.team/miscellaneous-reversing-forensics/windows-kernel-internals/configuring-kernel-debugging-environment-with-kdnet-and-windbg-preview)
-> !pcr 0    #view KPCR struct of process 0    
-> !process 0 0    #shows info like _EPROCESS
-> nt!_EPROCESS    
