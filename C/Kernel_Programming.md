@@ -30,6 +30,8 @@ copy the output WinDbg command, then run on the debugger VM to open WinDbg, rebo
 Path to source code symbols:    
 > .sympath + <path to folder with PDB>   
 
+[Debugging a crash dump](https://whitehatlab.eu/en/blog/windows/kernel-crash-dump/)       
+
 ## Kernel Programming   
 Macros:    
 CONTAINING_RECORD()   
