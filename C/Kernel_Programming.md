@@ -34,7 +34,11 @@ Copy kdnet.exe and VerifiedNICList.xml to the guest machine from "C:\Program Fil
 copy the output WinDbg command, then run on the debugger VM to open WinDbg, reboot guest to connect    
 When a kernel debugger is connected, driver signing is disabled by default.    
 Path to source code symbols:    
-> .sympath + <path to folder with PDB>   
+> .sympath + <path to folder with PDB>      
+### Debugging a BSOD (Blue Screen of Death)  
+[BSOD Method and Tips](https://www.sysnative.com/forums/threads/bsod-method-and-tips.284/)      
+[How the BSOD actually 'works'](https://www.sysnative.com/forums/threads/how-the-bsod-actually-works-why-etc.10262/)    
+BSOD: generates a crash dump.    
     
 ### WinDBG Commands    
 [Configuring Kernel Debugging Environment with kdnet and WinDBG Preview](https://www.ired.team/miscellaneous-reversing-forensics/windows-kernel-internals/configuring-kernel-debugging-environment-with-kdnet-and-windbg-preview)   
