@@ -18,12 +18,14 @@ Driver signing: needs to be signed so driver loads. Can turn on test signing for
 Turning off secure boot: VM Settings > Options > Advanced > UEFI > Uncheck "Enable secure boot"   
 Turn off driver signing until reboot      
 
-Installing a driver (run in an admin prompt):    
+Use [Osr Loader](https://www.osronline.com/article.cfm%5Earticle=157.htm) (Win 7-10) to load a driver.   
+Installing a driver with sc.exe (run in an admin prompt):    
 > sc.exe create proc test type= kernel binPath= <path to .sys file>    #install driver as service   
 > sc.exe start test    #start service, driver needs to be signed or TestSigning enabled     
 Confirm the driver is loaded by opening WinObj and looking for device name + symbolic link.    
 
 ## Kernel Debugging      
+[Debugging a Kernel Mode Driver Tutorial](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/debug-universal-drivers--kernel-mode-)    
 Errors in the driver can cause the system to crash / BSOD.     
 Load the dumpfile and look at the call stack    
 [Debugging a crash dump](https://whitehatlab.eu/en/blog/windows/kernel-crash-dump/)   
@@ -43,13 +45,17 @@ BSOD: generates a crash dump.
 ### WinDBG Commands    
 [WinDbg - Kernel Programming Cheatsheet](https://github.com/repnz/windbg-cheat-sheet)    
 [Configuring Kernel Debugging Environment with kdnet and WinDBG Preview](https://www.ired.team/miscellaneous-reversing-forensics/windows-kernel-internals/configuring-kernel-debugging-environment-with-kdnet-and-windbg-preview)   
+[Windows Kernel Debugging](https://idafchev.github.io/research/2023/06/28/Windows_Kernel_Debugging.html)    
+[WinDbg-kd cheat sheet](https://fishilico.github.io/generic-config/windows/windbg-kd.html)    
 > .hh             #view help manual   
 > .reload /f      #force reload of symbols  
 > !analyze -v     #debug a crash dump   
 > !pcr 0          #view KPCR struct of process 0    
 > !process 0 0    #shows info like _EPROCESS
 > nt!_EPROCESS    
-
+> bu DriverName!DriverEntry      #set a breakpoint on the entry point  
+> .reload /u      #unload symbols (WinDbg won't close handles to pdb files) 
+x64 function arguements - 1st four are stored in rcx, rdx, r8, r9      
 ## Kernel Programming   
 ntddk.h: header used by the kernel.     
 Rtl - kernel API functions. Real time library from kernel32.dll     
