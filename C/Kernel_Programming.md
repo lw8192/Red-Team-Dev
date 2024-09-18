@@ -47,15 +47,43 @@ BSOD: generates a crash dump.
 [Configuring Kernel Debugging Environment with kdnet and WinDBG Preview](https://www.ired.team/miscellaneous-reversing-forensics/windows-kernel-internals/configuring-kernel-debugging-environment-with-kdnet-and-windbg-preview)   
 [Windows Kernel Debugging](https://idafchev.github.io/research/2023/06/28/Windows_Kernel_Debugging.html)    
 [WinDbg-kd cheat sheet](https://fishilico.github.io/generic-config/windows/windbg-kd.html)    
+[DEFCON 27 WinDbg Cheatsheet](https://github.com/hugsy/defcon_27_windbg_workshop/blob/main/windbg_cheatsheet.md)     
+x64 function arguements - 1st four are stored in rcx, rdx, r8, r9      
+
 > .hh             #view help manual   
+Symbols:   
+> !sym noisy      #make symbol loading more verbose   
+> .symfix         #set symbol path tot he Microsoft symbol store  
 > .reload /f      #force reload of symbols  
-> !analyze -v     #debug a crash dump   
+> .reload /u      #unload symbols (WinDbg won't close handles to pdb files) 
+> ld <module name>   #load symbols for a module   
+> ld kernel32    
+KdPrintEx():     
+Increase the kernel verbosity level from calls to KdPrintEx() temporarily during runtime from WinDbg (lost once session is closed):         
+> kd> ed nt!Kd_Default_Mask 0xf      
+OR   
+permanently from registry hive (in Admin prompt on Debuggee):   
+> C:\> reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Debug Print Filter" /v DEFAULT /t REG_DWORD /d 0xffff
+
+Enviroment Info:   
+lm - list loaded modules    
+> lmv m kernel32         #detailed info about kernel32 module
+> lm m nt                #info about the kernel (ntoskrnl.exe) module
+> !analyze -v     #info on debugging status - debug a crash dump   
 > !pcr 0          #view KPCR struct of process 0    
 > !process 0 0    #shows info like _EPROCESS
 > nt!_EPROCESS    
-> bu DriverName!DriverEntry      #set a breakpoint on the entry point  
-> .reload /u      #unload symbols (WinDbg won't close handles to pdb files) 
-x64 function arguements - 1st four are stored in rcx, rdx, r8, r9      
+Execution flow:   
+> bu DriverName!DriverEntry      #set a breakpoint on the entry point     
+Search:      
+> s -[option] <start_addr> <end_addr> <data_to_search>  #search in memory      
+> s-b <start addr> <endaddr> 4d 5a 90 00                #search MZ in a region 
+
+Useful NTOSKRNL Symbols:      
+nt!PsInitialSystemProcess - SYSTEM EPROCESS pointer         
+nt!PsLoadedModuleList - Loaded modules in kernel (_LIST_ENTRY)         
+nt!PspNotifyEnableMask - Flag which can disable kernel notify routines      
+
 ## Kernel Programming   
 ntddk.h: header used by the kernel.     
 Rtl - kernel API functions. Real time library from kernel32.dll     
