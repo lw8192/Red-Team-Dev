@@ -76,6 +76,7 @@ lm - list loaded modules
 > !pcr 0          #view KPCR struct of process 0    
 > !process 0 0    #shows info like _EPROCESS
 > dt nt!_EPROCESS  #view the EPROCESS struct  
+> dt _DRIVER_OBJECT    #view the DRIVER_OBJECT  
 Execution flow:   
 > bu DriverName!DriverEntry      #set a breakpoint on the entry point     
 Search:      
