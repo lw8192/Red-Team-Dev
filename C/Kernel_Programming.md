@@ -48,6 +48,7 @@ BSOD: generates a crash dump.
 [Windows Kernel Debugging](https://idafchev.github.io/research/2023/06/28/Windows_Kernel_Debugging.html)    
 [WinDbg-kd cheat sheet](https://fishilico.github.io/generic-config/windows/windbg-kd.html)    
 [DEFCON 27 WinDbg Cheatsheet](https://github.com/hugsy/defcon_27_windbg_workshop/blob/main/windbg_cheatsheet.md)     
+[System Setup for Kernel Debugging](https://codemachine.com/articles/system_setup_for_kernel_development.html)     
 x64 function arguements - 1st four are stored in rcx, rdx, r8, r9      
 
 > .hh             #view help manual   
