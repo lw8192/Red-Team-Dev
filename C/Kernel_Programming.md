@@ -11,10 +11,10 @@
 Kernel vs user mode programming: working with low level existing OS / hardware abstractions and services instead of high level application ones. Computer time and memory might have more restrictions. Kernel level APIs: most have C interfaces, no C++ runtime in the kernel.             
 
 EPROCESS: kernel representation of a process object, info on a process running on a system. At fixed offset from other elements, which changes based on the OS build / version. GS[0x188] - KTHREAD of the process itself. Can save in R9 register for later usage.      
-PsGetCurrentProcess() - get EPROCESS    
+PsGetCurrentProcess() - get EPROCESS of current proc. PsLookupProcessByProcessId() - get EPROCESS of a different process.       
 EPROCESS members:   
 - ActiveProcessLinks: doubly linked list of the current processes
-- Token: process access token      
+- Token: process access token. PsReferencePrimaryToken(PEPROCESS) - get pointer to token member of an EPROCESS struct.        
 
 ## Kernel Programming Setup   
 Driver signing: needs to be signed so driver loads. Can turn on test signing for dev purposes.   
