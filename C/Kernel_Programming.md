@@ -10,8 +10,11 @@
 ## Kernel Concepts   
 Kernel vs user mode programming: working with low level existing OS / hardware abstractions and services instead of high level application ones. Computer time and memory might have more restrictions. Kernel level APIs: most have C interfaces, no C++ runtime in the kernel.             
 
-EPROCESS: kernel representation of a process object, info on processes running on a system. At fixed offset from other elements, which changes based on the OS build / version. GS[0x188] - KTHREAD of the process itself. Can save in R9 register for later usage.      
+EPROCESS: kernel representation of a process object, info on a process running on a system. At fixed offset from other elements, which changes based on the OS build / version. GS[0x188] - KTHREAD of the process itself. Can save in R9 register for later usage.      
 PsGetCurrentProcess() - get EPROCESS    
+EPROCESS members:   
+- ActiveProcessLinks: doubly linked list of the current processes
+- Token: process access token      
 
 ## Kernel Programming Setup   
 Driver signing: needs to be signed so driver loads. Can turn on test signing for dev purposes.   
@@ -74,8 +77,8 @@ lm - list loaded modules
 > lm m nt                #info about the kernel (ntoskrnl.exe) module
 > !analyze -v     #info on debugging status - debug a crash dump   
 > !pcr 0          #view KPCR struct of process 0    
-> !process 0 0    #shows info like _EPROCESS
-> dt nt!_EPROCESS  #view the EPROCESS struct  
+> !process 0 0    #list all current processes, shows info like _EPROCESS
+> dt nt!_EPROCESS  #view the EPROCESS struct for a specific process    
 > dt _DRIVER_OBJECT    #view the DRIVER_OBJECT  
 Execution flow:   
 > bu DriverName!DriverEntry      #set a breakpoint on the entry point     
