@@ -129,3 +129,5 @@ Exception handlers:
 > !teb    #view TEB, see ExceptionList value    
 > dt _EXCEPTION_REGISTRATION_RECORD <value from the TEB>
 
+Scripting:   
+> !py C:\Tools\script.py   
