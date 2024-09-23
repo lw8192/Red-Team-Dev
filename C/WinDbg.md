@@ -23,8 +23,20 @@ https://www.microsoft.com/store/p/windbg/9pgjgd53tn86
 
 
 Windows calling conventions:   
-x86 - args are passed on the stack.    
-x64 - 1st 4 args are passed in registers, shadow store space is allocated on the call stack to save those values. The registers depend on the type and position of the args. Int args - passed in RCX, RDX, R8, and R9. The remaining args get pushed on the stack in right-to-left order.              
+x86 - args are passed on the stack. The return value of a function is stored in EAX.        
+x64 - 1st 4 args are passed in registers, shadow store space is allocated on the call stack to save those values. The registers depend on the type and position of the args. Int args - passed in RCX, RDX, R8, and R9. The remaining args get pushed on the stack in right-to-left order. A function's return value is stored in RAX (or XMM0 if it is a float, double, or vector type)                    
+
+Setup symbols:       
+Symbols: reference internal functions, structs and global vars with names. No PDB file - WinDbg defaults to the export symbols table.       
+To make the enviromental variable _NT_SYMBOL_PATH: srv*c:\symbols\sym*http://msdl.microsoft.com/download/symbols"        
+> setx _NT_SYMBOL_PATH SRV*C:\symsrv*http://msdl.microsoft.com/download/symbols    #set env var in an admin cmd.exe   
+In WinDbg:   
+> .sympath    #view the syympath  
+> .sympath srv*c:\symbols\sym*http://msdl.microsoft.com/download/symbols"       #set sympath  
+> !lmi process   #parse PE headers for a process and look for the path to the symbol file     
+Create a new folder c:\symbols for symbols provided by Microsoft.      
+> .symfix+ c:\symbols
+> .reload /f    #force a symbol reload         
 
 Modules:        
 > lm                           # print a list of loaded modules, shows start / ending addr of where they are loaded in memory           
@@ -61,8 +73,11 @@ Execution Flow:
 Registers:       
 > r    #view the register values   
 > r @eax    #check the value of a specific register    
+> r ecx=42424242       #change the value of a register  
 
 Dump memory:       
+db: display bytes, dd: display DWORD, dw: display WORD, dq: display QWORD    
+default length - 0x80 bytes. Change using L     
 > dd esp L3      #dump stack as DWORDS       
 > dt <name of struct> [source mem addr]     #dump a struct, must be provided by a loaded symbol file      
 > da             #dump as ASCII   
@@ -70,23 +85,15 @@ Dump memory:
 > db, dw, dd, dq   #dump as bytes, word, dword, qword    
 
 Display strings:   
+dW, dc      
+da: display ASCII, du: display Unicode        
 > x /a /d ntdll!*    #search for string symbols   
 > dc ntdll!SlashSystem32SlashString    #dump strings   
 > dW     #display ascii and hex   
-> .formats 41414141   #view multiple formats at once, hex/dec/binary/chars     
+> .formats 41414141   #view multiple formats at once, hex/dec/binary/chars       
 
-Setup symbols:       
-Symbols: reference internal functions, structs and global vars with names. No PDB file - WinDbg defaults to the export symbols table.       
-To make the enviromental variable _NT_SYMBOL_PATH: srv*c:\symbols\sym*http://msdl.microsoft.com/download/symbols"        
-> setx _NT_SYMBOL_PATH SRV*C:\symsrv*http://msdl.microsoft.com/download/symbols    #set env var in an admin cmd.exe   
-In WinDbg:   
-> .sympath    #view the syympath  
-> .sympath srv*c:\symbols\sym*http://msdl.microsoft.com/download/symbols"       #set sympath  
-> !lmi process   #parse PE headers for a process and look for the path to the symbol file   
-
-Create a new folder c:\symbols for symbols provided by Microsoft.      
-> .symfix+ c:\symbols
-> .reload       #(or .reload -f if necessary)
+poi: display data referenced from a memory address.     
+> dd poi(esp)       #display the data ESP points to    
 
 Process and Thread Status:    
 > |    #process status cmd - see PID and process name   
@@ -95,10 +102,14 @@ Process and Thread Status:
 Edit memory:   
 e\* - edit command     
 > ed esp 41414141    #edit DWORD esp points to   
+> ea esp "test"   #write asci to esp  
+> eu esp "test"   #write unicode to esp    
 
 Search memory:       
 Search memory for a pattern. s - returns the memory address of found strings in loaded processes / modules.   
-> s <mem type to search for> <starting point of mem to search> <length of mem> <pattern to look for>  
+> s <mem type to search for> <starting point of mem to search> <length of mem> <pattern to look for>     
+-d: search for DWORD, -q: search for QWORD    
+> s -u 0 L?80000000 "hello"   #search entire address space for a Unicode string   
 
 ## User Mode Debugging    
 ### User Level Structs (PEB and TEB)   
@@ -108,16 +119,18 @@ PEB - at fs:[0x30] for x86 processes, gs:[60] for x64
 > !process      #dump current process info   
 > lm   #list loaded modules   
 > !peb   #summary view of the PEB          
-> db <base address of the process> L100
+> db <base address of the process> L100     
+dt: display type. Display structure / dump structure from a memory address.    
 > dt _peb     #dump the peb     
 > dt nt!_TEB    #get offset of the PEB struct   
-> dt -r ntdll!_TEB @$teb    #display nested structs     
+> dt -r ntdll!_TEB @$teb    #dump the TEB and display nested structs     
 > r $peb     #get the memory address of the PEB    
 > dt _peb @$peb    #view struct members and the values the PEB points to       
-+0x018 Ldr              : 0x00007fff`10e7a4c0 _PEB_LDR_DATA        
 > dt _PEB_LDR_DATA   
 > dt _peb @$peb ldr->InMemoryOrderModuleList*     #get the InMemoryOrderModuleList - Linked list of pointers to the loaded modules in the process   
 > dt _peb @$peb ProcessParameters    #view the ProcessParameters struct   
+get the size of a structure using sizeof():     
+> ?? sizeof(ntdll!_TEB)      
 
 Export Address Table:      
 > lm    #find the base address of kernel32.dll    
