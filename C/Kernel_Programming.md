@@ -9,6 +9,7 @@ Blogs:
 [Pavel Yosifovich](https://scorpiosoftware.net/)  
 [secret.club](https://secret.club/)    
 [back.engineering](https://back.engineering/blog)    
+[Windows Internals Training](https://www.alex-ionescu.com/)   
 
 ## Kernel Concepts   
 Kernel vs user mode programming: working with low level existing OS / hardware abstractions and services instead of high level application ones. Computer time and memory might have more restrictions. Kernel level APIs: most have C interfaces, no C++ runtime in the kernel.             
