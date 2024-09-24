@@ -40,7 +40,9 @@ Create a new folder c:\symbols for symbols provided by Microsoft.
 
 Modules:        
 > lm                           # print a list of loaded modules, shows start / ending addr of where they are loaded in memory           
+> lm m kernel*                 # list all modules starting with kernel  
 > x MyDllName!FunctionName     # prints loaded symbols   
+> x kernelbase!Name*           # print loaded symbol, searching for part of the name.  
 
 Check memory protections:     
 > .load narly    #load extension that generates a list of all loaded modules and their protections.  
@@ -66,8 +68,9 @@ Breakpoints:
 Execution Flow:      
 > g   #continue    
 > p   #step over. exec 1 instruction at a time, step over function calls.    
-> t   #exec 1 instruction at a time, step into function calls.   
-> pt   #exec function until return  
+> t   #step in. exec 1 instruction at a time, step into function calls.   
+> pt  #exec function until return. step until next return         
+> ph  #exec code until a branching instruction is reached    
 > k   #dump the call stack   
 > u   #un/disassemble   
 > ub @rip    #disass 8 instructions before rip    
@@ -85,15 +88,16 @@ default length - 0x80 bytes. Change using L
 > da             #dump as ASCII   
 > dp @rsp     #dump x64 stack - displays 64 bit values in 2 columns   
 > db, dw, dd, dq   #dump as bytes, word, dword, qword    
+> ? 5 - 4    #do math in WinDbg, assumes input is in hex. 0n: decimal format. 0y: binary format  
+> .formats 41414141   #view multiple formats at once, hex/dec/binary/chars     
 
 Display strings:   
 dW, dc      
 da: display ASCII, du: display Unicode        
 > x /a /d ntdll!*    #search for string symbols   
 > dc ntdll!SlashSystem32SlashString    #dump strings   
-> dW     #display ascii and hex   
-> .formats 41414141   #view multiple formats at once, hex/dec/binary/chars       
-
+> dW     #display ascii and hex     
+  
 poi: display data referenced from a memory address.     
 > dd poi(esp)       #display the data ESP points to    
 
