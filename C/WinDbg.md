@@ -55,11 +55,13 @@ Breakpoints:
 > bp notepad!wWinMain  #set bp on main  
 > bu   #set a breakpoint on an unresolved function - not loaded yet in the process memory space. Like a function from a loaded DLL.  
 
+Breakpoints:     
 > bl     #list breakpoints  
 > be     #enable a breakpoint   
 > bd     #disable a breakpoint   
 > bc *   #clear all breakpoints or specify a breakpoint   
 > .bpcmds      #list breakpoint commands   
+> bp kernel32!WriteFile ".printf \"breakpoint hit, esp points to: %p\", poi(esp);.echo;g"    #print out data when a breakpoint is hit then continue execution   
 
 Execution Flow:      
 > g   #continue    
