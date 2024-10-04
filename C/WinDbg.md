@@ -49,7 +49,7 @@ Check memory protections:
 > !nmod    #view all loaded modules and memory protections. No DEP / ASLR displayed - means they are disabled.      
 > !vprot eip     #show memory protections of a given addr            
 Breakpoints:    
-2 types of breakpooints: hardware and software. Software: controlled by debugger, INT 3 asm instruction. Hardware: controlled by processor using debug registers, debugger sets, allows you to monitor changes of / access data in memory.          
+2 types of breakpoints: hardware and software. Software: controlled by debugger, INT 3 asm instruction. Hardware: controlled by processor using debug registers, debugger sets, allows you to monitor changes of / access data in memory.          
 > bp <address>      #set a breakpoint   
 > bp 0x401000   
 > bp kernel32!recv   
@@ -146,7 +146,8 @@ Export Address Table:
 Exception handlers:      
 > !exchain   #list the current thread exception handler chain.  
 > !teb    #view TEB, see ExceptionList value    
-> dt _EXCEPTION_REGISTRATION_RECORD <value from the TEB>
+> dt _EXCEPTION_REGISTRATION_RECORD <ExceptionList value from the TEB> 
+Struct members: Next, Handler    
 
 Scripting:   
 > !py C:\Tools\script.py   
