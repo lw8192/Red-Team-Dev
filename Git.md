@@ -25,6 +25,12 @@ commit changes to a repo with an update message:
 push to main branch:     
 
 > git push origin main         
+
+Add a file, commit and push to main:       
+> git add /path/to/file  
+> git commit -m "added script to do something"      
+> git push origin main   
+
 ## Fixing Mistakes   
 Reset commit if not pushed (discard your changes):    
 
