@@ -23,6 +23,11 @@ func main(){
 > go install example/user/hello      #build and install   
 > go run .     #run the module    
 
+Enviromental Variables:   
+[GOPATH](https://medium.com/learn-go/go-path-explained-cab31a0d90b9)     
+> echo $GOROOT     
+> echo $GOPATH   
+
 ## Working with Files   
 os package: OS features like file system    
 ```
