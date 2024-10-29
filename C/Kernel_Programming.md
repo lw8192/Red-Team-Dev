@@ -47,6 +47,10 @@ copy the output WinDbg command, then run on the debugger VM to open WinDbg, rebo
 When a kernel debugger is connected, driver signing is disabled by default.    
 Path to source code symbols:    
 > .sympath + <path to folder with PDB>      
+
+DbgView: SysInternals tool. Can be buggy, but useful for seeing messages.     
+Run as admin > Capture > Capture Kernel & Enable Verbose Kernel Output    
+
 ### Debugging a BSOD (Blue Screen of Death)  
 [BSOD Method and Tips](https://www.sysnative.com/forums/threads/bsod-method-and-tips.284/)      
 [How the BSOD actually 'works'](https://www.sysnative.com/forums/threads/how-the-bsod-actually-works-why-etc.10262/)    
