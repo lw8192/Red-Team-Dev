@@ -40,6 +40,7 @@ Errors in the driver can cause the system to crash / BSOD.
 Load the dumpfile and look at the call stack    
 [Debugging a crash dump](https://whitehatlab.eu/en/blog/windows/kernel-crash-dump/)   
 [Setup remote kernel debugging](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/setting-up-a-network-debugging-connection-automatically)      
+[WinDbg for Kernel Debugging](https://www.apriorit.com/dev-blog/kernel-driver-debugging-with-windbg)
 Setup remote kernel debugging (host = debugger, guest = machine being debugged)    
 Copy kdnet.exe and VerifiedNICList.xml to the guest machine from "C:\Program Files (x86)\Windows Kits\10\Debuggers\x64" (On Win10+ x64)                   
 > kdnet.exe <host_IP> <Port>        #on guest    
