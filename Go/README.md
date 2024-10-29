@@ -27,6 +27,13 @@ Enviromental Variables:
 [GOPATH](https://medium.com/learn-go/go-path-explained-cab31a0d90b9)     
 > echo $GOROOT     
 > echo $GOPATH   
+If GOROOT is empty / wrong:
+> which go       # ex: /usr/bin   
+> export GOROOT=/usr/bin        
+
+If GOPATH is empty / wrong: create any directory anywhere on your computer for go projects. Ex: ~/projects
+> export GOPATH=~/projects
+
 
 ## Working with Files   
 os package: OS features like file system    
