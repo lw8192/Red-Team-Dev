@@ -3,6 +3,7 @@
 [Write your first driver](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/writing-your-first-driver)       
 [Kernel Cactus](https://spikysabra.gitbook.io/kernelcactus)   
 [Win-Kernel Resources](https://github.com/NullArray/WinKernel-Resources)    
+[Getting Started Writing Windows Drivers ](http://www.osronline.com/article.cfm%5Earticle=20.htm)     
   
 Blogs:   
 [OSR Online](https://community.osr.com/c/ntdev/7)  
@@ -111,6 +112,16 @@ Rtl - kernel API functions. Real time library from kernel32.dll
 Macros:    
 CONTAINING_RECORD()   
 CONTAINS()   
+
+### Timers   
+[Using Timer Objects - Docs](https://github.com/MicrosoftDocs/windows-driver-docs/blob/staging/windows-driver-docs-pr/kernel/using-timer-objects.md)        
+KeInitializeTimer - intialize a timer object.   
+KeInitializeTimerEx - initialize a timer object for a repeating timer.    
+KeSetTimer - set interval for when the timer will expire.       
+KeWaitForSingleObject - wait for a timer object to expire.  
+
+### Multithreading    
+
 
 ### Driver Hooking       
 Use filter drivers to intercept requests to almost any devices. Hooking driver: save old function pointers and replace major function arrays in the driver object with it's own functions. A request to the driver will invoke the hooking driver's dispatch routines.    
