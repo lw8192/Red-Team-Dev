@@ -109,18 +109,37 @@ nt!PspNotifyEnableMask - Flag which can disable kernel notify routines
 ntddk.h: header used by the kernel.     
 Rtl - kernel API functions. Real time library from kernel32.dll     
 
+NTSTATUS - signed 32 bit int for success / failure.   
+```
+NTSTATUS sucess = someKernelFunc(); 
+if (!NT_SUCCESS(status)){  //macro to check MSB   
+    DbgPrint("some error\n"); 
+    return status; 
+}
+```
+
 Macros:    
 CONTAINING_RECORD()   
 CONTAINS()   
 
 ### Timers   
-[Using Timer Objects - Docs](https://github.com/MicrosoftDocs/windows-driver-docs/blob/staging/windows-driver-docs-pr/kernel/using-timer-objects.md)        
-KeInitializeTimer - intialize a timer object.   
-KeInitializeTimerEx - initialize a timer object for a repeating timer.    
+[Using Timer Objects - Docs](https://github.com/MicrosoftDocs/windows-driver-docs/blob/staging/windows-driver-docs-pr/kernel/using-timer-objects.md)   
+KTIMER timer;        
+KeInitializeTimer(&timer);    //intialize a timer object.   
+KeInitializeTimerEx(&timer);   //initialize a timer object for a repeating timer.    
 KeSetTimer - set interval for when the timer will expire.       
-KeWaitForSingleObject - wait for a timer object to expire.  
+KeReadStateTimer(&timer);  //query a timer's signaled state   
+KeCancelTimer(&timer);   //cancel timer   
+
+"watchdog timer": I/O timer. For every device object (just 1 per driver) - run a callback at IRQL_DISPATCH_LEVEL every second.   
+IoInitializeTimer   
 
 ### Multithreading    
+dispatcher object: kernel defined object threads can use to sync operations. State of signaled / non-signaled.   
+threads can synchronize operations with:   
+- KeWaitForSingleObject - wait for a dispatcher object to expire. Rets STATUS_SUCCESS when object satisifed wait.   
+- KeWaitForMutexOperation  
+- KeWaitForMultipleObjects  
 
 
 ### Driver Hooking       
