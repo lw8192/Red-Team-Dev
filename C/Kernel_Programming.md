@@ -4,7 +4,8 @@
 [Kernel Cactus](https://spikysabra.gitbook.io/kernelcactus)   
 [Win-Kernel Resources](https://github.com/NullArray/WinKernel-Resources)    
 [Getting Started Writing Windows Drivers ](http://www.osronline.com/article.cfm%5Earticle=20.htm)     
-[Windows Driver Docs](https://github.com/MicrosoftDocs/windows-driver-docs/tree/staging)          
+[Windows Driver Docs](https://github.com/MicrosoftDocs/windows-driver-docs/tree/staging)       
+[Windows Driver Samples](https://github.com/microsoft/Windows-driver-samples/tree/main)       
   
 Blogs:   
 [OSR Online](https://community.osr.com/c/ntdev/7)  
