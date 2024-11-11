@@ -4,6 +4,7 @@
 [Kernel Cactus](https://spikysabra.gitbook.io/kernelcactus)   
 [Win-Kernel Resources](https://github.com/NullArray/WinKernel-Resources)    
 [Getting Started Writing Windows Drivers ](http://www.osronline.com/article.cfm%5Earticle=20.htm)     
+[Windows Driver Docs](https://github.com/MicrosoftDocs/windows-driver-docs/tree/staging)          
   
 Blogs:   
 [OSR Online](https://community.osr.com/c/ntdev/7)  
@@ -22,6 +23,10 @@ PsGetCurrentProcess() - get EPROCESS of current proc. PsLookupProcessByProcessId
 EPROCESS members:   
 - ActiveProcessLinks: doubly linked list of the current processes
 - Token: process access token. PsReferencePrimaryToken(PEPROCESS) - get pointer to token member of an EPROCESS struct.        
+
+Paged vs non-paged memory, page tables      
+
+Interrupts   
 
 ## Kernel Programming Setup   
 Driver signing: needs to be signed so driver loads. Can turn on test signing for dev purposes.   
