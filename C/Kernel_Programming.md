@@ -59,7 +59,9 @@ Path to source code symbols:
 DbgView: SysInternals tool. Can be buggy, but useful for seeing messages.     
 Make sure to compile in Debug mode and run DebugView as admin.       
 Run as admin > Capture > Enable 4 options: Capture Win32 & Capture Global Win32 & Capture Kernel & Enable Verbose Kernel Output    
-KdPrint - won't print out messages if compiled in release mode. DbgPrint 
+KdPrint - won't print out messages if compiled in release mode. DbgPrint    
+
+__debugbreak();        
 
 ### Debugging a BSOD (Blue Screen of Death)  
 [BSOD Method and Tips](https://www.sysnative.com/forums/threads/bsod-method-and-tips.284/)      
