@@ -147,6 +147,8 @@ threads can synchronize operations with:
 - KeWaitForMutexOperation  
 - KeWaitForMultipleObjects  
 
+CreateSystemThread         
+
 
 ### Driver Hooking       
 Use filter drivers to intercept requests to almost any devices. Hooking driver: save old function pointers and replace major function arrays in the driver object with it's own functions. A request to the driver will invoke the hooking driver's dispatch routines.    
