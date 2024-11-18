@@ -31,6 +31,7 @@ Paged vs non-paged memory, page tables
 Interrupts   
 
 IRQL - determines what kernel support routine a driver can call. Can drastically affect exploitation.       
+KeGetCurrentIrql()   
 
 ## Kernel Programming Setup   
 Driver signing: needs to be signed so driver loads. Can turn on test signing for dev purposes.   
