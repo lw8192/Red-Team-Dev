@@ -56,6 +56,7 @@ Copy kdnet.exe and VerifiedNICList.xml to the guest machine from "C:\Program Fil
 > kdnet.exe <host_IP> <Port>        #on guest    
 copy the output WinDbg command, then run on the debugger VM to open WinDbg, reboot guest to connect    
 When a kernel debugger is connected, driver signing is disabled by default.    
+Use WinDbg preview: Start debugging > Attach to kernel > enter in port and key    
 Path to source code symbols:    
 > .sympath + <path to folder with PDB>      
 
