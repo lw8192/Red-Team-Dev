@@ -6,6 +6,7 @@
 [Getting Started Writing Windows Drivers ](http://www.osronline.com/article.cfm%5Earticle=20.htm)     
 [Windows Driver Docs](https://github.com/MicrosoftDocs/windows-driver-docs/tree/staging)       
 [Windows Driver Samples](https://github.com/microsoft/Windows-driver-samples/tree/main)       
+[Windows Kernel Resources: Development, Exploitation, and Analysis](https://x.com/7etsuo/status/1816285806547591371)        
   
 Blogs:   
 [OSR Online](https://community.osr.com/c/ntdev/7)  
@@ -28,6 +29,8 @@ EPROCESS members:
 Paged vs non-paged memory, page tables      
 
 Interrupts   
+
+IRQL - determines what kernel support routine a driver can call. Can drastically affect exploitation.       
 
 ## Kernel Programming Setup   
 Driver signing: needs to be signed so driver loads. Can turn on test signing for dev purposes.   
@@ -67,6 +70,10 @@ __debugbreak();
 [BSOD Method and Tips](https://www.sysnative.com/forums/threads/bsod-method-and-tips.284/)      
 [How the BSOD actually 'works'](https://www.sysnative.com/forums/threads/how-the-bsod-actually-works-why-etc.10262/)    
 BSOD: generates a crash dump.    
+FLTMGR.SYS blue screen errors - usually caused by faulty hardware or corrupt device driver files.       
+MEMORY_MANAGEMENT:     
+PAGE_FAULT_IN_NONPAGED_AREA: data called from memory doesn't exist.    
+IRQL_NOT_LESS_OR_EQUAL: kernel-mode driver accessed paged memory at DISPATCH_LEVEL or above. Look for API functions that are raising the IRQL.      
     
 ### WinDBG Commands    
 [WinDbg - Kernel Programming Cheatsheet](https://github.com/repnz/windbg-cheat-sheet)    
@@ -130,6 +137,9 @@ Macros:
 CONTAINING_RECORD()   
 CONTAINS()   
 
+### Memory Management   
+ExAllocatePoolWithTag - most common memory allocation function.         
+
 ### Timers   
 [Using Timer Objects - Docs](https://github.com/MicrosoftDocs/windows-driver-docs/blob/staging/windows-driver-docs-pr/kernel/using-timer-objects.md)   
 KTIMER timer;        
@@ -140,17 +150,21 @@ KeReadStateTimer(&timer);  //query a timer's signaled state
 KeCancelTimer(&timer);   //cancel timer   
 
 "watchdog timer": I/O timer. For every device object (just 1 per driver) - run a callback at IRQL_DISPATCH_LEVEL every second.   
+DPC: runs in the same thread that sets the timer.        
 IoInitializeTimer   
 
 ### Multithreading    
 dispatcher object: kernel defined object threads can use to sync operations. State of signaled / non-signaled.   
 threads can synchronize operations with:   
-- KeWaitForSingleObject - wait for a dispatcher object to expire. Rets STATUS_SUCCESS when object satisifed wait.   
+- KeWaitForSingleObject - wait for a dispatcher object to expire. Rets STATUS_SUCCESS when object satisifed wait. Raises IRQL to DISPATCH_LEVEL.       
 - KeWaitForMutexOperation  
 - KeWaitForMultipleObjects  
 
-CreateSystemThread         
+PsCreateSystemThread - create thread.       
+PsTerminateSystemThread - cleanup or terminate thread in thread function.           
+ZwClose() - close thread handle (make sure to do this otherwise you might have a MEMORY_MANAGEMENT BSOD).      
 
+IoCreateSystemThread - Win8+, wrapper around PsCreateSystemThread. No need to close the thread handle.    
 
 ### Driver Hooking       
 Use filter drivers to intercept requests to almost any devices. Hooking driver: save old function pointers and replace major function arrays in the driver object with it's own functions. A request to the driver will invoke the hooking driver's dispatch routines.    
