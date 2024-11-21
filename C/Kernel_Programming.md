@@ -178,8 +178,8 @@ KeWaitForSingleObject(&pointer,
 PsCreateSystemThread - create thread. Must use ZwClose() to close the thread handle.      
 ```
 PsCreateSystemThread(&thread, 
-    THREAD_ALL_ACCESS,   //perms - most common  
-    NULL, 
+    THREAD_ALL_ACCESS,   //all possible perms   
+    NULL,                //ObjectAttributes  
     NULL, 
     NULL, 
     thread_func,         //function for thread to run  
