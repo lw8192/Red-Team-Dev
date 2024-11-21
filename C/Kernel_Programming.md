@@ -142,6 +142,9 @@ CONTAINS()
 ### Memory Management   
 ExAllocatePoolWithTag - most common memory allocation function.         
 
+RtlCopyMemory(dest, src, len);  //Copies memory in kernel mode         
+
+
 ### Timers   
 [Using Timer Objects - Docs](https://github.com/MicrosoftDocs/windows-driver-docs/blob/staging/windows-driver-docs-pr/kernel/using-timer-objects.md)   
 KTIMER timer;        
@@ -155,18 +158,40 @@ KeCancelTimer(&timer);   //cancel timer
 DPC: runs in the same thread that sets the timer.        
 IoInitializeTimer   
 
+KeSetEvent - set event object to a signaled state.     
+
 ### Multithreading    
 dispatcher object: kernel defined object threads can use to sync operations. State of signaled / non-signaled.   
 threads can synchronize operations with:   
-- KeWaitForSingleObject - wait for a dispatcher object to expire. Rets STATUS_SUCCESS when object satisifed wait. Raises IRQL to DISPATCH_LEVEL.       
+- KeWaitForSingleObject - wait for a dispatcher object to expire. Rets STATUS_SUCCESS when object satisifed wait. Raises IRQL to DISPATCH_LEVEL.   
+```    
+KeWaitForSingleObject(&pointer, 
+    Executive, 
+    KernelMode,   //mode   
+    FALSE,        //alertable  
+    NULL          //timeout  
+); 
+```
 - KeWaitForMutexOperation  
 - KeWaitForMultipleObjects  
 
-PsCreateSystemThread - create thread.       
+PsCreateSystemThread - create thread. Must use ZwClose() to close the thread handle.      
+```
+PsCreateSystemThread(&thread, 
+    THREAD_ALL_ACCESS,   //perms - most common  
+    NULL, 
+    NULL, 
+    NULL, 
+    thread_func,         //function for thread to run  
+    void_ptr_arg         //arg to thread_func. Might need to typecast from a void pointer.  
+)
+```
 PsTerminateSystemThread - cleanup or terminate thread in thread function.           
 ZwClose() - close thread handle (make sure to do this otherwise you might have a MEMORY_MANAGEMENT BSOD).      
 
 IoCreateSystemThread - Win8+, wrapper around PsCreateSystemThread. No need to close the thread handle.    
+
+KeDelayExecutionThread 
 
 ### Driver Hooking       
 Use filter drivers to intercept requests to almost any devices. Hooking driver: save old function pointers and replace major function arrays in the driver object with it's own functions. A request to the driver will invoke the hooking driver's dispatch routines.    
