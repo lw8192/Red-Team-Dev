@@ -4,12 +4,12 @@
 [Windows API Tutorial](https://zetcode.com/gui/winapi/)     
 [Malapi.io](https://malapi.io/)    
 [Offensive Tool Dev Notes](https://www.rotta.rocks/offensive-tool-development/windows-internals)    
+[Advanced Process Injection Workshop](https://github.com/RedTeamOperations/Advanced-Process-Injection-Workshop)    
+[Red Team Ops: Windows Tool Dev preview](https://www.sans.org/webcasts/sec670-red-team-ops-windows-tool-dev-preview/)    
+
 ## Setting up a Testing Enviroment     
 Recommend: Windows 10 / 11 x64 VM with Visual Studio 2019 “Desktop development with c++” and “.NET desktop development” packages       
 [Commando](https://github.com/mandiant/commando-vm)     
-
-[Red Team Ops: Windows Tool Dev preview](https://www.sans.org/webcasts/sec670-red-team-ops-windows-tool-dev-preview/)    
-Source video: https://www.youtube.com/watch?v=yJzpHxc1meI       
 
 First step after initial access: host survey. 
 Red team tasks: persist, exfil data, pivot.    
