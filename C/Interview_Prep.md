@@ -374,6 +374,26 @@ PE patching: change addresses in a binary. Can inject new code.Can get the addre
 - NOP an address, inject assembly into a binary, hook an entry point so it calls the address. 
 - Replace a function. 
 ### Kernel Programming    
+Interrupts   
+page tables    
+processes    
+paged vs non-paged memory     
+locking, deadlocking issues     
+Is Windows is a real-time os? (if not how to design a RT extension?)
+Locking, deadlocking issues (difference with single/smp/HT systems)
+What is a windows subsystem? (Native vs Win32 ? why does it exist?) can lead
+to discussion with Virtual machines.
+Recursion removal strategy (why is it bad in drivers)
+memory access optimization (tiling…)
+C compilation steps.
+Security (token, SID…)
+Cache Manager/VM interactions.
+Boot process description, Exec load process (what is the c-runtime, pagefault handling),
+Shared library (imports, rva…)
+Give your debugging strategies/support.(Bsod debug howto)
+Give 3 examples of filter drivers.
+Give n links to internet/blog related sites.
+Describe advanced Data structure implementation (B-tree, …), give O() properties.  
 
 ## Reverse Engineering    
 REMnux: network analysis platform.      

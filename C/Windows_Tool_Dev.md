@@ -223,6 +223,10 @@ int main(){
 }
 ```
 
+### DLL Injection    
+[DLL Injection Techniques](http://web.archive.org/web/20200807041601/http://deniable.org/windows/inject-all-the-things)          
+[Inject all the Things](http://web.archive.org/web/20200826025134/https://github.com/fdiskyou/injectAllTheThings)    
+
 
 ## Further Study   
 [Code & Process Injection](https://www.ired.team/offensive-security/code-injection-process-injection)
