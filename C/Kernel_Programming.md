@@ -19,6 +19,11 @@ Blogs:
 ## Kernel Concepts   
 Kernel vs user mode programming: working with low level existing OS / hardware abstractions and services instead of high level application ones. Computer time and memory might have more restrictions. Kernel level APIs: most have C interfaces, no C++ runtime in the kernel.             
 
+Syscalls: from userland to reach the kernel. [syscall tables](https://github.com/j00ru/windows-syscalls): diff Windows versions have diff syscall numbers. Added over time.        
+CreateFile() - in kernelbase.dll    
+NtCreateFile() - in ntdll.dll    
+ZwCreateFile() - in kernel     
+
 [Catalog of key kernel data structures](https://codemachine.com/articles/kernel_structures.html)        
 KPROCESS / EPROCESS: kernel representation of a process object, info on a process running on a system. At fixed offset from other elements, which changes based on the OS build / version. GS[0x188] - KTHREAD of the process itself. Can save in R9 register for later usage.      
 PsGetCurrentProcess() - get EPROCESS of current proc. PsLookupProcessByProcessId() - get EPROCESS of a different process.       
@@ -28,7 +33,9 @@ EPROCESS members:
 
 Paged vs non-paged memory, page tables      
 
-Interrupts   
+Interrupt: asynchronous event. Unrelated to what a processor is currently executing. Some hardware notifies the processor it is ready to do something.         
+Exception: synchronous condition, results from exec of a particular instruction. User mode execs a syscall instruction to transition to kernel mode.    
+IDT - interrupt descriptor table. Table of handlers for diff interrupt numbers. Accessed via SSDT and LIDT instructions.    
 
 IRQL - determines what kernel support routine a driver can call. Can drastically affect exploitation.       
 KeGetCurrentIrql()   
@@ -142,25 +149,16 @@ CONTAINS()
 ### Memory Management   
 ExAllocatePoolWithTag - most common memory allocation function.         
 
-RtlCopyMemory(dest, src, len);  //Copies memory in kernel mode         
-
-
-### Timers   
-[Using Timer Objects - Docs](https://github.com/MicrosoftDocs/windows-driver-docs/blob/staging/windows-driver-docs-pr/kernel/using-timer-objects.md)   
-KTIMER timer;        
-KeInitializeTimer(&timer);    //intialize a timer object.   
-KeInitializeTimerEx(&timer);   //initialize a timer object for a repeating timer.    
-KeSetTimer - set interval for when the timer will expire.       
-KeReadStateTimer(&timer);  //query a timer's signaled state   
-KeCancelTimer(&timer);   //cancel timer   
-
-"watchdog timer": I/O timer. For every device object (just 1 per driver) - run a callback at IRQL_DISPATCH_LEVEL every second.   
-DPC: runs in the same thread that sets the timer.        
-IoInitializeTimer   
-
-KeSetEvent - set event object to a signaled state.     
+RtlCopyMemory(dest, src, len);  //Copies memory in kernel mode          
 
 ### Multithreading    
+Synchronization: mutual exclusion - block threads from accessing data at the same time as thread accessing object.       
+Types:       
+- interlocked operation - wrapper around atomic assembly instruction.     
+- mutex: gives exclusive access to a resource.     
+- spinlock: causes 1 core to spin until it can gain access.      
+- critical section: can't be shared across processes (unlike mutexes)   
+
 dispatcher object: kernel defined object threads can use to sync operations. State of signaled / non-signaled.   
 threads can synchronize operations with:   
 - KeWaitForSingleObject - wait for a dispatcher object to expire. Rets STATUS_SUCCESS when object satisifed wait. Raises IRQL to DISPATCH_LEVEL.   
@@ -192,6 +190,21 @@ ZwClose() - close thread handle (make sure to do this otherwise you might have a
 IoCreateSystemThread - Win8+, wrapper around PsCreateSystemThread. No need to close the thread handle.    
 
 KeDelayExecutionThread 
+
+### Timers & Events     
+[Using Timer Objects - Docs](https://github.com/MicrosoftDocs/windows-driver-docs/blob/staging/windows-driver-docs-pr/kernel/using-timer-objects.md)   
+KTIMER timer;        
+KeInitializeTimer(&timer);    //intialize a timer object.   
+KeInitializeTimerEx(&timer);   //initialize a timer object for a repeating timer.    
+KeSetTimer - set interval for when the timer will expire.       
+KeReadStateTimer(&timer);  //query a timer's signaled state   
+KeCancelTimer(&timer);   //cancel timer   
+
+"watchdog timer": I/O timer. For every device object (just 1 per driver) - run a callback at IRQL_DISPATCH_LEVEL every second.   
+DPC: runs in the same thread that sets the timer.        
+IoInitializeTimer   
+
+KeSetEvent - set event object to a signaled state.    
 
 ### Driver Hooking       
 Use filter drivers to intercept requests to almost any devices. Hooking driver: save old function pointers and replace major function arrays in the driver object with it's own functions. A request to the driver will invoke the hooking driver's dispatch routines.    
