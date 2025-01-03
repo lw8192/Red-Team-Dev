@@ -8,6 +8,7 @@ https://github.com/nextco/windbg-readable-theme
 [WinDBG quick start tutorial](https://codemachine.com/articles/windbg_quickstart.html)    
 [Windbg Cheatsheet](https://github.com/repnz/windbg-cheat-sheet)     
 [Windbg Cheatsheet](https://dblohm7.ca/pmo/windbgcheatsheet.html)    
+[Another cheatsheet](https://blog.lamarranet.com/wp-content/uploads/2021/09/WinDbg-Cheat-Sheet.pdf)         
 [DEFCON27 WinDbg Workshop](https://github.com/hugsy/defcon_27_windbg_workshop)     
 ## Install     
 https://github.com/yanglr/advDotnetDebugging/blob/main/README.md          

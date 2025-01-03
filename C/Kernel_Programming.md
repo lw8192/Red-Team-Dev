@@ -189,7 +189,18 @@ ZwClose() - close thread handle (make sure to do this otherwise you might have a
 
 IoCreateSystemThread - Win8+, wrapper around PsCreateSystemThread. No need to close the thread handle.    
 
-KeDelayExecutionThread 
+KeDelayExecutionThread          
+
+### Mini-Filters    
+[Microsoft Filter Docs](https://learn.microsoft.com/en-us/windows-hardware/drivers/ifs/filter-manager-concepts)    
+[OSR Series on Filter and Mini-Filter programming](https://community.osr.com/c/ntfsd/6)        
+[Microsoft Mini Filter driver samples](https://github.com/microsoft/Windows-driver-samples/tree/main/filesys/miniFilter)    
+[OSR Intro to Mini-Filters](https://www.osr.com/nt-insider/2017-issue2/introduction-standard-isolation-minifilters/)   
+[How to Develop a Windows File System Minifilter Driver: Complete Tutorial](https://www.apriorit.com/dev-blog/675-driver-windows-minifilter-driver-development-tutorial)       
+Filters: legacy, mini-filters: updated and more error proof, modern use.    
+Mini-filter: type of driver written to interact with the Filter Manager / FltMgr, which is a kernel mode driver written to help with file operations. Using a mini filter makes intercepting and changing file system I/O operations a lot easier then trying to implement with a driver.             
+
+> fltmc     #view loaded mini filters on a system   
 
 ### Timers & Events     
 [Using Timer Objects - Docs](https://github.com/MicrosoftDocs/windows-driver-docs/blob/staging/windows-driver-docs-pr/kernel/using-timer-objects.md)   
