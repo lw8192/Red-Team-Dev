@@ -133,10 +133,10 @@ nt!PspNotifyEnableMask - Flag which can disable kernel notify routines
 ntddk.h: header used by the kernel.     
 Rtl - kernel API functions. Real time library from kernel32.dll     
 
-NTSTATUS - signed 32 bit int for success / failure.   
+NTSTATUS - signed 32 bit int for success / failure. Use NT_SUCCESS() and NT_ERROR() macros to check this value. Make sure to read the docs for the kernel functions - they might return different warnings / errors you don't expect and only checking for success might not be enough.        
 ```
-NTSTATUS sucess = someKernelFunc(); 
-if (!NT_SUCCESS(status)){  //macro to check MSB   
+NTSTATUS status = someKernelFunc(); 
+if (!NT_SUCCESS(status)){  //macro to check MSB for success. if condition is satisfied if error occurs      
     DbgPrint("some error\n"); 
     return status; 
 }
