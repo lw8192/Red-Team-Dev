@@ -47,4 +47,7 @@ If pushed to remote:
 > git merge branch_name          #merge the branch into main  
 > git branch -d branch_name      #delete branch post merge   
 Merge conflicts:    
-> git status    #check for unmerged changes, manually resolves the conflicts.  
+> git status    #check for unmerged changes, manually resolves the conflicts.   
+Get out of detached head mode:       
+> git checkout master   
+> git checkout -   
