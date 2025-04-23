@@ -172,6 +172,8 @@ Heaven’s Gate technique: executing 32bit code from a 64bit process or vice ver
 
 ## Windows Internals       
 [Portable Executable File Format](https://blog.kowalczyk.info/articles/pefileformat.html)      
+Windows API: documented Windows functions.    
+Native API: low level version of WinAPI functions. Need more code / effort to use.    
 
 ### Process Overview    
 EPROCESS - kernel level version of the PEB.    
@@ -226,6 +228,22 @@ int main(){
 ### DLL Injection    
 [DLL Injection Techniques](http://web.archive.org/web/20200807041601/http://deniable.org/windows/inject-all-the-things)          
 [Inject all the Things](http://web.archive.org/web/20200826025134/https://github.com/fdiskyou/injectAllTheThings)    
+
+Steps to load a DLL:         
+- Parse the DLL header to get the SizeOfImage value.
+- Allocate space for the DLL image to be loaded in the address space of the image using SizeOfImage / VirtualAlloc.
+- Copy the header and section data to the allocated memory space.
+- Perform image base relocations as needed by processing the image's import table.    
+- Load dependancies and resolve function addresses.
+- Populate the IAT.
+- Protect memory sections as needed.
+- Run TLS callbacks as needed.
+- Call DLL main function. 
+- Return the address of DllMain.   
+
+Reflective DLL injection: DLL maps itself into memory. Contains a function that will perform DLL mapping manually.     
+Challenges: the function needs to manually resolve the addresses of function in kernel32.dll to be used (like VirtualAlloc, GetProcAddress, LoadLibraryA) by walking the PEB. The offset to the function address will also need to be found.        
+
 
 
 ## Further Study   
