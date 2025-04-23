@@ -3,7 +3,7 @@
 Some legacy code is still Python2, but most modern scripts are written in Python3.    
 Main differences: older libraries, strings are stored as ASCII (Python3 - unicode), calculations are rounded down to the nearest whole number (ie 5/2 = 2), no () needed for print statements.   
 ## Dev Enviroments     
-Windows: use Visual Studio Code and install Pylance and Python (IntelliSense (Pylance) extensions.     
+Windows: use Visual Studio Code and install Pylance and Python (IntelliSense (Pylance)) extensions.     
 Install Python on Windows:    
 
     C> python -V #check if already installed   
@@ -160,7 +160,7 @@ Mutable objects: allow you to change their value or data in place without affect
 Immutable: can't change an object's state after creating it.    
 
 ## Debugging    
-IdentationError: use tabnanny to check for mixed tabs / spaces in your script:     
+IndentationError: use tabnanny to check for mixed tabs / spaces in your script:     
 
     python -m tabnanny script.py  
 Logging Library      

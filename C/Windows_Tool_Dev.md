@@ -243,6 +243,7 @@ Steps to load a DLL:
 
 Reflective DLL injection: DLL maps itself into memory. Contains a function that will perform DLL mapping manually.     
 Challenges: the function needs to manually resolve the addresses of function in kernel32.dll to be used (like VirtualAlloc, GetProcAddress, LoadLibraryA) by walking the PEB. The offset to the function address will also need to be found.        
+Different ways to find the base address of the DLL in the loader function: pass it into the function, hunt backward for the MZ & PE headers, hunt backwards for an egg.     
 
 
 

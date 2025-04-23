@@ -1,6 +1,8 @@
 # Git Cheatsheet    
 [Git style guide](https://github.com/agis/git-style-guide)            
-[Clone a Private Repo](https://stackoverflow.com/questions/2505096/clone-a-private-repository-github)        
+[Clone a Private Repo](https://stackoverflow.com/questions/2505096/clone-a-private-repository-github)     
+Git commits: each commit is identified by a hash.   
+
 ## Common commands   
 git workflow: clone repo, make changes, stage changes (using add), commit changes then push   
 clone repo using an access token:     
@@ -41,6 +43,9 @@ If pushed to remote:
 > git revert HEAD    #reset commit   
 
 ## Branches       
+Git will keep a local / remote copy of each branch. It's important to think of these as 2 different things - creating a local branch doesn't create a remote branch automatically (unless you turn on a certain setting) - you need to push the local branch changes    
+
+> git branch -v -a               #view all branches - remote and local   
 > git checkout -b branch_name    #create a new branch and switch to it    
 > git checkout branch_name       #switch to a branch, then commit some changes     
 > git checkout main              #switch to the main branch   
