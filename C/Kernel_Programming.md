@@ -7,6 +7,7 @@
 [Windows Driver Docs](https://github.com/MicrosoftDocs/windows-driver-docs/tree/staging)       
 [Windows Driver Samples](https://github.com/microsoft/Windows-driver-samples/tree/main)       
 [Windows Kernel Resources: Development, Exploitation, and Analysis](https://x.com/7etsuo/status/1816285806547591371)        
+[SANS Kernel Debugging Poster](https://sansorg.egnyte.com/dl/zpFvYURG0J)    
   
 Blogs:   
 [OSR Online](https://community.osr.com/c/ntdev/7)  
