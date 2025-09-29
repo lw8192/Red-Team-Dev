@@ -90,11 +90,20 @@ RSP - stack(top) pointer.
 RBP - stack frame base pointer.    
 RIP - pointer to the next instruction to execute, "instruction pointer".    
 
-# Arguments to Functions on Windows     
+# Windows Calling Conventions     
 arg0 - [EBP+8] on 32-bit, RCX on 64-bit       
 arg1 - [EBP+0xC] on 32-bit, RDX on 64-bit      
 arg2 - [EBP+0x10] on 32-bit, R8 on 64-bit      
 arg3 - [EBP+0x14] on 32-bit, R9 on 64-bit    
+
+# Linux Calling Conventions 
+## x64 - System V calling convention     
+function arguments are in the following registers before a function call:    
+call(arg1, arg2, arg3, arg4, arg5, arg6, arg7);    
+arg1 -> RDI, arg2 -> RSI, arg3 -> RDX, arg4 -> RCX, arg5 -> R8, arg6 -> R9   
+arg7...  -> placed on the stack       
+## x86 - cdecl calling convention   
+arguments are placed on the stack from right to left (last arg is put on the stack first)
 
 # Conditional Jumps
 JA / JG Jump if above/jump if greater.   
@@ -122,7 +131,12 @@ MOV: can move register to register, memory to register, register to memory, imme
 ADD and SUB: add or subtract. The destination operand can be r/mX or register, the source operand can be r/mX, register or immediate.    
 
  add rsp, 9    ; rsp = rsp+9   
- sub rsp, 5    ; rsp = rsp - 5   
+ sub rsp, 5    ; rsp = rsp - 5    
+
+
+LEAVE instruction:   
+restores the base pointer (ebp or rbp) to rsp    
+common instruction when exiting from main() - can mess with exploit flow.    
 
 ## Asm Files  
 ```
