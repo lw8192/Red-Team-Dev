@@ -107,3 +107,15 @@ run input.txt
 
 ## Assert   
 Use assert() statements then analyze your core dump with gdb and ddd.     
+
+
+## Valgrind    
+memcheck - detect memory errors   
+compile program with -g to get debug info and exact line numbers of errors   
+valgrind --leak-check=yes program arg1 arg2    
+--leak-check=yes --show-leak-kinds=all    
+Type of memory errors:   
+- Invalid free: free same block more then once, free non-heap address.   
+Memory leaks:   
+
+[Valgrind](https://web.stanford.edu/class/archive/cs/cs107/cs107.1262/resources/valgrind.html)    
