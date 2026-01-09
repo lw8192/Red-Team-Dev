@@ -13,41 +13,58 @@ Threading: using Pthreads (POSIX thread) interface on Unix/ Linux. POSIX - syste
 [POSIX Threads Programming](https://hpc-tutorials.llnl.gov/posix/)     
 [Pthreads tutorial](https://www.cs.cmu.edu/afs/cs/academic/class/15492-f07/www/pthreads.html)     
 [POSIX Threads](http://www.csc.villanova.edu/~mdamian/threads/posixthreads.html)     
-
+```
     #include <pthread.h>   
-    //to compile: gcc -pthread or -lpthread    depending on the platform    
+    //to compile: gcc -pthread or -lpthread    depending on the platform  
+```  
+Pthread structs:   
+```
+    //pthread_t : thread data type   
+    pthread_t thread[2];   
+
+    //thread_attr_t: define thread attributes. NULL - default thread attribs    
+    int pthread_attr_init(pthread_attr_t *attr);
+    int pthread_attr_destroy(pthread_attr_t *attr);
+    pthread_attr_{set/get}{attribute};
+```
 Create and reap threads:        
-
-    pthread_t thread[2];    
-    //int  pthread_create(pthread_t  * thread, pthread_attr_t * attr, void *(*start_routine)(void *), void * arg);
-    //args: return pointer to the thread ID, thread args (NULL unless you want the thread to have a specific priority), thread routine, thread args as a (void *p). Returns 0 on success.       
+```
+    //int pthread_create(pthread_t  *thread, pthread_attr_t *attr, void *(*start_routine)(void *), void *arg);
+    //args: return pointer to the thread ID, thread args (NULL unless you want the thread to have a specific priority), thread routine, thread args as a (void *p). Returns 0 on success.    
     pthread_create(&thread[0],NULL,&fctn1,NULL);
-    //pthread_join: wait for threads to die        
+
+    //pthread_join: wait for threads to die    
+    //int pthread_join(pthread_t thread, void **status);    
     pthread_join(thread[0],NULL);   //thread id, return value as a (void **p)
+
+    //default behavior for thread creation is joinable threads
+    int pthread_detach(pthread_t thread);
+```
 Determine your thread ID     
-
-    pthread_self();     
+```
+    pthread_self();    
+``` 
 Terminating threads:      
-
+```
     pthread_cancel();    
     pthread_exit();   
     exit();     //terminates all threads    
     RET    //terminates current thread   
-Synchronize access to variables:      
-
-    pthread_mutex_init();   
-    pthread_mutex_lock; 
-    pthread_mutex_unlock;   
+```
 
 ### Pthread Mutexes   
+data race / race condition: multiple threads try to access shared resource. Need to protect this code (the critical section) with some of kind of mutual exclusion -> mutexes.   
+
 Pthread mutexes: provides mechanism to solve mutual exclusion, ensure threads access shared state in a controlled way.      
 ```
 pthread_mutex_t aMutex = PTHREAD_MUTEX_INTIALIZER;   //mutex type    
+//int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *attr);
+pthread_mutex_init(&mutex, &attr);   //attr - mutex behavior. NULL is default. Mutex is shared among processes. 
 pthread_mutex_lock(&aMutex);    //explicit lock    
 //critical section code - protected by the mutex      
 pthread_mutex_unlock(&aMutex);   //explicit unlock   
 
-pthread_mutex_init(&mutex, &attr);   //attr - mutex behavior. NULL is default. Mutex is shared among processes.   
+  
 pthread_mutex_trylock(&mutex);   //check mutex - return if in use and notify calling thread. If free - will lock the mutex. Gives calling thread option to do something else while waiting     
 pthread_mutex_destroy(&mutex);   //clean up and destroy the mutex object 
 ```
@@ -59,7 +76,7 @@ Mutex safety tips:
 - Always unlock the correct mutex.      
 
 ### Pthread Conditional Variables     
-Pthread conditional variables: notify thread when a specific condition occurs.     
+Pthread conditional variables: notify thread when a specific condition occurs. Useful with mutexes but can be helpful otherwise.       
 ```
 pthread_cond_t cond = PTHREAD_COND_INTIALIZER;   //type of cond var      
 pthread_cond_wait(&cond, &mutex);      //wait        
