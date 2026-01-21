@@ -1,5 +1,5 @@
 # Working with Files in C    
-Working with files using integer file descriptors (on a Linux system):    
+## Working with files using integer file descriptors (on a Linux system):    
 The Linux kernel uses int file descriptors to describe files, allowing you to use them in programs written on Linux systems.      
 open() - open a file with read / write permissions. Returns a new integer file descriptor to the file.      
 
@@ -22,7 +22,8 @@ close() - close a file descriptor. Returns 0 on success.
     close(file_fd);    
 
 If you need more information about the stream you can use a file pointer (FILE *). This has info like the current location in the file, end of file marker and error info.     
-Working with files using file pointers on Linux:      
+
+## Working with files using file pointers on Linux:      
 [Basics of File Handling in C](https://www.geeksforgeeks.org/basics-file-handling-c/)      
 FILE * file_pointer;     //define a file pointer    
 fopen() - open a file. Returns a pointer to the file.    
@@ -31,7 +32,7 @@ fopen() - open a file. Returns a pointer to the file.
 
 fread() - read bytes from a file into a buffer. Returns the number of bytes read.     
 
-    size_t bytes_read = fread(buffer, 1, sizeof buffer, file_pointer);      //read in 1 byte chunks    
+    size_t bytes_read = fread(buffer, 1, sizeof(buffer), file_pointer);      //read in 1 byte chunks    
 
 fwrite() - write to a file. Returns the number of bytes read.    
 
