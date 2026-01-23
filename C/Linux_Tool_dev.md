@@ -7,6 +7,10 @@ https://syscall.sh/
 linux process injection:   
 https://www.outflank.nl/blog/2025/12/09/seccomp-notify-injection/      
 
+Syscall hooking:   
+https://exploit.ph/linux-kernel-hacking/2014/07/10/system-call-hooking/index.html          
+
+
 ## Linux OS Dev     
 Study osdev theory and existing operating systems:    
 - https://pages.cs.wisc.edu/~remzi/OSTEP/ READ THIS

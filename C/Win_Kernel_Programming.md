@@ -41,6 +41,32 @@ IDT - interrupt descriptor table. Table of handlers for diff interrupt numbers. 
 IRQL - determines what kernel support routine a driver can call. Can drastically affect exploitation.       
 KeGetCurrentIrql()   
 
+Named pipes: used for inter-process communication.           
+https://www.ired.team/offensive-security/privilege-escalation/windows-namedpipes-privilege-escalation          
+https://csandker.io/2021/01/10/Offensive-Windows-IPC-1-NamedPipes.html        
+named pipe: FILE_OBJECT, for IPC. exchange data between client / server      
+Windows IPC: named pipes, RPC, LPC, ALPC     
+2 types of pipes: anonymous / named        
+CreateNamedPipe - win32 API, L"\\\\.\\pipe\\<name>"        
+duplex pipe: server and client can send / rx data. pipe message mode     
+machines global dir: \. pipe is a symbolic link to the NamedPipe device    
+named pipes can be used over a network connection accross system boundaries    
+named pipes comm mode: bytes / message   
+named pipe operations - synchronous / asynchronous   
+look at data in pipe - shared memory section   
+
+ioctls:      
+https://learn.microsoft.com/en-us/windows/win32/devio/calling-deviceiocontrol       
+https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-i-o-control-codes    
+DeviceIOControl function - device input and output control (IOCTL) interface app can comm w/ device driver.    
+Each control code - op for driver to do std control codes in SDK header files.    
+Drivers: can define own device specific control codes.     
+#include <windows.h>    
+#include <winioctl.h>    
+ioctls: common between user-mode apps and drivers, comm internally among drivers in a stack. I/O control codes - sent using IRPs.     
+public ioctls: system-defined, documented by Microsoft in the Windows Driver Kit or Windows SDK.    
+
+
 ## Kernel Programming Setup   
 Driver signing: needs to be signed so driver loads. Can turn on test signing for dev purposes.   
 
@@ -219,6 +245,10 @@ IoInitializeTimer
 KeSetEvent - set event object to a signaled state.    
 
 ### Driver Hooking       
+Kernel hooks:        
+Hooking kernel functions is generally not allowed on Windows due to a security feature called PatchGuard or Kernel Patch Protection. PatchGuard was introduced by Microsoft to prevent unauthorized modifications to the kernel, which includes hooking kernel functions. PatchGuard operates non-deterministic, meaning it can be triggered at any random time to check for unauthorized modifications to the kernel. It protects some functions but not all.     
+
+Advanced techniques have been developed to bypass PatchGuard-  kernel function hooking. This technique is complex and risky and can lead to system instability or a Blue Screen of Death (BSOD).
 Use filter drivers to intercept requests to almost any devices. Hooking driver: save old function pointers and replace major function arrays in the driver object with it's own functions. A request to the driver will invoke the hooking driver's dispatch routines.    
 Patchguard / Kernel Patch Protection (KPP): hashes important data structures to prevent unauthorized modifications to the kernel. Can be triggered at any random time and crashes the system if changes are detected. Ex - SSDT pointing to system services (system calls)        
 To hook a driver: locate driver object pointer (DRIVER_OBJECT) using an undocumented exported function that can locate any object given its name - ObReferenceObjectByName      
