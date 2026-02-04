@@ -73,7 +73,7 @@ htons(short);   //16 bit int from host to network byte order
 ntohl(long);  //32 bit int from network to host byte order   
 ntohs(long);  //16 but int from network to host byte order 
 ```
-Define a sockaddr struct:    
+### Manually defining a sockaddr struct:    
 ```
   struct sockaddr_in host_addr; 
   host_addr.sin_family = AF_INET;   //host byte order   
@@ -81,5 +81,42 @@ Define a sockaddr struct:
   host_addr.sin_addr.s_addr = 0;  //auto fills with my ip  
   memset(&(host_addr.sin_zero), '\0', 8);  //zero the rest of the struct
 ```
+### Using getaddrinfo() to dynamically get socket address info
+Using getaddrinfo() to dynamically get ipv4 and ipv6 host details to be compatible with both.
+Call getaddrinfo() - which returns a linked list socket addresses. Need to free with freeaddrinfo()     
+Client connection code:     
+```
+  int sockfd;  
+  struct addrinfo hints, *res, *p;   //p will be linked list with ipv4 / ipv6 connection info
+  memset(&hints, 0, sizeof(hints));    //zero hints. 
+  hints.ai_family = AF_UNSPEC;   //ipv4 or ipv6  
+  hints.ai_socktype = SOCK_STREAM;  
+  hints.ai_flags = 0;    //0 for client connection 
+  if (getaddrinfo("localhost", "8080" ,&hints, &res) < 0){
+    fprintf(stderr, "%s @ %d: unable to get host info\n", __FILE__, __LINE__);   
+    return -1;    
+  }      //get address info of localhost to be ipv6 compatible. 
+
+  sockfd = socket(res->ai_family, res->ai_socktype, res->ai_protocol);         //use results from getaddrinfo
+  if (sockfd < 0){
+      fprintf(stderr, "%s @ %d: unable to create socket\n", __FILE__, __LINE__);   
+      freeaddrinfo(res);
+      return -1; 
+  }
+  for (p = res; p != NULL; p = p->ai_next) {
+    sockfd = socket(p->ai_family, p->ai_socktype, p->ai_protocol);
+    if (sockfd < 0) continue;
+    if (connect(sockfd, p->ai_addr,p->ai_addrlen) == 0) {
+        break; 
+    }
+    close(sockfd);
+  }
+  if (p == NULL){
+    fprintf(stderr, "%s @ %d: unable to connect to server\n", __FILE__, __LINE__);   
+    freeaddrinfo(res);
+    return -1;    
+  }
+```
+Getaddrinfo() - server connection code:   
 
 ## Networking on Windows using WinSock   
