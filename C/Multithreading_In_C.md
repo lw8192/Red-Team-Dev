@@ -57,7 +57,7 @@ data race / race condition: multiple threads try to access shared resource. Need
 
 Pthread mutexes: provides mechanism to solve mutual exclusion, ensure threads access shared state in a controlled way.      
 ```
-pthread_mutex_t aMutex = PTHREAD_MUTEX_INTIALIZER;   //mutex type    
+pthread_mutex_t aMutex = PTHREAD_MUTEX_INTIALIZER;   //mutex type when initializing as a global or static variable.    
 //int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *attr);
 pthread_mutex_init(&mutex, &attr);   //attr - mutex behavior. NULL is default. Mutex is shared among processes. 
 pthread_mutex_lock(&aMutex);    //explicit lock    
@@ -78,7 +78,7 @@ Mutex safety tips:
 ### Pthread Conditional Variables     
 Pthread conditional variables: notify thread when a specific condition occurs. Useful with mutexes but can be helpful otherwise.       
 ```
-pthread_cond_t cond = PTHREAD_COND_INTIALIZER;   //type of cond var      
+pthread_cond_t cond = PTHREAD_COND_INTIALIZER;   //when intializing as a global or static variable     
 pthread_cond_wait(&cond, &mutex);      //wait        
 pthread_cond_signal(&cond);    //notify 1 thread    
 pthread_cond_broadcast(&cond);     //notify all threads       
