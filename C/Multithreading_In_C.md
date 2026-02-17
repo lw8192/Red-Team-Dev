@@ -1,15 +1,29 @@
 # Implementing Threading in C    
 ## Threading Concepts    
-[Beej's Guide to C - Multithreading](https://beej.us/guide/bgc/html/split/multithreading.html)
+[Beej's Guide to C - Multithreading](https://beej.us/guide/bgc/html/split/multithreading.html)  
+Process: own memory space. Thread: part of a process, does not share stack and registers but shares heap memory.   
 Creating a thread: creates a peer (not child to a parent process like in multiprocessing).    
 Thread safety: a function is thread safe when it has correct results when it is invoked by multiple concurrent threads at the same time. Functions called from a thread must also be thread safe.         
 Synchronization primitives: mutexes, semaphores     
 Mutex (mutual exceptions): protects a section of code from being run at the same time by different threads. Used to protected a shared resource (ie a file) from being accessed and modified by multiple threads at the same time. Can be accquired or released.          
 Semaphores: similiar to a mutex, can be locked / unlocked by any part of the program.        
 Conditional variables: a condition to be checked that allows for threads to go to sleep until an event on another thread occurs. Can be used to send a signal between threads.            
+Terminating threads for a clean shutdown: can use a shutdown flag or poison pill approach.   
+
+### Threading Models   
+Boss / worker pattern:   
+A main thread (boss) will assigns tasks to worker threads by using a producer/consumer queue.    
+Total time = time for 1 task * (number of tasks / number of work threads)    
+
+Pipeline pattern:   
+Each thread has a subtask in a system; a task must pass through all threads to be completed.    
+Total time = time for 1st task  + (tasks left / time for last stage)   
+
+Layered pattern:  
+Each layer gets a group of related tasks. Workers do tasks from an assigned layer.   
 
 ## Pthreads - Threading on Unix / Linux 
-Threading: using Pthreads (POSIX thread) interface on Unix/ Linux. POSIX - system wide C library.         
+Threading: using Pthreads (POSIX thread) interface on Unix/ Linux. POSIX - system wide C library, Portable Operation System Interface.         
 [POSIX Threads Programming](https://hpc-tutorials.llnl.gov/posix/)     
 [Pthreads tutorial](https://www.cs.cmu.edu/afs/cs/academic/class/15492-f07/www/pthreads.html)     
 [POSIX Threads](http://www.csc.villanova.edu/~mdamian/threads/posixthreads.html)     
@@ -63,7 +77,6 @@ pthread_mutex_init(&mutex, &attr);   //attr - mutex behavior. NULL is default. M
 pthread_mutex_lock(&aMutex);    //explicit lock    
 //critical section code - protected by the mutex      
 pthread_mutex_unlock(&aMutex);   //explicit unlock   
-
   
 pthread_mutex_trylock(&mutex);   //check mutex - return if in use and notify calling thread. If free - will lock the mutex. Gives calling thread option to do something else while waiting     
 pthread_mutex_destroy(&mutex);   //clean up and destroy the mutex object 
@@ -111,7 +124,7 @@ Does the process ever hang? Yes > deadlock. If it only hangs sometimes > you mig
 Race conditions: 2 concurrent threads or processes compete for a resource and the resulting final program state depends on who gets the resources first. Occurs when code with multiple units of execution (like threads) has a shared variable that can be read / written by multiple threads at the same time. Look for shared variables or resources that are order dependant. Breakpoints in the code will affect race conditions.             
 Debugging threaded programs: sometimes the bug changes or goes away when you use printf statements or run it in a debugger (this is called a heisenbug). Heisenbug: usually means you have a race condition.     
 Critical sections: not always the best fix but can help to narrow down the problem.    
-If program hands - check stacktraces uses pstacks. Look for cyclic locks.     
+If program hangs - check stacktraces and uses pstacks. Look for cyclic locks.     
 
 Design Tips:    
 - Remove all global variables, including static as much as possible to isolate them. Minimize shared resources.        
