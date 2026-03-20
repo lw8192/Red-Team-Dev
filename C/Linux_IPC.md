@@ -62,14 +62,19 @@ unlink - shared memory space will be destroyed
 [POSIC Shared Memory API](https://www.geeksforgeeks.org/linux-unix/posix-shared-memory-api/)
 
 ### POSIX Semaphores    
-Integer maintained inside kernel   
+Integer maintained inside kernel, can never go below zero.       
 Blocking primitive. Protect shared memory / shared resource. Named (independent) and unnamed (embedded in shared memory) semaphores.         
+Named semaphores: synchronize across processes.      
 ```
+sem_open()   
 sem_post()   //increment by 1   
 sem_wait()   //decrement by 1  
+sem_close() 
+sem_unlink()   
 ```
-Unnamed semaphores:     
+Unnamed semaphores: synchronize across threads.        
 ```
+sem_init(), 
 sem_init(semp, pshared, value);  //initialize semaphore   
 sem_post(semp);     //add 1 to value  
 sem_wait(semp);     //subtract 1 from value  
