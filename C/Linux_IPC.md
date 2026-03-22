@@ -12,15 +12,35 @@ asynchronous communication with message prioritization and fixed-size messages
 Message Queue functions:    
 ```  
 #include <mqueue.h>  //need to also link with -lrt 
+//best practice for IPC - unlink the resource name before creating a new object
 mq_open()   
+mqd_t mq = mq_open(name, O_WRONLY); 
 mq_getattr()        
 mq_setattr()   
 mq_send()   
-mq_receive()   
+mq_receive()  
+ssize_t mq_receive(mqd_t mqdes, char *msg_ptr, size_t msg_len, unsigned int *msg_prio); 
 mq_notify()       
 
 mq_close()           //close a message queue descriptor   
 mq_unlink()       //remove message queue from system once process closes them
+
+
+#define QUEUE_NAME "/name"   //must start with a slash 
+// best practice for IPC - unlink the resource name before creating a new object
+if (mq_unlink(QUEUE_NAME) < 0) {   //unable to unlink message queue or message queue doesn't exist 
+    fprintf(stderr,"Unable to unlink message queue %s\n", QUEUE_NAME);
+}
+struct mq_attr attr;
+attr.mq_maxmsg = 10;
+attr.mq_msgsize = 1024;
+attr.mq_flags = 0;
+//attr required when calling mq_open with O_CREAT 
+mqd_t mq = mq_open(QUEUE_NAME, O_CREAT | O_RDWR, 0666, &attr); 
+if (mq == (mqd_t)-1){
+    fprintf(stderr,"Unable to create message queue %s\n", QUEUE_NAME);
+    return -1; 
+}
 ```
 see created message queues in /dev/mqueue/   
 Message queues needs to be unlinked or they will exist until the next system reboot.   
@@ -34,7 +54,7 @@ Have to use synchronization variables to control access.
 see created shared memory segments in /dev/shm/       
 Functions   
 ```
-int shm_fd = shm_open(name, flags, mode);   //open / create SHM object 
+int shm_fd = shm_open(name, flags, mode);   //open / create connection to SHM object 
 shm_fd = shm_open(name, O_CREAT | O_RDWR, 0666);   
 //FLAGS: O_CREAT, O_EXCL, O_RDONLY, O_RDWR, O_TRUNC   
 ftruncate(shm_fd, 4096);   //config size of shm object in bytes   
@@ -69,12 +89,17 @@ Named semaphores: synchronize across processes.
 sem_open()   
 sem_post()   //increment by 1   
 sem_wait()   //decrement by 1  
-sem_close() 
+int sem_getvalue ( sem_t * sem , int * sval);  //get current value of semaphore  
+int sem_close (sem_t * sem);  
 sem_unlink()   
+int sem_unlink (const char *name); 
 ```
 Unnamed semaphores: synchronize across threads.        
 ```
-sem_init(), 
+# include <semaphore.h>
+//Compile either with -lrt or -lpthread
+int sem_init ( sem_t * sem , int pshared , unsigned int value ) ;  //pshared - semaphore is shared among threads or processes  
+sem_init(semp, 1, 2), 
 sem_init(semp, pshared, value);  //initialize semaphore   
 sem_post(semp);     //add 1 to value  
 sem_wait(semp);     //subtract 1 from value  

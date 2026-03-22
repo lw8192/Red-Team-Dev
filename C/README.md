@@ -12,6 +12,9 @@ C is fast due to: compiling, strongly typed, no garbage collection.
 [Stanford CS Library](http://cslibrary.stanford.edu/)   
 [C Stack Overflow Wiki](https://stackoverflow.com/tags/c/info)    
 
+### System Programming   
+[Computer Systems Fundamentals](https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/index.html)
+
 ## Variables          
 [Reference Chart for Data Types in C](https://www.geeksforgeeks.org/data-types-in-c/#)     
 C - must declare variables and give them a type before use. Static var: valid in a global scope.         
@@ -263,21 +266,22 @@ Use a Pointer to refer to dynamically allocated memory
 
     struct ex *ptr = (struct ex *) malloc(sizeof(struct ex));   //allocated space to hold struct ex    
 Example of allocating and freeing memory:   
+```
+#include <stdio.h>   
+#include <stdlib.h> 
+int main(void) 
+{
+    int *pointr = malloc(4*sizeof(int));  // allocates memory - array of 4 ints   
 
-    #include <stdio.h>   
-    #include <stdlib.h> 
-    int main(void) 
-    {
-        int *pointr = malloc(4*sizeof(int));  // allocates memory - array of 4 ints   
-    
-        if(pointr) {
-            for(int n=0; n<4; ++n) // populate the array
-                pointr[n] = n*n;
-            for(int n=0; n<4; ++n) // print it back out
-                printf("[%d] == %d\n", n, pointr[n]);
-        }
-        free(pointr); //free allocated memory   
-    } 
+    if(pointr) {
+        for(int n=0; n<4; ++n) // populate the array
+            pointr[n] = n*n;
+        for(int n=0; n<4; ++n) // print it back out
+            printf("[%d] == %d\n", n, pointr[n]);
+    }
+    free(pointr); //free allocated memory   
+} 
+```
 Common errors when allocating memory:     
 Not allocating space for a terminating null char when allocating memory for a string.     
 Not freeing dynamically allocated variables.      
