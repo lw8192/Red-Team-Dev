@@ -54,11 +54,14 @@ Have to use synchronization variables to control access.
 see created shared memory segments in /dev/shm/       
 Functions   
 ```
+#include <sys/mman.h>
+//best practice for IPC - unlink the resource name before creating a new object
 int shm_fd = shm_open(name, flags, mode);   //open / create connection to SHM object 
 shm_fd = shm_open(name, O_CREAT | O_RDWR, 0666);   
 //FLAGS: O_CREAT, O_EXCL, O_RDONLY, O_RDWR, O_TRUNC   
 ftruncate(shm_fd, 4096);   //config size of shm object in bytes   
 mmap()   //map shared object    
+void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset);
 shm_unlink()    // remove SHM object pathname   
 ```
 
@@ -77,6 +80,22 @@ open object O_RDONLY
 mmap()   
 read from shared memory  
 unlink - shared memory space will be destroyed  
+```
+Example:  
+```
+#include <sys/mman.h>
+#define SHM_NAME "/shm_name" 
+  void *shm_ptr; 
+  if (shm_unlink(SHM_NAME) < 0) {   //unable to unlink shm or shm doesn't exist 
+    if (errno != ENOENT){
+      fprintf(stderr,"Unable to unlink message queue %s\n", QUEUE_NAME);
+    }
+  }
+  int shm_fd = shm_open(SHM_NAME, O_CREAT | O_RDWR, 0666);  
+  //  ftruncate to set size of segment to segsize 
+  ftruncate(shm_fd, segsize); 
+  // void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset);   
+  shm_ptr = mmap(0, segsize, PROT_WRITE, MAP_SHARED, shm_fd, 0);  
 ```
 
 [POSIC Shared Memory API](https://www.geeksforgeeks.org/linux-unix/posix-shared-memory-api/)
