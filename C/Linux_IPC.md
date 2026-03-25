@@ -46,6 +46,7 @@ see created message queues in /dev/mqueue/
 Message queues needs to be unlinked or they will exist until the next system reboot.   
 
 [Linux for DEV #17](https://olehslabak.medium.com/linux-for-dev-17-1dda8b3fc3b9)   
+[Message Queues](https://github.com/ANSANJAY/ipc-message-queue)
 
 ## Shared Memory IPC Methods   
 ### POSIX Shared Memory      
