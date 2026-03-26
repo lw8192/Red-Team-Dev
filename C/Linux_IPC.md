@@ -4,7 +4,9 @@ message passing: easier to implement, managed by OS, slower, more overhead. Mess
 shared memory: faster but dev needs to synchronize access.      
 
 SystemV vs POSIX   
-POSIX: thread safe, newer, modern standard. System V: legacy applications.             
+POSIX: thread safe, newer, modern standard. System V: legacy applications.    
+
+[Beej's Guide to Interprocess Communication](https://beej.us/guide/bgipc/html/)   
 
 ## Message Passing IPC Methods  
 ### POSIX Message Queues   
@@ -99,7 +101,8 @@ Example:
   shm_ptr = mmap(0, segsize, PROT_WRITE, MAP_SHARED, shm_fd, 0);  
 ```
 
-[POSIC Shared Memory API](https://www.geeksforgeeks.org/linux-unix/posix-shared-memory-api/)
+[POSIC Shared Memory API](https://www.geeksforgeeks.org/linux-unix/posix-shared-memory-api/)    
+[POSIX Shared Memory](https://logan.tw/posts/2018/01/07/posix-shared-memory/)
 
 ### POSIX Semaphores    
 Integer maintained inside kernel, can never go below zero.       

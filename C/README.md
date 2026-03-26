@@ -13,7 +13,10 @@ C is fast due to: compiling, strongly typed, no garbage collection.
 [C Stack Overflow Wiki](https://stackoverflow.com/tags/c/info)    
 
 ### System Programming   
-[Computer Systems Fundamentals](https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/index.html)
+[Computer Systems Fundamentals](https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/index.html)    
+[CodeVault](https://www.youtube.com/@CodeVault)    
+[CS 361 Systems Programming](https://www.youtube.com/playlist?list=PLhy9gU5W1fvUND_5mdpbNVHC1WCIaABbP)     
+[Operating Systems Concepts](https://www.youtube.com/playlist?list=PLI3TocC2xS26LoF6tSsgTLv44HTr2l2Ol)     
 
 ## Variables          
 [Reference Chart for Data Types in C](https://www.geeksforgeeks.org/data-types-in-c/#)     
