@@ -111,7 +111,7 @@ Named semaphores: synchronize across processes.
 ```
 #include <semaphore.h>
 sem_t *m_sem;
-sem_open() 
+//sem_open() 
 m_sem = sem_open (SEM_MUTEX_NAME, O_CREAT, 0660, 1);      
 sem_wait()   //decrement by 1. before accessing shared memory.   
 sem_post()   //increment by 1. After accessing shared memory.     
@@ -130,6 +130,24 @@ sem_init(semp, pshared, value);  //initialize semaphore
 sem_post(semp);     //add 1 to value  
 sem_wait(semp);     //subtract 1 from value  
 sem_destroy(semp);   //free semaphore, release resources back to system. 
+```
+
+Named semaphores - producer / consumer model example:    
+Producer:   
+```
+  sem_wait(sem_empty);  //wait until coordination object (ie queue) is empty   
+  //lock mutex 
+  //remove items from queue, do operation   
+  //unlock mutex 
+  sem_post(sem_wait); //publish queue is full, producer done.  
+```
+Consumer:   
+```
+  sem_wait(sem_full);  //wait until coordination object (ie queue) is full   
+  //lock mutex 
+  //remove items from queue, do operation   
+  //unlock mutex 
+  sem_post(sem_empty); //publish queue is empty, consumer done.  
 ```
 
 ## Cleaning up IPC Resources   
