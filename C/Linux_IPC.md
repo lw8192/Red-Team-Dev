@@ -109,9 +109,12 @@ Integer maintained inside kernel, can never go below zero.
 Blocking primitive. Protect shared memory / shared resource. Named (independent) and unnamed (embedded in shared memory) semaphores.         
 Named semaphores: synchronize across processes.      
 ```
-sem_open()   
-sem_post()   //increment by 1   
-sem_wait()   //decrement by 1  
+#include <semaphore.h>
+sem_t *m_sem;
+sem_open() 
+m_sem = sem_open (SEM_MUTEX_NAME, O_CREAT, 0660, 1);      
+sem_wait()   //decrement by 1. before accessing shared memory.   
+sem_post()   //increment by 1. After accessing shared memory.     
 int sem_getvalue ( sem_t * sem , int * sval);  //get current value of semaphore  
 int sem_close (sem_t * sem);  
 sem_unlink()   
