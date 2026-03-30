@@ -132,9 +132,11 @@ struct person {
    int age;
 };       
 struct person *x; 
+struct person y; 
 //-> is a shorthand for (*x).field. x->age is as the same as referring to (*x).age    
 //x.age would be used if you do not compare a pointer to the struct.       
 x->age = 25;     
+y.age = 26;   
 ```
 
 ### Typecasting    

@@ -135,21 +135,24 @@ sem_destroy(semp);   //free semaphore, release resources back to system.
 ```
 
 Named semaphores - producer / consumer model example:    
+Create semaphores:      
+```
+sem *sem_empty, * sem_full; 
+sem_empty = sem_open(sem_empty_name, O_CREAT | O_EXCL, 0644, 1);  //start with shared memory segment considered empty   
+sem_full = sem_open(sem_full_name, O_CREAT | O_EXCL, 0644, 0);   //start with shared memory segment considered empty   
+```
 Producer:   
 ```
-  sem_wait(sem_empty);  //wait until coordination object (ie queue) is empty   
-  //lock mutex 
-  //remove items from queue, do operation   
-  //unlock mutex 
-  sem_post(sem_wait); //publish queue is full, producer done.  
+  sem_wait(sem_empty);  //wait until coordination object is "empty"(ie shared memory segment)     
+  //write to shared memory segment. might need to include some kind of metadata.   
+  sem_post(sem_wait); //publish segment is full, producer done.  
+  //if reusing shared memory segments: need to be careful with what state the semaphores will be in / what is in the segment.  
 ```
 Consumer:   
 ```
-  sem_wait(sem_full);  //wait until coordination object (ie queue) is full   
-  //lock mutex 
-  //remove items from queue, do operation   
-  //unlock mutex 
-  sem_post(sem_empty); //publish queue is empty, consumer done.  
+  sem_wait(sem_full);  //wait until shared memory segment is full    
+  //read from shared memory segment. parse metadata (if applicable) 
+  sem_post(sem_empty); //publish shared memory is "empty", consumer done.  
 ```
 
 ## Cleaning up IPC Resources   

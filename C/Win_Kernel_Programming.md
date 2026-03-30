@@ -248,7 +248,7 @@ KeSetEvent - set event object to a signaled state.
 Kernel hooks:        
 Hooking kernel functions is generally not allowed on Windows due to a security feature called PatchGuard or Kernel Patch Protection. PatchGuard was introduced by Microsoft to prevent unauthorized modifications to the kernel, which includes hooking kernel functions. PatchGuard operates non-deterministic, meaning it can be triggered at any random time to check for unauthorized modifications to the kernel. It protects some functions but not all.     
 
-Advanced techniques have been developed to bypass PatchGuard-  kernel function hooking. This technique is complex and risky and can lead to system instability or a Blue Screen of Death (BSOD).
+Advanced techniques have been developed to bypass PatchGuard - kernel function hooking. This technique is complex and risky and can lead to system instability or a Blue Screen of Death (BSOD).
 Use filter drivers to intercept requests to almost any devices. Hooking driver: save old function pointers and replace major function arrays in the driver object with it's own functions. A request to the driver will invoke the hooking driver's dispatch routines.    
 Patchguard / Kernel Patch Protection (KPP): hashes important data structures to prevent unauthorized modifications to the kernel. Can be triggered at any random time and crashes the system if changes are detected. Ex - SSDT pointing to system services (system calls)        
 To hook a driver: locate driver object pointer (DRIVER_OBJECT) using an undocumented exported function that can locate any object given its name - ObReferenceObjectByName      

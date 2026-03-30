@@ -126,6 +126,10 @@ Debugging threaded programs: sometimes the bug changes or goes away when you use
 Critical sections: not always the best fix but can help to narrow down the problem.    
 If program hangs - check stacktraces and uses pstacks. Look for cyclic locks.     
 
+Thread safe functions:   
+- use pread() instead of read() if using a pool of shared file desciptors.  
+- use fstat() instead of lseek() to get file sizes.  
+
 Design Tips:    
 - Remove all global variables, including static as much as possible to isolate them. Minimize shared resources.        
 - make isolated components reentrant (stateless - take inputs as constants and only manipulate declared, logically constant parameters. Pass-by-value instead of pass-by-reference).    
