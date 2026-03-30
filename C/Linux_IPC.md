@@ -107,12 +107,14 @@ Example:
 ### POSIX Semaphores    
 Integer maintained inside kernel, can never go below zero.       
 Blocking primitive. Protect shared memory / shared resource. Named (independent) and unnamed (embedded in shared memory) semaphores.         
-Named semaphores: synchronize across processes.      
+Named semaphores: synchronize across processes.   
+View named semaphores on system in dev/shm/sem.*       
 ```
 #include <semaphore.h>
 sem_t *m_sem;
 //sem_open() 
-m_sem = sem_open (SEM_MUTEX_NAME, O_CREAT, 0660, 1);      
+m_sem = sem_open (SEM_MUTEX_NAME, O_CREAT | O_EXCL, 0660, 1);      
+//use O_CREAT | O_EXCL to make sure new, unique semaphore is created. 
 sem_wait()   //decrement by 1. before accessing shared memory.   
 sem_post()   //increment by 1. After accessing shared memory.     
 int sem_getvalue ( sem_t * sem , int * sval);  //get current value of semaphore  
