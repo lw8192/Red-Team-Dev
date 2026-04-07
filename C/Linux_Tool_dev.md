@@ -13,12 +13,12 @@ https://exploit.ph/linux-kernel-hacking/2014/07/10/system-call-hooking/index.htm
 
 ## Linux OS Dev     
 Study osdev theory and existing operating systems:    
-- https://pages.cs.wisc.edu/~remzi/OSTEP/ READ THIS
+- https://pages.cs.wisc.edu/~remzi/OSTEP/    
 - https://www.studytonight.com/operating-system/round-robin-scheduling
 - http://www.rohitab.com/discuss/topic/31139-tutorial-paging-memory-mapping-with-a-recursive-page-directory/
 - https://0xax.gitbooks.io/linux-insides/content/
-- https://github.com/openbsd/src/tree/master/sys sys is the kernel
-- https://github.com/NetBSD/src/tree/trunk/sys sys is also the kernel here
+- https://github.com/openbsd/src/tree/master/sys     
+- https://github.com/NetBSD/src/tree/trunk/sys    
 - https://elixir.bootlin.com/ Linux source code browser
 Limine template for x86_64:   
 - https://github.com/limine-bootloader/limine-c-template-x86-64     
