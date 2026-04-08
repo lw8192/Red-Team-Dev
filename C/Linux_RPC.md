@@ -1,14 +1,15 @@
 # Linux RPC   
 Remote Procedure Calls: 
 Server / client stubs:   
-Marshalling / unmarshalling:   
-Interface Definition Language (IDL): 
+Marshalling / unmarshalling: encode function args.   
+Interface Definition Language (IDL): specify function behaviors.    
 
 different APIs / methods to make RPCs.   
 gRPC - C++   
 REST - JavaScript    
 
 ## gRPC    
+Protocol buffers: format to serialize structured data.     
 
 
 ## Resources    
