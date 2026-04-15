@@ -11,7 +11,6 @@ REST - JavaScript
 ## gRPC    
 Protocol buffers: simple language-neutral and platform-neutral Interface Definition Language (IDL). Defined in the .proto file: methods and request / reply fields.     
 
-### 
 C++ Structure for a DFS Streaming RPC Call on the client side:    
 ```
 //in Public class of the client: 
@@ -32,7 +31,13 @@ C++ Structure for a DFS Streaming RPC Call on the server side:
     //close file, return status  
 ```
 
-
+Using Inotify: monitor file system events.          
+```
+#include <sys/inotify.h>
+inotify_init();   
+inotify_add_watch(fd, pathname, mask); 
+inotify_rm_watch(fd, wd); 
+```
 
 ## Resources    
 [ Distributed Systems 1.3: RPC (Remote Procedure Call)] (https://www.youtube.com/watch?v=S2osKiqQG9s)   
