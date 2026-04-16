@@ -38,6 +38,7 @@ inotify_init();
 inotify_add_watch(fd, pathname, mask); 
 inotify_rm_watch(fd, wd); 
 ```
+[Inotify Demo Code](https://man7.org/tlpi/code/online/dist/inotify/demo_inotify.c.html)
 
 ## Resources    
 [ Distributed Systems 1.3: RPC (Remote Procedure Call)] (https://www.youtube.com/watch?v=S2osKiqQG9s)   
