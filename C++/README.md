@@ -26,3 +26,6 @@ Compile exe on Kali (you might need to adjust these flags):
 ## C / C++ Runtime on Windows   
 Usually a C / C++ runtime, the C runtime is used for C++ programs when C functions are used. C++ runtime - usually on top of the C runtime, often uses the C runtime for memory management.       
 C++ has official support from Microsoft and more modern features (which is why it is often used over C on Windows).     
+
+## Multithreading   
+[Thread Safety Using c++](https://medium.com/@pauljlucas/advanced-thread-safety-in-c-4cbab821356e#:~:text=C++%20supports%20writing%20programs%20where%20parts%20of,locking%20takes%20a%20significant%20percentage%20of%20time)   
