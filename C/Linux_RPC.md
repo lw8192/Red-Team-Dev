@@ -1,5 +1,5 @@
 # Linux RPC   
-Remote Procedure Calls: 
+Remote Procedure Calls: communicate between 2 remote processes.   
 Server / client stubs:   
 Marshalling / unmarshalling: encode function args.   
 Interface Definition Language (IDL): specify function behaviors.    
