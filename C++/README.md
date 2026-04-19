@@ -28,4 +28,15 @@ Usually a C / C++ runtime, the C runtime is used for C++ programs when C functio
 C++ has official support from Microsoft and more modern features (which is why it is often used over C on Windows).     
 
 ## Multithreading   
-[Thread Safety Using c++](https://medium.com/@pauljlucas/advanced-thread-safety-in-c-4cbab821356e#:~:text=C++%20supports%20writing%20programs%20where%20parts%20of,locking%20takes%20a%20significant%20percentage%20of%20time)   
+[Thread Safety Using c++](https://medium.com/@pauljlucas/advanced-thread-safety-in-c-4cbab821356e#:~:text=C++%20supports%20writing%20programs%20where%20parts%20of,locking%20takes%20a%20significant%20percentage%20of%20time)     
+
+Mutexes in C++    
+Don't manually call .lock() and .unlock() - forgetting to unlock leads to deadlocks. Use RAII (Resource Acquisition Is Initialization) wrappers.    
+```
+#include <mutex>
+std::mutex mtx;
+
+std::lock_guard<std::mutex> lock(mtx);
+```
+[mutex](https://en.cppreference.com/cpp/thread/mutex)     
+[Multithreading in C++: Mutexes](https://www.ramtintjb.com/blog/Mutexes)     
