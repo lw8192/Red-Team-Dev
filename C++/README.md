@@ -31,12 +31,25 @@ C++ has official support from Microsoft and more modern features (which is why i
 [Thread Safety Using c++](https://medium.com/@pauljlucas/advanced-thread-safety-in-c-4cbab821356e#:~:text=C++%20supports%20writing%20programs%20where%20parts%20of,locking%20takes%20a%20significant%20percentage%20of%20time)     
 
 Mutexes in C++    
-Don't manually call .lock() and .unlock() - forgetting to unlock leads to deadlocks. Use RAII (Resource Acquisition Is Initialization) wrappers.    
+Don't manually call .lock() and .unlock() - forgetting to unlock leads to deadlocks or an issue if exception is thrown while a mutex is locked. Use RAII (Resource Acquisition Is Initialization) wrappers, with std::lock_guard or std::unique_lock.    
 ```
 #include <mutex>
 std::mutex mtx;
 
-std::lock_guard<std::mutex> lock(mtx);
+std::lock_guard<std::mutex> lock(mtx);  //locks mutex in its constructor and unlocks mutex in its destructor
 ```
-[mutex](https://en.cppreference.com/cpp/thread/mutex)     
+
+Kinds of thread locks:    
+```
+std::mutex
+std::shared_mutex
+std::lock_guard
+std::unique_lock
+std::shared_lock
+```
+
+File locks: must use OS standard libaries, not provided by C++.   
+
+[c++ thread reference](https://en.cppreference.com/cpp/thread)    
+[c++ mutex reference](https://en.cppreference.com/cpp/thread/mutex)     
 [Multithreading in C++: Mutexes](https://www.ramtintjb.com/blog/Mutexes)     
