@@ -56,7 +56,9 @@ Breakpoints:
 > bp kernel32!recv   
 > x notepad!*main     #if notepad was the process - examine symbol. 
 > bp notepad!wWinMain  #set bp on main  
-> bu   #set a breakpoint on an unresolved function - not loaded yet in the process memory space. Like a function from a loaded DLL.  
+> bu   #set a breakpoint on an unresolved function - not loaded yet in the process memory space. Like a function from a loaded DLL.     
+Enable verbose debug print:      
+> ed nt!Kd_IHVDRIVER_Mask 0xf   
 
 Breakpoints:     
 > bl     #list breakpoints  
