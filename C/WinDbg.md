@@ -131,6 +131,7 @@ PEB - at fs:[0x30] for x86 processes, gs:[60] for x64
 > db <base address of the process> L100     
 dt: display type. Display structure / dump structure from a memory address.    
 > dt _peb     #dump the peb     
+> dt @$peb    
 > dt nt!_TEB    #get offset of the PEB struct   
 > dt -r ntdll!_TEB @$teb    #dump the TEB and display nested structs     
 > r $peb     #get the memory address of the PEB    
