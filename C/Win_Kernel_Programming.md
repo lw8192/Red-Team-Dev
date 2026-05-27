@@ -92,6 +92,12 @@ Copy kdnet.exe and VerifiedNICList.xml to the guest machine from "C:\Program Fil
 copy the output WinDbg command, then run on the debugger VM to open WinDbg, reboot guest to connect    
 When a kernel debugger is connected, driver signing is disabled by default.    
 Use WinDbg preview: Start debugging > Attach to kernel > enter in port and key    
+
+On a Windows 11 Dev preview VM:     
+Need to download the Windows SDK   
+
+VirtualBox VMs: kdnet kernel debugging is not reliable. Might need to use COM serial debugging or named pipe debugging with bridged network.    
+
 Path to source code symbols:    
 > .sympath + <path to folder with PDB>      
 
