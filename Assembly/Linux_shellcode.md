@@ -1,0 +1,36 @@
+# Writing Linux Shellcode   
+
+## x86 Shellcode   
+
+
+## x86-64 Shellcode   
+x64 Linux calling conventions for a syscall:     
+```  
+Syscall Number %rax    
+Arg1  %rdi 
+Arg2  %rsi     
+Arg3  %rdx     
+Arg4 %r10 
+Arg5 %r8 
+Arg6 %r9 
+Ret value %rax 
+```
+
+Syscall example code:  
+```
+#include <sys/syscall.h>
+
+.intel_syntax noprefix
+.text
+
+.globl main
+.type  main, @function
+  mov    al,SYS_call           /* syscall number */
+  mov    rdi,1                  /* arg 1 */
+  lea    rsi,2                  /* arg 2 */
+  lea    rdx,3                  /* arg 3 */
+  syscall                       /* call(arg1, arg2, arg3);  */
+```
+
+Common syscalls to use:    
+open(), read(), write(), openat(), close(), mmap(), mprotect(), brk(), fstat(), lseek(), execve(), dup2()
