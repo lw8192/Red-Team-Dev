@@ -86,6 +86,8 @@ Load the dumpfile and look at the call stack
 [Debugging a crash dump](https://whitehatlab.eu/en/blog/windows/kernel-crash-dump/)   
 [Setup remote kernel debugging](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/setting-up-a-network-debugging-connection-automatically)      
 [WinDbg for Kernel Debugging](https://www.apriorit.com/dev-blog/kernel-driver-debugging-with-windbg)
+
+### Setting up kernel debugging using kdnet 
 Setup remote kernel debugging (host = debugger, guest = machine being debugged)    
 Copy kdnet.exe and VerifiedNICList.xml to the guest machine from "C:\Program Files (x86)\Windows Kits\10\Debuggers\x64" (On Win10+ x64)                   
 > kdnet.exe <host_IP> <Port>        #on guest    
@@ -96,7 +98,18 @@ Use WinDbg preview: Start debugging > Attach to kernel > enter in port and key
 On a Windows 11 Dev preview VM:     
 Need to download the Windows SDK   
 
-VirtualBox VMs: kdnet kernel debugging is not reliable. Might need to use COM serial debugging or named pipe debugging with bridged network.    
+### Setting up kernel debugging using a named pipe connection (ViritualBox) 
+VirtualBox VMs: kdnet kernel debugging is not always reliable. Might need to use COM serial debugging or named pipe debugging with bridged network.    
+Debuggee:    
+> bcdedit /debug on
+> bcdedit /dbgsettings serial debugport:1 baudrate:115200   #then shut down the VM   
+Debuggee VM > Settings > Serial Ports
+Port 1: Enable Serial Port, Port Number=COM1, Port Mode: Host Pipe, uncheck Connect to existing pipe/socket, name for the pipe (ex - \\.\pipe\virtualbox_debug) 
+Shutdown debugger VM   
+Debugger VM > Settings > Serial Ports
+Port 1: Enable Serial Port, Port Number=COM1, Port Mode: Host Pipe, check Connect to existing pipe/socket, fill in name for the pipe (ex - \\.\pipe\virtualbox_debug) 
+Boot debuggee VM so the named pipe can be created.    
+Boot debugger VM and open WinDbg, connect using the local COM1 port settings.   
 
 Path to source code symbols:    
 > .sympath + <path to folder with PDB>      
