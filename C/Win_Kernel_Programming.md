@@ -98,7 +98,7 @@ Use WinDbg preview: Start debugging > Attach to kernel > enter in port and key
 On a Windows 11 Dev preview VM:     
 Need to download the Windows SDK   
 
-### Setting up kernel debugging using a named pipe connection (ViritualBox) 
+### Setting up kernel debugging using a named pipe connection (VirtualBox)  
 VirtualBox VMs: kdnet kernel debugging is not always reliable. Might need to use COM serial debugging or named pipe debugging with bridged network.    
 Debuggee:    
 > bcdedit /debug on
@@ -165,11 +165,19 @@ lm - list loaded modules
 > !process 0 0    #list all current processes, shows info like _EPROCESS
 > dt nt!_EPROCESS  #view the EPROCESS struct for a specific process    
 > dt _DRIVER_OBJECT    #view the DRIVER_OBJECT  
+
 Execution flow:   
-> bu DriverName!DriverEntry      #set a breakpoint on the entry point     
+> bu DriverName!DriverEntry      #set a breakpoint on the entry point 
+
 Search:      
 > s -[option] <start_addr> <end_addr> <data_to_search>  #search in memory      
 > s-b <start addr> <endaddr> 4d 5a 90 00                #search MZ in a region 
+
+Kernel Objects: 
+> !drvobj DriverName    #view driver object 
+> !devobj               #view device object 
+> !process 0 0          #view EPROCESS structs for all processes  
+> !thread               #current ETHREAD 
 
 Useful NTOSKRNL Symbols:      
 nt!PsInitialSystemProcess - SYSTEM EPROCESS pointer         
